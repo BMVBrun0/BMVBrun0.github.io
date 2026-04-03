@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bruno Getten Triches | Portfólio</title>
+  <meta name="description" content="Portfólio público de Bruno Getten Triches com experiência em desenvolvimento web, mobile, jogos, liderança técnica e arquitetura de software.">
+  <meta name="theme-color" content="#0e1018">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bruno Getten Triches | Portfólio">
+  <meta property="og:description" content="Projetos, experiência, serviços e formas de contato.">
+  <meta property="og:image" content="assets/img/brand/logo-bm.png">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preload" href="assets/css/main.css" as="style">
+  <link rel="preload" href="assets/img/brand/logo-bm-white.png" as="image">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header" id="home">
+    <div class="container header-shell">
+      <a href="#home" class="brand" aria-label="Voltar ao topo">
+        <img class="brand-logo" src="assets/img/brand/logo-bm.png" alt="Logo BM">
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+        <a href="#about">Sobre</a>
+        <a href="#experience">Experiência</a>
+        <a href="#services">Serviços</a>
+        <a href="#projects">Projetos</a>
+        <a href="#contact">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero-section">
+      <div class="hero-backdrop"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Tech Lead · Software Engineer</p>
+          <h1>Bruno Getten Triches</h1>
+          <p class="hero-role">
+            Eu sou <span id="typed-role" aria-live="polite"></span>
+          </p>
+          <p class="hero-text">
+            Desenvolvedor e Tech Lead com foco em arquitetura, refatoração, sistemas escaláveis,
+            produtos web, apps mobile, integrações, APIs e jogos.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Ver projetos</a>
+            <a class="btn btn-secondary" href="assets/docs/curriculo-br-2026.pdf" target="_blank" rel="noopener">Baixar CV</a>
+          </div>
+
+          <ul class="hero-links" aria-label="Redes sociais">
+            <li><a href="https://github.com/BMVBrun0" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/bruno-getten-triches-152952207/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/bruno_getten" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://wa.me/5549988427624" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+
+        <aside class="hero-panel reveal" aria-label="Resumo profissional">
+          <img class="hero-panel-logo" src="assets/img/brand/logo-bm-white.png" alt="Marca BM com texto branco">
+          <div class="hero-stats">
+            <article>
+              <strong>8+ anos</strong>
+              <span>desenvolvendo software</span>
+            </article>
+            <article>
+              <strong>Web · Mobile · Games</strong>
+              <span>atuação end-to-end</span>
+            </article>
+            <article>
+              <strong>Tech Lead</strong>
+              <span>execução, mentoria e arquitetura</span>
+            </article>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="section-copy reveal">
+          <p class="eyebrow">Sobre mim</p>
+          <h2>Desenvolvimento com foco em arquitetura, produto e escalabilidade.</h2>
+          <p>
+            Meu nome é Bruno Getten Triches. Trabalho com desenvolvimento há 8 anos, com experiência em
+            liderança técnica, mentoria, arquitetura de software, refatoração e evolução de produtos.
+          </p>
+          <p>
+            Tenho atuação prática em backend, frontend, mobile, integrações, jogos e modernização de sistemas legados,
+            sempre com foco em clareza de código, manutenibilidade e resultado real.
+          </p>
+
+          <div class="skill-block">
+            <div class="section-label">Principais habilidades</div>
+            <div class="skill-list" id="skills-list"></div>
+          </div>
+        </div>
+
+        <div class="about-card reveal">
+          <img src="assets/img/about/1.jpg" alt="Imagem de apresentação do portfólio">
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="experience">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Experiência</p>
+          <h2>Minha trajetória profissional</h2>
+          <p>Resumo das experiências que melhor representam meu perfil técnico e de liderança.</p>
+        </div>
+        <div class="timeline" id="experience-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Serviços</p>
+          <h2>Como posso agregar</h2>
+          <p>Serviços organizados em torno de produto, arquitetura, performance e evolução de sistemas.</p>
+        </div>
+        <div class="service-grid" id="services-list"></div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="projects">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Projetos</p>
+          <h2>Projetos em destaque</h2>
+          <p>
+            Seleção de projetos e estudos visuais que representam meu repertório em interfaces,
+            produtos digitais, implementação e organização de sistemas.
+          </p>
+        </div>
+
+        <div class="filters reveal" id="project-filters" role="tablist" aria-label="Filtros de projeto"></div>
+        <div class="project-grid" id="projects-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Contato</p>
+          <h2>Informações de contato</h2>
+          <p>
+            Caso tenha interesse em parceria, serviço, liderança técnica, consultoria, mentoria ou projeto,
+            você pode falar comigo por qualquer um dos canais abaixo.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card reveal">
+            <h3>WhatsApp / Celular</h3>
+            <a href="https://wa.me/5549988427624" target="_blank" rel="noopener">+55 (49) 98842-7624</a>
+          </article>
+
+          <article class="contact-card reveal">
+            <h3>Email</h3>
+            <a href="mailto:trichesbruno@gmail.com">trichesbruno@gmail.com</a>
+          </article>
+
+          <article class="contact-card reveal">
+            <h3>LinkedIn</h3>
+            <a href="https://www.linkedin.com/in/bruno-getten-triches-152952207/" target="_blank" rel="noopener">Perfil Bruno Getten</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-shell">
+      <p>© <span id="current-year"></span> Bruno Getten Triches. Todos os direitos reservados.</p>
+      <a href="#home" class="back-top">Voltar ao topo</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
