@@ -493,7 +493,7 @@ button { font: inherit; }
 
 .project-media img {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 10 / 10;
   object-fit: cover;
 }
 

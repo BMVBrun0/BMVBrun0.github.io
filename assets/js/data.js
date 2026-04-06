@@ -101,23 +101,23 @@ window.portfolioData = {
     {
       title: 'SDK e Plugin de Acessibilidade Universal',
       category: 'tool',
-      image: 'assets/img/portfolio/3.jpg',
+      image: 'assets/img/portfolio/accessibility_plugin.png',
       status: 'Planejado',
-      description: 'SDK/plugin reutilizável para adicionar menu de acessibilidade em sites e sistemas, com foco em perfis como TDAH, autismo, deficiência visual e recursos inspirados em soluções como VLibras.',
+      description: 'SDK/plugin para adicionar menu de acessibilidade em sites, aplicativos e sistemas. Possui sistema de licença e página demo',
       stack: ['JavaScript SDK', 'Plugin Web', 'Acessibilidade', 'Configuração White-Label']
     },
     {
       title: 'Encurtador de URL Mobile Offline',
       category: 'mobile',
-      image: 'assets/img/portfolio/4.jpg',
+      image: 'assets/img/portfolio/url_shortener.png',
       status: 'Público em breve',
-      description: 'Aplicativo mobile com autenticação, funcionamento offline, persistência local em SQLite e histórico recente mantido por cache para uso contínuo mesmo sem rede.',
+      description: 'Aplicativo mobile com funcionamento offline, persistência local e histórico mantido por cache, salvo no dispositivo para uso contínuo mesmo sem rede.',
       stack: ['React Native', 'SQLite', 'Cache Local', 'Offline First']
     },
     {
       title: 'Website de Compressão e Conversão de Assets',
       category: 'tool',
-      image: 'assets/img/portfolio/5.jpg',
+      image: 'assets/img/portfolio/media_forge.png',
       status: 'Público em breve',
       description: 'Ferramenta web para compressão e conversão de assets, pensada para acelerar fluxos de trabalho com imagens, arquivos estáticos e materiais prontos para uso em apps, sites e jogos.',
       stack: ['Web App', 'Conversão de Arquivos', 'Compressão', 'Produtividade']
