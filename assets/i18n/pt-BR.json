@@ -1,0 +1,475 @@
+{
+  "meta": {
+    "title": "Bruno Getten Triches | Portfólio",
+    "description": "Portfólio público de Bruno Getten Triches com experiência em desenvolvimento web, mobile, jogos, liderança técnica e arquitetura de software.",
+    "ogTitle": "Bruno Getten Triches | Portfólio",
+    "ogDescription": "Projetos, experiência, serviços e formas de contato."
+  },
+  "accessibility": {
+    "skipToContent": "Pular para o conteúdo",
+    "backToTop": "Voltar ao topo",
+    "openMenu": "Abrir menu",
+    "mainNavigation": "Navegação principal"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "nav": {
+    "about": "Sobre",
+    "experience": "Experiência",
+    "services": "Serviços",
+    "projects": "Projetos",
+    "contact": "Contato",
+    "certificates": "Certificados"
+  },
+  "hero": {
+    "eyebrow": "Tech Lead · Software Engineer",
+    "rolePrefix": "Eu sou",
+    "roles": [
+      "Desenvolvedor Web",
+      "Desenvolvedor Mobile",
+      "Desenvolvedor de Jogos",
+      "Tech Lead"
+    ],
+    "text": "Desenvolvedor e Tech Lead com foco em arquitetura, liderança técnica, refatoração, plataformas white-label, produtos web e mobile, APIs escaláveis, integrações e jogos.",
+    "primaryCta": "Ver projetos",
+    "secondaryCta": "Baixar CV",
+    "stats": [
+      {
+        "title": "8+ anos",
+        "text": "desenvolvendo software"
+      },
+      {
+        "title": "Web · Mobile · Games",
+        "text": "atuação end-to-end"
+      },
+      {
+        "title": "Tech Lead",
+        "text": "execução, mentoria e arquitetura"
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "Sobre mim",
+    "title": "Desenvolvimento com foco em arquitetura, produto, entrega e escalabilidade.",
+    "paragraphs": [
+      "Meu nome é Bruno Getten Triches. Atuo como desenvolvedor e Tech Lead com experiência prática em soluções web, mobile, backend, integrações, infraestrutura e produtos digitais de ponta a ponta.",
+      "Ao longo da trajetória, trabalhei com refatoração de sistemas críticos, criação de novos produtos, plataformas white-label, documentação técnica, liderança de times e evolução de sistemas já em produção."
+    ],
+    "skillsLabel": "Principais habilidades",
+    "imageAlt": "Imagem de apresentação do portfólio"
+  },
+  "skills": [
+    {
+      "name": "Laravel",
+      "level": 95
+    },
+    {
+      "name": "React Native",
+      "level": 100
+    },
+    {
+      "name": "TypeScript",
+      "level": 90
+    },
+    {
+      "name": "PHP",
+      "level": 85
+    },
+    {
+      "name": "JavaScript",
+      "level": 90
+    },
+    {
+      "name": "C#",
+      "level": 80
+    },
+    {
+      "name": "Unity",
+      "level": 60
+    },
+    {
+      "name": "Bancos de Dados (SQL/MongoDB)",
+      "level": 70
+    }
+  ],
+  "experienceSection": {
+    "eyebrow": "Experiência",
+    "title": "Minha trajetória profissional",
+    "text": "Resumo das experiências que melhor representam meu perfil técnico, de liderança e de construção de produtos."
+  },
+  "experience": [
+    {
+      "title": "Tech Lead · Sensorama Play",
+      "period": "2025 · Atual",
+      "description": "Liderança técnica de múltiplos projetos voltados ao setor público, com definição de arquitetura, padrões de código, documentação técnica, fluxos de deploy e apoio em POCs. Atuação hands-on em produtos web, mobile, APIs, jogos 2D/3D e infraestrutura."
+    },
+    {
+      "title": "Desenvolvedor Pleno · Amplimed",
+      "period": "2024 · 2025",
+      "description": "Principal responsável pelos produtos do marketplace, incluindo agendamento online, telemedicina, aplicativos e filas de atendimento. Trabalhei na refatoração do marketplace, no app de agendamento e na criação de microsserviços e soluções white-label."
+    },
+    {
+      "title": "Tech Lead · Astronfy",
+      "period": "2023 · 2024",
+      "description": "Responsável técnico por marketplace, dashboard de afiliados, sistema de suporte e produtos 2D/3D. Conduzi estruturas web e mobile, integrações com pagamentos nacionais, internacionais e cripto, além de relacionamento técnico com clientes da Europa e Ásia."
+    },
+    {
+      "title": "Desenvolvedor Pleno · Infogen Sistemas",
+      "period": "2022 · 2023",
+      "description": "Atuação em ERP GeneXus, portal web em .NET e aplicativos mobile. Liderei refatorações para React Native, publiquei apps, apoiei implantações, integrações e mentoria de novos desenvolvedores, além de ajudar na padronização da stack."
+    },
+    {
+      "title": "Desenvolvedor Freelancer",
+      "period": "2018 · Atual",
+      "description": "Projetos sob demanda para diferentes segmentos, incluindo landing pages, intranets, mini ERPs, dashboards em tempo real, aplicativos mobile, integrações e jogos 3D multiplayer, com contato direto com clientes e parceiros de diferentes mercados."
+    }
+  ],
+  "servicesSection": {
+    "eyebrow": "Serviços",
+    "title": "Como posso agregar",
+    "text": "Serviços organizados em torno de produto, arquitetura, performance, integrações e evolução de sistemas."
+  },
+  "services": [
+    {
+      "icon": "assets/img/service/4.png",
+      "title": "Arquitetura de Software",
+      "description": "Definição de arquitetura, padrões técnicos, separação de responsabilidades, documentação e base sólida para crescimento do produto."
+    },
+    {
+      "icon": "assets/img/service/5.png",
+      "title": "Desenvolvimento Web",
+      "description": "Criação e evolução de plataformas, dashboards, sistemas administrativos, marketplaces, landing pages e soluções web com foco em performance e clareza de UX."
+    },
+    {
+      "icon": "assets/img/service/6.png",
+      "title": "Desenvolvimento Mobile",
+      "description": "Desenvolvimento e refatoração de aplicativos Android e iOS com foco em estabilidade, publicação, manutenção contínua e padronização técnica."
+    },
+    {
+      "icon": "assets/img/service/1.png",
+      "title": "APIs e Integrações",
+      "description": "Integrações com gateways de pagamento, autenticação, serviços em nuvem, REST APIs, OAuth, SSO, WebSockets e serviços externos."
+    },
+    {
+      "icon": "assets/img/service/2.png",
+      "title": "Soluções White-Label",
+      "description": "Construção de produtos reutilizáveis e personalizáveis para diferentes clientes, acelerando rollout, consistência técnica e expansão comercial."
+    },
+    {
+      "icon": "assets/img/service/3.png",
+      "title": "Refatoração e Escalabilidade",
+      "description": "Reorganização de código, melhoria de sistemas legados, redução de retrabalho e preparação estrutural para aumento de demanda e novos módulos."
+    }
+  ],
+  "projectsSection": {
+    "eyebrow": "Projetos",
+    "title": "Projetos em destaque",
+    "text": "Seleção de projetos e estudos visuais que representam meu repertório em interfaces, produtos digitais, implementação, acessibilidade, integrações e organização de sistemas.",
+    "filtersLabel": "Filtros de projeto",
+    "zoomCta": "Clique para ampliar",
+    "zoomAriaLabel": "Ampliar imagem do projeto {title}",
+    "imageAlt": "Preview do projeto {title}",
+    "stackAriaLabel": "Stack prevista",
+    "defaultCategory": "Projeto"
+  },
+  "categories": [
+    {
+      "id": "all",
+      "label": "Todos"
+    },
+    {
+      "id": "product",
+      "label": "Produtos"
+    },
+    {
+      "id": "mobile",
+      "label": "Mobile"
+    },
+    {
+      "id": "tool",
+      "label": "SDK / Ferramentas"
+    },
+    {
+      "id": "game",
+      "label": "Jogos"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Aplicativo de Agendamento Online",
+      "category": "mobile",
+      "image": "assets/img/portfolio/1.jpg",
+      "status": "Planejado",
+      "description": "Aplicativo mobile para agendamento online com autenticação tradicional, login social, fluxo orientado à conversão e integração com agenda, pensado para operação escalável e reaproveitamento em cenários white-label.",
+      "stack": [
+        "React Native",
+        "Firebase Auth",
+        "Google SSO",
+        "Google Calendar API"
+      ]
+    },
+    {
+      "title": "Painel Web de Agenda e Administração",
+      "category": "product",
+      "image": "assets/img/portfolio/2.jpg",
+      "status": "Planejado",
+      "description": "Painel web para gestão operacional de agenda, serviços, disponibilidade, configurações e fluxos administrativos. Estrutura pensada para centralizar operação, manter consistência entre app e web e suportar evolução do produto.",
+      "stack": [
+        "Laravel",
+        "Painel Admin",
+        "API REST",
+        "Integração App + Web"
+      ]
+    },
+    {
+      "title": "SDK e Plugin de Acessibilidade Universal",
+      "category": "tool",
+      "image": "assets/img/portfolio/accessibility_plugin.png",
+      "status": "Planejado",
+      "description": "SDK/plugin para adicionar recursos de acessibilidade em sites, aplicativos e sistemas, com configuração simples, demo dedicada, gestão de licença e potencial para distribuição como produto reutilizável.",
+      "stack": [
+        "JavaScript SDK",
+        "Plugin Web",
+        "Acessibilidade",
+        "Configuração White-Label"
+      ]
+    },
+    {
+      "title": "Encurtador de URL Mobile Offline",
+      "category": "mobile",
+      "image": "assets/img/portfolio/url_shortener.png",
+      "status": "Público em breve",
+      "description": "Aplicativo mobile offline-first com persistência local, histórico mantido no dispositivo e experiência pensada para uso contínuo mesmo sem rede, priorizando simplicidade, velocidade e confiabilidade.",
+      "stack": [
+        "React Native",
+        "SQLite",
+        "Cache Local",
+        "Offline First"
+      ]
+    },
+    {
+      "title": "Website de Compressão e Conversão de Assets",
+      "category": "tool",
+      "image": "assets/img/portfolio/media_forge.png",
+      "status": "Público em breve",
+      "description": "Ferramenta web para compressão e conversão de assets, criada para acelerar fluxos de trabalho com imagens e arquivos estáticos voltados a apps, sites, jogos e pipelines de publicação.",
+      "stack": [
+        "Web App",
+        "Conversão de Arquivos",
+        "Compressão",
+        "Produtividade"
+      ]
+    },
+    {
+      "title": "Truco 2D Multiplayer em Unity",
+      "category": "game",
+      "image": "assets/img/portfolio/6.jpg",
+      "status": "Público em breve",
+      "description": "Jogo 2D de truco em Unity com estrutura preparada para multiplayer local e online, gerenciamento de estado de partida, organização para expansão futura e foco em experiência rápida e competitiva.",
+      "stack": [
+        "Unity",
+        "C#",
+        "Multiplayer Local",
+        "Multiplayer Online"
+      ]
+    }
+  ],
+  "contactSection": {
+    "eyebrow": "Contato",
+    "title": "Informações de contato",
+    "text": "Caso tenha interesse em parceria, serviço, liderança técnica, consultoria, mentoria ou projeto, você pode falar comigo por qualquer um dos canais abaixo."
+  },
+  "contacts": [
+    {
+      "id": "whatsapp",
+      "icon": "icon-whatsapp",
+      "title": "WhatsApp / Celular",
+      "value": "+55 (49) 98842-7624",
+      "text": "Clique para abrir a conversa diretamente no WhatsApp.",
+      "ariaLabel": "Abrir conversa no WhatsApp",
+      "external": true
+    },
+    {
+      "id": "email",
+      "icon": "icon-envelope",
+      "title": "Email",
+      "value": "trichesbruno@gmail.com",
+      "text": "Clique para abrir seu cliente de email e iniciar contato.",
+      "ariaLabel": "Enviar email para Bruno",
+      "external": false
+    },
+    {
+      "id": "linkedin",
+      "icon": "icon-linkedin",
+      "title": "LinkedIn",
+      "value": "Perfil Bruno Getten",
+      "text": "Clique para visualizar o perfil completo e o histórico profissional.",
+      "ariaLabel": "Abrir perfil do LinkedIn",
+      "external": true
+    }
+  ],
+  "footer": {
+    "rights": "Todos os direitos reservados.",
+    "backToTop": "Voltar ao topo"
+  },
+  "modal": {
+    "title": "Visualização do projeto",
+    "initialCaption": "Selecione um projeto para visualizar a imagem ampliada.",
+    "caption": "Visualização ampliada do projeto {title}.",
+    "imageAlt": "Imagem ampliada do projeto {title}",
+    "closeLabel": "Fechar imagem ampliada"
+  },
+  "certificatesSection": {
+    "eyebrow": "Certificados",
+    "title": "Certificados e formação complementar",
+    "text": "Uma seleção dos cursos mais relevantes em backend, mobile, jogos, arquitetura e fundamentos que reforçam minha atuação prática em projetos reais.",
+    "tagsAriaLabel": "Tecnologias e temas do certificado",
+    "providerBadgeLabel": "Instituição",
+    "credentialCta": "Ver certificado",
+    "credentialAriaLabel": "Abrir certificado {title}",
+    "imageAlt": "Imagem ilustrativa do certificado {title}"
+  },
+  "certificates": [
+    {
+      "provider": "Udemy",
+      "providerClass": "udemy",
+      "year": "2026",
+      "title": "The Ultimate Guide to Video Game Optimisation",
+      "description": "Curso focado em otimização de jogos, profiling, performance e boas práticas para melhorar fluidez e escalabilidade em projetos Unity.",
+      "tags": [
+        "Unity",
+        "Performance",
+        "Profiling"
+      ],
+      "url": "https://www.udemy.com/certificate/UC-ca3c9b23-19f6-4244-ac50-5c1f534271f6/",
+      "image": "assets/img/certificates/thumbs/udemy-ultimate-guide.jpg"
+    },
+    {
+      "provider": "Udemy",
+      "providerClass": "udemy",
+      "year": "2026",
+      "title": "Build A Multiplayer Kart Racing Game - Unity 6 Compatible",
+      "description": "Formação prática sobre estruturação de jogo multiplayer de corrida em Unity, cobrindo base de gameplay, organização de projeto e evolução técnica.",
+      "tags": [
+        "Unity 6",
+        "Multiplayer",
+        "Gameplay"
+      ],
+      "url": "https://www.udemy.com/certificate/UC-4fbbbb88-6447-4165-ac14-d00b47ddaf07/",
+      "image": "assets/img/certificates/thumbs/udemy-kart.jpg"
+    },
+    {
+      "provider": "Udemy",
+      "providerClass": "udemy",
+      "year": "2026",
+      "title": "Design Patterns for Game Programming - Unity 6 Compatible",
+      "description": "Estudo de padrões aplicados ao desenvolvimento de jogos para manter código mais modular, legível e preparado para manutenção.",
+      "tags": [
+        "Game Patterns",
+        "Architecture",
+        "Unity"
+      ],
+      "url": "https://www.udemy.com/certificate/UC-d057fb56-c6b2-4fb4-bfc8-44b0bd272fe7/",
+      "image": "assets/img/certificates/thumbs/udemy-design.jpg"
+    },
+    {
+      "provider": "Alura",
+      "providerClass": "alura",
+      "year": "2023",
+      "title": "PHP Composer: Dependências, Autoload e Publicação",
+      "description": "Curso voltado a gerenciamento de dependências, autoload e organização de aplicações PHP com Composer.",
+      "tags": [
+        "PHP",
+        "Composer",
+        "Backend"
+      ],
+      "url": "https://cursos.alura.com.br/certificate/7f09a468-ba8e-4671-b777-5a8ae9c3c6f9",
+      "image": "assets/img/certificates/thumbs/alura-php-composer.png"
+    },
+    {
+      "provider": "Alura",
+      "providerClass": "alura",
+      "year": "2023",
+      "title": "JavaScript: conhecendo o Browser e padrões de projeto",
+      "description": "Formação em JavaScript com foco em browser APIs, organização de código e padrões de projeto para aplicações web.",
+      "tags": [
+        "JavaScript",
+        "Browser",
+        "Patterns"
+      ],
+      "url": "https://cursos.alura.com.br/certificate/75f90563-051c-41d0-a5e0-2960c7b40349",
+      "image": "assets/img/certificates/thumbs/alura-javascript-browser.png"
+    },
+    {
+      "provider": "Alura",
+      "providerClass": "alura",
+      "year": "2023",
+      "title": "JavaScript: explorando a linguagem",
+      "description": "Base de linguagem JavaScript, sintaxe, lógica e fundamentos usados na construção de interfaces e regras de negócio.",
+      "tags": [
+        "JavaScript",
+        "Language",
+        "Fundamentals"
+      ],
+      "url": "https://cursos.alura.com.br/certificate/a900b3e0-31f6-4ee7-b2cc-2bc5f3084827",
+      "image": "assets/img/certificates/thumbs/alura-javascript-explorando.png"
+    },
+    {
+      "provider": "Alura",
+      "providerClass": "alura",
+      "year": "2023",
+      "title": "React Native: utilizando e criando Hooks",
+      "description": "Estudo prático de React Native com Hooks para componentização, estado, efeitos e reaproveitamento de lógica.",
+      "tags": [
+        "React Native",
+        "Hooks",
+        "Mobile"
+      ],
+      "url": "https://cursos.alura.com.br/certificate/c5e6edcf-ecf8-4d57-9e92-67252fbdfa64",
+      "image": "assets/img/certificates/thumbs/alura-react-native-hooks.png"
+    },
+    {
+      "provider": "Alura",
+      "providerClass": "alura",
+      "year": "2023",
+      "title": "React Native: criando um app",
+      "description": "Curso introdutório de criação de aplicativo em React Native com foco em estrutura de projeto e fluxo mobile.",
+      "tags": [
+        "React Native",
+        "App",
+        "Mobile"
+      ],
+      "url": "https://cursos.alura.com.br/certificate/3bdb6829-78f9-4c96-9488-e4b8b1f6abf1",
+      "image": "assets/img/certificates/thumbs/alura-react-native-criando-app.png"
+    },
+    {
+      "provider": "Alura",
+      "providerClass": "alura",
+      "year": "2022",
+      "title": "C# parte 1: primeiros passos",
+      "description": "Fundamentos de C#, orientação inicial à linguagem e base importante para desenvolvimento em .NET e Unity.",
+      "tags": [
+        "C#",
+        ".NET",
+        "Fundamentals"
+      ],
+      "url": "https://cursos.alura.com.br/certificate/3606134c-c467-4d12-80d1-75140f65dcc1",
+      "image": "assets/img/certificates/thumbs/alura-csharp-parte1.png"
+    },
+    {
+      "provider": "Alura",
+      "providerClass": "alura",
+      "year": "2022",
+      "title": "ASP.NET Identity parte 1: Gerencie contas de usuários",
+      "description": "Curso voltado a autenticação e gerenciamento de contas de usuário com ASP.NET Identity.",
+      "tags": [
+        "ASP.NET",
+        "Identity",
+        "Auth"
+      ],
+      "url": "https://cursos.alura.com.br/certificate/cf13b8a0-d9b2-4578-ae3e-8e50b73b1ed8",
+      "image": "assets/img/certificates/thumbs/alura-aspnet-identity.png"
+    }
+  ]
+}

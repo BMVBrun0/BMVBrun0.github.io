@@ -18,24 +18,81 @@
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-arrow-up-right" viewBox="0 0 24 24">
+      <path d="M7 17L17 7"></path>
+      <path d="M9 7h8v8"></path>
+    </symbol>
+    <symbol id="icon-expand" viewBox="0 0 24 24">
+      <path d="M15 3h6v6"></path>
+      <path d="M9 21H3v-6"></path>
+      <path d="M21 3l-7 7"></path>
+      <path d="M3 21l7-7"></path>
+    </symbol>
+    <symbol id="icon-envelope" viewBox="0 0 24 24">
+      <path d="M4 6h16v12H4z"></path>
+      <path d="M4 8l8 6 8-6"></path>
+    </symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.78.59 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.11a2 2 0 0 1 2.11-.45c.85.27 1.73.47 2.63.59A2 2 0 0 1 22 16.92z"></path>
+    </symbol>
+    <symbol id="icon-linkedin" viewBox="0 0 24 24">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V9h4v1.8A4.9 4.9 0 0 1 16 8z"></path>
+      <rect x="2" y="9" width="4" height="12"></rect>
+      <circle cx="4" cy="4" r="2"></circle>
+    </symbol>
+    <symbol id="icon-github" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.18-3.37-1.18-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.61.07-.61 1 .08 1.53 1.03 1.53 1.03.88 1.52 2.32 1.08 2.88.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.11-.26-.45-1.29.1-2.69 0 0 .84-.27 2.75 1.02a9.54 9.54 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.4.21 2.43.1 2.69.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.67-4.59 4.92.36.31.68.91.68 1.84v2.72c0 .26.18.58.69.48A10 10 0 0 0 12 2z"></path>
+    </symbol>
+    <symbol id="icon-instagram" viewBox="0 0 24 24">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <path d="M17.5 6.5h.01"></path>
+    </symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.85 11.85 0 0 0 12.07 0C5.54 0 .23 5.3.23 11.83c0 2.08.54 4.12 1.57 5.91L0 24l6.45-1.69a11.8 11.8 0 0 0 5.62 1.43h.01c6.53 0 11.84-5.3 11.84-11.83 0-3.16-1.23-6.12-3.4-8.43zM12.08 21.7a9.84 9.84 0 0 1-5.01-1.37l-.36-.22-3.83 1 1.02-3.73-.24-.38a9.8 9.8 0 0 1-1.5-5.18C2.16 6.57 6.82 1.9 12.07 1.9c2.64 0 5.12 1.03 6.97 2.9a9.8 9.8 0 0 1 2.88 6.98c0 5.25-4.66 9.92-9.84 9.92zm5.43-7.43c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.95 1.18-.18.2-.35.23-.65.08-.3-.15-1.28-.47-2.43-1.49-.9-.8-1.5-1.78-1.68-2.08-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.68-1.63-.93-2.24-.25-.6-.5-.52-.68-.53h-.58c-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.5 0 1.48 1.08 2.9 1.23 3.1.15.2 2.12 3.24 5.14 4.54.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.78-.73 2.03-1.44.25-.7.25-1.31.17-1.44-.08-.13-.28-.2-.58-.35z"></path>
+    </symbol>
+  </svg>
+
   <header class="site-header" id="home">
     <div class="container header-shell">
       <a href="#home" class="brand" aria-label="Voltar ao topo">
         <img class="brand-logo" src="assets/img/brand/logo-bm-white.png" alt="Logo BM">
       </a>
 
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="header-actions">
+        <label class="lang-field desktop-lang" for="lang-select-desktop">
+          <span class="lang-label" id="language-label-desktop">Idioma</span>
+          <select class="lang-select" id="lang-select-desktop" aria-label="Selecionar idioma">
+            <option value="pt-BR">🇧🇷 Português (BR)</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="es">🇪🇸 Español</option>
+          </select>
+        </label>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
 
       <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
-        <a href="#about">Sobre</a>
-        <a href="#experience">Experiência</a>
-        <a href="#services">Serviços</a>
-        <a href="#projects">Projetos</a>
-        <a href="#contact">Contato</a>
+        <a href="#about" id="nav-about">Sobre</a>
+        <a href="#experience" id="nav-experience">Experiência</a>
+        <a href="#services" id="nav-services">Serviços</a>
+        <a href="#projects" id="nav-projects">Projetos</a>
+        <a href="#certificates" id="nav-certificates">Certificados</a>
+        <a href="#contact" id="nav-contact">Contato</a>
+
+        <label class="lang-field mobile-lang" for="lang-select-mobile">
+          <span class="lang-label" id="language-label-mobile">Idioma</span>
+          <select class="lang-select" id="lang-select-mobile" aria-label="Selecionar idioma no menu mobile">
+            <option value="pt-BR">🇧🇷 Português (BR)</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="es">🇪🇸 Español</option>
+          </select>
+        </label>
       </nav>
     </div>
   </header>
@@ -45,45 +102,32 @@
       <div class="hero-backdrop"></div>
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <p class="eyebrow">Tech Lead · Software Engineer</p>
+          <p class="eyebrow" id="hero-eyebrow">Tech Lead · Software Engineer</p>
           <h1>Bruno Getten Triches</h1>
           <p class="hero-role">
-            Eu sou <span id="typed-role" aria-live="polite"></span>
+            <span id="hero-role-prefix">Eu sou</span> <span id="typed-role" aria-live="polite"></span>
           </p>
-          <p class="hero-text">
-            Desenvolvedor e Tech Lead com foco em arquitetura, refatoração, sistemas escaláveis,
-            produtos web, apps mobile, integrações, APIs e jogos.
+          <p class="hero-text" id="hero-text">
+            Desenvolvedor e Tech Lead com foco em arquitetura, liderança técnica, refatoração,
+            plataformas white-label, produtos web e mobile, APIs escaláveis, integrações e jogos.
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">Ver projetos</a>
-            <a class="btn btn-secondary" href="assets/docs/curriculo-br-2026.pdf" target="_blank" rel="noopener">Baixar CV</a>
+            <a class="btn btn-primary" href="#projects" id="hero-projects-cta">Ver projetos</a>
+            <a class="btn btn-secondary" id="hero-cv-cta" href="assets/docs/curriculo-br-2026.pdf" target="_blank" rel="noopener">Baixar CV</a>
           </div>
 
           <ul class="hero-links" aria-label="Redes sociais">
-            <li><a href="https://github.com/BMVBrun0" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/bruno-getten-triches-152952207/" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href="https://www.instagram.com/bruno_getten" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://wa.me/5549988427624" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="https://github.com/BMVBrun0" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-github"></use></svg><span>GitHub</span></a></li>
+            <li><a href="https://www.linkedin.com/in/bruno-getten-triches-152952207/" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-linkedin"></use></svg><span>LinkedIn</span></a></li>
+            <li><a href="https://www.instagram.com/bruno_getten" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-instagram"></use></svg><span>Instagram</span></a></li>
+            <li><a href="https://wa.me/5549988427624" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-whatsapp"></use></svg><span>WhatsApp</span></a></li>
           </ul>
         </div>
 
         <aside class="hero-panel reveal" aria-label="Resumo profissional">
           <img class="hero-panel-logo" src="assets/img/brand/logo-bm-white.png" alt="Marca BM com texto branco">
-          <div class="hero-stats">
-            <article>
-              <strong>8+ anos</strong>
-              <span>desenvolvendo software</span>
-            </article>
-            <article>
-              <strong>Web · Mobile · Games</strong>
-              <span>atuação end-to-end</span>
-            </article>
-            <article>
-              <strong>Tech Lead</strong>
-              <span>execução, mentoria e arquitetura</span>
-            </article>
-          </div>
+          <div class="hero-stats" id="hero-stats"></div>
         </aside>
       </div>
     </section>
@@ -91,25 +135,19 @@
     <section class="section" id="about">
       <div class="container about-grid">
         <div class="section-copy reveal">
-          <p class="eyebrow">Sobre mim</p>
-          <h2>Desenvolvimento com foco em arquitetura, produto e escalabilidade.</h2>
-          <p>
-            Meu nome é Bruno Getten Triches. Trabalho com desenvolvimento há 8 anos, com experiência em
-            liderança técnica, mentoria, arquitetura de software, refatoração e evolução de produtos.
-          </p>
-          <p>
-            Tenho atuação prática em backend, frontend, mobile, integrações, jogos e modernização de sistemas legados,
-            sempre com foco em clareza de código, manutenibilidade e resultado real.
-          </p>
+          <p class="eyebrow" id="about-eyebrow">Sobre mim</p>
+          <h2 id="about-title">Desenvolvimento com foco em arquitetura, produto, entrega e escalabilidade.</h2>
+          <p id="about-text-1"></p>
+          <p id="about-text-2"></p>
 
           <div class="skill-block">
-            <div class="section-label">Principais habilidades</div>
+            <div class="section-label" id="skills-label">Principais habilidades</div>
             <div class="skill-list" id="skills-list"></div>
           </div>
         </div>
 
         <div class="about-card reveal">
-          <img src="assets/img/about/1.jpg" alt="Imagem de apresentação do portfólio">
+          <img id="about-image" src="assets/img/about/1.jpg" alt="Imagem de apresentação do portfólio">
         </div>
       </div>
     </section>
@@ -117,9 +155,9 @@
     <section class="section section-alt" id="experience">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="eyebrow">Experiência</p>
-          <h2>Minha trajetória profissional</h2>
-          <p>Resumo das experiências que melhor representam meu perfil técnico e de liderança.</p>
+          <p class="eyebrow" id="experience-eyebrow">Experiência</p>
+          <h2 id="experience-title">Minha trajetória profissional</h2>
+          <p id="experience-text">Resumo das experiências que melhor representam meu perfil técnico, de liderança e de construção de produtos.</p>
         </div>
         <div class="timeline" id="experience-list"></div>
       </div>
@@ -128,9 +166,9 @@
     <section class="section" id="services">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="eyebrow">Serviços</p>
-          <h2>Como posso agregar</h2>
-          <p>Serviços organizados em torno de produto, arquitetura, performance e evolução de sistemas.</p>
+          <p class="eyebrow" id="services-eyebrow">Serviços</p>
+          <h2 id="services-title">Como posso agregar</h2>
+          <p id="services-text">Serviços organizados em torno de produto, arquitetura, performance, integrações e evolução de sistemas.</p>
         </div>
         <div class="service-grid" id="services-list"></div>
       </div>
@@ -139,12 +177,9 @@
     <section class="section section-alt" id="projects">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="eyebrow">Projetos</p>
-          <h2>Projetos em destaque</h2>
-          <p>
-            Seleção de projetos e estudos visuais que representam meu repertório em interfaces,
-            produtos digitais, implementação e organização de sistemas.
-          </p>
+          <p class="eyebrow" id="projects-eyebrow">Projetos</p>
+          <h2 id="projects-title">Projetos em destaque</h2>
+          <p id="projects-text"></p>
         </div>
 
         <div class="filters reveal" id="project-filters" role="tablist" aria-label="Filtros de projeto"></div>
@@ -152,43 +187,49 @@
       </div>
     </section>
 
+    <section class="section section-alt" id="certificates">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow" id="certificates-eyebrow">Certificados</p>
+          <h2 id="certificates-title">Formação complementar e estudos aplicados</h2>
+          <p id="certificates-text"></p>
+        </div>
+
+        <div class="certificate-grid" id="certificates-list"></div>
+      </div>
+    </section>
+
     <section class="section" id="contact">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="eyebrow">Contato</p>
-          <h2>Informações de contato</h2>
-          <p>
-            Caso tenha interesse em parceria, serviço, liderança técnica, consultoria, mentoria ou projeto,
-            você pode falar comigo por qualquer um dos canais abaixo.
-          </p>
+          <p class="eyebrow" id="contact-eyebrow">Contato</p>
+          <h2 id="contact-title">Informações de contato</h2>
+          <p id="contact-text"></p>
         </div>
 
-        <div class="contact-grid">
-          <article class="contact-card reveal">
-            <h3>WhatsApp / Celular</h3>
-            <a href="https://wa.me/5549988427624" target="_blank" rel="noopener">+55 (49) 98842-7624</a>
-          </article>
-
-          <article class="contact-card reveal">
-            <h3>Email</h3>
-            <a href="mailto:trichesbruno@gmail.com">trichesbruno@gmail.com</a>
-          </article>
-
-          <article class="contact-card reveal">
-            <h3>LinkedIn</h3>
-            <a href="https://www.linkedin.com/in/bruno-getten-triches-152952207/" target="_blank" rel="noopener">Perfil Bruno Getten</a>
-          </article>
-        </div>
+        <div class="contact-grid" id="contact-grid"></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-shell">
-      <p>© <span id="current-year"></span> Bruno Getten Triches. Todos os direitos reservados.</p>
-      <a href="#home" class="back-top">Voltar ao topo</a>
+      <p id="footer-copy">© <span id="current-year"></span> Bruno Getten Triches. Todos os direitos reservados.</p>
+      <a href="#home" class="back-top" id="footer-back-top">Voltar ao topo</a>
     </div>
   </footer>
+
+  <div class="image-modal" id="image-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="image-modal-title">
+    <div class="image-modal-backdrop" data-close-modal></div>
+    <div class="image-modal-dialog" role="document">
+      <button class="image-modal-close" type="button" aria-label="Fechar imagem ampliada" data-close-modal>
+        ×
+      </button>
+      <p class="image-modal-title" id="image-modal-title">Visualização do projeto</p>
+      <img class="image-modal-image" id="image-modal-image" alt="">
+      <p class="image-modal-caption" id="image-modal-caption"></p>
+    </div>
+  </div>
 
   <script src="assets/js/data.js"></script>
   <script src="assets/js/main.js"></script>
