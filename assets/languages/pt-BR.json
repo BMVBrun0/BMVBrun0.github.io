@@ -36,7 +36,7 @@
     "secondaryCta": "Baixar CV",
     "stats": [
       {
-        "title": "8+ anos",
+        "title": "7+ anos",
         "text": "desenvolvendo software"
       },
       {
@@ -215,7 +215,7 @@
       "title": "Painel Web de Agenda e Administração",
       "category": "product",
       "image": "assets/img/portfolio/whitelabel_booking.png",
-      "status": "Planejado",
+      "status": "Privado",
       "description": "Painel web para gestão operacional de agenda, serviços, disponibilidade, configurações e fluxos administrativos. Estrutura pensada para centralizar operação, manter consistência entre app e web e suportar evolução do produto.",
       "stack": [
         "Laravel",
@@ -228,7 +228,7 @@
       "title": "SDK e Plugin de Acessibilidade Universal",
       "category": "tool",
       "image": "assets/img/portfolio/accessibility_plugin.png",
-      "status": "Planejado",
+      "status": "Privado",
       "description": "SDK/plugin para adicionar recursos de acessibilidade em sites, aplicativos e sistemas, com configuração simples, demo dedicada, gestão de licença e potencial para distribuição como produto reutilizável.",
       "stack": [
         "JavaScript SDK",
@@ -241,7 +241,7 @@
       "title": "Encurtador de URL Mobile Offline",
       "category": "mobile",
       "image": "assets/img/portfolio/url_shortener.png",
-      "status": "Público em breve",
+      "status": "Público",
       "description": "Aplicativo mobile offline-first com persistência local, histórico mantido no dispositivo e experiência pensada para uso contínuo mesmo sem rede, priorizando simplicidade, velocidade e confiabilidade.",
       "stack": [
         "React Native",
@@ -254,7 +254,7 @@
       "title": "Website de Compressão e Conversão de Assets",
       "category": "tool",
       "image": "assets/img/portfolio/media_forge.png",
-      "status": "Público em breve",
+      "status": "Público",
       "description": "Ferramenta web para compressão e conversão de assets, criada para acelerar fluxos de trabalho com imagens e arquivos estáticos voltados a apps, sites, jogos e pipelines de publicação.",
       "stack": [
         "Web App",

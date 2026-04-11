@@ -14,8 +14,16 @@
   <link rel="preload" href="assets/css/main.css" as="style">
   <link rel="preload" href="assets/img/brand/logo-bm-white.png" as="image">
   <link rel="stylesheet" href="assets/css/main.css">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 <body>
+  <div id="topo" aria-hidden="true"></div>
+
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <svg class="icon-sprite" aria-hidden="true" focusable="false">
@@ -56,7 +64,7 @@
 
   <header class="site-header" id="home">
     <div class="container header-shell">
-      <a href="#home" class="brand" aria-label="Voltar ao topo">
+      <a href="#topo" class="brand" aria-label="Voltar ao topo">
         <img class="brand-logo" src="assets/img/brand/logo-bm-white.png" alt="Logo BM">
       </a>
 
@@ -247,7 +255,7 @@
   <footer class="site-footer">
     <div class="container footer-shell">
       <p id="footer-copy">© <span id="current-year"></span> Bruno Getten Triches. Todos os direitos reservados.</p>
-      <a href="#home" class="back-top" id="footer-back-top">Voltar ao topo</a>
+      <a href="#topo" class="back-top" id="footer-back-top">Voltar ao topo</a>
     </div>
   </footer>
 
@@ -265,5 +273,19 @@
 
   <script src="assets/js/data.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('a[href="#topo"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
