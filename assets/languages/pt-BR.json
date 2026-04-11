@@ -171,7 +171,8 @@
     "zoomAriaLabel": "Ampliar imagem do projeto {title}",
     "imageAlt": "Preview do projeto {title}",
     "stackAriaLabel": "Stack prevista",
-    "defaultCategory": "Projeto"
+    "defaultCategory": "Projeto",
+    "comingSoonLabel": "Em breve"
   },
   "categories": [
     {
@@ -199,20 +200,21 @@
     {
       "title": "Aplicativo de Agendamento Online",
       "category": "mobile",
-      "image": "assets/img/portfolio/1.jpg",
-      "status": "Planejado",
+      "image": "assets/img/portfolio/coming_soon.png",
+      "status": "Em breve",
       "description": "Aplicativo mobile para agendamento online com autenticação tradicional, login social, fluxo orientado à conversão e integração com agenda, pensado para operação escalável e reaproveitamento em cenários white-label.",
       "stack": [
         "React Native",
         "Firebase Auth",
         "Google SSO",
         "Google Calendar API"
-      ]
+      ],
+      "comingSoon": true
     },
     {
       "title": "Painel Web de Agenda e Administração",
       "category": "product",
-      "image": "assets/img/portfolio/2.jpg",
+      "image": "assets/img/portfolio/whitelabel_booking.png",
       "status": "Planejado",
       "description": "Painel web para gestão operacional de agenda, serviços, disponibilidade, configurações e fluxos administrativos. Estrutura pensada para centralizar operação, manter consistência entre app e web e suportar evolução do produto.",
       "stack": [
@@ -264,15 +266,16 @@
     {
       "title": "Truco 2D Multiplayer em Unity",
       "category": "game",
-      "image": "assets/img/portfolio/6.jpg",
-      "status": "Público em breve",
+      "image": "assets/img/portfolio/coming_soon.png",
+      "status": "Em breve",
       "description": "Jogo 2D de truco em Unity com estrutura preparada para multiplayer local e online, gerenciamento de estado de partida, organização para expansão futura e foco em experiência rápida e competitiva.",
       "stack": [
         "Unity",
         "C#",
         "Multiplayer Local",
         "Multiplayer Online"
-      ]
+      ],
+      "comingSoon": true
     }
   ],
   "contactSection": {

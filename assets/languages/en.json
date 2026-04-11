@@ -171,7 +171,8 @@
     "zoomAriaLabel": "Enlarge image for project {title}",
     "imageAlt": "Preview image for project {title}",
     "stackAriaLabel": "Expected stack",
-    "defaultCategory": "Project"
+    "defaultCategory": "Project",
+    "comingSoonLabel": "Coming soon"
   },
   "categories": [
     {
@@ -199,20 +200,21 @@
     {
       "title": "Online Scheduling App",
       "category": "mobile",
-      "image": "assets/img/portfolio/1.jpg",
-      "status": "Planned",
+      "image": "assets/img/portfolio/coming_soon.png",
+      "status": "Coming soon",
       "description": "Mobile app for online scheduling with traditional authentication, social login, conversion-oriented flow, and calendar integration, designed for scalable operation and reuse in white-label scenarios.",
       "stack": [
         "React Native",
         "Firebase Auth",
         "Google SSO",
         "Google Calendar API"
-      ]
+      ],
+      "comingSoon": true
     },
     {
       "title": "Scheduling and Administration Web Panel",
       "category": "product",
-      "image": "assets/img/portfolio/2.jpg",
+      "image": "assets/img/portfolio/whitelabel_booking.png",
       "status": "Planned",
       "description": "Web panel for operational management of schedules, services, availability, configuration, and admin flows. Structured to centralize operations, keep app and web consistent, and support product evolution.",
       "stack": [
@@ -264,15 +266,16 @@
     {
       "title": "Unity 2D Multiplayer Truco",
       "category": "game",
-      "image": "assets/img/portfolio/6.jpg",
-      "status": "Public soon",
+      "image": "assets/img/portfolio/coming_soon.png",
+      "status": "Coming soon",
       "description": "2D Truco game in Unity with structure prepared for local and online multiplayer, match state management, organized expansion paths, and a fast, competitive experience.",
       "stack": [
         "Unity",
         "C#",
         "Local Multiplayer",
         "Online Multiplayer"
-      ]
+      ],
+      "comingSoon": true
     }
   ],
   "contactSection": {

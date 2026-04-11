@@ -61,14 +61,30 @@
       </a>
 
       <div class="header-actions">
-        <label class="lang-field desktop-lang" for="lang-select-desktop">
+        <div class="lang-switcher desktop-lang" data-lang-switcher>
           <span class="lang-label" id="language-label-desktop">Idioma</span>
-          <select class="lang-select" id="lang-select-desktop" aria-label="Selecionar idioma">
-            <option value="pt-BR">🇧🇷 Português (BR)</option>
-            <option value="en">🇺🇸 English</option>
-            <option value="es">🇪🇸 Español</option>
-          </select>
-        </label>
+          <button class="lang-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-menu-desktop" aria-labelledby="language-label-desktop lang-current-desktop" data-lang-trigger>
+            <span class="lang-current" id="lang-current-desktop">
+              <span class="lang-current-flag" data-lang-current-flag>🇧🇷</span>
+              <span class="lang-current-text" data-lang-current-text>Português (BR)</span>
+            </span>
+            <span class="lang-trigger-icon" aria-hidden="true">▾</span>
+          </button>
+          <div class="lang-menu" id="lang-menu-desktop" role="listbox" aria-labelledby="language-label-desktop">
+            <button class="lang-option is-active" type="button" role="option" data-locale="pt-BR" aria-selected="true">
+              <span class="lang-option-flag">🇧🇷</span>
+              <span class="lang-option-copy"><strong>Português (BR)</strong><small>Currículo BR</small></span>
+            </button>
+            <button class="lang-option" type="button" role="option" data-locale="en" aria-selected="false">
+              <span class="lang-option-flag">🇺🇸</span>
+              <span class="lang-option-copy"><strong>English</strong><small>CV in English</small></span>
+            </button>
+            <button class="lang-option" type="button" role="option" data-locale="es" aria-selected="false">
+              <span class="lang-option-flag">🇪🇸</span>
+              <span class="lang-option-copy"><strong>Español</strong><small>CV in English</small></span>
+            </button>
+          </div>
+        </div>
 
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menu">
           <span></span>
@@ -85,14 +101,30 @@
         <a href="#certificates" id="nav-certificates">Certificados</a>
         <a href="#contact" id="nav-contact">Contato</a>
 
-        <label class="lang-field mobile-lang" for="lang-select-mobile">
+        <div class="lang-switcher mobile-lang" data-lang-switcher>
           <span class="lang-label" id="language-label-mobile">Idioma</span>
-          <select class="lang-select" id="lang-select-mobile" aria-label="Selecionar idioma no menu mobile">
-            <option value="pt-BR">🇧🇷 Português (BR)</option>
-            <option value="en">🇺🇸 English</option>
-            <option value="es">🇪🇸 Español</option>
-          </select>
-        </label>
+          <button class="lang-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-menu-mobile" aria-labelledby="language-label-mobile lang-current-mobile" data-lang-trigger>
+            <span class="lang-current" id="lang-current-mobile">
+              <span class="lang-current-flag" data-lang-current-flag>🇧🇷</span>
+              <span class="lang-current-text" data-lang-current-text>Português (BR)</span>
+            </span>
+            <span class="lang-trigger-icon" aria-hidden="true">▾</span>
+          </button>
+          <div class="lang-menu" id="lang-menu-mobile" role="listbox" aria-labelledby="language-label-mobile">
+            <button class="lang-option is-active" type="button" role="option" data-locale="pt-BR" aria-selected="true">
+              <span class="lang-option-flag">🇧🇷</span>
+              <span class="lang-option-copy"><strong>Português (BR)</strong><small>Currículo BR</small></span>
+            </button>
+            <button class="lang-option" type="button" role="option" data-locale="en" aria-selected="false">
+              <span class="lang-option-flag">🇺🇸</span>
+              <span class="lang-option-copy"><strong>English</strong><small>CV in English</small></span>
+            </button>
+            <button class="lang-option" type="button" role="option" data-locale="es" aria-selected="false">
+              <span class="lang-option-flag">🇪🇸</span>
+              <span class="lang-option-copy"><strong>Español</strong><small>CV in English</small></span>
+            </button>
+          </div>
+        </div>
       </nav>
     </div>
   </header>

@@ -40,8 +40,30 @@ async function loadLocaleData(locale) {
 }
 
 function syncLanguageSelects(locale) {
-  qsa('.lang-select').forEach((select) => {
-    select.value = locale;
+  const activeLocale = config.locales.includes(locale) ? locale : config.defaultLocale;
+  const currentLanguage = config.languageOptions[activeLocale] || config.languageOptions[config.defaultLocale];
+
+  qsa('[data-lang-switcher]').forEach((switcher) => {
+    const currentFlag = qs('[data-lang-current-flag]', switcher);
+    const currentText = qs('[data-lang-current-text]', switcher);
+
+    if (currentFlag) currentFlag.textContent = currentLanguage.flag;
+    if (currentText) currentText.textContent = currentLanguage.label;
+
+    qsa('.lang-option', switcher).forEach((option) => {
+      const isActive = option.dataset.locale === activeLocale;
+      option.classList.toggle('is-active', isActive);
+      option.setAttribute('aria-selected', String(isActive));
+    });
+  });
+}
+
+function closeLanguageMenus(exceptSwitcher = null) {
+  qsa('[data-lang-switcher]').forEach((switcher) => {
+    if (exceptSwitcher && switcher === exceptSwitcher) return;
+    switcher.classList.remove('is-open');
+    const trigger = qs('[data-lang-trigger]', switcher);
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
   });
 }
 
@@ -199,13 +221,14 @@ function renderProjects() {
     : state.data.projects.filter((project) => project.category === state.activeCategory);
 
   root.innerHTML = projects.map((project) => `
-    <article class="project-card reveal">
+    <article class="project-card reveal ${project.comingSoon ? 'is-coming-soon' : ''}">
       <button
         type="button"
         class="project-media project-zoom-trigger"
         data-image="${project.image}"
         data-title="${project.title}"
         aria-label="${replacePlaceholders(state.data.projectsSection.zoomAriaLabel, { title: project.title })}">
+        ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
         <img src="${project.image}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy">
         <span class="project-media-overlay">
           <span class="project-media-pill">
@@ -407,12 +430,40 @@ function initModalEvents() {
 }
 
 function initLanguageSwitcher() {
-  qsa('.lang-select').forEach((select) => {
-    select.addEventListener('change', async (event) => {
-      const locale = event.target.value;
-      syncLanguageSelects(locale);
-      await applyLocale(locale);
+  qsa('[data-lang-trigger]').forEach((trigger) => {
+    trigger.addEventListener('click', (event) => {
+      const switcher = event.currentTarget.closest('[data-lang-switcher]');
+      const willOpen = !switcher.classList.contains('is-open');
+
+      closeLanguageMenus(willOpen ? switcher : null);
+      switcher.classList.toggle('is-open', willOpen);
+      trigger.setAttribute('aria-expanded', String(willOpen));
     });
+  });
+
+  qsa('.lang-option').forEach((option) => {
+    option.addEventListener('click', async (event) => {
+      const locale = event.currentTarget.dataset.locale;
+      syncLanguageSelects(locale);
+      closeLanguageMenus();
+      await applyLocale(locale);
+
+      const nav = qs('.site-nav');
+      const toggle = qs('.nav-toggle');
+      if (window.innerWidth <= 920 && nav && toggle) {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('[data-lang-switcher]')) return;
+    closeLanguageMenus();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeLanguageMenus();
   });
 }
 

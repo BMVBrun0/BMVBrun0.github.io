@@ -7,9 +7,14 @@ window.portfolioConfig = {
     'es': 'assets/docs/curriculo-en-2026.pdf'
   },
   localeFiles: {
-    'pt-BR': 'assets/i18n/pt-BR.json',
-    'en': 'assets/i18n/en.json',
-    'es': 'assets/i18n/es.json'
+    'pt-BR': 'assets/languages/pt-BR.json',
+    'en': 'assets/languages/en.json',
+    'es': 'assets/languages/es.json'
+  },
+  languageOptions: {
+    'pt-BR': { flag: '🇧🇷', label: 'Português (BR)', helper: 'Currículo BR' },
+    'en': { flag: '🇺🇸', label: 'English', helper: 'CV in English' },
+    'es': { flag: '🇪🇸', label: 'Español', helper: 'CV in English' }
   },
   contactLinks: {
     whatsapp: 'https://wa.me/5549988427624',

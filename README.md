@@ -68,6 +68,10 @@ A estrutura foi organizada para separar responsabilidades e deixar o repositóri
 │   │   ├── brand
 │   │   ├── portfolio
 │   │   └── service
+│   ├── languages
+│   │   ├── en.json
+│   │   ├── es.json
+│   │   └── pt-BR.json
 │   └── js
 │       ├── data.js
 │       └── main.js
