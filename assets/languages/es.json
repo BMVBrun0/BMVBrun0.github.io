@@ -198,20 +198,6 @@
   ],
   "projects": [
     {
-      "title": "Aplicación de Agendamiento Online",
-      "category": "mobile",
-      "image": "assets/img/portfolio/coming_soon.png",
-      "status": "Próximamente",
-      "description": "Aplicación mobile para agendamiento online con autenticación tradicional, login social, flujo orientado a conversión e integración con agenda, pensada para operación escalable y reutilización en escenarios white-label.",
-      "stack": [
-        "React Native",
-        "Firebase Auth",
-        "Google SSO",
-        "Google Calendar API"
-      ],
-      "comingSoon": true
-    },
-    {
       "title": "Panel Web de Agenda y Administración",
       "category": "product",
       "image": "assets/img/portfolio/whitelabel_booking.png",
@@ -262,6 +248,20 @@
         "Compresión",
         "Productividad"
       ]
+    },
+    {
+      "title": "Aplicación de Agendamiento Online",
+      "category": "mobile",
+      "image": "assets/img/portfolio/coming_soon.png",
+      "status": "Próximamente",
+      "description": "Aplicación mobile para agendamiento online con autenticación tradicional, login social, flujo orientado a conversión e integración con agenda, pensada para operación escalable y reutilización en escenarios white-label.",
+      "stack": [
+        "React Native",
+        "Firebase Auth",
+        "Google SSO",
+        "Google Calendar API"
+      ],
+      "comingSoon": true
     },
     {
       "title": "Truco 2D Multiplayer en Unity",
