@@ -210,6 +210,20 @@
         "Integração App + Web"
       ]
     },
+        {
+      "title": "XtremeFut - App de exercícios em parceria com Ferrão",
+      "category": "mobile",
+      "image": "assets/img/portfolio/xtreme_fut.png",
+      "status": "Privado",
+      "description": "Aplicativo mobile de exercícios, mobilidade, alongamentos e rotinas guiadas para o público geral, desenvolvido em parceria com Ferrão, atleta de futsal e jogador da Kings League. O produto reúne catálogo prático, recomendação de plano, trilhas por nível e estrutura preparada para assinatura premium via IAP.",
+      "stack": [
+        "React Native",
+        "Firebase Auth",
+        "PHP API",
+        "IAP / Assinaturas",
+        "Planos Guiados"
+      ]
+    },
     {
       "title": "SDK e Plugin de Acessibilidade Universal",
       "category": "tool",
@@ -402,7 +416,7 @@
         "Patterns"
       ],
       "url": "https://cursos.alura.com.br/certificate/75f90563-051c-41d0-a5e0-2960c7b40349",
-      "image": "assets/img/certificates/thumbs/alura-javascript-browser.png"
+      "image": "assets/img/certificates/thumbs/alura-javascript-browser-fixed.png"
     },
     {
       "provider": "Alura",
