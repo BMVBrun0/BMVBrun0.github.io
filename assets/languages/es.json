@@ -154,7 +154,7 @@
     {
       "icon": "assets/img/service/2.png",
       "title": "Soluciones White-Label",
-      "description": "Construcción de productos reutilizables y personalizables para distintos clientes, acelerando rollout, consistencia técnica y expansión comercial."
+      "description": "Construcción de productos reutilizables y personalizables para diferentes clientes, acelerando la implantación, la consistencia técnica y la expansión comercial."
     },
     {
       "icon": "assets/img/service/3.png",
@@ -210,16 +210,16 @@
         "Integración App + Web"
       ]
     },
-        {
-      "title": "XtremeFut - App de ejercicios creada junto a Ferrão",
+    {
+      "title": "XtremeFut · App de ejercicios junto a Ferrão",
       "category": "mobile",
       "image": "assets/img/portfolio/xtreme_fut.png",
       "status": "Privado",
-      "description": "Aplicación móvil de ejercicios, movilidad, estiramientos y rutinas guiadas para el público general, desarrollada en conjunto con Ferrão, jugador profesional de futsal y atleta de Kings League. El producto combina un catálogo práctico, recomendación de plan, recorridos por nivel y una estructura lista para suscripción premium vía IAP.",
+      "description": "Aplicación móvil de ejercicios, movilidad, estiramientos y rutinas guiadas para el público general, desarrollada junto a Ferrão, jugador de futsal y atleta de la Kings League. El producto reúne catálogo práctico, recomendación de plan, recorridos por nivel y estructura preparada para suscripción premium vía IAP.",
       "stack": [
         "React Native",
         "Firebase Auth",
-        "API PHP",
+        "PHP API",
         "IAP / Suscripciones",
         "Planes Guiados"
       ]
@@ -416,7 +416,7 @@
         "Patterns"
       ],
       "url": "https://cursos.alura.com.br/certificate/75f90563-051c-41d0-a5e0-2960c7b40349",
-      "image": "assets/img/certificates/thumbs/alura-javascript-browser-fixed.png"
+      "image": "assets/img/certificates/thumbs/alura-javascript-browser.png"
     },
     {
       "provider": "Alura",
@@ -487,6 +487,86 @@
       ],
       "url": "https://cursos.alura.com.br/certificate/cf13b8a0-d9b2-4578-ae3e-8e50b73b1ed8",
       "image": "assets/img/certificates/thumbs/alura-aspnet-identity.png"
+    }
+  ],
+  "impactSection": {
+    "eyebrow": "Impacto real",
+    "title": "Resultados que ayudan a entender mi nivel de entrega",
+    "text": "Más que una lista de tecnologías, estos son ejemplos concretos de impacto en operación, implantación, estandarización técnica, liderazgo práctico y evolución de producto."
+  },
+  "impacts": [
+    {
+      "company": "Sensorama Play",
+      "period": "Actual",
+      "title": "Liderazgo técnico con entrega multi-producto",
+      "result": "Actúo como Tech Lead y como referencia principal de desarrollo, cubriendo web, mobile, APIs, infraestructura, DevOps, juegos 2D/3D en Unity y relación directa con clientes y equipos internos.",
+      "bullets": [
+        "Soporte técnico en 4 licitaciones públicas con POCs, apps, portales y entregas de validación",
+        "Creación de apps originales, productos web completos, pipelines de servicio y rutinas de equipo",
+        "Participación en entrevistas, definición de proceso, seguimiento técnico y ejecución hands-on"
+      ]
+    },
+    {
+      "company": "Amplimed",
+      "period": "2024 · 2025",
+      "title": "Productos white-label convertidos en motor del negocio",
+      "result": "Refactoricé la app y el sitio de agendamiento online, mejoré APIs legadas y estructuré portales white-label de agendamiento y filas sobre una base estándar reutilizable.",
+      "bullets": [
+        "Creación del portal white-label de agendamiento y del portal de filas en una misma estructura",
+        "Mejoras de rendimiento en flujos legados y documentación técnica para continuidad",
+        "En el trimestre posterior a la implantación, los productos white-label superaron en ingresos a un año completo del producto de gestión"
+      ]
+    },
+    {
+      "company": "Astronfy",
+      "period": "2023 · 2024",
+      "title": "Implantación más rápida y apoyo comercial más fuerte",
+      "result": "Creé una pipeline técnica para productos white-label, web, mobile y juegos que redujo el tiempo de entrada de nuevos clientes a unos 3 días y ayudó al equipo comercial a ganar velocidad.",
+      "bullets": [
+        "Estandarización técnica para subir nuevos clientes en pocos días",
+        "Liderazgo práctico en productos de juegos, web y mobile",
+        "Relación con clientes internacionales y apoyo directo al crecimiento comercial"
+      ]
+    },
+    {
+      "company": "Infogen Sistemas",
+      "period": "2022 · 2023",
+      "title": "Base sólida en apps, APIs, ERP y soporte a clientes",
+      "result": "Fui una pieza importante en el equipo de APIs y desarrollo online, creando apps, estandarizando estructuras white-label, apoyando migración y soporte, y contribuyendo en módulos críticos del ERP.",
+      "bullets": [
+        "Creación de varias apps, mantenimiento de cuentas de tiendas y apoyo en publicación y soporte",
+        "Contacto directo con migración, soporte y resolución de problemas recurrentes de clientes",
+        "Influencia relevante en contabilidad y módulo de leche, con reglas de crédito, cooperativas, cálculos, pagos y deudas"
+      ]
+    }
+  ],
+  "recruiterSection": {
+    "eyebrow": "Para reclutadores",
+    "title": "Resumen rápido de mi posicionamiento profesional",
+    "text": "Si quieres evaluar seniority, amplitud técnica y capacidad de entrega, este es el resumen más directo de mi perfil.",
+    "actions": {
+      "cvPt": "Descargar CV PT-BR",
+      "cvEn": "Descargar CV English",
+      "whatsapp": "Hablar por WhatsApp",
+      "linkedin": "Abrir LinkedIn"
+    }
+  },
+  "recruiterHighlights": [
+    {
+      "title": "Alcance de actuación",
+      "text": "Trabajo real en web, mobile, backend, juegos 2D/3D, integraciones, DevOps, soporte técnico y liderazgo práctico de equipos."
+    },
+    {
+      "title": "Contextos de negocio",
+      "text": "Experiencia práctica en white-label, ERP, sector público, salud, marketplace, games, suscripciones y productos digitales en producción."
+    },
+    {
+      "title": "Liderazgo y ejecución",
+      "text": "Creación de pipelines, documentación, entrenamiento de nuevos colaboradores, participación en entrevistas, definición de proceso y entrega hands-on."
+    },
+    {
+      "title": "Comunicación e internacional",
+      "text": "Inglés fluido, presentaciones en Berlín y Múnich, contacto con clientes internacionales y buena relación con gestores, POs, directores y equipos técnicos."
     }
   ]
 }

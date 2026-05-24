@@ -154,7 +154,7 @@
     {
       "icon": "assets/img/service/2.png",
       "title": "White-Label Solutions",
-      "description": "Reusable and customizable product structures for different clients, accelerating rollout, technical consistency, and commercial expansion."
+      "description": "Reusable and customizable product structures for different clients, accelerating client onboarding, technical consistency, and commercial expansion."
     },
     {
       "icon": "assets/img/service/3.png",
@@ -210,12 +210,12 @@
         "App + Web Integration"
       ]
     },
-        {
-      "title": "XtremeFut - Exercise app built with Ferrão",
+    {
+      "title": "XtremeFut · Fitness app built with Ferrão",
       "category": "mobile",
       "image": "assets/img/portfolio/xtreme_fut.png",
       "status": "Private",
-      "description": "Mobile fitness app with exercises, mobility drills, stretching flows and guided routines for the general public, developed in partnership with Ferrão, professional futsal player and Kings League athlete. The product combines a practical catalog, plan recommendation, level-based paths and a premium subscription structure prepared for IAP.",
+      "description": "Mobile app for workouts, mobility, stretching, and guided routines for a broader audience, built in partnership with Ferrão, futsal player and Kings League athlete. The product combines a practical catalog, plan recommendation, level-based journeys, and a structure prepared for premium subscriptions via IAP.",
       "stack": [
         "React Native",
         "Firebase Auth",
@@ -416,7 +416,7 @@
         "Patterns"
       ],
       "url": "https://cursos.alura.com.br/certificate/75f90563-051c-41d0-a5e0-2960c7b40349",
-      "image": "assets/img/certificates/thumbs/alura-javascript-browser-fixed.png"
+      "image": "assets/img/certificates/thumbs/alura-javascript-browser.png"
     },
     {
       "provider": "Alura",
@@ -487,6 +487,86 @@
       ],
       "url": "https://cursos.alura.com.br/certificate/cf13b8a0-d9b2-4578-ae3e-8e50b73b1ed8",
       "image": "assets/img/certificates/thumbs/alura-aspnet-identity.png"
+    }
+  ],
+  "impactSection": {
+    "eyebrow": "Real impact",
+    "title": "Results that help recruiters understand my delivery level",
+    "text": "More than a stack list, these are concrete examples of impact across operations, client onboarding, technical standardization, hands-on leadership, and product evolution."
+  },
+  "impacts": [
+    {
+      "company": "Sensorama Play",
+      "period": "Present",
+      "title": "Technical leadership across multiple products",
+      "result": "I work as Tech Lead and as a core delivery reference across web, mobile, APIs, infrastructure, DevOps, 2D/3D Unity games, and direct communication with clients and internal teams.",
+      "bullets": [
+        "Technical support across 4 public bids with POCs, apps, portals, and validation deliveries",
+        "Creation of original apps, complete web products, service pipelines, and team routines",
+        "Participation in interviews, process definition, technical follow-up, and hands-on execution"
+      ]
+    },
+    {
+      "company": "Amplimed",
+      "period": "2024 · 2025",
+      "title": "White-label products turned into a business driver",
+      "result": "I refactored the online scheduling app and site, improved legacy APIs, and structured white-label scheduling and queue portals on top of a reusable standard foundation.",
+      "bullets": [
+        "Built the white-label scheduling portal and queue portal on a shared structure",
+        "Improved legacy performance and created technical documentation for continuity",
+        "In the quarter after launch, white-label products outperformed a full year of the management product"
+      ]
+    },
+    {
+      "company": "Astronfy",
+      "period": "2023 · 2024",
+      "title": "Faster client onboarding and stronger commercial support",
+      "result": "I created a technical pipeline for white-label, web, mobile, and game products that reduced the time to onboard new clients to around 3 days and helped the commercial team move faster.",
+      "bullets": [
+        "Technical standardization to launch new clients in just a few days",
+        "Hands-on leadership across game, web, and mobile products",
+        "Direct relationship with international clients and support for commercial growth"
+      ]
+    },
+    {
+      "company": "Infogen Sistemas",
+      "period": "2022 · 2023",
+      "title": "Strong foundation in apps, APIs, ERP, and client support",
+      "result": "I played an important role in the APIs and online development team, creating apps, standardizing white-label structures, supporting migration and support routines, and contributing to critical ERP modules.",
+      "bullets": [
+        "Created multiple apps, handled store account maintenance, and supported publishing and support",
+        "Worked directly with migration, support, and recurring client issues",
+        "Contributed to accounting and dairy modules with credit, cooperative, calculation, payment, and debt rules"
+      ]
+    }
+  ],
+  "recruiterSection": {
+    "eyebrow": "For recruiters",
+    "title": "A quick summary of my professional positioning",
+    "text": "If you want to evaluate seniority, technical breadth, and delivery capability, this is the most direct summary of my profile.",
+    "actions": {
+      "cvPt": "Download PT-BR CV",
+      "cvEn": "Download English CV",
+      "whatsapp": "Chat on WhatsApp",
+      "linkedin": "Open LinkedIn"
+    }
+  },
+  "recruiterHighlights": [
+    {
+      "title": "Scope of work",
+      "text": "Hands-on work across web, mobile, backend, 2D/3D games, integrations, DevOps, technical support, and practical team leadership."
+    },
+    {
+      "title": "Business contexts",
+      "text": "Real experience in white-label, ERP, public sector, healthcare, marketplaces, games, subscriptions, and production digital products."
+    },
+    {
+      "title": "Leadership and execution",
+      "text": "Pipeline design, documentation, onboarding of new teammates, interview participation, process definition, and hands-on delivery."
+    },
+    {
+      "title": "Communication and international exposure",
+      "text": "Fluent English, presentations delivered in Berlin and Munich, ongoing contact with international clients, and strong relationships with managers, POs, directors, and technical teams."
     }
   ]
 }

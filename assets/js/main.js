@@ -112,6 +112,14 @@ function renderStaticText() {
   qs('#skills-label').textContent = about.skillsLabel;
   qs('#about-image').alt = about.imageAlt;
 
+  qs('#impact-eyebrow').textContent = state.data.impactSection.eyebrow;
+  qs('#impact-title').textContent = state.data.impactSection.title;
+  qs('#impact-text').textContent = state.data.impactSection.text;
+
+  qs('#recruiter-eyebrow').textContent = state.data.recruiterSection.eyebrow;
+  qs('#recruiter-title').textContent = state.data.recruiterSection.title;
+  qs('#recruiter-text').textContent = state.data.recruiterSection.text;
+
   qs('#experience-eyebrow').textContent = experienceSection.eyebrow;
   qs('#experience-title').textContent = experienceSection.title;
   qs('#experience-text').textContent = experienceSection.text;
@@ -165,6 +173,42 @@ function renderSkills() {
       </div>
     </article>
   `).join('');
+}
+
+
+function renderImpact() {
+  const root = qs('#impact-grid');
+  root.innerHTML = state.data.impacts.map((item) => `
+    <article class="impact-card reveal">
+      <div class="impact-top">
+        <span class="impact-company">${item.company}</span>
+        <span class="impact-period">${item.period}</span>
+      </div>
+      <h3>${item.title}</h3>
+      <p class="impact-result">${item.result}</p>
+      <ul class="impact-bullets">
+        ${item.bullets.map((bullet) => `<li>${bullet}</li>`).join('')}
+      </ul>
+    </article>
+  `).join('');
+}
+
+function renderRecruiterHighlights() {
+  const root = qs('#recruiter-grid');
+  root.innerHTML = state.data.recruiterHighlights.map((item) => `
+    <article class="recruiter-card reveal">
+      <h3>${item.title}</h3>
+      <p>${item.text}</p>
+    </article>
+  `).join('');
+
+  const actions = qs('#recruiter-actions');
+  actions.innerHTML = `
+    <a class="btn btn-primary" href="assets/docs/curriculo-br-2026.pdf" target="_blank" rel="noopener">${state.data.recruiterSection.actions.cvPt}</a>
+    <a class="btn btn-secondary" href="assets/docs/curriculo-en-2026.pdf" target="_blank" rel="noopener">${state.data.recruiterSection.actions.cvEn}</a>
+    <a class="btn btn-secondary" href="${config.contactLinks.whatsapp}" target="_blank" rel="noopener">${state.data.recruiterSection.actions.whatsapp}</a>
+    <a class="btn btn-secondary" href="${config.contactLinks.linkedin}" target="_blank" rel="noopener">${state.data.recruiterSection.actions.linkedin}</a>
+  `;
 }
 
 function renderExperience() {
@@ -478,6 +522,8 @@ async function applyLocale(locale) {
   renderStaticText();
   renderHeroStats();
   renderSkills();
+  renderImpact();
+  renderRecruiterHighlights();
   renderExperience();
   renderServices();
   renderFilters();

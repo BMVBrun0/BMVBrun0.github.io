@@ -31,21 +31,21 @@
       "Desenvolvedor de Jogos",
       "Tech Lead"
     ],
-    "text": "Desenvolvedor e Tech Lead com foco em arquitetura, liderança técnica, refatoração, plataformas white-label, produtos web e mobile, APIs escaláveis, integrações e jogos.",
+    "text": "Tech Lead e software engineer com atuação hands-on em web, mobile, backend, DevOps, jogos 2D/3D e produtos white-label, com histórico de padronizar stacks, acelerar implantações e destravar operações críticas.",
     "primaryCta": "Ver projetos",
     "secondaryCta": "Baixar CV",
     "stats": [
       {
-        "title": "7+ anos",
-        "text": "desenvolvendo software"
+        "title": "4+ editais públicos e POCs realizados para mercados educacional",
+        "text": "POCs, apps, portais, jogos 2D e 3D, editor de epubs entre outros produtos entregues na Sensorama"
       },
       {
-        "title": "Web · Mobile · Games",
-        "text": "atuação end-to-end"
+        "title": "7+ anos de experiencia",
+        "text": "Dev/Lider com mais de 7 anos de experiencia e atuação pratica para mostrar resultado, render e ajudar a equipe a evoluir"
       },
       {
-        "title": "Tech Lead",
-        "text": "execução, mentoria e arquitetura"
+        "title": "100+ APPs publicados",
+        "text": "produtos mobile criados em 7 anos de carreira"
       }
     ]
   },
@@ -53,8 +53,8 @@
     "eyebrow": "Sobre mim",
     "title": "Desenvolvimento com foco em arquitetura, produto, entrega e escalabilidade.",
     "paragraphs": [
-      "Meu nome é Bruno Getten Triches. Atuo como desenvolvedor e Tech Lead com experiência prática em soluções web, mobile, backend, integrações, infraestrutura e produtos digitais de ponta a ponta.",
-      "Ao longo da trajetória, trabalhei com refatoração de sistemas críticos, criação de novos produtos, plataformas white-label, documentação técnica, liderança de times e evolução de sistemas já em produção."
+      "Meu nome é Bruno Getten Triches. Atuo como Tech Lead e desenvolvedor full-stack com experiência real em soluções web, mobile, backend, DevOps, integrações, jogos e produtos digitais ponta a ponta.",
+      "Minha carreira foi construída em ambientes com alta responsabilidade: padronização de stacks, implantação de produtos white-label, refatoração de legados, suporte a clientes estratégicos, ERP, setor público, marketplace, saúde, games e liderança prática de times."
     ],
     "skillsLabel": "Principais habilidades",
     "imageAlt": "Imagem de apresentação do portfólio"
@@ -102,27 +102,27 @@
     {
       "title": "Tech Lead · Sensorama Play",
       "period": "2025 · Atual",
-      "description": "Liderança técnica de múltiplos projetos voltados ao setor público, com definição de arquitetura, padrões de código, documentação técnica, fluxos de deploy e apoio em POCs. Atuação hands-on em produtos web, mobile, APIs, jogos 2D/3D e infraestrutura."
+      "description": "Atuo como Tech Lead e principal referência de desenvolvimento, com trabalho hands-on em produtos web, mobile, APIs, DevOps, jogos 2D/3D em Unity e relacionamento com clientes. Além da liderança técnica e da definição de padrões, participo de POCs para editais, apoio a evolução do time e conduzo entregas críticas do produto."
     },
     {
       "title": "Desenvolvedor Pleno · Amplimed",
       "period": "2024 · 2025",
-      "description": "Principal responsável pelos produtos do marketplace, incluindo agendamento online, telemedicina, aplicativos e filas de atendimento. Trabalhei na refatoração do marketplace, no app de agendamento e na criação de microsserviços e soluções white-label."
+      "description": "Refatorei o aplicativo e o site de agendamento online, melhorei APIs legadas e criei o portal white-label de agendamento, o portal de filas e a integração dos dois fluxos em uma base padrão reutilizável. Também produzi documentação, treinei novos colaboradores e ajudei a transformar o white-label em um dos principais motores de receita da operação."
     },
     {
       "title": "Tech Lead · Astronfy",
       "period": "2023 · 2024",
-      "description": "Responsável técnico por marketplace, dashboard de afiliados, sistema de suporte e produtos 2D/3D. Conduzi estruturas web e mobile, integrações com pagamentos nacionais, internacionais e cripto, além de relacionamento técnico com clientes da Europa e Ásia."
+      "description": "Estruturei a operação técnica para produtos web, mobile e jogos, com forte atuação em white-label, liderança técnica e relacionamento com clientes internacionais. Criei uma pipeline capaz de colocar novos clientes no ar em cerca de 3 dias, acelerando o comercial e dando mais previsibilidade à entrega."
     },
     {
       "title": "Desenvolvedor Pleno · Infogen Sistemas",
       "period": "2022 · 2023",
-      "description": "Atuação em ERP GeneXus, portal web em .NET e aplicativos mobile. Liderei refatorações para React Native, publiquei apps, apoiei implantações, integrações e mentoria de novos desenvolvedores, além de ajudar na padronização da stack."
+      "description": "Atuei em APIs, aplicativos mobile, ERP em GeneXus e portal web em .NET. Contribuí para a padronização de apps white-label, manutenção de contas de lojas, suporte de migração e evolução de módulos críticos do ERP, incluindo contabilidade e o módulo leite, com regras ligadas a cooperativas, crédito, pagamentos e operação do produtor."
     },
     {
       "title": "Desenvolvedor Freelancer",
       "period": "2018 · Atual",
-      "description": "Projetos sob demanda para diferentes segmentos, incluindo landing pages, intranets, mini ERPs, dashboards em tempo real, aplicativos mobile, integrações e jogos 3D multiplayer, com contato direto com clientes e parceiros de diferentes mercados."
+      "description": "Projetos sob demanda em produtos web, mobile, dashboards, landing pages, mini ERPs, integrações e jogos 2D/3D, sempre com proximidade do cliente, visão de negócio e responsabilidade sobre entrega, estrutura e manutenção."
     }
   ],
   "servicesSection": {
@@ -154,7 +154,7 @@
     {
       "icon": "assets/img/service/2.png",
       "title": "Soluções White-Label",
-      "description": "Construção de produtos reutilizáveis e personalizáveis para diferentes clientes, acelerando rollout, consistência técnica e expansão comercial."
+      "description": "Construção de produtos reutilizáveis e personalizáveis para diferentes clientes, acelerando implantação, consistência técnica e expansão comercial."
     },
     {
       "icon": "assets/img/service/3.png",
@@ -210,7 +210,7 @@
         "Integração App + Web"
       ]
     },
-        {
+    {
       "title": "XtremeFut - App de exercícios em parceria com Ferrão",
       "category": "mobile",
       "image": "assets/img/portfolio/xtreme_fut.png",
@@ -416,7 +416,7 @@
         "Patterns"
       ],
       "url": "https://cursos.alura.com.br/certificate/75f90563-051c-41d0-a5e0-2960c7b40349",
-      "image": "assets/img/certificates/thumbs/alura-javascript-browser-fixed.png"
+      "image": "assets/img/certificates/thumbs/alura-javascript-browser.png"
     },
     {
       "provider": "Alura",
@@ -487,6 +487,86 @@
       ],
       "url": "https://cursos.alura.com.br/certificate/cf13b8a0-d9b2-4578-ae3e-8e50b73b1ed8",
       "image": "assets/img/certificates/thumbs/alura-aspnet-identity.png"
+    }
+  ],
+  "impactSection": {
+    "eyebrow": "Impacto real",
+    "title": "Resultados que ajudam a traduzir escopo, senioridade e execução",
+    "text": "Mais do que stack, estes são exemplos concretos de impacto em operação, receita, implantação, liderança e sustentação técnica."
+  },
+  "impacts": [
+    {
+      "company": "Sensorama Play",
+      "period": "Atual",
+      "title": "Liderança técnica com entrega multi-stack",
+      "result": "Atuação como Tech Lead e principal figura de desenvolvimento, cobrindo web, mobile, APIs, DevOps, jogos 2D/3D em Unity e relacionamento com clientes.",
+      "bullets": [
+        "Participação prática em POCs e entregas para editais públicos",
+        "Criação de aplicativos, produtos web e fluxos internos de trabalho",
+        "Implantação de sprints, dailys, feedbacks e apoio em entrevistas"
+      ]
+    },
+    {
+      "company": "Amplimed",
+      "period": "2024 · 2025",
+      "title": "White-label transformado em alavanca de negócio",
+      "result": "Refatoração dos canais de agendamento e criação de uma base padrão reutilizável para agendamento white-label e filas, com ganho real de operação e receita.",
+      "bullets": [
+        "Refatoração do app e do site de agendamento online",
+        "Criação do portal white-label e do portal de filas em uma estrutura única",
+        "No trimestre seguinte à implantação, o white-label superou em receita um ano inteiro do produto de gestão"
+      ]
+    },
+    {
+      "company": "Astronfy",
+      "period": "2023 · 2024",
+      "title": "Implantação técnica acelerada para novos clientes",
+      "result": "Criação de uma pipeline white-label com setup técnico curto, reduzindo o tempo de entrada de novos clientes e apoiando diretamente o comercial.",
+      "bullets": [
+        "Pipeline para colocar novos clientes no ar em cerca de 3 dias",
+        "Atuação em produtos web, mobile e jogos",
+        "Experiência com liderança técnica e clientes internacionais"
+      ]
+    },
+    {
+      "company": "Infogen Sistemas",
+      "period": "2022 · 2023",
+      "title": "Base forte em apps, APIs, ERP e operação",
+      "result": "Atuação estratégica em APIs, aplicativos mobile, ERP GeneXus e portal web em .NET, com impacto direto em operação, migração, suporte e manutenção.",
+      "bullets": [
+        "Padronização de apps white-label e manutenção das contas de lojas",
+        "Contato direto com migração, suporte e resolução de problemas recorrentes",
+        "Contribuição relevante em contabilidade e no módulo leite para cooperativas e produtores"
+      ]
+    }
+  ],
+  "recruiterSection": {
+    "eyebrow": "Para recrutadores",
+    "title": "Resumo rápido do meu posicionamento profissional",
+    "text": "Se você quer avaliar senioridade, escopo e aderência, este é o recorte mais direto do meu perfil.",
+    "actions": {
+      "cvPt": "Baixar CV PT-BR",
+      "cvEn": "Baixar CV English",
+      "whatsapp": "Falar no WhatsApp",
+      "linkedin": "Abrir LinkedIn"
+    }
+  },
+  "recruiterHighlights": [
+    {
+      "title": "Escopo de atuação",
+      "text": "Full-stack com atuação real em web, mobile, backend, games 2D/3D, integrações, DevOps, suporte e liderança técnica."
+    },
+    {
+      "title": "Contextos de negócio",
+      "text": "Experiência prática em white-label, ERP, setor público, saúde, marketplace, games, assinaturas e produtos digitais em produção."
+    },
+    {
+      "title": "Liderança e execução",
+      "text": "Criação de pipeline, documentação, treinamento de novos colaboradores, participação em entrevistas, definição de processo e entrega hands-on."
+    },
+    {
+      "title": "Stack e adaptabilidade",
+      "text": "Atuação com React Native, Laravel, PHP, JavaScript, TypeScript, C#, Unity, GeneXus, .NET e infraestrutura, sempre com foco em resolver o problema real do produto."
     }
   ]
 }
