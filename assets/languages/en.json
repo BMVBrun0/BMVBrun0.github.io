@@ -238,6 +238,19 @@
       ]
     },
     {
+      "title": "Unity 3D Multiplayer Truco",
+      "category": "game",
+      "image": "assets/img/portfolio/truco_game.png",
+      "status": "Private",
+      "description": "3D Truco game built in Unity, featuring an online multiplayer structure and an offline mode with bots, match state management, an organized foundation for future expansion, and a focus on fast, competitive gameplay.",
+      "stack": [
+        "Unity",
+        "C#",
+        "Local Multiplayer",
+        "Online Multiplayer"
+      ]
+    },
+    {
       "title": "Offline Mobile URL Shortener",
       "category": "mobile",
       "image": "assets/img/portfolio/url_shortener.png",
@@ -274,20 +287,6 @@
         "Firebase Auth",
         "Google SSO",
         "Google Calendar API"
-      ],
-      "comingSoon": true
-    },
-    {
-      "title": "Unity 2D Multiplayer Truco",
-      "category": "game",
-      "image": "assets/img/portfolio/coming_soon.png",
-      "status": "Coming soon",
-      "description": "2D Truco game in Unity with structure prepared for local and online multiplayer, match state management, organized expansion paths, and a fast, competitive experience.",
-      "stack": [
-        "Unity",
-        "C#",
-        "Local Multiplayer",
-        "Online Multiplayer"
       ],
       "comingSoon": true
     }

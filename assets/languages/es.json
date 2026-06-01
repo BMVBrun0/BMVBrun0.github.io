@@ -251,6 +251,19 @@
       ]
     },
     {
+      "title": "Truco 3D Multijugador en Unity",
+      "category": "game",
+      "image": "assets/img/portfolio/truco_game.png",
+      "status": "Privado",
+      "description": "Juego 3D de truco desarrollado en Unity, con estructura de multijugador online y modo offline con bots, gestión del estado de la partida, organización preparada para futuras expansiones y enfoque en una experiencia rápida y competitiva.",
+      "stack": [
+        "Unity",
+        "C#",
+        "Multijugador Local",
+        "Multijugador Online"
+      ]
+    },
+    {
       "title": "Sitio de Compresión y Conversión de Assets",
       "category": "tool",
       "image": "assets/img/portfolio/media_forge.png",
@@ -274,20 +287,6 @@
         "Firebase Auth",
         "Google SSO",
         "Google Calendar API"
-      ],
-      "comingSoon": true
-    },
-    {
-      "title": "Truco 2D Multiplayer en Unity",
-      "category": "game",
-      "image": "assets/img/portfolio/coming_soon.png",
-      "status": "Próximamente",
-      "description": "Juego 2D de truco en Unity con estructura preparada para multiplayer local y online, gestión del estado de partida, organización para expansión futura y foco en una experiencia rápida y competitiva.",
-      "stack": [
-        "Unity",
-        "C#",
-        "Multiplayer Local",
-        "Multiplayer Online"
       ],
       "comingSoon": true
     }

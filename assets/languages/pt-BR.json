@@ -238,6 +238,19 @@
       ]
     },
     {
+      "title": "Truco 3D Multiplayer em Unity",
+      "category": "game",
+      "image": "assets/img/portfolio/truco_game.png",
+      "status": "Privado",
+      "description": "Jogo 3D de truco com Unity, estrutura com multiplayer online e modo offline com bots, gerenciamento de estado de partida, organização para expansão futura e foco em experiência rápida e competitiva.",
+      "stack": [
+        "Unity",
+        "C#",
+        "Multiplayer Local",
+        "Multiplayer Online"
+      ]
+    },
+    {
       "title": "Encurtador de URL Mobile Offline",
       "category": "mobile",
       "image": "assets/img/portfolio/url_shortener.png",
@@ -274,20 +287,6 @@
         "Firebase Auth",
         "Google SSO",
         "Google Calendar API"
-      ],
-      "comingSoon": true
-    },
-    {
-      "title": "Truco 2D Multiplayer em Unity",
-      "category": "game",
-      "image": "assets/img/portfolio/coming_soon.png",
-      "status": "Em breve",
-      "description": "Jogo 2D de truco em Unity com estrutura preparada para multiplayer local e online, gerenciamento de estado de partida, organização para expansão futura e foco em experiência rápida e competitiva.",
-      "stack": [
-        "Unity",
-        "C#",
-        "Multiplayer Local",
-        "Multiplayer Online"
       ],
       "comingSoon": true
     }
