@@ -351,6 +351,22 @@
       "provider": "Udemy",
       "providerClass": "udemy",
       "year": "2026",
+      "title": "Fundamentals of Database Engineering",
+      "description": "Comprehensive course on database engineering fundamentals, covering ACID transactions, indexing and B-Trees, partitioning, replication, sharding, concurrency control, database engines, system design, and security, with a focus on performance, scalability, reliability, and architectural trade-offs.",
+      "tags": [
+        "Database Engineering",
+        "ACID",
+        "Indexing",
+        "Scalability",
+        "System Design"
+      ],
+      "url": "https://www.udemy.com/certificate/UC-d9107ade-85d2-4f9d-84c3-9198ef02aa76/",
+      "image": "assets/img/certificates/thumbs/udemy-database-engineering.png"
+    },
+    {
+      "provider": "Udemy",
+      "providerClass": "udemy",
+      "year": "2026",
       "title": "The Ultimate Guide to Video Game Optimisation",
       "description": "Course focused on game optimisation, profiling, performance and engineering practices to improve fluidity and scalability in Unity projects.",
       "tags": [

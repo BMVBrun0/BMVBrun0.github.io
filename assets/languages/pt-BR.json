@@ -351,6 +351,22 @@
       "provider": "Udemy",
       "providerClass": "udemy",
       "year": "2026",
+      "title": "Fundamentos de Engenharia de Bancos de Dados",
+      "description": "Curso abrangente sobre os fundamentos da engenharia de bancos de dados, abordando transações ACID, indexação e B-Trees, particionamento, replicação, sharding, controle de concorrência, mecanismos de bancos de dados, design de sistemas e segurança, com foco em desempenho, escalabilidade, confiabilidade e decisões arquiteturais.",
+      "tags": [
+        "Engenharia de Bancos de Dados",
+        "ACID",
+        "Indexação",
+        "Escalabilidade",
+        "Design de Sistemas"
+      ],
+        "url": "https://www.udemy.com/certificate/UC-d9107ade-85d2-4f9d-84c3-9198ef02aa76/",
+        "image": "assets/img/certificates/thumbs/udemy-database-engineering.png"
+    },
+    {
+      "provider": "Udemy",
+      "providerClass": "udemy",
+      "year": "2026",
       "title": "The Ultimate Guide to Video Game Optimisation",
       "description": "Curso focado em otimização de jogos, profiling, performance e boas práticas para melhorar fluidez e escalabilidade em projetos Unity.",
       "tags": [

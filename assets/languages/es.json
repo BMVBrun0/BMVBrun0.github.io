@@ -351,6 +351,22 @@
       "provider": "Udemy",
       "providerClass": "udemy",
       "year": "2026",
+      "title": "Fundamentos de Ingeniería de Bases de Datos",
+      "description": "Curso integral sobre los fundamentos de la ingeniería de bases de datos, que abarca transacciones ACID, indexación y B-Trees, particionamiento, replicación, sharding, control de concurrencia, motores de bases de datos, diseño de sistemas y seguridad, con énfasis en rendimiento, escalabilidad, confiabilidad y decisiones arquitectónicas.",
+      "tags": [
+        "Ingeniería de Bases de Datos",
+        "ACID",
+        "Indexación",
+        "Escalabilidad",
+        "Diseño de Sistemas"
+      ],
+            "url": "https://www.udemy.com/certificate/UC-d9107ade-85d2-4f9d-84c3-9198ef02aa76/",
+          "image": "assets/img/certificates/thumbs/udemy-database-engineering.png"
+    },
+    {
+      "provider": "Udemy",
+      "providerClass": "udemy",
+      "year": "2026",
       "title": "The Ultimate Guide to Video Game Optimisation",
       "description": "Curso enfocado en optimización de videojuegos, profiling, rendimiento y buenas prácticas para mejorar fluidez y escalabilidad en proyectos Unity.",
       "tags": [
