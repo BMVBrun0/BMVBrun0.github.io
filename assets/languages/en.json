@@ -351,6 +351,22 @@
       "provider": "Udemy",
       "providerClass": "udemy",
       "year": "2026",
+      "title": "Machine Learning A-Z [2026]: ML, DL, AI with AWS, Python & R",
+      "description": "Comprehensive course on Machine Learning, Deep Learning and Artificial Intelligence, covering data preprocessing, regression, classification, clustering, reinforcement learning, natural language processing, neural networks and advanced AI techniques, with practical applications using Python, R and AWS.",
+      "tags": [
+        "Machine Learning",
+        "Deep Learning",
+        "Artificial Intelligence",
+        "Python",
+        "AWS"
+      ],
+        "url": "https://ude.my/UC-7abce1e3-ba61-41f4-bf98-cfcb1265efd4",
+        "image": "assets/img/certificates/thumbs/udemy-machine-learning.png"
+    },
+    {
+      "provider": "Udemy",
+      "providerClass": "udemy",
+      "year": "2026",
       "title": "Fundamentals of Database Engineering",
       "description": "Comprehensive course on database engineering fundamentals, covering ACID transactions, indexing and B-Trees, partitioning, replication, sharding, concurrency control, database engines, system design, and security, with a focus on performance, scalability, reliability, and architectural trade-offs.",
       "tags": [

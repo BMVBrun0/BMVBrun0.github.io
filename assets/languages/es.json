@@ -351,6 +351,22 @@
       "provider": "Udemy",
       "providerClass": "udemy",
       "year": "2026",
+      "title": "Machine Learning A-Z [2026]: ML, DL, IA con AWS, Python y R",
+      "description": "Curso completo de Machine Learning, Deep Learning e Inteligencia Artificial, que abarca preparación de datos, regresión, clasificación, clustering, aprendizaje por refuerzo, procesamiento del lenguaje natural, redes neuronales y técnicas avanzadas de IA, con aplicaciones prácticas utilizando Python, R y AWS.",
+      "tags": [
+        "Machine Learning",
+        "Deep Learning",
+        "Inteligencia Artificial",
+        "Python",
+        "AWS"
+      ],
+        "url": "https://ude.my/UC-7abce1e3-ba61-41f4-bf98-cfcb1265efd4",
+        "image": "assets/img/certificates/thumbs/udemy-machine-learning.png"
+    },
+    {
+      "provider": "Udemy",
+      "providerClass": "udemy",
+      "year": "2026",
       "title": "Fundamentos de Ingeniería de Bases de Datos",
       "description": "Curso integral sobre los fundamentos de la ingeniería de bases de datos, que abarca transacciones ACID, indexación y B-Trees, particionamiento, replicación, sharding, control de concurrencia, motores de bases de datos, diseño de sistemas y seguridad, con énfasis en rendimiento, escalabilidad, confiabilidad y decisiones arquitectónicas.",
       "tags": [
