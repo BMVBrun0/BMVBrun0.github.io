@@ -172,7 +172,16 @@
     "imageAlt": "Vista previa del proyecto {title}",
     "stackAriaLabel": "Stack prevista",
     "defaultCategory": "Proyecto",
-    "comingSoonLabel": "Próximamente"
+    "comingSoonLabel": "Próximamente",
+    "galleryCta": "Ver galería",
+    "singleImageCta": "Ver imagen",
+    "galleryAriaLabel": "Abrir galería del proyecto {title}. {countLabel}.",
+    "galleryImageAlt": "Imagen {index} de la galería del proyecto {title}",
+    "imageCountSingle": "1 imagen",
+    "imageCountMultiple": "{count} imágenes",
+    "noImagesTitle": "Galería en preparación",
+    "noImagesText": "Pronto se añadirán más imágenes de este proyecto.",
+    "noImagesAriaLabel": "El proyecto {title} todavía no tiene imágenes disponibles"
   },
   "categories": [
     {
@@ -330,11 +339,22 @@
     "backToTop": "Volver arriba"
   },
   "modal": {
-    "title": "Vista del proyecto",
-    "initialCaption": "Selecciona un proyecto para ver la imagen ampliada.",
-    "caption": "Vista ampliada del proyecto {title}.",
-    "imageAlt": "Imagen ampliada del proyecto {title}",
-    "closeLabel": "Cerrar imagen ampliada"
+    "title": "Galería del proyecto",
+    "initialCaption": "Selecciona un proyecto para abrir su galería.",
+    "caption": "Imagen {index} de {count} · {title}",
+    "imageAlt": "Imagen {index} de la galería del proyecto {title}",
+    "closeLabel": "Cerrar galería",
+    "previousLabel": "Imagen anterior",
+    "nextLabel": "Imagen siguiente",
+    "counter": "{current} / {count}",
+    "thumbnailLabel": "Abrir imagen {index} del proyecto {title}",
+    "navigationHint": "Usa las flechas, las miniaturas o el botón de ampliar para ver detalles.",
+    "unavailableTitle": "Imagen no disponible",
+    "unavailableText": "Este archivo aún no está disponible. Puedes seguir navegando por las demás imágenes de la galería.",
+    "kicker": "GALERÍA DEL PROYECTO",
+    "thumbnailsLabel": "Miniaturas de la galería",
+    "zoomInLabel": "Ampliar imagen",
+    "zoomOutLabel": "Ajustar imagen a la pantalla"
   },
   "certificatesSection": {
     "eyebrow": "Certificados",
@@ -360,8 +380,8 @@
         "Python",
         "AWS"
       ],
-        "url": "https://ude.my/UC-7abce1e3-ba61-41f4-bf98-cfcb1265efd4",
-        "image": "assets/img/certificates/thumbs/udemy-machine-learning.png"
+      "url": "https://ude.my/UC-7abce1e3-ba61-41f4-bf98-cfcb1265efd4",
+      "image": "assets/img/certificates/thumbs/udemy-machine-learning.png"
     },
     {
       "provider": "Udemy",
@@ -376,8 +396,8 @@
         "Escalabilidad",
         "Diseño de Sistemas"
       ],
-            "url": "https://www.udemy.com/certificate/UC-d9107ade-85d2-4f9d-84c3-9198ef02aa76/",
-          "image": "assets/img/certificates/thumbs/udemy-database-engineering.png"
+      "url": "https://www.udemy.com/certificate/UC-d9107ade-85d2-4f9d-84c3-9198ef02aa76/",
+      "image": "assets/img/certificates/thumbs/udemy-database-engineering.png"
     },
     {
       "provider": "Udemy",

@@ -26,5 +26,35 @@ window.portfolioConfig = {
     linkedin: 'https://www.linkedin.com/in/bruno-getten-triches-152952207/',
     instagram: 'https://www.instagram.com/bruno_getten',
     whatsapp: 'https://wa.me/5549988427624'
+  },
+  // A imagem de capa de cada projeto continua definida nos arquivos de idioma.
+  // Adicione aqui somente as imagens extras da galeria; a capa entra automaticamente como a primeira imagem.
+  // Dessa forma, novos prints são cadastrados uma única vez e aparecem em todos os idiomas.
+  projectGalleries: {
+    'assets/img/portfolio/whitelabel_booking.png': [
+        'assets/img/portfolio/whitelabel_booking/booking_1.png',
+        'assets/img/portfolio/whitelabel_booking/booking_2.png',
+        'assets/img/portfolio/whitelabel_booking/booking_3.png',
+        'assets/img/portfolio/whitelabel_booking/booking_4.png',
+        'assets/img/portfolio/whitelabel_booking/booking_5.png',
+        'assets/img/portfolio/whitelabel_booking/booking_6.png',
+        'assets/img/portfolio/whitelabel_booking/booking_7.png',
+        'assets/img/portfolio/whitelabel_booking/booking_8.png'
+    ],
+    'assets/img/portfolio/xtreme_fut.png': [],
+    'assets/img/portfolio/accessibility_plugin.png': [
+        'assets/img/portfolio/accessibility_plugin/home.png',
+        'assets/img/portfolio/accessibility_plugin/home_black_white.png',
+        'assets/img/portfolio/accessibility_plugin/home_contrast.png',
+        'assets/img/portfolio/accessibility_plugin/home_cursor.png',
+        'assets/img/portfolio/accessibility_plugin/home_reading_focus.png',
+        'assets/img/portfolio/accessibility_plugin/mobile_1.png',
+        'assets/img/portfolio/accessibility_plugin/mobile_2.png',
+        'assets/img/portfolio/accessibility_plugin/mobile_3.png'
+    ],
+    'assets/img/portfolio/truco_game.png': [],
+    'assets/img/portfolio/url_shortener.png': [],
+    'assets/img/portfolio/media_forge.png': [],
+    'assets/img/portfolio/coming_soon.png': []
   }
 };

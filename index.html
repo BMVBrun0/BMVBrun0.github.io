@@ -37,6 +37,18 @@
       <path d="M21 3l-7 7"></path>
       <path d="M3 21l7-7"></path>
     </symbol>
+    <symbol id="icon-images" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="16" height="14" rx="2"></rect>
+      <path d="M7 15l3-3 3 3 2-2 4 4"></path>
+      <circle cx="8.5" cy="9.5" r="1.25"></circle>
+      <path d="M7 2h12a2 2 0 0 1 2 2v11"></path>
+    </symbol>
+    <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+      <path d="M15 18l-6-6 6-6"></path>
+    </symbol>
+    <symbol id="icon-chevron-right" viewBox="0 0 24 24">
+      <path d="M9 18l6-6-6-6"></path>
+    </symbol>
     <symbol id="icon-envelope" viewBox="0 0 24 24">
       <path d="M4 6h16v12H4z"></path>
       <path d="M4 8l8 6 8-6"></path>
@@ -285,12 +297,48 @@
   <div class="image-modal" id="image-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="image-modal-title">
     <div class="image-modal-backdrop" data-close-modal></div>
     <div class="image-modal-dialog" role="document">
-      <button class="image-modal-close" type="button" aria-label="Fechar imagem ampliada" data-close-modal>
-        ×
-      </button>
-      <p class="image-modal-title" id="image-modal-title">Visualização do projeto</p>
-      <img class="image-modal-image" id="image-modal-image" alt="">
-      <p class="image-modal-caption" id="image-modal-caption"></p>
+      <header class="image-modal-header">
+        <div class="image-modal-heading">
+          <span class="image-modal-kicker" id="image-modal-kicker" aria-hidden="true">GALERIA DO PROJETO</span>
+          <p class="image-modal-title" id="image-modal-title">Galeria do projeto</p>
+        </div>
+        <div class="image-modal-header-actions">
+          <span class="image-modal-counter" id="image-modal-counter" aria-live="polite">1 / 1</span>
+          <button class="image-modal-zoom" id="image-modal-zoom" type="button" aria-pressed="false" aria-label="Ampliar imagem" title="Ampliar imagem">
+            <svg class="icon"><use href="#icon-expand"></use></svg>
+          </button>
+          <button class="image-modal-close" type="button" aria-label="Fechar galeria" data-close-modal>
+            ×
+          </button>
+        </div>
+      </header>
+
+      <div class="image-modal-stage">
+        <button class="image-modal-nav image-modal-nav-prev" id="image-modal-prev" type="button" aria-label="Imagem anterior" hidden>
+          <svg class="icon"><use href="#icon-chevron-left"></use></svg>
+        </button>
+
+        <div class="image-modal-frame">
+          <img class="image-modal-image" id="image-modal-image" alt="">
+          <div class="image-modal-fallback" id="image-modal-fallback" hidden>
+            <span class="image-modal-fallback-icon"><svg class="icon"><use href="#icon-images"></use></svg></span>
+            <strong id="image-modal-fallback-title">Imagem indisponível</strong>
+            <span id="image-modal-fallback-text"></span>
+          </div>
+        </div>
+
+        <button class="image-modal-nav image-modal-nav-next" id="image-modal-next" type="button" aria-label="Próxima imagem" hidden>
+          <svg class="icon"><use href="#icon-chevron-right"></use></svg>
+        </button>
+      </div>
+
+      <div class="image-modal-footer">
+        <div class="image-modal-copy">
+          <p class="image-modal-caption" id="image-modal-caption"></p>
+          <p class="image-modal-hint" id="image-modal-hint"></p>
+        </div>
+        <div class="image-modal-thumbnails" id="image-modal-thumbnails" aria-label="Miniaturas da galeria" hidden></div>
+      </div>
     </div>
   </div>
 

@@ -7,7 +7,15 @@ const state = {
   data: null,
   activeCategory: 'all',
   roleIntervalId: null,
-  loadedLocales: new Map()
+  loadedLocales: new Map(),
+  gallery: {
+    items: [],
+    index: 0,
+    title: '',
+    lastTrigger: null,
+    pointerStartX: null,
+    isZoomed: false
+  }
 };
 
 function replacePlaceholders(template, values = {}) {
@@ -146,8 +154,21 @@ function renderStaticText() {
 
   const closeButton = qs('.image-modal-close');
   closeButton.setAttribute('aria-label', state.data.modal.closeLabel);
+  qs('#image-modal-prev').setAttribute('aria-label', state.data.modal.previousLabel);
+  qs('#image-modal-next').setAttribute('aria-label', state.data.modal.nextLabel);
+  const zoomButton = qs('#image-modal-zoom');
+  if (zoomButton) {
+    const zoomLabel = state.gallery.isZoomed ? state.data.modal.zoomOutLabel : state.data.modal.zoomInLabel;
+    zoomButton.setAttribute('aria-label', zoomLabel);
+    zoomButton.setAttribute('title', zoomLabel);
+  }
+  qs('#image-modal-kicker').textContent = state.data.modal.kicker;
   qs('#image-modal-title').textContent = state.data.modal.title;
   qs('#image-modal-caption').textContent = state.data.modal.initialCaption;
+  qs('#image-modal-thumbnails').setAttribute('aria-label', state.data.modal.thumbnailsLabel);
+  qs('#image-modal-fallback-title').textContent = state.data.modal.unavailableTitle;
+  qs('#image-modal-fallback-text').textContent = state.data.modal.unavailableText;
+  qs('#image-modal-hint').textContent = state.data.modal.navigationHint;
 }
 
 function renderHeroStats() {
@@ -258,46 +279,149 @@ function renderFilters() {
   });
 }
 
+function normalizeGalleryItem(item, project, index) {
+  if (typeof item === 'string') {
+    return {
+      src: item,
+      alt: replacePlaceholders(state.data.projectsSection.galleryImageAlt, {
+        title: project.title,
+        index: index + 1
+      }),
+      caption: ''
+    };
+  }
+
+  if (!item || typeof item !== 'object' || !item.src) return null;
+
+  return {
+    src: item.src,
+    alt: item.alt || replacePlaceholders(state.data.projectsSection.galleryImageAlt, {
+      title: project.title,
+      index: index + 1
+    }),
+    caption: item.caption || ''
+  };
+}
+
+function getProjectGallery(project) {
+  const candidates = [];
+
+  if (project.image) candidates.push({ src: project.image, alt: '', caption: '' });
+
+  const sharedGallery = project.image ? config.projectGalleries?.[project.image] : null;
+  if (Array.isArray(sharedGallery)) candidates.push(...sharedGallery);
+
+  // Opcional: permite complementar a galeria diretamente no JSON do idioma,
+  // por exemplo quando uma legenda precisa ser traduzida.
+  if (Array.isArray(project.gallery)) candidates.push(...project.gallery);
+
+  const seen = new Set();
+  const gallery = [];
+
+  candidates.forEach((item) => {
+    const normalized = normalizeGalleryItem(item, project, gallery.length);
+    if (!normalized?.src || seen.has(normalized.src)) return;
+
+    seen.add(normalized.src);
+    gallery.push(normalized);
+  });
+
+  return gallery;
+}
+
 function renderProjects() {
   const root = qs('#projects-list');
   const projects = state.activeCategory === 'all'
     ? state.data.projects
     : state.data.projects.filter((project) => project.category === state.activeCategory);
 
-  root.innerHTML = projects.map((project) => `
-    <article class="project-card reveal ${project.comingSoon ? 'is-coming-soon' : ''}">
-      <button
-        type="button"
-        class="project-media project-zoom-trigger"
-        data-image="${project.image}"
-        data-title="${project.title}"
-        aria-label="${replacePlaceholders(state.data.projectsSection.zoomAriaLabel, { title: project.title })}">
-        ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
-        <img src="${project.image}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy">
-        <span class="project-media-overlay">
-          <span class="project-media-pill">
-            <svg class="icon"><use href="#icon-expand"></use></svg>
-            <span>${state.data.projectsSection.zoomCta}</span>
-          </span>
-        </span>
-      </button>
-      <div class="project-body">
-        <div class="project-meta">
-          <span class="project-tag">${state.data.categories.find((item) => item.id === project.category)?.label ?? state.data.projectsSection.defaultCategory}</span>
-          ${project.status ? `<span class="project-status">${project.status}</span>` : ''}
-        </div>
-        <h3>${project.title}</h3>
-        <p>${project.description}</p>
-        ${Array.isArray(project.stack) && project.stack.length ? `
-          <ul class="project-stack" aria-label="${state.data.projectsSection.stackAriaLabel}">
-            ${project.stack.map((item) => `<li>${item}</li>`).join('')}
-          </ul>
-        ` : ''}
-      </div>
-    </article>
-  `).join('');
+  root.innerHTML = projects.map((project) => {
+    const gallery = getProjectGallery(project);
+    const cover = gallery[0];
+    const galleryCount = gallery.length;
+    const galleryLabel = galleryCount > 1
+      ? state.data.projectsSection.galleryCta
+      : state.data.projectsSection.singleImageCta;
+    const galleryCountLabel = galleryCount === 1
+      ? state.data.projectsSection.imageCountSingle
+      : replacePlaceholders(state.data.projectsSection.imageCountMultiple, { count: galleryCount });
 
-  initProjectZoom();
+    const media = cover
+      ? `
+        <button
+          type="button"
+          class="project-media project-gallery-trigger"
+          data-project-index="${state.data.projects.indexOf(project)}"
+          aria-label="${replacePlaceholders(state.data.projectsSection.galleryAriaLabel, {
+            title: project.title,
+            countLabel: galleryCountLabel
+          })}">
+          ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
+          <img src="${cover.src}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy">
+          <span class="project-cover-fallback" aria-hidden="true">
+            <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-images"></use></svg></span>
+            <strong>${state.data.modal.unavailableTitle}</strong>
+          </span>
+          <span class="project-media-overlay" aria-hidden="true"></span>
+          <span class="project-gallery-affordance" aria-hidden="true">
+            <span class="project-gallery-affordance-icon">
+              <svg class="icon"><use href="#icon-images"></use></svg>
+            </span>
+            <span class="project-gallery-affordance-copy">
+              <strong>${galleryLabel}</strong>
+              <small>${galleryCountLabel}</small>
+            </span>
+            <span class="project-gallery-affordance-arrow">
+              <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
+            </span>
+          </span>
+        </button>
+      `
+      : `
+        <div class="project-media project-media-empty" aria-label="${replacePlaceholders(state.data.projectsSection.noImagesAriaLabel, { title: project.title })}">
+          ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
+          <div class="project-media-empty-content">
+            <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-images"></use></svg></span>
+            <strong>${state.data.projectsSection.noImagesTitle}</strong>
+            <span>${state.data.projectsSection.noImagesText}</span>
+          </div>
+        </div>
+      `;
+
+    return `
+      <article class="project-card reveal ${project.comingSoon ? 'is-coming-soon' : ''}">
+        ${media}
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-tag">${state.data.categories.find((item) => item.id === project.category)?.label ?? state.data.projectsSection.defaultCategory}</span>
+            ${project.status ? `<span class="project-status">${project.status}</span>` : ''}
+          </div>
+          <h3>${project.title}</h3>
+          <p>${project.description}</p>
+          ${Array.isArray(project.stack) && project.stack.length ? `
+            <ul class="project-stack" aria-label="${state.data.projectsSection.stackAriaLabel}">
+              ${project.stack.map((item) => `<li>${item}</li>`).join('')}
+            </ul>
+          ` : ''}
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  initProjectMediaFallbacks();
+  initProjectGallery();
+}
+
+function initProjectMediaFallbacks() {
+  qsa('.project-gallery-trigger > img').forEach((image) => {
+    const handleError = () => {
+      image.hidden = true;
+      image.closest('.project-gallery-trigger')?.classList.add('has-media-error');
+    };
+
+    image.addEventListener('error', handleError, { once: true });
+    if (image.complete && image.naturalWidth === 0) handleError();
+  });
 }
 
 
@@ -426,52 +550,361 @@ function setCurrentYear() {
   if (year) year.textContent = new Date().getFullYear();
 }
 
-function initProjectZoom() {
+
+function clearGalleryImageSizing() {
+  const modalImage = qs('#image-modal-image');
+  if (!modalImage) return;
+
+  modalImage.style.removeProperty('width');
+  modalImage.style.removeProperty('height');
+  modalImage.style.removeProperty('max-width');
+  modalImage.style.removeProperty('max-height');
+}
+
+function fitGalleryImageToStage() {
+  const modal = qs('#image-modal');
+  const stage = qs('.image-modal-stage');
+  const modalImage = qs('#image-modal-image');
+
+  if (!modal?.classList.contains('is-open') || !stage || !modalImage) return;
+  if (state.gallery.isZoomed || modalImage.hidden || !modalImage.complete || !modalImage.naturalWidth || !modalImage.naturalHeight) return;
+
+  // The mobile lightbox already has the desired CSS-driven behaviour. Keep it untouched.
+  if (window.innerWidth <= 920) {
+    clearGalleryImageSizing();
+    return;
+  }
+
+  const style = window.getComputedStyle(stage);
+  const horizontalPadding = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
+  const verticalPadding = (parseFloat(style.paddingTop) || 0) + (parseFloat(style.paddingBottom) || 0);
+  const availableWidth = Math.max(1, stage.clientWidth - horizontalPadding - 4);
+  const availableHeight = Math.max(1, stage.clientHeight - verticalPadding - 4);
+
+  const naturalWidth = modalImage.naturalWidth;
+  const naturalHeight = modalImage.naturalHeight;
+  const containScale = Math.min(availableWidth / naturalWidth, availableHeight / naturalHeight, 1);
+  const fittedWidth = Math.max(1, Math.floor(naturalWidth * containScale));
+  const fittedHeight = Math.max(1, Math.floor(naturalHeight * containScale));
+
+  modalImage.style.width = `${fittedWidth}px`;
+  modalImage.style.height = `${fittedHeight}px`;
+  modalImage.style.maxWidth = 'none';
+  modalImage.style.maxHeight = 'none';
+}
+
+function setGalleryZoom(enabled, { center = true } = {}) {
+  const stage = qs('.image-modal-stage');
+  const modalImage = qs('#image-modal-image');
+  const zoomButton = qs('#image-modal-zoom');
+  if (!stage || !modalImage || !zoomButton) return;
+
+  const canZoom = !modalImage.hidden && modalImage.complete && modalImage.naturalWidth > 0;
+  state.gallery.isZoomed = Boolean(enabled && canZoom);
+
+  stage.classList.toggle('is-zoomed', state.gallery.isZoomed);
+  zoomButton.classList.toggle('is-active', state.gallery.isZoomed);
+  zoomButton.setAttribute('aria-pressed', String(state.gallery.isZoomed));
+
+  const zoomLabel = state.data
+    ? (state.gallery.isZoomed ? state.data.modal.zoomOutLabel : state.data.modal.zoomInLabel)
+    : '';
+  if (zoomLabel) {
+    zoomButton.setAttribute('aria-label', zoomLabel);
+    zoomButton.setAttribute('title', zoomLabel);
+  }
+
+  if (!state.gallery.isZoomed) {
+    clearGalleryImageSizing();
+    stage.scrollTop = 0;
+    stage.scrollLeft = 0;
+    fitGalleryImageToStage();
+    return;
+  }
+
+  const fittedRect = modalImage.getBoundingClientRect();
+  const naturalWidth = modalImage.naturalWidth || fittedRect.width;
+  const zoomWidth = Math.min(naturalWidth, Math.max(fittedRect.width * 1.65, fittedRect.width + 180));
+
+  modalImage.style.width = `${Math.round(zoomWidth)}px`;
+  modalImage.style.height = 'auto';
+  modalImage.style.maxWidth = 'none';
+  modalImage.style.maxHeight = 'none';
+
+  if (center) {
+    window.requestAnimationFrame(() => {
+      stage.scrollLeft = Math.max(0, (stage.scrollWidth - stage.clientWidth) / 2);
+      stage.scrollTop = Math.max(0, (stage.scrollHeight - stage.clientHeight) / 2);
+    });
+  }
+}
+
+function resetGalleryZoom() {
+  setGalleryZoom(false, { center: false });
+}
+
+function updateGalleryImageShape() {
   const modal = qs('#image-modal');
   const modalImage = qs('#image-modal-image');
+  if (!modal || !modalImage || !modalImage.naturalWidth || !modalImage.naturalHeight) return;
+
+  const ratio = modalImage.naturalWidth / modalImage.naturalHeight;
+  modal.classList.toggle('image-is-portrait', ratio < 0.82);
+  modal.classList.toggle('image-is-square', ratio >= 0.82 && ratio <= 1.18);
+  modal.classList.toggle('image-is-landscape', ratio > 1.18);
+}
+
+function updateProjectGallery() {
+  const modal = qs('#image-modal');
+  if (!modal || !state.gallery.items.length) return;
+
+  const item = state.gallery.items[state.gallery.index];
+  const total = state.gallery.items.length;
+  const modalImage = qs('#image-modal-image');
+  const modalFallback = qs('#image-modal-fallback');
   const modalCaption = qs('#image-modal-caption');
+  const modalCounter = qs('#image-modal-counter');
+  const previousButton = qs('#image-modal-prev');
+  const nextButton = qs('#image-modal-next');
+  const thumbnails = qs('#image-modal-thumbnails');
+
+  resetGalleryZoom();
+  modal.classList.remove('image-is-portrait', 'image-is-square', 'image-is-landscape');
+  modalImage.hidden = false;
+  modalFallback.hidden = true;
+  modalImage.src = item.src;
+  modalImage.alt = item.alt || replacePlaceholders(state.data.modal.imageAlt, {
+    title: state.gallery.title,
+    index: state.gallery.index + 1
+  });
+
+  modalCaption.textContent = item.caption || replacePlaceholders(state.data.modal.caption, {
+    title: state.gallery.title,
+    index: state.gallery.index + 1,
+    count: total
+  });
+
+  modalCounter.textContent = replacePlaceholders(state.data.modal.counter, {
+    current: state.gallery.index + 1,
+    count: total
+  });
+
+  const hasMultipleImages = total > 1;
+  previousButton.hidden = !hasMultipleImages;
+  nextButton.hidden = !hasMultipleImages;
+  thumbnails.hidden = !hasMultipleImages;
+
+  previousButton.disabled = !hasMultipleImages;
+  nextButton.disabled = !hasMultipleImages;
+
+  if (hasMultipleImages) {
+    thumbnails.innerHTML = state.gallery.items.map((galleryItem, index) => `
+      <button
+        type="button"
+        class="image-modal-thumbnail ${index === state.gallery.index ? 'is-active' : ''}"
+        data-gallery-index="${index}"
+        aria-label="${replacePlaceholders(state.data.modal.thumbnailLabel, {
+          index: index + 1,
+          title: state.gallery.title
+        })}"
+        aria-current="${index === state.gallery.index ? 'true' : 'false'}">
+        <img src="${galleryItem.src}" alt="" loading="lazy">
+        <span>${String(index + 1).padStart(2, '0')}</span>
+      </button>
+    `).join('');
+
+    qsa('[data-gallery-index]', thumbnails).forEach((button) => {
+      button.addEventListener('click', () => {
+        state.gallery.index = Number(button.dataset.galleryIndex);
+        updateProjectGallery();
+      });
+    });
+
+    const activeThumbnail = qs('.image-modal-thumbnail.is-active', thumbnails);
+    activeThumbnail?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  } else {
+    thumbnails.innerHTML = '';
+  }
+}
+
+function openProjectGallery(project, trigger) {
+  const modal = qs('#image-modal');
   const modalTitle = qs('#image-modal-title');
   const closeButton = qs('.image-modal-close');
-  if (!modal || !modalImage || !modalCaption || !modalTitle || !closeButton) return;
+  const gallery = getProjectGallery(project);
+  if (!modal || !modalTitle || !closeButton || !gallery.length) return;
 
-  qsa('.project-zoom-trigger').forEach((trigger) => {
+  state.gallery.items = gallery;
+  state.gallery.index = 0;
+  state.gallery.title = project.title;
+  state.gallery.lastTrigger = trigger;
+  state.gallery.pointerStartX = null;
+  state.gallery.isZoomed = false;
+
+  modalTitle.textContent = project.title;
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+
+  updateProjectGallery();
+  window.requestAnimationFrame(() => closeButton.focus());
+}
+
+function initProjectGallery() {
+  qsa('.project-gallery-trigger').forEach((trigger) => {
     trigger.addEventListener('click', () => {
-      const imageSrc = trigger.dataset.image;
-      const title = trigger.dataset.title || state.data.projectsSection.defaultCategory;
-
-      modalImage.src = imageSrc;
-      modalImage.alt = replacePlaceholders(state.data.modal.imageAlt, { title });
-      modalTitle.textContent = title;
-      modalCaption.textContent = replacePlaceholders(state.data.modal.caption, { title });
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
-      closeButton.focus();
+      const projectIndex = Number(trigger.dataset.projectIndex);
+      const project = state.data.projects[projectIndex];
+      if (project) openProjectGallery(project, trigger);
     });
   });
 }
 
-function closeProjectZoom() {
+function moveProjectGallery(direction) {
+  const total = state.gallery.items.length;
+  if (total <= 1) return;
+
+  state.gallery.index = (state.gallery.index + direction + total) % total;
+  updateProjectGallery();
+}
+
+function closeProjectGallery() {
   const modal = qs('#image-modal');
   const modalImage = qs('#image-modal-image');
+  const thumbnails = qs('#image-modal-thumbnails');
   if (!modal || !modalImage) return;
 
+  const lastTrigger = state.gallery.lastTrigger;
+
+  resetGalleryZoom();
+  modal.classList.remove('image-is-portrait', 'image-is-square', 'image-is-landscape');
   modal.classList.remove('is-open');
   modal.setAttribute('aria-hidden', 'true');
   modalImage.src = '';
   modalImage.alt = '';
+  if (thumbnails) thumbnails.innerHTML = '';
   document.body.classList.remove('modal-open');
+
+  state.gallery.items = [];
+  state.gallery.index = 0;
+  state.gallery.title = '';
+  state.gallery.lastTrigger = null;
+  state.gallery.pointerStartX = null;
+  state.gallery.isZoomed = false;
+
+  if (lastTrigger && document.contains(lastTrigger)) {
+    window.requestAnimationFrame(() => lastTrigger.focus());
+  }
+}
+
+function handleGalleryImageError() {
+  const modalImage = qs('#image-modal-image');
+  const fallback = qs('#image-modal-fallback');
+  if (!modalImage || !fallback) return;
+
+  modalImage.hidden = true;
+  fallback.hidden = false;
+}
+
+function trapModalFocus(event) {
+  const modal = qs('#image-modal');
+  if (!modal?.classList.contains('is-open') || event.key !== 'Tab') return;
+
+  const focusable = qsa('button:not([disabled]):not([hidden]), [href], [tabindex]:not([tabindex="-1"])', modal)
+    .filter((element) => !element.hidden && element.offsetParent !== null);
+  if (!focusable.length) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 function initModalEvents() {
   qsa('[data-close-modal]').forEach((item) => {
-    item.addEventListener('click', closeProjectZoom);
+    item.addEventListener('click', closeProjectGallery);
+  });
+
+  qs('#image-modal-prev')?.addEventListener('click', () => moveProjectGallery(-1));
+  qs('#image-modal-next')?.addEventListener('click', () => moveProjectGallery(1));
+
+  const modalImage = qs('#image-modal-image');
+  modalImage?.addEventListener('error', handleGalleryImageError);
+  modalImage?.addEventListener('load', () => {
+    updateGalleryImageShape();
+    resetGalleryZoom();
+    window.requestAnimationFrame(fitGalleryImageToStage);
+  });
+
+  qs('#image-modal-zoom')?.addEventListener('click', () => {
+    setGalleryZoom(!state.gallery.isZoomed);
+  });
+
+  const stage = qs('.image-modal-stage');
+  stage?.addEventListener('pointerdown', (event) => {
+    if (state.gallery.isZoomed) return;
+    state.gallery.pointerStartX = event.clientX;
+  });
+  stage?.addEventListener('pointerup', (event) => {
+    if (state.gallery.isZoomed || state.gallery.pointerStartX === null || state.gallery.items.length <= 1) return;
+
+    const distance = event.clientX - state.gallery.pointerStartX;
+    state.gallery.pointerStartX = null;
+
+    if (Math.abs(distance) < 50) return;
+    moveProjectGallery(distance > 0 ? -1 : 1);
+  });
+  stage?.addEventListener('pointercancel', () => {
+    state.gallery.pointerStartX = null;
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeProjectZoom();
+    const modal = qs('#image-modal');
+    if (!modal?.classList.contains('is-open')) return;
+
+    if (event.key === 'Escape') {
+      closeProjectGallery();
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      moveProjectGallery(-1);
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      moveProjectGallery(1);
+    } else if (event.key === 'Home' && state.gallery.items.length > 1) {
+      event.preventDefault();
+      state.gallery.index = 0;
+      updateProjectGallery();
+    } else if (event.key === 'End' && state.gallery.items.length > 1) {
+      event.preventDefault();
+      state.gallery.index = state.gallery.items.length - 1;
+      updateProjectGallery();
+    }
+  });
+
+  document.addEventListener('keydown', trapModalFocus);
+
+  let galleryResizeFrame = null;
+  window.addEventListener('resize', () => {
+    const modal = qs('#image-modal');
+    if (!modal?.classList.contains('is-open') || state.gallery.isZoomed) return;
+
+    if (galleryResizeFrame) window.cancelAnimationFrame(galleryResizeFrame);
+    galleryResizeFrame = window.requestAnimationFrame(() => {
+      galleryResizeFrame = null;
+      fitGalleryImageToStage();
+    });
   });
 }
+
 
 function initLanguageSwitcher() {
   qsa('[data-lang-trigger]').forEach((trigger) => {

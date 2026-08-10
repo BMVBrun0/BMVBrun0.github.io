@@ -172,7 +172,16 @@
     "imageAlt": "Preview image for project {title}",
     "stackAriaLabel": "Expected stack",
     "defaultCategory": "Project",
-    "comingSoonLabel": "Coming soon"
+    "comingSoonLabel": "Coming soon",
+    "galleryCta": "View gallery",
+    "singleImageCta": "View image",
+    "galleryAriaLabel": "Open gallery for project {title}. {countLabel}.",
+    "galleryImageAlt": "Image {index} from the {title} project gallery",
+    "imageCountSingle": "1 image",
+    "imageCountMultiple": "{count} images",
+    "noImagesTitle": "Gallery in progress",
+    "noImagesText": "More images from this project will be added soon.",
+    "noImagesAriaLabel": "Project {title} does not have images available yet"
   },
   "categories": [
     {
@@ -330,11 +339,22 @@
     "backToTop": "Back to top"
   },
   "modal": {
-    "title": "Project preview",
-    "initialCaption": "Select a project to view the enlarged image.",
-    "caption": "Expanded preview for project {title}.",
-    "imageAlt": "Expanded image for project {title}",
-    "closeLabel": "Close enlarged image"
+    "title": "Project gallery",
+    "initialCaption": "Select a project to open its gallery.",
+    "caption": "Image {index} of {count} · {title}",
+    "imageAlt": "Image {index} from the {title} project gallery",
+    "closeLabel": "Close gallery",
+    "previousLabel": "Previous image",
+    "nextLabel": "Next image",
+    "counter": "{current} / {count}",
+    "thumbnailLabel": "Open image {index} from project {title}",
+    "navigationHint": "Use the arrows, thumbnails, or zoom button to inspect details.",
+    "unavailableTitle": "Image unavailable",
+    "unavailableText": "This file is not available yet. You can continue browsing the other gallery images.",
+    "kicker": "PROJECT GALLERY",
+    "thumbnailsLabel": "Gallery thumbnails",
+    "zoomInLabel": "Zoom image",
+    "zoomOutLabel": "Fit image to screen"
   },
   "certificatesSection": {
     "eyebrow": "Certificates",
@@ -360,8 +380,8 @@
         "Python",
         "AWS"
       ],
-        "url": "https://ude.my/UC-7abce1e3-ba61-41f4-bf98-cfcb1265efd4",
-        "image": "assets/img/certificates/thumbs/udemy-machine-learning.png"
+      "url": "https://ude.my/UC-7abce1e3-ba61-41f4-bf98-cfcb1265efd4",
+      "image": "assets/img/certificates/thumbs/udemy-machine-learning.png"
     },
     {
       "provider": "Udemy",

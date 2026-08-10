@@ -77,3 +77,57 @@ A estrutura foi organizada para separar responsabilidades e deixar o repositóri
 │       └── main.js
 ├── favicon.ico
 └── index.html
+## Galeria de imagens dos projetos
+
+Cada card de projeto possui um visualizador próprio. A imagem configurada em `image` continua sendo a capa de marketing do card e entra automaticamente como a primeira imagem da galeria.
+
+As imagens extras ficam centralizadas em `assets/js/data.js`, dentro de `projectGalleries`. Isso evita cadastrar os mesmos caminhos três vezes nos arquivos de idioma.
+
+Exemplo:
+
+```js
+projectGalleries: {
+  'assets/img/portfolio/truco_game.png': [
+    'assets/img/portfolio/truco/menu.png',
+    'assets/img/portfolio/truco/gameplay.png',
+    'assets/img/portfolio/truco/multiplayer.png'
+  ]
+}
+```
+
+Depois de copiar os novos arquivos para a pasta desejada e adicionar seus caminhos nesse array, o site atualiza automaticamente:
+
+- o card passa a indicar que existe uma galeria e a quantidade de imagens;
+- a capa continua sendo a primeira imagem;
+- o modal ganha navegação anterior/próxima;
+- as miniaturas aparecem automaticamente;
+- as setas do teclado (`←` e `→`) funcionam;
+- no celular também é possível deslizar horizontalmente na imagem principal.
+
+Não é necessário alterar `index.html`, `main.js` ou `main.css` para cada nova foto.
+
+### Legenda personalizada e traduzida
+
+Na maioria dos casos basta usar `projectGalleries`, deixando o modal gerar uma legenda padrão. Se uma imagem específica precisar de texto traduzido, o projeto correspondente no JSON do idioma também pode declarar um `gallery` opcional:
+
+```json
+{
+  "title": "Exemplo de projeto",
+  "image": "assets/img/portfolio/exemplo.png",
+  "gallery": [
+    {
+      "src": "assets/img/portfolio/exemplo/detalhe.png",
+      "alt": "Tela de detalhes do projeto",
+      "caption": "Tela de detalhes com os principais indicadores."
+    }
+  ]
+}
+```
+
+O visualizador remove caminhos duplicados automaticamente, então uma imagem já cadastrada no bloco compartilhado não será mostrada duas vezes.
+
+### Projeto sem nenhuma imagem
+
+A galeria também tolera projetos sem `image` e sem `gallery`. Nesse caso, o card mostra um estado visual neutro de **galeria em preparação**, sem exibir uma imagem quebrada ou um botão sem função.
+
+Se um caminho cadastrado existir na configuração mas o arquivo estiver ausente, o modal mostra um estado de **imagem indisponível** e permite continuar navegando pelas outras imagens.
