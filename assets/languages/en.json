@@ -895,28 +895,124 @@
       }
     },
     {
-      "title": "Neurodivergence Support Circle",
+      "title": "SupportCircle · Neurodivergence & Support Network",
       "category": "product",
-      "image": "assets/img/portfolio/coming_soon.png",
-      "status": "Coming soon",
-      "description": "Product in planning to centralize support, organization, and follow-up resources for neurodivergence.",
+      "image": "assets/img/portfolio/support_circle.png",
+      "status": "Public",
+      "description": "Web platform and mobile app for neurodivergent people and their support networks, bringing reliable information, support profiles, passports, records, routines and communication into one person-centered space.",
       "stack": [
-        "Mobile App",
-        "Web Platform",
-        "Accessibility",
-        "In planning"
+        "Laravel 13",
+        "Livewire 4",
+        "Expo / React Native",
+        "MySQL + SQLite",
+        "Laravel Reverb"
       ],
-      "comingSoon": true,
       "details": {
-        "description": "Mobile app and web platform in planning to support neurodivergent people as well as family members, caregivers, educators, and others in their support network. The goal is to centralize support, organization, and follow-up in a simple and accessible experience.",
+        "description": "SupportCircle was created to support neurodivergent people and help family members, friends, educators, caregivers and professionals better understand individual needs, preferences, sensitivities, communication styles and helpful strategies. The platform starts with the person — not the diagnosis — and turns everyday information into something clear, organized and shared only with authorized people. Its library brings together more than 200 resources on neurodivergence, accessibility, education, work, health, autonomy, relationships and daily life, built from institutional and government sources, legislation, specialist organizations and scientific publications, with references available for consultation. Support Profiles, Passports, daily records, routines and conversations help the support network apply that knowledge in real situations. In the mobile app, selected resources can be downloaded and read without an internet connection. The goal is to bring reliable information closer to practical, respectful support without diagnosing, prescribing or replacing professional care.",
         "features": [
-          "Support resources organized in one place",
-          "Organization and follow-up tools",
-          "Experience planned for different support-network profiles",
-          "Accessibility as a core product requirement"
+          "Support circles built around the neurodivergent person, with access defined individually for family, friends, education staff, caregivers and professionals",
+          "Support Profile and Passport for communication preferences, sensitivities, needs and helpful strategies, with explicit control over what is shared",
+          "Daily records for documenting situations, context, strategies and outcomes without turning observations into diagnoses or automatic causal claims",
+          "Routines and day-specific changes for communicating sequences, schedules, transitions and predictable reference points",
+          "Library with more than 200 resources, 73 topics and 78 unique sources covering neurodivergence, accessibility, education, health, work, autonomy and everyday life",
+          "Visible references on each resource, combining institutional sources, public agencies, legislation, specialist organizations and scientific publications",
+          "Natural-language search with synonyms, related terms, subject filters and editorial rules for situations that require a higher level of attention",
+          "Context-based conversations — General, Family, School and Professionals — so information can be shared without collapsing every relationship into one channel",
+          "Mobile app with selective downloads, offline library access, locally available Passports and routines, and synchronization when connectivity returns",
+          "Granular permissions, consent, invitations and access revocation so information is shared only with the people who are meant to see it"
         ],
-        "technicalSpecs": [],
-        "technologies": [],
+        "technicalSpecs": [
+          {
+            "label": "Architecture",
+            "value": "Laravel centralizes domain, web and a versioned API in a single application. Blade, Livewire and Alpine.js compose the web UI without a separate frontend, while the Expo app consumes /api/v1."
+          },
+          {
+            "label": "Person-centered model",
+            "value": "User represents who accesses the system and Person represents who receives support. A person can self-manage, be managed by a guardian, exist without login credentials and own an independent circle."
+          },
+          {
+            "label": "Authorization",
+            "value": "Relationship and permission are independent. Policies and granular permissions govern profile access, records, routines, documents, conversation channels and circle administration without granting full access from a social role alone."
+          },
+          {
+            "label": "Knowledge and search",
+            "value": "Editorial content is stored in MySQL and searched through FULLTEXT, aliases, synonyms, topics, audience and attention level. Risk handling uses deterministic editorial rules rather than generative classification."
+          },
+          {
+            "label": "Mobile offline layer",
+            "value": "SQLite stores only selected data: downloaded materials, synchronized person lists, Passport content, routines and drafts. Downloads are isolated per user and remain searchable without connectivity."
+          },
+          {
+            "label": "Synchronization",
+            "value": "TanStack Query coordinates remote state and device connectivity. When the connection returns, the app revalidates the session, authorized people and downloaded materials while updating local cache without treating SQLite as a replica of the main database."
+          },
+          {
+            "label": "Realtime",
+            "value": "Laravel Reverb delivers messages and contextual events to authorized channels. Chat can reference records and knowledge materials while authorization remains enforced on the backend."
+          },
+          {
+            "label": "Privacy and traceability",
+            "value": "Consents, invitations, revocations, permission changes, exports and relevant administrative actions are audited without writing raw sensitive content to application logs."
+          },
+          {
+            "label": "Local runtime",
+            "value": "Docker Compose starts MySQL, migrations, initial data, the application, queue worker and Reverb with healthchecks and non-standard host ports for a reproducible one-command environment."
+          },
+          {
+            "label": "Experience",
+            "value": "Web and mobile share visual language, minimalist navigation, readable typography, responsive behavior and low-stimulation presentation while technical synchronization controls stay out of the main user path."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Laravel 13",
+            "description": "Main backend for domain rules, web/API routes, authentication, authorization, migrations, queues and module organization."
+          },
+          {
+            "name": "Livewire 4 + Blade",
+            "description": "Server-driven web interface for dashboards, circles, records, routines, knowledge and editorial administration without a separate SPA."
+          },
+          {
+            "name": "Alpine.js + Tailwind CSS",
+            "description": "Lightweight interactions and responsive design system across public and authenticated web screens."
+          },
+          {
+            "name": "Laravel Sanctum",
+            "description": "Token authentication for the mobile application over the shared Laravel API."
+          },
+          {
+            "name": "Laravel Reverb",
+            "description": "Realtime communication for messages and events scoped to authorized support circles."
+          },
+          {
+            "name": "MySQL 8",
+            "description": "Source of truth for users, Persons, permissions, editorial content, records, routines, conversations, consents and audit data."
+          },
+          {
+            "name": "Expo 54 + React Native",
+            "description": "Mobile application foundation for Android and iOS with a shared interface aligned to the web product."
+          },
+          {
+            "name": "TypeScript + Expo Router",
+            "description": "Typed mobile layer and file-based routing across authentication, knowledge, people and circle features."
+          },
+          {
+            "name": "TanStack Query",
+            "description": "Remote-data cache and synchronization integrated with device connectivity state."
+          },
+          {
+            "name": "expo-sqlite",
+            "description": "Selective local persistence for downloaded materials, Passport content, routines, synchronized identity data and drafts."
+          },
+          {
+            "name": "expo-secure-store",
+            "description": "Protected storage for authentication tokens and secure session association on the device."
+          },
+          {
+            "name": "Docker Compose",
+            "description": "Reproducible local stack for the application, MySQL, migrations, queue worker and Reverb server."
+          }
+        ],
         "pricing": []
       }
     },

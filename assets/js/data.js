@@ -66,6 +66,18 @@ window.portfolioConfig = {
         'assets/img/portfolio/realtime_messaging/Messaging_8.png',
         'assets/img/portfolio/realtime_messaging/Messaging_9.png'
     ],
+    'assets/img/portfolio/support_circle.png': [
+        'assets/img/portfolio/support_circle/support_1.png',
+        'assets/img/portfolio/support_circle/support_2.png',
+        'assets/img/portfolio/support_circle/support_3.png',
+        'assets/img/portfolio/support_circle/support_4.png',
+        'assets/img/portfolio/support_circle/support_5.png',
+        'assets/img/portfolio/support_circle/support_6.png',
+        'assets/img/portfolio/support_circle/support_7.png',
+        'assets/img/portfolio/support_circle/support_8.png',
+        'assets/img/portfolio/support_circle/support_9.png',
+        'assets/img/portfolio/support_circle/support_10.png'
+    ],
     'assets/img/portfolio/coming_soon.png': []
   }
 };

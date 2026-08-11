@@ -895,28 +895,124 @@
       }
     },
     {
-      "title": "Círculo de Apoyo a la Neurodivergencia",
+      "title": "SupportCircle · Neurodivergencia y Red de Apoyo",
       "category": "product",
-      "image": "assets/img/portfolio/coming_soon.png",
-      "status": "Próximamente",
-      "description": "Producto en planificación para reunir apoyo, organización y seguimiento orientados a la neurodivergencia.",
+      "image": "assets/img/portfolio/support_circle.png",
+      "status": "Público",
+      "description": "Plataforma web y aplicación móvil para personas neurodivergentes y sus redes de apoyo, que reúne información confiable, perfiles de apoyo, pasaportes, registros, rutinas y comunicación en un espacio centrado en la persona.",
       "stack": [
-        "Aplicación Mobile",
-        "Plataforma Web",
-        "Accesibilidad",
-        "En planificación"
+        "Laravel 13",
+        "Livewire 4",
+        "Expo / React Native",
+        "MySQL + SQLite",
+        "Laravel Reverb"
       ],
-      "comingSoon": true,
       "details": {
-        "description": "Aplicación móvil y plataforma web en planificación para apoyar a personas neurodivergentes y también a familiares, cuidadores, educadores y otras personas de su red. La propuesta es centralizar apoyo, organización y seguimiento en una experiencia simple y accesible.",
+        "description": "SupportCircle fue creado para apoyar a personas neurodivergentes y ayudar a familiares, amigos, educadores, cuidadores y profesionales a comprender mejor necesidades, preferencias, sensibilidades, formas de comunicación y estrategias de apoyo. La plataforma parte de la persona — no del diagnóstico — y convierte la información cotidiana en algo claro, organizado y compartido únicamente con quienes tienen autorización. La biblioteca reúne más de 200 materiales sobre neurodivergencia, accesibilidad, educación, trabajo, salud, autonomía, relaciones y vida diaria, elaborados a partir de fuentes institucionales y gubernamentales, legislación, organizaciones especializadas y publicaciones científicas, siempre con las referencias disponibles para consulta. El Perfil de Apoyo, el Pasaporte, los registros, las rutinas y las conversaciones ayudan a llevar ese conocimiento a situaciones reales. En la aplicación, los materiales elegidos pueden descargarse y consultarse sin conexión. La propuesta es acercar información confiable y apoyo práctico sin diagnosticar, prescribir ni sustituir el acompañamiento profesional.",
         "features": [
-          "Recursos de apoyo organizados en un único entorno",
-          "Herramientas de organización y seguimiento",
-          "Experiencia pensada para distintos perfiles de la red de apoyo",
-          "Accesibilidad como requisito central"
+          "Círculos de apoyo construidos alrededor de la persona neurodivergente, con acceso definido individualmente para familia, amigos, personal educativo, cuidadores y profesionales",
+          "Perfil de Apoyo y Pasaporte para registrar comunicación, sensibilidades, preferencias, necesidades y estrategias útiles, con control explícito sobre lo que se comparte",
+          "Registros cotidianos para documentar situaciones, contexto, estrategias utilizadas y resultados sin convertir observaciones en diagnósticos ni relaciones automáticas de causa",
+          "Rutinas y cambios del día para comunicar secuencias, horarios, transiciones y puntos de previsibilidad de forma sencilla",
+          "Biblioteca con más de 200 materiales, 73 temas y 78 fuentes únicas sobre neurodivergencia, accesibilidad, educación, salud, trabajo, autonomía y vida cotidiana",
+          "Referencias visibles en cada material, con fuentes institucionales, organismos públicos, legislación, organizaciones especializadas y publicaciones científicas",
+          "Búsqueda en lenguaje cotidiano con sinónimos, términos relacionados, filtros por tema y reglas editoriales para situaciones que requieren mayor atención",
+          "Conversaciones organizadas por contexto — General, Familia, Escuela y Profesionales — para compartir información sin mezclar todos los espacios del círculo",
+          "Aplicación móvil con descarga selectiva de materiales, biblioteca sin conexión, Pasaporte y rutinas disponibles localmente y sincronización al recuperar la conexión",
+          "Permisos granulares, consentimientos, invitaciones y revocación de acceso para que cada información se comparta solo con quienes deben verla"
         ],
-        "technicalSpecs": [],
-        "technologies": [],
+        "technicalSpecs": [
+          {
+            "label": "Arquitectura",
+            "value": "Laravel concentra el dominio, la web y la API versionada en una única aplicación. Blade, Livewire y Alpine.js componen la interfaz web sin un proyecto de frontend separado, mientras la aplicación Expo consume /api/v1."
+          },
+          {
+            "label": "Modelo de datos centrado en la persona",
+            "value": "La cuenta de quien accede al sistema se mantiene separada de la persona que recibe apoyo. Así, una persona puede gestionar su propio perfil, estar acompañada por un responsable, existir sin inicio de sesión y tener un círculo independiente."
+          },
+          {
+            "label": "Autorización",
+            "value": "Relación y permiso son independientes. Policies y permisos granulares controlan perfiles, registros, rutinas, documentos, canales de conversación y administración del círculo sin conceder acceso total por el rol social."
+          },
+          {
+            "label": "Conocimiento y búsqueda",
+            "value": "El contenido editorial se almacena en MySQL y se consulta con FULLTEXT, sinónimos, términos relacionados, temas, público y nivel de atención. Las reglas de riesgo son editoriales y determinísticas, sin depender de generación de contenido para clasificar la urgencia."
+          },
+          {
+            "label": "Uso sin conexión en la aplicación",
+            "value": "SQLite almacena únicamente datos seleccionados: materiales descargados, lista sincronizada de personas, Pasaporte, rutinas y borradores. Las descargas están aisladas por usuario y siguen siendo buscables sin conexión."
+          },
+          {
+            "label": "Sincronización",
+            "value": "TanStack Query coordina los datos remotos y la conectividad. Al recuperar la conexión, la aplicación vuelve a validar la sesión, las personas autorizadas y los materiales descargados, actualizando la caché local sin convertir SQLite en una réplica de la base de datos principal."
+          },
+          {
+            "label": "Tiempo real",
+            "value": "Laravel Reverb entrega mensajes y eventos contextuales a canales autorizados. El chat puede relacionar registros y materiales de la biblioteca manteniendo la autorización en el backend."
+          },
+          {
+            "label": "Privacidad y trazabilidad",
+            "value": "Consentimientos, invitaciones, revocaciones, cambios de permisos, exportaciones y acciones administrativas relevantes se auditan sin registrar contenido sensible en bruto en los logs."
+          },
+          {
+            "label": "Ejecución local",
+            "value": "Docker Compose inicia MySQL, migraciones, datos iniciales, la aplicación, el procesador de colas y Reverb con comprobaciones de estado y puertos no estándar, dejando un entorno reproducible con un único flujo."
+          },
+          {
+            "label": "Experiencia",
+            "value": "La web y la aplicación comparten lenguaje visual, navegación minimalista, tipografía legible, diseño adaptable y una presentación de bajo estímulo, manteniendo los controles técnicos de sincronización fuera del recorrido principal."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Laravel 13",
+            "description": "Backend principal para dominio, rutas web/API, autenticación, autorización, migrations, colas y organización de módulos."
+          },
+          {
+            "name": "Livewire 4 + Blade",
+            "description": "Interfaz web server-driven para dashboard, círculos, registros, rutinas, biblioteca y panel editorial sin una SPA separada."
+          },
+          {
+            "name": "Alpine.js + Tailwind CSS",
+            "description": "Interacciones ligeras y sistema visual responsivo en las pantallas públicas y autenticadas de la web."
+          },
+          {
+            "name": "Laravel Sanctum",
+            "description": "Autenticación por token del aplicación móvil sobre la misma API Laravel."
+          },
+          {
+            "name": "Laravel Reverb",
+            "description": "Comunicación en tiempo real para mensajes y eventos vinculados a círculos autorizados."
+          },
+          {
+            "name": "MySQL 8",
+            "description": "Fuente de verdad para usuarios, personas, permisos, contenido editorial, registros, rutinas, conversaciones, consentimientos y auditoría."
+          },
+          {
+            "name": "Expo 54 + React Native",
+            "description": "Base del aplicación móvil para Android e iOS con una interfaz compartida alineada con la web."
+          },
+          {
+            "name": "TypeScript + Expo Router",
+            "description": "Tipado de la capa de la aplicación y navegación basada en archivos para autenticación, biblioteca, personas y recursos del círculo."
+          },
+          {
+            "name": "TanStack Query",
+            "description": "Caché y sincronización de datos remotos integrados con el estado de conectividad del dispositivo."
+          },
+          {
+            "name": "expo-sqlite",
+            "description": "Persistencia local selectiva para materiales descargados, Pasaporte, rutinas, identidad sincronizada y borradores."
+          },
+          {
+            "name": "expo-secure-store",
+            "description": "Almacenamiento protegido del token de autenticación y asociación segura de la sesión en el dispositivo."
+          },
+          {
+            "name": "Docker Compose",
+            "description": "Entorno local reproducible con aplicación, MySQL, migrations, procesador de colas y servidor Reverb."
+          }
+        ],
         "pricing": []
       }
     },
