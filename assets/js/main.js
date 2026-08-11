@@ -12,6 +12,9 @@ const state = {
     items: [],
     index: 0,
     title: '',
+    project: null,
+    tabs: [],
+    activeTab: null,
     lastTrigger: null,
     pointerStartX: null,
     isZoomed: false
@@ -165,6 +168,7 @@ function renderStaticText() {
   qs('#image-modal-kicker').textContent = state.data.modal.kicker;
   qs('#image-modal-title').textContent = state.data.modal.title;
   qs('#image-modal-caption').textContent = state.data.modal.initialCaption;
+  qs('#project-modal-tabs').setAttribute('aria-label', state.data.modal.tabsLabel);
   qs('#image-modal-thumbnails').setAttribute('aria-label', state.data.modal.thumbnailsLabel);
   qs('#image-modal-fallback-title').textContent = state.data.modal.unavailableTitle;
   qs('#image-modal-fallback-text').textContent = state.data.modal.unavailableText;
@@ -329,6 +333,37 @@ function getProjectGallery(project) {
   return gallery;
 }
 
+function hasProjectContent(value) {
+  if (Array.isArray(value)) return value.some((item) => hasProjectContent(item));
+  if (typeof value === 'string') return value.trim().length > 0;
+  if (value && typeof value === 'object') return Object.values(value).some((item) => hasProjectContent(item));
+  return value !== null && value !== undefined && value !== false;
+}
+
+function getProjectTabs(project) {
+  const details = project.details || {};
+  const gallery = getProjectGallery(project);
+  const tabs = [];
+
+  if (hasProjectContent(details.description) || hasProjectContent(details.features)) {
+    tabs.push({ id: 'overview', label: state.data.modal.overviewTab });
+  }
+  if (hasProjectContent(details.technicalSpecs)) {
+    tabs.push({ id: 'technical', label: state.data.modal.technicalTab });
+  }
+  if (hasProjectContent(details.technologies)) {
+    tabs.push({ id: 'technologies', label: state.data.modal.technologiesTab });
+  }
+  if (gallery.length) {
+    tabs.push({ id: 'images', label: state.data.modal.imagesTab });
+  }
+  if (hasProjectContent(details.pricing)) {
+    tabs.push({ id: 'pricing', label: state.data.modal.pricingTab });
+  }
+
+  return tabs;
+}
+
 function renderProjects() {
   const root = qs('#projects-list');
   const projects = state.activeCategory === 'all'
@@ -338,13 +373,11 @@ function renderProjects() {
   root.innerHTML = projects.map((project) => {
     const gallery = getProjectGallery(project);
     const cover = gallery[0];
-    const galleryCount = gallery.length;
-    const galleryLabel = galleryCount > 1
-      ? state.data.projectsSection.galleryCta
-      : state.data.projectsSection.singleImageCta;
-    const galleryCountLabel = galleryCount === 1
-      ? state.data.projectsSection.imageCountSingle
-      : replacePlaceholders(state.data.projectsSection.imageCountMultiple, { count: galleryCount });
+    const tabs = getProjectTabs(project);
+    const sectionCount = tabs.length;
+    const sectionCountLabel = sectionCount === 1
+      ? state.data.projectsSection.sectionCountSingle
+      : replacePlaceholders(state.data.projectsSection.sectionCountMultiple, { count: sectionCount });
 
     const media = cover
       ? `
@@ -352,24 +385,24 @@ function renderProjects() {
           type="button"
           class="project-media project-gallery-trigger"
           data-project-index="${state.data.projects.indexOf(project)}"
-          aria-label="${replacePlaceholders(state.data.projectsSection.galleryAriaLabel, {
+          aria-label="${replacePlaceholders(state.data.projectsSection.detailsAriaLabel, {
             title: project.title,
-            countLabel: galleryCountLabel
+            countLabel: sectionCountLabel
           })}">
           ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
           <img src="${cover.src}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy">
           <span class="project-cover-fallback" aria-hidden="true">
-            <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-images"></use></svg></span>
+            <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
             <strong>${state.data.modal.unavailableTitle}</strong>
           </span>
           <span class="project-media-overlay" aria-hidden="true"></span>
           <span class="project-gallery-affordance" aria-hidden="true">
             <span class="project-gallery-affordance-icon">
-              <svg class="icon"><use href="#icon-images"></use></svg>
+              <svg class="icon"><use href="#icon-details"></use></svg>
             </span>
             <span class="project-gallery-affordance-copy">
-              <strong>${galleryLabel}</strong>
-              <small>${galleryCountLabel}</small>
+              <strong>${state.data.projectsSection.detailsCta}</strong>
+              <small>${sectionCountLabel}</small>
             </span>
             <span class="project-gallery-affordance-arrow">
               <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
@@ -381,7 +414,7 @@ function renderProjects() {
         <div class="project-media project-media-empty" aria-label="${replacePlaceholders(state.data.projectsSection.noImagesAriaLabel, { title: project.title })}">
           ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
           <div class="project-media-empty-content">
-            <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-images"></use></svg></span>
+            <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
             <strong>${state.data.projectsSection.noImagesTitle}</strong>
             <span>${state.data.projectsSection.noImagesText}</span>
           </div>
@@ -429,8 +462,8 @@ function renderCertificates() {
   const root = qs('#certificates-list');
   if (!root || !Array.isArray(state.data.certificates)) return;
 
-  root.innerHTML = state.data.certificates.map((item) => {
-    const cardInner = `
+  root.innerHTML = state.data.certificates.map((item, index) => `
+    <article class="certificate-card reveal" data-certificate-index="${index}">
       <div class="certificate-media-wrap">
         <img class="certificate-media" src="${item.image || ''}" alt="${replacePlaceholders(state.data.certificatesSection.imageAlt, { title: item.title })}" loading="lazy">
       </div>
@@ -440,33 +473,69 @@ function renderCertificates() {
           <span class="certificate-year">${item.year}</span>
         </div>
         <h3>${item.title}</h3>
-        <p>${item.description}</p>
+        <div class="certificate-description-wrap">
+          <p class="certificate-description is-collapsed">${item.description}</p>
+          <button
+            class="certificate-description-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-label="${replacePlaceholders(state.data.certificatesSection.descriptionToggleAria, { title: item.title })}"
+            hidden>${state.data.certificatesSection.showMore}</button>
+        </div>
         ${Array.isArray(item.tags) && item.tags.length ? `
           <ul class="certificate-tags" aria-label="${state.data.certificatesSection.tagsAriaLabel}">
             ${item.tags.map((tag) => `<li>${tag}</li>`).join('')}
           </ul>
         ` : ''}
         ${item.url ? `
-          <span class="certificate-link-label">
+          <a class="certificate-link-label" href="${item.url}" target="_blank" rel="noopener" aria-label="${replacePlaceholders(state.data.certificatesSection.credentialAriaLabel, { title: item.title })}">
             <span>${state.data.certificatesSection.credentialCta}</span>
             <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
-          </span>
+          </a>
         ` : ''}
       </div>
-    `;
+    </article>
+  `).join('');
 
-    return item.url
-      ? `
-        <a class="certificate-card reveal certificate-link-card" href="${item.url}" target="_blank" rel="noopener" aria-label="${replacePlaceholders(state.data.certificatesSection.credentialAriaLabel, { title: item.title })}">
-          ${cardInner}
-        </a>
-      `
-      : `
-        <article class="certificate-card reveal">
-          ${cardInner}
-        </article>
-      `;
-  }).join('');
+  initCertificateDescriptionToggles();
+}
+
+function syncCertificateDescriptionToggles() {
+  qsa('.certificate-description-wrap').forEach((wrap) => {
+    const description = qs('.certificate-description', wrap);
+    const toggle = qs('.certificate-description-toggle', wrap);
+    if (!description || !toggle) return;
+
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      toggle.hidden = false;
+      return;
+    }
+
+    description.classList.add('is-collapsed');
+    const isOverflowing = description.scrollHeight > description.clientHeight + 1;
+    toggle.hidden = !isOverflowing;
+  });
+}
+
+function initCertificateDescriptionToggles() {
+  qsa('.certificate-description-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const wrap = toggle.closest('.certificate-description-wrap');
+      const description = wrap ? qs('.certificate-description', wrap) : null;
+      if (!description) return;
+
+      const willExpand = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(willExpand));
+      description.classList.toggle('is-collapsed', !willExpand);
+      description.classList.toggle('is-expanded', willExpand);
+      toggle.textContent = willExpand
+        ? state.data.certificatesSection.showLess
+        : state.data.certificatesSection.showMore;
+    });
+  });
+
+  window.requestAnimationFrame(syncCertificateDescriptionToggles);
 }
 
 function renderContacts() {
@@ -654,6 +723,185 @@ function updateGalleryImageShape() {
   modal.classList.toggle('image-is-landscape', ratio > 1.18);
 }
 
+function renderProjectModalTabs() {
+  const root = qs('#project-modal-tabs');
+  if (!root) return;
+
+  root.innerHTML = state.gallery.tabs.map((tab) => `
+    <button
+      type="button"
+      class="project-modal-tab ${tab.id === state.gallery.activeTab ? 'is-active' : ''}"
+      role="tab"
+      id="project-tab-${tab.id}"
+      data-project-tab="${tab.id}"
+      aria-selected="${String(tab.id === state.gallery.activeTab)}"
+      aria-controls="${tab.id === 'images' ? 'project-modal-gallery' : 'project-modal-content'}">${tab.label}</button>
+  `).join('');
+
+  qsa('[data-project-tab]', root).forEach((button) => {
+    button.addEventListener('click', () => setProjectModalTab(button.dataset.projectTab));
+    button.addEventListener('keydown', (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const buttons = qsa('[data-project-tab]', root);
+      const currentIndex = buttons.indexOf(button);
+      let nextIndex = currentIndex;
+      if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+      if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
+      if (event.key === 'Home') nextIndex = 0;
+      if (event.key === 'End') nextIndex = buttons.length - 1;
+      const next = buttons[nextIndex];
+      if (next) {
+        setProjectModalTab(next.dataset.projectTab);
+        next.focus();
+      }
+    });
+  });
+}
+
+function updateProjectModalTabState() {
+  qsa('[data-project-tab]', qs('#project-modal-tabs')).forEach((button) => {
+    const isActive = button.dataset.projectTab === state.gallery.activeTab;
+    button.classList.toggle('is-active', isActive);
+    button.setAttribute('aria-selected', String(isActive));
+    button.tabIndex = isActive ? 0 : -1;
+  });
+}
+
+function renderProjectOverview(project) {
+  const details = project.details || {};
+  return `
+    <section class="project-detail-section project-detail-overview">
+      ${hasProjectContent(details.description) ? `
+        <div class="project-detail-lead">
+          <span class="project-detail-label">${state.data.modal.overviewTitle}</span>
+          <p>${details.description}</p>
+        </div>
+      ` : ''}
+      ${hasProjectContent(details.features) ? `
+        <div class="project-detail-block">
+          <h3>${state.data.modal.featuresTitle}</h3>
+          <ul class="project-feature-grid">
+            ${details.features.map((feature) => `
+              <li><span class="project-feature-mark" aria-hidden="true">✓</span><span>${typeof feature === 'string' ? feature : feature.label || feature.value || ''}</span></li>
+            `).join('')}
+          </ul>
+        </div>
+      ` : ''}
+    </section>
+  `;
+}
+
+function renderProjectTechnical(project) {
+  const specs = project.details?.technicalSpecs || [];
+  return `
+    <section class="project-detail-section">
+      <div class="project-detail-block">
+        <h3>${state.data.modal.technicalTitle}</h3>
+        <dl class="project-spec-grid">
+          ${specs.map((spec) => {
+            if (typeof spec === 'string') return `<div class="project-spec-item"><dd>${spec}</dd></div>`;
+            return `<div class="project-spec-item"><dt>${spec.label || ''}</dt><dd>${spec.value || ''}</dd></div>`;
+          }).join('')}
+        </dl>
+      </div>
+    </section>
+  `;
+}
+
+function renderProjectTechnologies(project) {
+  const technologies = project.details?.technologies || [];
+  return `
+    <section class="project-detail-section">
+      <div class="project-detail-block">
+        <h3>${state.data.modal.technologiesTitle}</h3>
+        <ul class="project-technology-grid">
+          ${technologies.map((technology) => {
+            const label = typeof technology === 'string' ? technology : technology.name || technology.label || '';
+            const detail = typeof technology === 'object' ? technology.description || technology.detail || '' : '';
+            return `<li><strong>${label}</strong>${detail ? `<span>${detail}</span>` : ''}</li>`;
+          }).join('')}
+        </ul>
+      </div>
+    </section>
+  `;
+}
+
+function renderProjectPricing(project) {
+  const pricing = project.details?.pricing || [];
+  return `
+    <section class="project-detail-section">
+      <div class="project-detail-block">
+        <h3>${state.data.modal.pricingTitle}</h3>
+        <div class="project-pricing-grid">
+          ${pricing.map((plan) => {
+            if (typeof plan === 'string') return `<article class="project-pricing-card"><strong>${plan}</strong></article>`;
+            const items = Array.isArray(plan.items) ? plan.items : [];
+            return `
+              <article class="project-pricing-card">
+                <div class="project-pricing-heading">
+                  <strong>${plan.name || plan.title || ''}</strong>
+                  ${plan.price ? `<span>${plan.price}</span>` : ''}
+                </div>
+                ${plan.description ? `<p>${plan.description}</p>` : ''}
+                ${items.length ? `<ul>${items.map((item) => `<li>${item}</li>`).join('')}</ul>` : ''}
+              </article>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderProjectModalContent(tabId) {
+  const root = qs('#project-modal-content');
+  const project = state.gallery.project;
+  if (!root || !project) return;
+
+  if (tabId === 'overview') root.innerHTML = renderProjectOverview(project);
+  else if (tabId === 'technical') root.innerHTML = renderProjectTechnical(project);
+  else if (tabId === 'technologies') root.innerHTML = renderProjectTechnologies(project);
+  else if (tabId === 'pricing') root.innerHTML = renderProjectPricing(project);
+  else root.innerHTML = '';
+
+  root.scrollTop = 0;
+}
+
+function setProjectModalTab(tabId) {
+  if (!state.gallery.tabs.some((tab) => tab.id === tabId)) return;
+
+  state.gallery.activeTab = tabId;
+  const galleryPane = qs('#project-modal-gallery');
+  const contentPane = qs('#project-modal-content');
+  const counter = qs('#image-modal-counter');
+  const zoomButton = qs('#image-modal-zoom');
+  const isImages = tabId === 'images';
+
+  resetGalleryZoom();
+  if (galleryPane) {
+    galleryPane.hidden = !isImages;
+    if (isImages) galleryPane.setAttribute('aria-labelledby', `project-tab-${tabId}`);
+    else galleryPane.removeAttribute('aria-labelledby');
+  }
+  if (contentPane) {
+    contentPane.hidden = isImages;
+    if (!isImages) contentPane.setAttribute('aria-labelledby', `project-tab-${tabId}`);
+    else contentPane.removeAttribute('aria-labelledby');
+  }
+  if (counter) counter.hidden = !isImages;
+  if (zoomButton) zoomButton.hidden = !isImages;
+
+  updateProjectModalTabState();
+
+  if (isImages) {
+    updateProjectGallery();
+    window.requestAnimationFrame(fitGalleryImageToStage);
+  } else {
+    renderProjectModalContent(tabId);
+  }
+}
+
 function updateProjectGallery() {
   const modal = qs('#image-modal');
   if (!modal || !state.gallery.items.length) return;
@@ -731,12 +979,16 @@ function openProjectGallery(project, trigger) {
   const modal = qs('#image-modal');
   const modalTitle = qs('#image-modal-title');
   const closeButton = qs('.image-modal-close');
+  const tabs = getProjectTabs(project);
   const gallery = getProjectGallery(project);
-  if (!modal || !modalTitle || !closeButton || !gallery.length) return;
+  if (!modal || !modalTitle || !closeButton || !tabs.length) return;
 
   state.gallery.items = gallery;
   state.gallery.index = 0;
   state.gallery.title = project.title;
+  state.gallery.project = project;
+  state.gallery.tabs = tabs;
+  state.gallery.activeTab = tabs[0].id;
   state.gallery.lastTrigger = trigger;
   state.gallery.pointerStartX = null;
   state.gallery.isZoomed = false;
@@ -746,7 +998,8 @@ function openProjectGallery(project, trigger) {
   modal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
 
-  updateProjectGallery();
+  renderProjectModalTabs();
+  setProjectModalTab(state.gallery.activeTab);
   window.requestAnimationFrame(() => closeButton.focus());
 }
 
@@ -772,6 +1025,8 @@ function closeProjectGallery() {
   const modal = qs('#image-modal');
   const modalImage = qs('#image-modal-image');
   const thumbnails = qs('#image-modal-thumbnails');
+  const tabs = qs('#project-modal-tabs');
+  const content = qs('#project-modal-content');
   if (!modal || !modalImage) return;
 
   const lastTrigger = state.gallery.lastTrigger;
@@ -783,11 +1038,16 @@ function closeProjectGallery() {
   modalImage.src = '';
   modalImage.alt = '';
   if (thumbnails) thumbnails.innerHTML = '';
+  if (tabs) tabs.innerHTML = '';
+  if (content) content.innerHTML = '';
   document.body.classList.remove('modal-open');
 
   state.gallery.items = [];
   state.gallery.index = 0;
   state.gallery.title = '';
+  state.gallery.project = null;
+  state.gallery.tabs = [];
+  state.gallery.activeTab = null;
   state.gallery.lastTrigger = null;
   state.gallery.pointerStartX = null;
   state.gallery.isZoomed = false;
@@ -873,6 +1133,8 @@ function initModalEvents() {
       return;
     }
 
+    if (state.gallery.activeTab !== 'images') return;
+
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       moveProjectGallery(-1);
@@ -895,7 +1157,8 @@ function initModalEvents() {
   let galleryResizeFrame = null;
   window.addEventListener('resize', () => {
     const modal = qs('#image-modal');
-    if (!modal?.classList.contains('is-open') || state.gallery.isZoomed) return;
+    syncCertificateDescriptionToggles();
+    if (!modal?.classList.contains('is-open') || state.gallery.isZoomed || state.gallery.activeTab !== 'images') return;
 
     if (galleryResizeFrame) window.cancelAnimationFrame(galleryResizeFrame);
     galleryResizeFrame = window.requestAnimationFrame(() => {
@@ -945,6 +1208,7 @@ function initLanguageSwitcher() {
 }
 
 async function applyLocale(locale) {
+  if (qs('#image-modal')?.classList.contains('is-open')) closeProjectGallery();
   const normalized = config.locales.includes(locale) ? locale : config.defaultLocale;
   state.locale = normalized;
   window.localStorage.setItem('portfolio-locale', normalized);

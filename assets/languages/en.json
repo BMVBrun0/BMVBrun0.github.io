@@ -181,7 +181,11 @@
     "imageCountMultiple": "{count} images",
     "noImagesTitle": "Gallery in progress",
     "noImagesText": "More images from this project will be added soon.",
-    "noImagesAriaLabel": "Project {title} does not have images available yet"
+    "noImagesAriaLabel": "Project {title} does not have images available yet",
+    "detailsCta": "View details",
+    "detailsAriaLabel": "Open details for project {title}. {countLabel}.",
+    "sectionCountSingle": "1 section available",
+    "sectionCountMultiple": "{count} sections available"
   },
   "categories": [
     {
@@ -211,122 +215,736 @@
       "category": "product",
       "image": "assets/img/portfolio/whitelabel_booking.png",
       "status": "Planned",
-      "description": "Web panel for operational management of schedules, services, availability, configuration, and admin flows. Structured to centralize operations, keep app and web consistent, and support product evolution.",
+      "description": "White-label platform for online booking, schedules, services, staff, customers and day-to-day operations in one panel.",
       "stack": [
-        "Laravel",
-        "Admin Panel",
-        "REST API",
-        "App + Web Integration"
-      ]
+        "Laravel 13",
+        "Livewire 4",
+        "MySQL",
+        "Redis"
+      ],
+      "details": {
+        "description": "A white-label online booking platform that connects the customer journey with the team’s daily operation in one flow. Customers can choose a service or professional, check real availability, select a date and time, sign in or create an account, review their information and confirm the booking. On the administrative side, teams manage branches, professionals, services, customers, schedules, availability exceptions, appointment statuses and visual identity while monitoring operational indicators and upcoming appointments from the dashboard.",
+        "features": [
+          "Guided public booking with service or professional selection, calendar, available time slots and a final review before confirmation",
+          "Customer area for viewing bookings and cancelling future appointments",
+          "Operational dashboard with today’s agenda, pending items, upcoming appointments and status distribution",
+          "Service management with duration, price and relationships to branches and professionals",
+          "Professional schedules with weekly blocks, intervals, unavailable periods and extra availability",
+          "Branch, staff and customer management with role-based administrative permissions",
+          "Per-company white-label identity with logo, favicon, color palette and public booking copy"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Architecture",
+            "value": "Laravel 13 with Livewire 4 in a server-driven application, separating public booking, customer portal and administrative modules while sharing the same domain rules."
+          },
+          {
+            "label": "Scope and permissions",
+            "value": "Multi-company structure scoped by tenant with access profiles for super administration, company administration, management, professionals and customers."
+          },
+          {
+            "label": "Availability engine",
+            "value": "Slot calculation considers company timezone, service duration, slot interval, minimum notice, maximum booking window, schedules, exceptions and conflicts with existing appointments."
+          },
+          {
+            "label": "Booking flow",
+            "value": "Step-based process covering service/professional choice, complementary selection, calendar, customer authentication and review. Booking state can be preserved across sign-in or registration."
+          },
+          {
+            "label": "Operational model",
+            "value": "Services can define their own duration and price and be linked to professionals and branches. Appointments support states such as pending, confirmed, completed, cancelled and no-show."
+          },
+          {
+            "label": "API and authentication",
+            "value": "REST API protected with Laravel Sanctum for authenticated integrations around tenants, branches, professionals, services, customers and appointments."
+          },
+          {
+            "label": "Infrastructure",
+            "value": "Containerized environment with application, worker, scheduler, MySQL 8 and Redis 7, separating web processing, queues and scheduled routines."
+          },
+          {
+            "label": "Branding",
+            "value": "Brand asset pipeline handles logo and favicon processing, WebP conversion and versioned asset URLs for consistent white-label updates."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Laravel 13",
+            "description": "Backend foundation for domain rules, authentication, authorization, web/API routes and administrative modules."
+          },
+          {
+            "name": "Livewire 4",
+            "description": "Reactive administrative UI without duplicating domain logic in a separate SPA."
+          },
+          {
+            "name": "Laravel Sanctum",
+            "description": "REST API authentication for trusted integrations with operational resources."
+          },
+          {
+            "name": "MySQL 8",
+            "description": "Relational source for tenants, branches, professionals, services, customers, schedules and appointments."
+          },
+          {
+            "name": "Redis 7",
+            "description": "Infrastructure support for queues, cache and decoupled background execution."
+          },
+          {
+            "name": "Docker Compose",
+            "description": "Orchestrates the application, database, Redis, worker, scheduler and initialization steps in a reproducible stack."
+          },
+          {
+            "name": "Carbon",
+            "description": "Date, calendar, timezone and temporal-rule handling used by the availability engine."
+          },
+          {
+            "name": "GD / WebP",
+            "description": "Logo and favicon processing to normalize dimensions and optimize white-label assets."
+          },
+          {
+            "name": "PHPUnit 12",
+            "description": "Automated coverage for critical backend rules and flows."
+          }
+        ],
+        "pricing": []
+      }
     },
     {
       "title": "XtremeFut · Fitness app built with Ferrão",
       "category": "mobile",
       "image": "assets/img/portfolio/xtreme_fut.png",
       "status": "Private",
-      "description": "Mobile app for workouts, mobility, stretching, and guided routines for a broader audience, built in partnership with Ferrão, futsal player and Kings League athlete. The product combines a practical catalog, plan recommendation, level-based journeys, and a structure prepared for premium subscriptions via IAP.",
+      "description": "Fitness and training app with recommended plans, exercise library, guided routines, video, diets and premium subscriptions.",
       "stack": [
-        "React Native",
-        "Firebase Auth",
+        "Expo / React Native",
+        "Firebase",
         "PHP API",
-        "IAP / Subscriptions",
-        "Guided Plans"
-      ]
+        "IAP"
+      ],
+      "details": {
+        "description": "A fitness and training application built in partnership with Ferrão, designed to turn a broad content catalog into a guided journey. Users create a profile, receive level and goal recommendations, browse exercises by equipment, muscle group, level or objective, and follow workouts organized by day with video demonstrations and timers. The experience also includes search, favorites, diets, user-linked content and premium access through in-app subscriptions.",
+        "features": [
+          "Level and goal recommendations based on profile data, age range and physical indicators",
+          "Exercise library browsable by equipment, muscle group, level and objective",
+          "Workouts organized by day with exercise details, video demonstrations and execution timers",
+          "Workout search and navigation by goals and levels to find routines aligned with each objective",
+          "Local favorites for workouts and diets so important content remains easy to reach",
+          "Authenticated profile area with account recovery and content associated with the user",
+          "In-app subscriptions that unlock premium plans and content"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Mobile foundation",
+            "value": "Expo 54, React Native 0.81 and TypeScript with functional components and a shared Android/iOS codebase."
+          },
+          {
+            "label": "Navigation",
+            "value": "React Navigation combines drawers, stacks and top tabs to separate authentication, catalog, detail, profile and workout journeys."
+          },
+          {
+            "label": "Identity and profile",
+            "value": "Firebase Authentication handles sign-in, registration and account recovery, while Firestore stores the profile data used by personalized experiences."
+          },
+          {
+            "label": "Content catalog",
+            "value": "A service layer consumes a PHP JSON API for workouts, exercises, diets, products, posts, goals, levels, muscles, equipment and the catalog’s supporting filters."
+          },
+          {
+            "label": "Recommendation engine",
+            "value": "Local logic normalizes profile data, calculates indicators such as age and BMI, and scores levels and goals to select a compatible recommendation."
+          },
+          {
+            "label": "Guided training",
+            "value": "Detail and execution flows combine exercise media, timers and progression through workout items until routine completion."
+          },
+          {
+            "label": "Local persistence",
+            "value": "AsyncStorage keeps favorites and preferences that should remain available across sessions."
+          },
+          {
+            "label": "Subscriptions",
+            "value": "expo-iap integration encapsulates offer loading, purchase requests, purchase-update events and transaction completion."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Expo 54",
+            "description": "Mobile toolchain for packaging, native modules and Android/iOS build workflows."
+          },
+          {
+            "name": "React Native 0.81",
+            "description": "Primary mobile UI and shared user experience across supported platforms."
+          },
+          {
+            "name": "React 19 + TypeScript",
+            "description": "Typed component architecture, hooks and safer contracts for state, navigation and remote data."
+          },
+          {
+            "name": "Firebase Authentication",
+            "description": "Registration, sign-in, account recovery and user identity lifecycle."
+          },
+          {
+            "name": "Cloud Firestore",
+            "description": "Profile persistence used for personalization and account-linked data."
+          },
+          {
+            "name": "PHP JSON API",
+            "description": "Content backend for exercises, workouts, diets, goals, levels and the other entities shown by the app."
+          },
+          {
+            "name": "React Navigation 7",
+            "description": "Composition of stacks, drawers and tabs for the application’s different journeys."
+          },
+          {
+            "name": "AsyncStorage",
+            "description": "Local persistence for favorites and user preferences."
+          },
+          {
+            "name": "expo-iap",
+            "description": "Integration with mobile-store purchases and subscriptions."
+          },
+          {
+            "name": "Expo Video",
+            "description": "Playback for exercise demonstrations and guided workout media."
+          }
+        ],
+        "pricing": []
+      }
     },
     {
       "title": "Universal Accessibility SDK and Plugin",
       "category": "tool",
       "image": "assets/img/portfolio/accessibility_plugin.png",
       "status": "Planned",
-      "description": "SDK/plugin to add accessibility resources to websites, applications, and systems, with simple setup, dedicated demo, license management, and potential distribution as a reusable product.",
+      "description": "Pluggable web SDK with reading, contrast, typography, speech, focus and motion controls, persistent preferences and white-label support.",
       "stack": [
         "JavaScript SDK",
-        "Web Plugin",
-        "Accessibility",
-        "White-Label Setup"
-      ]
+        "Shadow DOM",
+        "Web Speech API",
+        "Web Crypto"
+      ],
+      "details": {
+        "description": "A pluggable web SDK that adds an accessibility personalization layer to digital products without requiring the host application to be rebuilt. Users can enlarge text, switch typography, adjust spacing, contrast and saturation, use enlarged cursors, enable reading focus, listen to content through speech and reduce visual stimuli. Preferences remain saved, the interface can follow each brand identity, and the component provides Portuguese, English and Spanish independently from the host site language.",
+        "features": [
+          "Text scaling, font-family choices and spacing controls to improve readability",
+          "Contrast modes, saturation control and reduced visual stimuli and motion",
+          "Enlarged cursors and text magnifier to support visual tracking and selection",
+          "Reading focus that follows pointer or keyboard focus and isolates the current page region",
+          "Text-to-speech through mouse or touch with visual highlighting plus pause, resume and navigation controls",
+          "Preference presets and complete restoration to the page’s original state",
+          "Persistent preferences with the widget UI available in Portuguese, English and Spanish",
+          "White-label customization and licensing architecture for distributing the SDK across different products"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Modular architecture",
+            "value": "UI-independent core, feature registry and diff-based updates: only preference groups that actually changed are reapplied to the document."
+          },
+          {
+            "label": "UI isolation",
+            "value": "The widget interface runs inside Shadow DOM, preventing CSS collisions with the host product while keeping accessibility effects targeted to the intended roots."
+          },
+          {
+            "label": "Reversible lifecycle",
+            "value": "Each feature implements update, reset and dispose. Original inline styles are preserved so the widget can be toggled or destroyed without leaving residual page mutations."
+          },
+          {
+            "label": "Dynamic DOM",
+            "value": "MutationObserver tracks content added after load, and the adapter can work with Document, registered open ShadowRoots and same-origin iframes."
+          },
+          {
+            "label": "Speech layer",
+            "value": "An isolated SpeechEngine uses native browser APIs, manages selection/element/section/page reading, keeps visual highlights and handles desktop and touch interaction."
+          },
+          {
+            "label": "Persistent state",
+            "value": "Preferences use a versioned schema with migrations so the stored format can evolve without losing existing user configuration."
+          },
+          {
+            "label": "Licensing",
+            "value": "Provider-based licensing supports signed local licenses, remote validation or custom implementations, with cryptographic signature verification plus host, validity and entitlement rules."
+          },
+          {
+            "label": "Quality and accessibility",
+            "value": "The suite covers state, migrations, licensing, reversibility, keyboard use, speech, dynamic DOM, Shadow DOM, iframe support, reset/destroy and browser checks including the accessibility tree."
+          },
+          {
+            "label": "Dependencies",
+            "value": "The production core has no third-party runtime dependencies, reducing payload and integration conflicts."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "JavaScript ES Modules",
+            "description": "Modular SDK, core, features, adapters and UI without a framework dependency at runtime."
+          },
+          {
+            "name": "Shadow DOM",
+            "description": "Encapsulates the widget UI to prevent style interference between the host and the component."
+          },
+          {
+            "name": "Web Speech API",
+            "description": "Native foundation for speech playback, pause, resume and navigation across content."
+          },
+          {
+            "name": "Web Crypto API",
+            "description": "Cryptographic verification of signed licenses using ECDSA P-256 and SHA-256."
+          },
+          {
+            "name": "MutationObserver",
+            "description": "Detects newly inserted DOM nodes so preferences remain applied in dynamic interfaces."
+          },
+          {
+            "name": "LocalStorage",
+            "description": "Persists preferences and UI locale through a versioned schema with migrations."
+          },
+          {
+            "name": "CSS Custom Properties",
+            "description": "Visual tokens and white-label theme configuration without coupling the SDK to the host product’s CSS."
+          },
+          {
+            "name": "Node.js 20+",
+            "description": "Build, lint and automated-test toolchain for the SDK."
+          }
+        ],
+        "pricing": []
+      }
     },
     {
       "title": "Unity 3D Multiplayer Truco",
       "category": "game",
       "image": "assets/img/portfolio/truco_game.png",
       "status": "Private",
-      "description": "3D Truco game built in Unity, featuring an online multiplayer structure and an offline mode with bots, match state management, an organized foundation for future expansion, and a focus on fast, competitive gameplay.",
+      "description": "3D truco game with offline bot matches and online multiplayer for up to four players, with desktop and mobile controls.",
       "stack": [
-        "Unity",
+        "Unity 6",
         "C#",
-        "Local Multiplayer",
-        "Online Multiplayer"
-      ]
+        "Photon PUN 2",
+        "Offline + Online"
+      ],
+      "details": {
+        "description": "A 3D card game set around a bar table, with offline matches against bots and online matches for up to four players. The experience synchronizes card dealing, turns, played cards, score and truco decisions among participants while keeping each player tied to their own seat and hand. World-space controls are designed for mouse and touch, allowing players to switch between table and hand views and perform actions directly inside the 3D environment.",
+        "features": [
+          "Offline matches against bots without depending on other players",
+          "Online rooms for up to four players with the match starting when the table is complete",
+          "Assigned seats and avatars for consistent player position and identification throughout the match",
+          "Synchronized dealing, turns, played cards, vira, manilha, score and truco decisions",
+          "World-space controls to play cards, answer actions and switch between table and hand views",
+          "Mouse and touch interaction with raycast priority for the local hand’s relevant elements",
+          "Build structure prepared for desktop and mobile platforms"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Engine",
+            "value": "Unity 6 (6000.0.64f1), with 3D gameplay and interface implemented in C#."
+          },
+          {
+            "label": "Networking",
+            "value": "Photon PUN 2 manages rooms, player entry and real-time communication for online matches."
+          },
+          {
+            "label": "Match authority",
+            "value": "The Master Client centralizes deterministic decisions such as deck dealing, turn selection, round resolution, scoring, vira/manilha and truco actions."
+          },
+          {
+            "label": "Synchronization",
+            "value": "Relevant table state is propagated to participants so played cards, turn, round and score remain aligned across clients."
+          },
+          {
+            "label": "3D input",
+            "value": "Raycasts and world-space controls distinguish the local hand, buttons and table objects with consistent behavior across click and touch."
+          },
+          {
+            "label": "Game modes",
+            "value": "Offline bot play and online multiplayer share the same table experience and interaction patterns."
+          },
+          {
+            "label": "Platforms",
+            "value": "Project structure prepared for Windows, Linux, Android and iOS builds."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Unity 6",
+            "description": "Engine for the 3D environment, scenes, camera, world-space UI and multiplatform runtime."
+          },
+          {
+            "name": "C#",
+            "description": "Implementation of gameplay rules, turn control, input, bots and match-state coordination."
+          },
+          {
+            "name": "Photon PUN 2",
+            "description": "Multiplayer layer for rooms, players and synchronization of online match actions."
+          },
+          {
+            "name": "Master Client Authority",
+            "description": "Authority model that centralizes sensitive match decisions instead of letting every client resolve state independently."
+          },
+          {
+            "name": "World-Space UI",
+            "description": "Buttons and interactions integrated into the 3D table so the interface remains inside the game environment."
+          },
+          {
+            "name": "Physics Raycast",
+            "description": "Card and command selection with priority handling for mouse and touch screens."
+          }
+        ],
+        "pricing": []
+      }
     },
     {
       "title": "Mobile URL Shortener with Offline History",
       "category": "mobile",
       "image": "assets/img/portfolio/url_shortener.png",
       "status": "Public soon",
-      "description": "Mobile app for shortening URLs with local persistence and on-device history. Creating new short links requires connectivity, while saved links, history, and local features remain available offline, keeping the experience fast and reliable even with unstable network access.",
+      "description": "Mobile app for creating short links, keeping local history and favorites, and queueing requests while offline.",
       "stack": [
-        "React Native",
-        "SQLite",
-        "Local Persistence",
-        "Offline Support"
-      ]
+        "Expo / React Native",
+        "TypeScript",
+        "AsyncStorage",
+        "Offline-first"
+      ],
+      "details": {
+        "description": "A mobile application for creating and organizing short links with a focus on remaining useful when connectivity is unavailable. Each link is added to persistent history, can be favorited, found through search or filters, and copied directly to the clipboard. In offline mode, new requests stay in a local queue for later synchronization; the app also presents link, pending-item, favorite and copy statistics to make the history easier to manage.",
+        "features": [
+          "Short-link creation with URL validation before an item is added to history",
+          "Offline mode that queues new requests and allows them to be synchronized later",
+          "Persistent history with ready, pending and failed states for each item",
+          "Favorites, search and status filters for quickly finding previously created links",
+          "Copy-to-clipboard action with a usage counter for each short link",
+          "Summary with total links, pending items, favorites and recent activity",
+          "Settings for automatic synchronization and offline behavior directly in the app"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Mobile foundation",
+            "value": "Expo 54, React Native 0.81 and TypeScript with a component- and hook-based architecture."
+          },
+          {
+            "label": "Offline persistence",
+            "value": "Links and settings are serialized into AsyncStorage so the application survives restarts without depending on a local SQL database."
+          },
+          {
+            "label": "Synchronization queue",
+            "value": "Links created offline receive pending state and can transition to ready or failed during synchronization; the auto-sync preference controls automatic resumption."
+          },
+          {
+            "label": "Shortening provider",
+            "value": "The link-generation strategy sits behind a provider abstraction, decoupling UI and state management from the implementation that produces the short URL."
+          },
+          {
+            "label": "Validation",
+            "value": "Only valid HTTP and HTTPS URLs are accepted, blocking inappropriate schemes before processing."
+          },
+          {
+            "label": "History querying",
+            "value": "Derived filters combine text, status and favorites without duplicating persistent state, supporting search by original URL, alias or short link."
+          },
+          {
+            "label": "Device integrations",
+            "value": "Expo Clipboard handles link copying and Expo Linking integrates URL opening and external navigation when required."
+          },
+          {
+            "label": "Testing",
+            "value": "Jest and React Native Testing Library cover alias generation, provider behavior, filters, validation, UI flows and the main link-management hook."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Expo 54",
+            "description": "Mobile toolchain and integration point for the native modules used by the application."
+          },
+          {
+            "name": "React Native 0.81",
+            "description": "Shared mobile interface for creation, history and settings screens."
+          },
+          {
+            "name": "TypeScript",
+            "description": "Typed contracts for links, synchronization states, settings, providers and filters."
+          },
+          {
+            "name": "AsyncStorage",
+            "description": "Local persistence for history and preferences across offline sessions."
+          },
+          {
+            "name": "Expo Clipboard",
+            "description": "Device clipboard integration for copying short links directly from the app."
+          },
+          {
+            "name": "Expo Linking",
+            "description": "Safe integration with URLs and external-navigation capabilities on the device."
+          },
+          {
+            "name": "Jest + React Native Testing Library",
+            "description": "Automated tests for validation rules, filters, providers, hooks and interface flows."
+          }
+        ],
+        "pricing": []
+      }
     },
     {
       "title": "Asset Compression and Conversion Website",
       "category": "tool",
       "image": "assets/img/portfolio/media_forge.png",
       "status": "Public soon",
-      "description": "Web tool for asset compression and conversion, built to speed up workflows with images and static files for apps, websites, games, and publishing pipelines.",
+      "description": "Web tool for batch image compression, conversion and resizing with presets, queueing, previews, downloads and local history.",
       "stack": [
-        "Web App",
-        "File Conversion",
-        "Compression",
-        "Productivity"
-      ]
+        "Next.js 15",
+        "TypeScript",
+        "Sharp",
+        "IndexedDB"
+      ],
+      "details": {
+        "description": "A web tool for preparing images for websites, applications, stores and other digital products without relying on multiple separate programs. Users can upload one or many images, choose compression or conversion, set quality and dimension limits, and apply presets for recurring configurations. Each file moves through a queue with status tracking, preview, before/after size, reduction percentage and download; processed results are also kept in local history for later review and download.",
+        "features": [
+          "Single or batch upload for processing multiple images in one workflow",
+          "Compression in the existing format or conversion to JPEG, PNG, WebP and AVIF",
+          "Quality control and maximum width/height limits without enlarging smaller images",
+          "Quick presets for recurring quality, format and dimension combinations",
+          "Processing queue with per-file status and result preview",
+          "Original-versus-output size comparison with reduction percentage before download",
+          "Persistent history with search, re-download, individual deletion and full cleanup"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Frontend",
+            "value": "Next.js 15 with App Router, React 19 and TypeScript for the interface, studio state and processing workflow."
+          },
+          {
+            "label": "Image pipeline",
+            "value": "A server-side Node route uses Sharp for auto-rotation, resizing and output encoding."
+          },
+          {
+            "label": "Formats",
+            "value": "Input accepts PNG, JPEG, WebP, AVIF, GIF and TIFF; output can be generated as JPEG, PNG, WebP or AVIF."
+          },
+          {
+            "label": "Resizing",
+            "value": "Resize uses fit-inside behavior with enlargement disabled, preserving aspect ratio and avoiding quality loss from upscaling assets smaller than the requested limit."
+          },
+          {
+            "label": "Optimization",
+            "value": "The pipeline applies codec-specific parameters, including mozjpeg for JPEG, advanced PNG compression and quality controls for WebP and AVIF."
+          },
+          {
+            "label": "Batch processing",
+            "value": "Files are organized in a queue, processed through FormData and tracked individually through result, error and download states."
+          },
+          {
+            "label": "Local history",
+            "value": "IndexedDB stores metadata plus the processed Blob, allowing users to search results and download again without reprocessing the source file."
+          },
+          {
+            "label": "Testing",
+            "value": "Vitest and JSDOM support automated validation of application rules and frontend utilities."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Next.js 15",
+            "description": "App Router and Node runtime that connect the web interface to the image-processing endpoint."
+          },
+          {
+            "name": "React 19",
+            "description": "Components and state for the queue, settings, previews and history views."
+          },
+          {
+            "name": "TypeScript",
+            "description": "Typing for files, presets, processing settings, history and frontend-to-endpoint contracts."
+          },
+          {
+            "name": "Sharp / libvips",
+            "description": "High-performance engine for rotation, resize, compression and image-format conversion."
+          },
+          {
+            "name": "IndexedDB + idb",
+            "description": "Local persistence for history and processed Blobs, enabling search and later downloads."
+          },
+          {
+            "name": "File / Blob / FormData APIs",
+            "description": "Native browser APIs for upload, preview, file transfer and result download."
+          },
+          {
+            "name": "Vitest + JSDOM",
+            "description": "Automated test environment for logic and frontend behavior."
+          }
+        ],
+        "pricing": []
+      }
     },
     {
       "title": "Realtime Messaging · Real-Time Messaging Platform",
       "category": "product",
       "image": "assets/img/portfolio/realtime_messaging.png",
       "status": "Public",
-      "description": "Real-time web messaging platform built to demonstrate distributed architecture, reliable communication, persistence, and end-to-end observability. It supports direct messages and channels, invites, presence and typing, persistent unread state, blocking, image attachments, and reconnect/replay. The backend uses C# with ASP.NET Core/.NET 10 and WebSockets, PostgreSQL as the source of truth, NATS JetStream/Core NATS for events, Redis for distributed presence, and Nginx across two gateways; the frontend uses React 19 + TypeScript/Vite, with OpenTelemetry, Prometheus, Grafana, Jaeger, xUnit, k6, Docker Compose, and GitHub Actions CI.",
+      "description": "Real-time messaging platform with DMs, channels, presence, reconnect replay and full infrastructure observability.",
       "stack": [
-        "ASP.NET Core / .NET 10",
-        "React 19 + TypeScript",
+        ".NET 10",
         "WebSockets",
-        "PostgreSQL + Redis",
-        "NATS JetStream",
-        "OpenTelemetry + Grafana"
-      ]
+        "PostgreSQL",
+        "NATS",
+        "Grafana"
+      ],
+      "details": {
+        "description": "A real-time messaging platform for direct conversations and channels with invitations, presence, typing indicators, persistent unread state, blocking, image attachments and history. The experience is built to remain reliable across connection drops: clients reconnect and recover missing messages from persisted history while multiple gateways distribute real-time connections. End-to-end telemetry also provides visibility into connections, message volume, replay, latency and infrastructure behavior.",
+        "features": [
+          "Direct conversations and channels with invitations and membership control",
+          "Online presence, typing indicators and persistent read/unread state",
+          "User blocking and image attachments with file validation",
+          "Reconnection with replay of missing messages from the persisted sequence",
+          "Idempotent message identifiers to reduce duplicates during retries",
+          "Multiple gateways for distributing HTTP and WebSocket connections",
+          "Metrics, traces and dashboards for availability, latency and message-flow visibility"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Distributed topology",
+            "value": "Nginx balances HTTP and WebSocket traffic across multiple ASP.NET Core gateways, allowing more than one real-time service instance to run concurrently."
+          },
+          {
+            "label": "Durable path",
+            "value": "Persistent messages are written to PostgreSQL together with a transactional outbox and then published to NATS JetStream, reducing divergence risk between the database and event bus."
+          },
+          {
+            "label": "Ephemeral events",
+            "value": "Core NATS handles fan-out for signals that do not need persistence, such as presence and typing, keeping the ephemeral path separate from durable history."
+          },
+          {
+            "label": "Distributed presence",
+            "value": "Redis maintains presence state shared across gateways so separate connections observe a consistent view of online users."
+          },
+          {
+            "label": "WebSocket protocol",
+            "value": "The flow supports subscribe/resume, heartbeat, delivery acknowledgements, mark-read, typing and paged replay after a known sequence, plus payload limits and backpressure handling."
+          },
+          {
+            "label": "Consistency",
+            "value": "Idempotent clientMessageId values, persisted sequence numbers and replay allow sessions to resume without duplicating accepted messages and recover gaps after reconnect."
+          },
+          {
+            "label": "Security",
+            "value": "HMAC-SHA256 signed tokens, PBKDF2-SHA512 password derivation, constant-time comparisons, per-connection rate limiting and MIME plus binary-signature validation for attachments."
+          },
+          {
+            "label": "Observability",
+            "value": "OpenTelemetry instruments the application; Prometheus collects metrics; Grafana exposes operational dashboards and Jaeger supports distributed-trace investigation."
+          },
+          {
+            "label": "Quality and load",
+            "value": "xUnit covers backend behavior while k6 runs functional and load scenarios across authentication, DMs, persistence, blocking, channels, invitations and WebSockets."
+          },
+          {
+            "label": "Delivery",
+            "value": "Docker Compose assembles the full stack and GitHub Actions validates backend, frontend, containers, readiness and integrated scenarios before release."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "ASP.NET Core / .NET 10",
+            "description": "Backend for authentication, APIs and WebSocket gateways with concurrent processing and infrastructure services."
+          },
+          {
+            "name": "React 19 + TypeScript + Vite",
+            "description": "Typed frontend for authentication, conversations, channels, presence, messages and reconnection."
+          },
+          {
+            "name": "WebSockets",
+            "description": "Bidirectional channel for messages, typing, presence, acknowledgements and real-time session resumption."
+          },
+          {
+            "name": "PostgreSQL 17",
+            "description": "Source of truth for users, rooms, messages, read state, attachments, sequences and the transactional outbox."
+          },
+          {
+            "name": "Redis",
+            "description": "Distributed presence state shared across gateway instances."
+          },
+          {
+            "name": "NATS JetStream",
+            "description": "Durable event bus for message events that must survive temporary consumer failures."
+          },
+          {
+            "name": "Core NATS",
+            "description": "Low-latency fan-out for ephemeral events that do not require persistence."
+          },
+          {
+            "name": "Nginx",
+            "description": "Load balancing for HTTP requests and WebSocket upgrades across gateways."
+          },
+          {
+            "name": "OpenTelemetry",
+            "description": "Unified instrumentation for metrics and traces across backend and messaging flows."
+          },
+          {
+            "name": "Prometheus + Grafana",
+            "description": "Collection, querying and operational visualization of connections, messages, replay, rate limiting and persistence latency."
+          },
+          {
+            "name": "Jaeger",
+            "description": "Distributed-trace analysis for locating bottlenecks and following operations across components."
+          },
+          {
+            "name": "xUnit + k6",
+            "description": "Automated backend tests plus realistic load and flow scenarios including WebSockets and persistence."
+          },
+          {
+            "name": "Docker Compose + GitHub Actions",
+            "description": "Reproducible full stack and integrated validation pipeline for backend, frontend and infrastructure."
+          }
+        ],
+        "pricing": []
+      }
     },
     {
       "title": "Neurodivergence Support Circle",
       "category": "product",
       "image": "assets/img/portfolio/coming_soon.png",
       "status": "Coming soon",
-      "description": "Mobile app and web platform in planning, designed to support neurodivergent people as well as family members, caregivers, educators, and others in their support network. The proposal is to bring support, organization, and follow-up resources into a simple and accessible experience.",
+      "description": "Product in planning to centralize support, organization, and follow-up resources for neurodivergence.",
       "stack": [
         "Mobile App",
         "Web Platform",
         "Accessibility",
         "In planning"
       ],
-      "comingSoon": true
+      "comingSoon": true,
+      "details": {
+        "description": "Mobile app and web platform in planning to support neurodivergent people as well as family members, caregivers, educators, and others in their support network. The goal is to centralize support, organization, and follow-up in a simple and accessible experience.",
+        "features": [
+          "Support resources organized in one place",
+          "Organization and follow-up tools",
+          "Experience planned for different support-network profiles",
+          "Accessibility as a core product requirement"
+        ],
+        "technicalSpecs": [],
+        "technologies": [],
+        "pricing": []
+      }
     },
     {
       "title": "Public Tender Radar",
       "category": "tool",
       "image": "assets/img/portfolio/coming_soon.png",
       "status": "Coming soon",
-      "description": "System in planning to simplify the search, screening, and analysis of public notices and procurement opportunities published by Brazilian government entities, organizing essential information and making open opportunities easier to understand.",
+      "description": "System in planning to simplify the search, screening, and understanding of Brazilian public tenders and notices.",
       "stack": [
         "App / Web",
         "Tender Search",
         "Data Organization",
         "In planning"
       ],
-      "comingSoon": true
+      "comingSoon": true,
+      "details": {
+        "description": "System in planning to simplify the search, screening, and analysis of public notices and tender opportunities published by Brazilian government entities. The goal is to organize essential information and reduce the complexity of understanding available opportunities.",
+        "features": [
+          "Search and organization of public notices",
+          "Opportunity screening",
+          "Detailed presentation of essential information",
+          "Experience focused on easier reading and decision-making"
+        ],
+        "technicalSpecs": [],
+        "technologies": [],
+        "pricing": []
+      }
     }
   ],
   "contactSection": {
@@ -368,11 +986,11 @@
     "backToTop": "Back to top"
   },
   "modal": {
-    "title": "Project gallery",
-    "initialCaption": "Select a project to open its gallery.",
+    "title": "Project details",
+    "initialCaption": "Select a project to view its details.",
     "caption": "Image {index} of {count} · {title}",
     "imageAlt": "Image {index} from the {title} project gallery",
-    "closeLabel": "Close gallery",
+    "closeLabel": "Close project details",
     "previousLabel": "Previous image",
     "nextLabel": "Next image",
     "counter": "{current} / {count}",
@@ -380,10 +998,21 @@
     "navigationHint": "Use the arrows, thumbnails, or zoom button to inspect details.",
     "unavailableTitle": "Image unavailable",
     "unavailableText": "This file is not available yet. You can continue browsing the other gallery images.",
-    "kicker": "PROJECT GALLERY",
+    "kicker": "PROJECT DETAILS",
     "thumbnailsLabel": "Gallery thumbnails",
     "zoomInLabel": "Zoom image",
-    "zoomOutLabel": "Fit image to screen"
+    "zoomOutLabel": "Fit image to screen",
+    "tabsLabel": "Project sections",
+    "overviewTab": "Overview",
+    "technicalTab": "Specifications",
+    "technologiesTab": "Technologies",
+    "imagesTab": "Images",
+    "pricingTab": "Pricing",
+    "overviewTitle": "About the project",
+    "featuresTitle": "User-facing features",
+    "technicalTitle": "Technical specifications",
+    "technologiesTitle": "Technologies used",
+    "pricingTitle": "Pricing and plans"
   },
   "certificatesSection": {
     "eyebrow": "Certificates",
@@ -393,7 +1022,10 @@
     "providerBadgeLabel": "Provider",
     "credentialCta": "View certificate",
     "credentialAriaLabel": "Open certificate {title}",
-    "imageAlt": "Illustrative image for certificate {title}"
+    "imageAlt": "Illustrative image for certificate {title}",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "descriptionToggleAria": "Toggle certificate description for {title}"
   },
   "certificates": [
     {
