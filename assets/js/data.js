@@ -55,6 +55,17 @@ window.portfolioConfig = {
     'assets/img/portfolio/truco_game.png': [],
     'assets/img/portfolio/url_shortener.png': [],
     'assets/img/portfolio/media_forge.png': [],
+    'assets/img/portfolio/realtime_messaging.png': [
+        'assets/img/portfolio/realtime_messaging/Messaging_1.png',
+        'assets/img/portfolio/realtime_messaging/Messaging_2.png',
+        'assets/img/portfolio/realtime_messaging/Messaging_3.png',
+        'assets/img/portfolio/realtime_messaging/Messaging_4.png',
+        'assets/img/portfolio/realtime_messaging/Messaging_5.png',
+        'assets/img/portfolio/realtime_messaging/Messaging_6.png',
+        'assets/img/portfolio/realtime_messaging/Messaging_7.png',
+        'assets/img/portfolio/realtime_messaging/Messaging_8.png',
+        'assets/img/portfolio/realtime_messaging/Messaging_9.png'
+    ],
     'assets/img/portfolio/coming_soon.png': []
   }
 };

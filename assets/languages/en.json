@@ -260,16 +260,16 @@
       ]
     },
     {
-      "title": "Offline Mobile URL Shortener",
+      "title": "Mobile URL Shortener with Offline History",
       "category": "mobile",
       "image": "assets/img/portfolio/url_shortener.png",
       "status": "Public soon",
-      "description": "Offline-first mobile app with local persistence, on-device history, and an experience designed for continuous use even without connectivity, prioritizing simplicity, speed, and reliability.",
+      "description": "Mobile app for shortening URLs with local persistence and on-device history. Creating new short links requires connectivity, while saved links, history, and local features remain available offline, keeping the experience fast and reliable even with unstable network access.",
       "stack": [
         "React Native",
         "SQLite",
-        "Local Cache",
-        "Offline First"
+        "Local Persistence",
+        "Offline Support"
       ]
     },
     {
@@ -286,16 +286,45 @@
       ]
     },
     {
-      "title": "Online Scheduling App",
-      "category": "mobile",
+      "title": "Realtime Messaging · Real-Time Messaging Platform",
+      "category": "product",
+      "image": "assets/img/portfolio/realtime_messaging.png",
+      "status": "Public",
+      "description": "Real-time web messaging platform built to demonstrate distributed architecture, reliable communication, persistence, and end-to-end observability. It supports direct messages and channels, invites, presence and typing, persistent unread state, blocking, image attachments, and reconnect/replay. The backend uses C# with ASP.NET Core/.NET 10 and WebSockets, PostgreSQL as the source of truth, NATS JetStream/Core NATS for events, Redis for distributed presence, and Nginx across two gateways; the frontend uses React 19 + TypeScript/Vite, with OpenTelemetry, Prometheus, Grafana, Jaeger, xUnit, k6, Docker Compose, and GitHub Actions CI.",
+      "stack": [
+        "ASP.NET Core / .NET 10",
+        "React 19 + TypeScript",
+        "WebSockets",
+        "PostgreSQL + Redis",
+        "NATS JetStream",
+        "OpenTelemetry + Grafana"
+      ]
+    },
+    {
+      "title": "Neurodivergence Support Circle",
+      "category": "product",
       "image": "assets/img/portfolio/coming_soon.png",
       "status": "Coming soon",
-      "description": "Mobile app for online scheduling with traditional authentication, social login, conversion-oriented flow, and calendar integration, designed for scalable operation and reuse in white-label scenarios.",
+      "description": "Mobile app and web platform in planning, designed to support neurodivergent people as well as family members, caregivers, educators, and others in their support network. The proposal is to bring support, organization, and follow-up resources into a simple and accessible experience.",
       "stack": [
-        "React Native",
-        "Firebase Auth",
-        "Google SSO",
-        "Google Calendar API"
+        "Mobile App",
+        "Web Platform",
+        "Accessibility",
+        "In planning"
+      ],
+      "comingSoon": true
+    },
+    {
+      "title": "Public Tender Radar",
+      "category": "tool",
+      "image": "assets/img/portfolio/coming_soon.png",
+      "status": "Coming soon",
+      "description": "System in planning to simplify the search, screening, and analysis of public notices and procurement opportunities published by Brazilian government entities, organizing essential information and making open opportunities easier to understand.",
+      "stack": [
+        "App / Web",
+        "Tender Search",
+        "Data Organization",
+        "In planning"
       ],
       "comingSoon": true
     }

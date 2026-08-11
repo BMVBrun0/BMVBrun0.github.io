@@ -260,16 +260,16 @@
       ]
     },
     {
-      "title": "Encurtador de URL Mobile Offline",
+      "title": "Encurtador de URL Mobile com Histórico Offline",
       "category": "mobile",
       "image": "assets/img/portfolio/url_shortener.png",
       "status": "Público",
-      "description": "Aplicativo mobile offline-first com persistência local, histórico mantido no dispositivo e experiência pensada para uso contínuo mesmo sem rede, priorizando simplicidade, velocidade e confiabilidade.",
+      "description": "Aplicativo mobile para encurtamento de URLs com persistência local e histórico mantido no dispositivo. A criação de novos links curtos depende de conectividade, enquanto os links já salvos, o histórico e os recursos locais continuam disponíveis offline, preservando uma experiência rápida e confiável mesmo com rede instável.",
       "stack": [
         "React Native",
         "SQLite",
-        "Cache Local",
-        "Offline First"
+        "Persistência Local",
+        "Suporte Offline"
       ]
     },
     {
@@ -286,16 +286,45 @@
       ]
     },
     {
-      "title": "Aplicativo de Agendamento Online",
-      "category": "mobile",
+      "title": "Realtime Messaging · Chat em Tempo Real",
+      "category": "product",
+      "image": "assets/img/portfolio/realtime_messaging.png",
+      "status": "Público",
+      "description": "Plataforma web de chat em tempo real criada para demonstrar uma arquitetura distribuída com comunicação confiável, persistência e observabilidade ponta a ponta. O sistema oferece mensagens diretas e canais, convites, presença e typing, contagem persistente de não lidas, bloqueio, envio de imagens e reconexão com replay de mensagens. O backend utiliza C# com ASP.NET Core/.NET 10 e WebSockets, PostgreSQL como fonte de verdade, NATS JetStream/Core NATS para eventos, Redis para presença distribuída e Nginx com dois gateways; o frontend é React 19 + TypeScript/Vite, com OpenTelemetry, Prometheus, Grafana, Jaeger, xUnit, k6, Docker Compose e CI no GitHub Actions.",
+      "stack": [
+        "ASP.NET Core / .NET 10",
+        "React 19 + TypeScript",
+        "WebSockets",
+        "PostgreSQL + Redis",
+        "NATS JetStream",
+        "OpenTelemetry + Grafana"
+      ]
+    },
+    {
+      "title": "Círculo de Apoio à Neurodivergência",
+      "category": "product",
       "image": "assets/img/portfolio/coming_soon.png",
       "status": "Em breve",
-      "description": "Aplicativo mobile para agendamento online com autenticação tradicional, login social, fluxo orientado à conversão e integração com agenda, pensado para operação escalável e reaproveitamento em cenários white-label.",
+      "description": "Aplicativo e plataforma web em planejamento para apoiar pessoas neurodivergentes e também familiares, cuidadores, educadores e demais pessoas que fazem parte de sua rede de convivência. A proposta é reunir recursos de apoio, organização e acompanhamento em uma experiência simples e acessível.",
       "stack": [
-        "React Native",
-        "Firebase Auth",
-        "Google SSO",
-        "Google Calendar API"
+        "Aplicativo Mobile",
+        "Plataforma Web",
+        "Acessibilidade",
+        "Em planejamento"
+      ],
+      "comingSoon": true
+    },
+    {
+      "title": "Radar de Editais Públicos",
+      "category": "tool",
+      "image": "assets/img/portfolio/coming_soon.png",
+      "status": "Em breve",
+      "description": "Sistema em planejamento para simplificar a busca, triagem e detalhamento de editais públicos abertos pelo governo brasileiro, organizando informações essenciais e facilitando o entendimento das oportunidades disponíveis.",
+      "stack": [
+        "Aplicativo / Web",
+        "Busca de Editais",
+        "Organização de Dados",
+        "Em planejamento"
       ],
       "comingSoon": true
     }
