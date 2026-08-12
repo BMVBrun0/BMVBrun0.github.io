@@ -1017,28 +1017,116 @@
       }
     },
     {
-      "title": "Radar de Editais Públicos",
-      "category": "tool",
-      "image": "assets/img/portfolio/coming_soon.png",
-      "status": "Em breve",
-      "description": "Sistema em planejamento para simplificar a busca, triagem e entendimento de editais públicos brasileiros.",
+      "title": "Radar Público · Busca e Inteligência de Editais",
+      "category": "product",
+      "image": "assets/img/portfolio/radar_publico.png",
+      "status": "Público",
+      "description": "Plataforma web para encontrar e acompanhar editais e contratações públicas brasileiras com pesquisa contextual, filtros avançados, recomendações por perfil empresarial, alertas e acesso direto às fontes e documentos oficiais.",
       "stack": [
-        "Aplicativo / Web",
-        "Busca de Editais",
-        "Organização de Dados",
-        "Em planejamento"
+        ".NET 10",
+        "React + TypeScript",
+        "PostgreSQL",
+        "PNCP / Compras.gov.br",
+        "Docker"
       ],
-      "comingSoon": true,
       "details": {
-        "description": "Sistema em planejamento para simplificar a busca, triagem e detalhamento de editais públicos abertos pelo governo brasileiro. A proposta é organizar informações essenciais e reduzir a complexidade de entendimento das oportunidades disponíveis.",
+        "description": "Radar Público centraliza oportunidades reais publicadas em fontes oficiais e transforma a procura por editais em um fluxo mais simples para empresas e profissionais que não querem navegar portal por portal. A pesquisa aceita termos do dia a dia e combina palavras, contexto e assuntos relacionados para encontrar oportunidades mais úteis — por exemplo, uma busca por “jogos educacionais” pode considerar jogos pedagógicos, softwares de aprendizagem, plataformas web educacionais e equipamentos voltados ao ensino, sem misturar resultados sem relação com o objetivo pesquisado. A consulta pública funciona sem cadastro. Ao criar uma conta e configurar a empresa, o usuário pode salvar filtros, receber avisos de novas oportunidades, acompanhar alterações, organizar editais em um pipeline e receber uma indicação de aderência explicada por critérios como área de atuação, região, faixa de valor e requisitos. Cada oportunidade concentra identificadores, órgão, situação, valores, datas, itens, documentos e links para os sistemas oficiais, mantendo a fonte governamental como referência.",
         "features": [
-          "Busca e organização de editais públicos",
-          "Triagem das oportunidades disponíveis",
-          "Detalhamento de informações essenciais",
-          "Experiência focada em facilitar leitura e decisão"
+          "Pesquisa pública sem necessidade de conta, com consulta por objeto, órgão, itens, localização, valores, datas e outros dados do edital",
+          "Busca contextual que amplia termos relacionados e combina intenções para melhorar relevância sem depender apenas de correspondência literal de palavras",
+          "Filtros avançados com seleção múltipla para UF, município, órgão, modalidade, situação e fonte, além de faixas de valor e períodos",
+          "Resultados ordenados por relevância e apresentados com identificadores oficiais, órgão, localização, valor estimado, prazos, modalidade e situação",
+          "Detalhe completo da oportunidade com número da contratação, processo, objeto, itens, valores, datas, unidade responsável, documentos e histórico de alterações quando disponível",
+          "Links diretos para o PNCP, sistema de origem e processo eletrônico quando a fonte oficial disponibiliza esses endereços",
+          "Perfil empresarial com capacidades, regiões de interesse, faixa de valor e requisitos para gerar recomendações e uma aderência explicável por oportunidade",
+          "Buscas salvas com avisos quando novas contratações compatíveis aparecem ou quando oportunidades acompanhadas recebem mudanças relevantes",
+          "Acompanhamento comercial com pipeline, responsáveis, notas, tarefas, decisão e valor planejado para transformar uma oportunidade encontrada em processo interno",
+          "Interface responsiva para desktop e mobile, com pesquisa, filtros, cadastro, notificações, acompanhamento e gerenciamento da empresa no mesmo produto"
         ],
-        "technicalSpecs": [],
-        "technologies": [],
+        "technicalSpecs": [
+          {
+            "label": "Arquitetura",
+            "value": "Monólito modular em ASP.NET Core / .NET 10. Backend, autenticação, serviços em segundo plano e API ficam no mesmo host, enquanto React, TypeScript e Vite compõem a interface e são publicados como arquivos estáticos pelo próprio ASP.NET Core."
+          },
+          {
+            "label": "Fontes oficiais",
+            "value": "A ingestão usa integrações públicas do PNCP e do Compras.gov.br atrás de uma abstração de fonte, preservando o caminho para incluir novos portais governamentais sem acoplar controllers e interface ao formato externo."
+          },
+          {
+            "label": "Pipeline de ingestão",
+            "value": "Contratações são descobertas, preservadas primeiro como payload bruto em JSONB e depois normalizadas em órgãos, oportunidades, itens, documentos e alterações. Filas persistidas e HostedServices permitem retomar processamento e executar sincronizações incrementais."
+          },
+          {
+            "label": "Busca e relevância",
+            "value": "PostgreSQL executa a pesquisa com Full Text Search em português, pg_trgm, unaccent e índices específicos. Uma camada determinística de intenção expande contextos e combina grupos de termos para melhorar precisão e recall sem transformar a busca em simples substring."
+          },
+          {
+            "label": "Recomendações",
+            "value": "A aderência da empresa é calculada por regras auditáveis sobre capacidades, região, faixa de valor, requisitos e outros sinais do perfil. O score é acompanhado das razões que contribuíram positiva ou negativamente para o resultado."
+          },
+          {
+            "label": "Documentos",
+            "value": "Metadados e URLs oficiais permanecem vinculados ao edital. Quando documentos são processados localmente, o sistema calcula SHA-256, mantém versões imutáveis por checksum e extrai texto de PDFs digitais com PdfPig, sinalizando documentos que exigem OCR."
+          },
+          {
+            "label": "Detecção de mudanças",
+            "value": "Checksums e dados normalizados permitem identificar alterações de prazo, valor, situação, payload e documentos, registrando o histórico e alimentando notificações de oportunidades acompanhadas."
+          },
+          {
+            "label": "Contas e autorização",
+            "value": "Usuários e empresas são armazenados no PostgreSQL do próprio Radar. A autenticação usa cookie same-origin e hash local de senha, com papéis owner, analyst e viewer e autorização vinculada à organização."
+          },
+          {
+            "label": "Automação",
+            "value": "HostedServices cuidam da atualização de propostas abertas, sincronização incremental, processamento documental, alertas de prazo e reavaliação de buscas salvas sem depender de Redis, broker ou serviços pagos."
+          },
+          {
+            "label": "Execução",
+            "value": "Docker Compose sobe aplicação e PostgreSQL em um fluxo reproduzível. O frontend é compilado durante o build e o runtime final não exige um servidor Node separado."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "ASP.NET Core / .NET 10",
+            "description": "Backend principal, endpoints, autenticação, autorização, HostedServices e coordenação dos fluxos de ingestão, busca e acompanhamento."
+          },
+          {
+            "name": "React + TypeScript + Vite",
+            "description": "SPA responsiva para pesquisa pública, filtros, detalhes, cadastro, recomendações, notificações, pipeline e configuração da empresa."
+          },
+          {
+            "name": "PostgreSQL",
+            "description": "Fonte de verdade para usuários, empresas, contratações, itens, documentos, histórico e filas, além do motor de Full Text Search e índices de similaridade."
+          },
+          {
+            "name": "Entity Framework Core + Npgsql",
+            "description": "Mapeamento do domínio, migrations, persistência transacional e integração da aplicação .NET com PostgreSQL."
+          },
+          {
+            "name": "PNCP",
+            "description": "Fonte governamental principal para descoberta e detalhamento de contratações, itens, documentos e links oficiais."
+          },
+          {
+            "name": "Compras.gov.br",
+            "description": "Integração pública complementar utilizada na estratégia de cobertura de contratações governamentais."
+          },
+          {
+            "name": "PostgreSQL FTS + pg_trgm + unaccent",
+            "description": "Recursos de busca textual, similaridade e normalização usados em conjunto com o motor contextual do Radar."
+          },
+          {
+            "name": "PdfPig",
+            "description": "Extração local de texto de PDFs digitais para apoiar leitura estruturada, requisitos e versionamento documental."
+          },
+          {
+            "name": "ASP.NET Core Identity",
+            "description": "Infraestrutura local de hash de senha, sessão por cookie e identidade dos usuários armazenados no próprio banco da aplicação."
+          },
+          {
+            "name": "Docker Compose",
+            "description": "Ambiente reproduzível com aplicação e PostgreSQL, incluindo build do frontend, migrations e inicialização dos serviços internos."
+          }
+        ],
         "pricing": []
       }
     }

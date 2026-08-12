@@ -1017,28 +1017,116 @@
       }
     },
     {
-      "title": "Radar de Licitaciones Públicas",
-      "category": "tool",
-      "image": "assets/img/portfolio/coming_soon.png",
-      "status": "Próximamente",
-      "description": "Sistema en planificación para simplificar la búsqueda, clasificación y comprensión de licitaciones públicas brasileñas.",
+      "title": "Radar Público · Búsqueda e Inteligencia de Licitaciones",
+      "category": "product",
+      "image": "assets/img/portfolio/radar_publico.png",
+      "status": "Público",
+      "description": "Plataforma web para encontrar y acompañar licitaciones públicas brasileñas con búsqueda contextual, filtros avanzados, recomendaciones por perfil empresarial, alertas y acceso directo a fuentes y documentos oficiales.",
       "stack": [
-        "Aplicación / Web",
-        "Búsqueda de Licitaciones",
-        "Organización de Datos",
-        "En planificación"
+        ".NET 10",
+        "React + TypeScript",
+        "PostgreSQL",
+        "PNCP / Compras.gov.br",
+        "Docker"
       ],
-      "comingSoon": true,
       "details": {
-        "description": "Sistema en planificación para simplificar la búsqueda, clasificación y análisis de licitaciones y convocatorias públicas de organismos brasileños. La propuesta es organizar la información esencial y reducir la complejidad de comprender las oportunidades disponibles.",
+        "description": "Radar Público centraliza oportunidades reales publicadas por fuentes oficiales del gobierno brasileño y transforma la búsqueda de licitaciones en un flujo más simple para empresas y profesionales que no quieren navegar portal por portal. La búsqueda acepta términos cotidianos y combina palabras, contexto y temas relacionados para encontrar oportunidades más útiles — por ejemplo, una consulta por “juegos educativos” puede considerar juegos pedagógicos, software de aprendizaje, plataformas web educativas y dispositivos orientados a la enseñanza sin mezclar resultados sin relación con el objetivo buscado. La consulta pública funciona sin cuenta. Después de registrar y configurar la empresa, el usuario puede guardar filtros, recibir alertas de nuevas oportunidades, acompañar cambios, organizar licitaciones en un pipeline y obtener una indicación explicable de adecuación basada en criterios como capacidades, región, rango de valor y requisitos. Cada oportunidad reúne identificadores, organismo, situación, valores, fechas, ítems, documentos y enlaces a los sistemas oficiales, manteniendo la fuente gubernamental como referencia.",
         "features": [
-          "Búsqueda y organización de convocatorias públicas",
-          "Clasificación de oportunidades",
-          "Detalle de información esencial",
-          "Experiencia enfocada en facilitar lectura y decisión"
+          "Búsqueda pública sin necesidad de cuenta por objeto, organismo, ítems, ubicación, valores, fechas y otros datos de la licitación",
+          "Búsqueda contextual que amplía conceptos relacionados y combina grupos de intención para mejorar relevancia sin depender solo de coincidencias literales",
+          "Filtros avanzados con selección múltiple para estado, municipio, organismo, modalidad, situación y fuente, además de rangos de valor y períodos",
+          "Resultados ordenados por relevancia con identificadores oficiales, organismo, ubicación, valor estimado, plazos, modalidad y situación",
+          "Detalle completo de la oportunidad con número de contratación, proceso, objeto, ítems, valores, fechas, unidad responsable, documentos e historial de cambios cuando está disponible",
+          "Enlaces directos al PNCP, sistema de origen y proceso electrónico cuando la fuente oficial proporciona esas direcciones",
+          "Perfil empresarial con capacidades, regiones de interés, rango de valor y requisitos para generar recomendaciones y una adecuación explicable",
+          "Búsquedas guardadas con alertas cuando aparecen nuevas contrataciones compatibles o las oportunidades acompañadas reciben cambios relevantes",
+          "Seguimiento comercial con pipeline, responsables, notas, tareas, decisión y valor planificado para convertir una oportunidad encontrada en un proceso interno",
+          "Experiencia responsiva en desktop y mobile para búsqueda, filtros, registro, notificaciones, seguimiento y gestión de la empresa"
         ],
-        "technicalSpecs": [],
-        "technologies": [],
+        "technicalSpecs": [
+          {
+            "label": "Arquitectura",
+            "value": "Monolito modular en ASP.NET Core / .NET 10. Backend, autenticación, servicios en segundo plano y API se ejecutan en el mismo host, mientras React, TypeScript y Vite construyen la interfaz publicada como archivos estáticos por ASP.NET Core."
+          },
+          {
+            "label": "Fuentes oficiales",
+            "value": "La ingesta utiliza integraciones públicas del PNCP y Compras.gov.br detrás de una abstracción de fuente, manteniendo controllers e interfaz independientes de los formatos externos y permitiendo incorporar otros portales gubernamentales."
+          },
+          {
+            "label": "Pipeline de ingesta",
+            "value": "Las contrataciones se descubren, se conservan primero como payload bruto en JSONB y luego se normalizan en organismos, oportunidades, ítems, documentos y cambios. Colas persistentes y HostedServices permiten retomar la sincronización incremental."
+          },
+          {
+            "label": "Búsqueda y relevancia",
+            "value": "PostgreSQL ejecuta Full Text Search en portugués junto con pg_trgm, unaccent e índices dedicados. Una capa determinística de intención amplía contextos y combina grupos de términos para mejorar precisión y cobertura sin reducir la búsqueda a substrings."
+          },
+          {
+            "label": "Recomendaciones",
+            "value": "La adecuación de la empresa se calcula con reglas auditables sobre capacidades, regiones, rango de valor, requisitos y otras señales del perfil. El score se presenta junto con las razones positivas y negativas que contribuyeron al resultado."
+          },
+          {
+            "label": "Documentos",
+            "value": "Los metadatos y URLs oficiales permanecen vinculados a la contratación. Cuando los archivos se procesan localmente, el sistema calcula SHA-256, conserva versiones inmutables por checksum, extrae texto de PDFs digitales con PdfPig y marca documentos que requieren OCR."
+          },
+          {
+            "label": "Detección de cambios",
+            "value": "Checksums y campos normalizados permiten detectar cambios de plazo, valor, situación, payload y documentos, manteniendo historial y alimentando notificaciones de oportunidades acompañadas."
+          },
+          {
+            "label": "Cuentas y autorización",
+            "value": "Usuarios y empresas se almacenan en el PostgreSQL propio de Radar Público. La autenticación usa cookies same-origin y hashes locales de contraseña, con roles owner, analyst y viewer limitados a una organización."
+          },
+          {
+            "label": "Automatización",
+            "value": "HostedServices actualizan propuestas abiertas, sincronización incremental, procesamiento documental, alertas de plazo y reevaluación de búsquedas guardadas sin depender de Redis, brokers o servicios pagos."
+          },
+          {
+            "label": "Ejecución",
+            "value": "Docker Compose inicia aplicación y PostgreSQL en un flujo reproducible. El frontend se compila durante el build y el runtime final no necesita un servidor Node separado."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "ASP.NET Core / .NET 10",
+            "description": "Backend principal para endpoints, autenticación, autorización, HostedServices y coordinación de los flujos de ingesta, búsqueda y seguimiento."
+          },
+          {
+            "name": "React + TypeScript + Vite",
+            "description": "SPA responsiva para búsqueda pública, filtros, detalle, registro, recomendaciones, notificaciones, pipeline y configuración empresarial."
+          },
+          {
+            "name": "PostgreSQL",
+            "description": "Fuente de verdad para usuarios, empresas, contrataciones, ítems, documentos, historial y colas, además de motor de Full Text Search e índices de similitud."
+          },
+          {
+            "name": "Entity Framework Core + Npgsql",
+            "description": "Mapeo de dominio, migrations, persistencia transaccional e integración de .NET con PostgreSQL."
+          },
+          {
+            "name": "PNCP",
+            "description": "Fuente gubernamental principal para descubrir y detallar contrataciones, ítems, documentos y enlaces oficiales."
+          },
+          {
+            "name": "Compras.gov.br",
+            "description": "Integración pública complementaria utilizada como parte de la estrategia de cobertura de contrataciones gubernamentales."
+          },
+          {
+            "name": "PostgreSQL FTS + pg_trgm + unaccent",
+            "description": "Recursos de búsqueda textual, similitud y normalización combinados con el motor contextual de Radar Público."
+          },
+          {
+            "name": "PdfPig",
+            "description": "Extracción local de texto de PDFs digitales para apoyar lectura estructurada, detección de requisitos y versionado documental."
+          },
+          {
+            "name": "ASP.NET Core Identity",
+            "description": "Infraestructura local de hash de contraseña, sesión por cookie e identidad de usuarios almacenados en la propia base de la aplicación."
+          },
+          {
+            "name": "Docker Compose",
+            "description": "Entorno reproducible para aplicación y PostgreSQL, incluyendo build del frontend, migrations e inicio de servicios internos."
+          }
+        ],
         "pricing": []
       }
     }

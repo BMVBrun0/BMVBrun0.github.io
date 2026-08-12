@@ -78,6 +78,19 @@ window.portfolioConfig = {
         'assets/img/portfolio/support_circle/support_9.png',
         'assets/img/portfolio/support_circle/support_10.png'
     ],
+    'assets/img/portfolio/radar_publico.png': [
+        'assets/img/portfolio/radar_publico/radar_1.png',
+        'assets/img/portfolio/radar_publico/radar_2.png',
+        'assets/img/portfolio/radar_publico/radar_3.png',
+        'assets/img/portfolio/radar_publico/radar_4.png',
+        'assets/img/portfolio/radar_publico/radar_5.png',
+        'assets/img/portfolio/radar_publico/radar_6.png',
+        'assets/img/portfolio/radar_publico/radar_7.png',
+        'assets/img/portfolio/radar_publico/radar_8.png',
+        'assets/img/portfolio/radar_publico/radar_9.png',
+        'assets/img/portfolio/radar_publico/radar_10.png',
+        'assets/img/portfolio/radar_publico/radar_11.png'
+    ],
     'assets/img/portfolio/coming_soon.png': []
   }
 };

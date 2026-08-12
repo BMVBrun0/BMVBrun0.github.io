@@ -1017,28 +1017,116 @@
       }
     },
     {
-      "title": "Public Tender Radar",
-      "category": "tool",
-      "image": "assets/img/portfolio/coming_soon.png",
-      "status": "Coming soon",
-      "description": "System in planning to simplify the search, screening, and understanding of Brazilian public tenders and notices.",
+      "title": "Radar Público · Public Tender Search & Intelligence",
+      "category": "product",
+      "image": "assets/img/portfolio/radar_publico.png",
+      "status": "Public",
+      "description": "Web platform for finding and tracking Brazilian public tenders with contextual search, advanced filters, company-based recommendations, alerts, and direct access to official sources and documents.",
       "stack": [
-        "App / Web",
-        "Tender Search",
-        "Data Organization",
-        "In planning"
+        ".NET 10",
+        "React + TypeScript",
+        "PostgreSQL",
+        "PNCP / Compras.gov.br",
+        "Docker"
       ],
-      "comingSoon": true,
       "details": {
-        "description": "System in planning to simplify the search, screening, and analysis of public notices and tender opportunities published by Brazilian government entities. The goal is to organize essential information and reduce the complexity of understanding available opportunities.",
+        "description": "Radar Público centralizes real opportunities published by official Brazilian government sources and turns tender discovery into a simpler workflow for companies and professionals who do not want to search portal by portal. Search accepts everyday terms and combines words, context, and related topics to surface more useful opportunities — for example, a query for “educational games” can consider pedagogical games, learning software, educational web platforms, and devices used in teaching without mixing in unrelated results. Public search works without an account. After creating an account and configuring the company, users can save filters, receive alerts about new opportunities, track changes, organize tenders in a pipeline, and get an explainable fit indication based on criteria such as capabilities, region, value range, and requirements. Each opportunity brings together identifiers, agency, status, values, dates, items, documents, and links back to the official systems, keeping the government source as the reference.",
         "features": [
-          "Search and organization of public notices",
-          "Opportunity screening",
-          "Detailed presentation of essential information",
-          "Experience focused on easier reading and decision-making"
+          "Public search without an account, covering subject, agency, items, location, values, dates, and other tender information",
+          "Contextual search that expands related concepts and combines intent groups to improve relevance instead of relying only on literal keyword matches",
+          "Advanced filters with multi-selection for state, city, agency, procurement method, status, and source, plus value ranges and date periods",
+          "Relevance-ranked results with official identifiers, agency, location, estimated value, deadlines, procurement method, and status",
+          "Detailed opportunity view with procurement number, process, subject, items, values, dates, responsible unit, documents, and change history when available",
+          "Direct links to PNCP, the source procurement system, and electronic process when those official URLs are provided",
+          "Company profile with capabilities, target regions, value range, and requirements used to generate recommendations and an explainable fit score",
+          "Saved searches with alerts when new matching procurements appear or tracked opportunities receive relevant changes",
+          "Commercial tracking with pipeline stages, owners, notes, tasks, decisions, and planned bid value to move from discovery to an internal process",
+          "Responsive desktop and mobile experience covering search, filters, registration, notifications, tracking, and company management"
         ],
-        "technicalSpecs": [],
-        "technologies": [],
+        "technicalSpecs": [
+          {
+            "label": "Architecture",
+            "value": "Modular monolith built with ASP.NET Core / .NET 10. Backend, authentication, background services, and API run in the same host, while React, TypeScript, and Vite build the interface served as static assets by ASP.NET Core."
+          },
+          {
+            "label": "Official data sources",
+            "value": "Ingestion uses public PNCP and Compras.gov.br integrations behind a source abstraction, keeping controllers and UI independent from external payload formats and leaving room for additional government portals."
+          },
+          {
+            "label": "Ingestion pipeline",
+            "value": "Procurements are discovered, preserved first as raw JSONB payloads, and then normalized into agencies, opportunities, items, documents, and changes. Persistent queues and HostedServices make incremental synchronization resumable."
+          },
+          {
+            "label": "Search and relevance",
+            "value": "PostgreSQL runs Portuguese Full Text Search together with pg_trgm, unaccent, and dedicated indexes. A deterministic intent layer expands contexts and combines term groups to improve precision and recall without reducing search to substring matching."
+          },
+          {
+            "label": "Recommendations",
+            "value": "Company fit is calculated with auditable rules over capabilities, regions, value range, requirements, and other profile signals. The score is displayed together with positive and negative reasons that contributed to it."
+          },
+          {
+            "label": "Documents",
+            "value": "Official metadata and URLs stay linked to the procurement. When files are processed locally, the system calculates SHA-256, keeps immutable checksum-based versions, extracts text from digital PDFs with PdfPig, and flags documents that require OCR."
+          },
+          {
+            "label": "Change detection",
+            "value": "Checksums and normalized fields are used to identify deadline, value, status, payload, and document changes, keeping a history and feeding notifications for tracked opportunities."
+          },
+          {
+            "label": "Accounts and authorization",
+            "value": "Users and companies are stored in Radar Público's own PostgreSQL database. Authentication uses same-origin cookies and local password hashes, with owner, analyst, and viewer roles scoped to an organization."
+          },
+          {
+            "label": "Automation",
+            "value": "HostedServices handle open-proposal refreshes, incremental synchronization, document processing, deadline alerts, and saved-search reevaluation without requiring Redis, message brokers, or paid services."
+          },
+          {
+            "label": "Runtime",
+            "value": "Docker Compose starts the application and PostgreSQL in a reproducible flow. The frontend is compiled during build, so the final runtime does not require a separate Node server."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "ASP.NET Core / .NET 10",
+            "description": "Main backend for endpoints, authentication, authorization, HostedServices, and coordination of ingestion, search, and tracking workflows."
+          },
+          {
+            "name": "React + TypeScript + Vite",
+            "description": "Responsive SPA for public search, filters, tender details, registration, recommendations, notifications, pipeline, and company configuration."
+          },
+          {
+            "name": "PostgreSQL",
+            "description": "Source of truth for users, companies, procurements, items, documents, history, and queues, while also powering Full Text Search and similarity indexes."
+          },
+          {
+            "name": "Entity Framework Core + Npgsql",
+            "description": "Domain mapping, migrations, transactional persistence, and .NET integration with PostgreSQL."
+          },
+          {
+            "name": "PNCP",
+            "description": "Primary government source for procurement discovery, detail, items, documents, and official links."
+          },
+          {
+            "name": "Compras.gov.br",
+            "description": "Complementary public integration used as part of the strategy for broader government procurement coverage."
+          },
+          {
+            "name": "PostgreSQL FTS + pg_trgm + unaccent",
+            "description": "Text search, similarity, and normalization features combined with Radar Público's contextual search engine."
+          },
+          {
+            "name": "PdfPig",
+            "description": "Local text extraction from digital PDFs to support structured reading, requirement detection, and document versioning."
+          },
+          {
+            "name": "ASP.NET Core Identity",
+            "description": "Local password hashing, cookie session infrastructure, and user identity stored in the application's own database."
+          },
+          {
+            "name": "Docker Compose",
+            "description": "Reproducible environment for the application and PostgreSQL, including frontend build, migrations, and startup of internal services."
+          }
+        ],
         "pricing": []
       }
     }
