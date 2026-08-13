@@ -1,15 +1,17 @@
 {
   "meta": {
-    "title": "Bruno Getten Triches | Portfolio",
-    "description": "Public portfolio of Bruno Getten Triches with experience in web, mobile, games, technical leadership, and software architecture.",
-    "ogTitle": "Bruno Getten Triches | Portfolio",
+    "title": "{name} | Portfolio",
+    "description": "Public portfolio of {name} with experience in web, mobile, games, technical leadership, and software architecture.",
+    "ogTitle": "{name} | Portfolio",
     "ogDescription": "Projects, experience, services, and contact channels."
   },
   "accessibility": {
     "skipToContent": "Skip to content",
     "backToTop": "Back to top",
     "openMenu": "Open menu",
-    "mainNavigation": "Main navigation"
+    "mainNavigation": "Main navigation",
+    "socialLinks": "Social links",
+    "professionalSummary": "Professional summary"
   },
   "language": {
     "label": "Language"
@@ -36,7 +38,7 @@
     "secondaryCta": "Download CV",
     "stats": [
       {
-        "title": "7+ years",
+        "title": "8+ years",
         "text": "building software"
       },
       {
@@ -1168,6 +1170,14 @@
   "footer": {
     "rights": "All rights reserved.",
     "backToTop": "Back to top"
+  },
+  "carousel": {
+    "projectsLabel": "Projects carousel",
+    "certificatesLabel": "Certificates carousel",
+    "previousLabel": "Show previous group of {section}",
+    "nextLabel": "Show next group of {section}",
+    "pageLabel": "Go to group {current} of {count}",
+    "status": "Group {current} of {count}"
   },
   "modal": {
     "title": "Project details",

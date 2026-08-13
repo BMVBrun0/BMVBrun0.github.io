@@ -1,15 +1,17 @@
 {
   "meta": {
-    "title": "Bruno Getten Triches | Portfólio",
-    "description": "Portfólio público de Bruno Getten Triches com experiência em desenvolvimento web, mobile, jogos, liderança técnica e arquitetura de software.",
-    "ogTitle": "Bruno Getten Triches | Portfólio",
+    "title": "{name} | Portfólio",
+    "description": "Portfólio público de {name} com experiência em desenvolvimento web, mobile, jogos, liderança técnica e arquitetura de software.",
+    "ogTitle": "{name} | Portfólio",
     "ogDescription": "Projetos, experiência, serviços e formas de contato."
   },
   "accessibility": {
     "skipToContent": "Pular para o conteúdo",
     "backToTop": "Voltar ao topo",
     "openMenu": "Abrir menu",
-    "mainNavigation": "Navegação principal"
+    "mainNavigation": "Navegação principal",
+    "socialLinks": "Redes sociais",
+    "professionalSummary": "Resumo profissional"
   },
   "language": {
     "label": "Idioma"
@@ -36,16 +38,16 @@
     "secondaryCta": "Baixar CV",
     "stats": [
       {
-        "title": "4+ editais públicos e POCs realizados para mercados educacional",
-        "text": "POCs, apps, portais, jogos 2D e 3D, editor de epubs entre outros produtos entregues na Sensorama"
+        "title": "4+ editais públicos e POCs no mercado educacional",
+        "text": "POCs, apps, portais, jogos 2D/3D, editor de EPUBs e outros produtos entregues na Sensorama."
       },
       {
-        "title": "7+ anos de experiencia",
-        "text": "Dev/Lider com mais de 7 anos de experiencia e atuação pratica para mostrar resultado, render e ajudar a equipe a evoluir"
+        "title": "8+ anos de experiência",
+        "text": "Desenvolvedor e líder com mais de 7 anos de experiência e atuação prática, com foco em entrega, evolução técnica e colaboração com a equipe."
       },
       {
-        "title": "100+ APPs publicados",
-        "text": "produtos mobile criados em 7 anos de carreira"
+        "title": "100+ apps publicados",
+        "text": "Produtos mobile publicados ao longo de 7 anos de carreira."
       }
     ]
   },
@@ -169,7 +171,7 @@
     "filtersLabel": "Filtros de projeto",
     "zoomCta": "Clique para ampliar",
     "zoomAriaLabel": "Ampliar imagem do projeto {title}",
-    "imageAlt": "Preview do projeto {title}",
+    "imageAlt": "Imagem de capa do projeto {title}",
     "stackAriaLabel": "Stack prevista",
     "defaultCategory": "Projeto",
     "comingSoonLabel": "Em breve",
@@ -1168,6 +1170,14 @@
   "footer": {
     "rights": "Todos os direitos reservados.",
     "backToTop": "Voltar ao topo"
+  },
+  "carousel": {
+    "projectsLabel": "Projetos em carrossel",
+    "certificatesLabel": "Certificados em carrossel",
+    "previousLabel": "Mostrar grupo anterior de {section}",
+    "nextLabel": "Mostrar próximo grupo de {section}",
+    "pageLabel": "Ir para o grupo {current} de {count}",
+    "status": "Grupo {current} de {count}"
   },
   "modal": {
     "title": "Detalhes do projeto",

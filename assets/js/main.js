@@ -8,6 +8,10 @@ const state = {
   activeCategory: 'all',
   roleIntervalId: null,
   loadedLocales: new Map(),
+  carousels: {
+    projects: null,
+    certificates: null
+  },
   gallery: {
     items: [],
     index: 0,
@@ -20,6 +24,123 @@ const state = {
     isZoomed: false
   }
 };
+
+const featureTargets = {
+  hero: ['.hero-section'],
+  about: ['#about', '#nav-about'],
+  impact: ['#impact'],
+  recruiter: ['#recruiter'],
+  experience: ['#experience', '#nav-experience'],
+  services: ['#services', '#nav-services'],
+  projects: ['#projects', '#nav-projects'],
+  certificates: ['#certificates', '#nav-certificates'],
+  contact: ['#contact', '#nav-contact'],
+  footer: ['.site-footer']
+};
+
+function isFeatureEnabled(name) {
+  const value = config.features?.[name];
+  return value !== 0 && value !== false;
+}
+
+function hexToRgbChannels(value) {
+  const hex = String(value || '').trim().replace(/^#/, '');
+  const normalized = hex.length === 3
+    ? hex.split('').map((char) => `${char}${char}`).join('')
+    : hex;
+
+  if (!/^[0-9a-f]{6}$/i.test(normalized)) return null;
+  return [0, 2, 4].map((index) => Number.parseInt(normalized.slice(index, index + 2), 16)).join(', ');
+}
+
+function applyTheme() {
+  const colors = config.theme?.colors || {};
+  const root = document.documentElement;
+  const variables = {
+    background: '--bg',
+    backgroundSoft: '--bg-soft',
+    backgroundEnd: '--bg-end',
+    text: '--text',
+    muted: '--muted',
+    accent: '--accent',
+    accentSecondary: '--accent-2',
+    accentTertiary: '--accent-3'
+  };
+
+  Object.entries(variables).forEach(([key, variable]) => {
+    if (colors[key]) root.style.setProperty(variable, colors[key]);
+  });
+
+  const rgbVariables = {
+    background: '--bg-rgb',
+    accent: '--accent-rgb',
+    accentSecondary: '--accent-2-rgb',
+    accentTertiary: '--accent-3-rgb'
+  };
+
+  Object.entries(rgbVariables).forEach(([key, variable]) => {
+    const channels = hexToRgbChannels(colors[key]);
+    if (channels) root.style.setProperty(variable, channels);
+  });
+
+  const themeColor = qs('meta[name="theme-color"]');
+  if (themeColor && colors.background) themeColor.setAttribute('content', colors.background);
+}
+
+function renderBranding() {
+  const branding = config.branding || {};
+  const profileName = config.profile?.name || '';
+
+  qsa('.brand-logo, .hero-panel-logo').forEach((image) => {
+    if (branding.logo) image.src = branding.logo;
+    image.alt = branding.logoAlt || profileName;
+  });
+
+  const aboutImage = qs('#about-image');
+  if (aboutImage && branding.aboutImage) aboutImage.src = branding.aboutImage;
+
+  const favicon = qs('link[rel="icon"]');
+  if (favicon && branding.favicon) favicon.href = branding.favicon;
+
+  const ogImage = qs('meta[property="og:image"]');
+  if (ogImage && branding.socialPreview) ogImage.setAttribute('content', branding.socialPreview);
+
+  const heroName = qs('#hero-name');
+  if (heroName && profileName) heroName.textContent = profileName;
+}
+
+function renderSocialLinks() {
+  const root = qs('#hero-links');
+  if (!root) return;
+
+  const links = Array.isArray(config.socialLinks) ? config.socialLinks.filter((item) => item?.url) : [];
+  root.innerHTML = links.map((item) => `
+    <li>
+      <a href="${item.url}" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#${item.icon || 'icon-arrow-up-right'}"></use></svg>
+        <span>${item.label || item.id || ''}</span>
+      </a>
+    </li>
+  `).join('');
+
+  root.classList.toggle('is-feature-disabled', !isFeatureEnabled('socialLinks') || !links.length);
+}
+
+function applyFeatureVisibility() {
+  Object.entries(featureTargets).forEach(([feature, selectors]) => {
+    const enabled = isFeatureEnabled(feature);
+    selectors.forEach((selector) => {
+      qsa(selector).forEach((element) => element.classList.toggle('is-feature-disabled', !enabled));
+    });
+  });
+
+  qsa('[data-lang-switcher]').forEach((switcher) => {
+    switcher.classList.toggle('is-feature-disabled', !isFeatureEnabled('languageSwitcher'));
+  });
+
+  const projectsCta = qs('#hero-projects-cta');
+  if (projectsCta) projectsCta.classList.toggle('is-feature-disabled', !isFeatureEnabled('projects'));
+}
 
 function replacePlaceholders(template, values = {}) {
   return String(template).replace(/\{(\w+)\}/g, (_, key) => values[key] ?? '');
@@ -80,16 +201,17 @@ function closeLanguageMenus(exceptSwitcher = null) {
 
 function updateMeta() {
   const meta = state.data.meta;
+  const values = { name: config.profile?.name || '' };
   document.documentElement.lang = state.locale;
-  document.title = meta.title;
+  document.title = replacePlaceholders(meta.title, values);
 
   const description = qs('meta[name="description"]');
   const ogTitle = qs('meta[property="og:title"]');
   const ogDescription = qs('meta[property="og:description"]');
 
-  if (description) description.setAttribute('content', meta.description);
-  if (ogTitle) ogTitle.setAttribute('content', meta.ogTitle);
-  if (ogDescription) ogDescription.setAttribute('content', meta.ogDescription);
+  if (description) description.setAttribute('content', replacePlaceholders(meta.description, values));
+  if (ogTitle) ogTitle.setAttribute('content', replacePlaceholders(meta.ogTitle, values));
+  if (ogDescription) ogDescription.setAttribute('content', replacePlaceholders(meta.ogDescription, values));
 }
 
 function renderStaticText() {
@@ -99,6 +221,8 @@ function renderStaticText() {
   qs('.brand').setAttribute('aria-label', state.data.accessibility.backToTop);
   qs('.nav-toggle').setAttribute('aria-label', state.data.accessibility.openMenu);
   qs('#site-nav').setAttribute('aria-label', state.data.accessibility.mainNavigation);
+  qs('#hero-links').setAttribute('aria-label', state.data.accessibility.socialLinks);
+  qs('.hero-panel').setAttribute('aria-label', state.data.accessibility.professionalSummary);
   qs('#nav-about').textContent = nav.about;
   qs('#nav-experience').textContent = nav.experience;
   qs('#nav-services').textContent = nav.services;
@@ -152,7 +276,7 @@ function renderStaticText() {
   qs('#contact-title').textContent = contactSection.title;
   qs('#contact-text').textContent = contactSection.text;
 
-  qs('#footer-copy').innerHTML = `© <span id="current-year"></span> Bruno Getten Triches. ${footer.rights}`;
+  qs('#footer-copy').innerHTML = `© <span id="current-year"></span> ${config.profile?.name || ''}. ${footer.rights}`;
   qs('#footer-back-top').textContent = footer.backToTop;
 
   const closeButton = qs('.image-modal-close');
@@ -228,12 +352,22 @@ function renderRecruiterHighlights() {
   `).join('');
 
   const actions = qs('#recruiter-actions');
-  actions.innerHTML = `
-    <a class="btn btn-primary" href="assets/docs/curriculo-br-2026.pdf" target="_blank" rel="noopener">${state.data.recruiterSection.actions.cvPt}</a>
-    <a class="btn btn-secondary" href="assets/docs/curriculo-en-2026.pdf" target="_blank" rel="noopener">${state.data.recruiterSection.actions.cvEn}</a>
-    <a class="btn btn-secondary" href="${config.contactLinks.whatsapp}" target="_blank" rel="noopener">${state.data.recruiterSection.actions.whatsapp}</a>
-    <a class="btn btn-secondary" href="${config.contactLinks.linkedin}" target="_blank" rel="noopener">${state.data.recruiterSection.actions.linkedin}</a>
-  `;
+  const actionItems = [
+    { className: 'btn btn-primary', href: config.cvByLocale['pt-BR'], label: state.data.recruiterSection.actions.cvPt },
+    { className: 'btn btn-secondary', href: config.cvByLocale.en, label: state.data.recruiterSection.actions.cvEn }
+  ];
+
+  if (isFeatureEnabled('contact')) {
+    actionItems.push(
+      { className: 'btn btn-secondary', href: config.contactLinks.whatsapp, label: state.data.recruiterSection.actions.whatsapp },
+      { className: 'btn btn-secondary', href: config.contactLinks.linkedin, label: state.data.recruiterSection.actions.linkedin }
+    );
+  }
+
+  actions.innerHTML = actionItems
+    .filter((item) => item.href)
+    .map((item) => `<a class="${item.className}" href="${item.href}" target="_blank" rel="noopener">${item.label}</a>`)
+    .join('');
 }
 
 function renderExperience() {
@@ -315,8 +449,6 @@ function getProjectGallery(project) {
   const sharedGallery = project.image ? config.projectGalleries?.[project.image] : null;
   if (Array.isArray(sharedGallery)) candidates.push(...sharedGallery);
 
-  // Opcional: permite complementar a galeria diretamente no JSON do idioma,
-  // por exemplo quando uma legenda precisa ser traduzida.
   if (Array.isArray(project.gallery)) candidates.push(...project.gallery);
 
   const seen = new Set();
@@ -364,82 +496,272 @@ function getProjectTabs(project) {
   return tabs;
 }
 
+function destroyContentCarousel(kind) {
+  const cleanup = state.carousels[kind];
+  if (typeof cleanup === 'function') cleanup();
+  state.carousels[kind] = null;
+}
+
+function getCarouselItemsPerView() {
+  if (window.innerWidth <= 920) return 1;
+  if (window.innerWidth <= 1120) return 2;
+  return 3;
+}
+
+function initContentCarousel(root, kind) {
+  const viewport = qs('[data-carousel-viewport]', root);
+  const track = qs('[data-carousel-track]', root);
+  const previousButton = qs('[data-carousel-previous]', root);
+  const nextButton = qs('[data-carousel-next]', root);
+  const dots = qs('[data-carousel-dots]', root);
+  const status = qs('[data-carousel-status]', root);
+  const controls = qs('[data-carousel-controls]', root);
+  const cards = track ? [...track.children] : [];
+  if (!viewport || !track || !previousButton || !nextButton || !dots || !status || !controls || !cards.length) return null;
+
+  let page = 0;
+  let timerId = null;
+  let scrollTimerId = null;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const autoplayEnabled = config.carousel?.autoplay !== 0 && config.carousel?.autoplay !== false && !prefersReducedMotion;
+  const intervalMs = Math.max(2500, Number(config.carousel?.intervalMs) || 5000);
+
+  const pageCount = () => Math.max(1, Math.ceil(cards.length / getCarouselItemsPerView()));
+  const clampPage = (value) => {
+    const count = pageCount();
+    return ((value % count) + count) % count;
+  };
+  const maxScrollLeft = () => Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+  const getCardScrollLeft = (card) => {
+    if (!card) return 0;
+
+    const viewportRect = viewport.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const absoluteCardLeft = viewport.scrollLeft + cardRect.left - viewportRect.left;
+
+    return Math.min(maxScrollLeft(), Math.max(0, absoluteCardLeft));
+  };
+  const getPageScrollLeft = (targetPage) => {
+    const perView = getCarouselItemsPerView();
+    const cardIndex = Math.min(targetPage * perView, cards.length - 1);
+    return getCardScrollLeft(cards[cardIndex]);
+  };
+
+  const renderDots = () => {
+    const count = pageCount();
+    dots.innerHTML = Array.from({ length: count }, (_, index) => `
+      <button
+        type="button"
+        class="content-carousel-dot ${index === page ? 'is-active' : ''}"
+        data-carousel-page="${index}"
+        aria-current="${index === page ? 'true' : 'false'}"
+        aria-label="${replacePlaceholders(state.data.carousel.pageLabel, { current: index + 1, count })}"></button>
+    `).join('');
+
+    qsa('[data-carousel-page]', dots).forEach((button) => {
+      button.addEventListener('click', () => {
+        scrollToPage(Number(button.dataset.carouselPage));
+        restartAutoplay();
+      });
+    });
+  };
+
+  const updateUi = () => {
+    const count = pageCount();
+    page = Math.min(page, count - 1);
+    controls.hidden = count <= 1;
+    status.textContent = replacePlaceholders(state.data.carousel.status, { current: page + 1, count });
+    renderDots();
+  };
+
+  const scrollToPage = (targetPage, behavior = prefersReducedMotion ? 'auto' : 'smooth') => {
+    page = clampPage(targetPage);
+    viewport.scrollTo({ left: getPageScrollLeft(page), behavior });
+    updateUi();
+  };
+
+  const stopAutoplay = () => {
+    if (!timerId) return;
+    window.clearInterval(timerId);
+    timerId = null;
+  };
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    if (!autoplayEnabled || pageCount() <= 1 || document.hidden) return;
+    timerId = window.setInterval(() => scrollToPage(page + 1), intervalMs);
+  };
+
+  const restartAutoplay = () => {
+    startAutoplay();
+  };
+
+  const syncPageFromScroll = () => {
+    if (scrollTimerId) window.clearTimeout(scrollTimerId);
+    scrollTimerId = window.setTimeout(() => {
+      const starts = Array.from({ length: pageCount() }, (_, index) => getPageScrollLeft(index));
+      page = starts.reduce((best, offset, index) => (
+        Math.abs(offset - viewport.scrollLeft) < Math.abs(starts[best] - viewport.scrollLeft) ? index : best
+      ), 0);
+      updateUi();
+    }, 90);
+  };
+
+  const handleResize = () => {
+    scrollToPage(Math.min(page, pageCount() - 1), 'auto');
+    startAutoplay();
+  };
+
+  const handleVisibilityChange = () => {
+    if (document.hidden) stopAutoplay();
+    else startAutoplay();
+  };
+
+  const handleFocusOut = (event) => {
+    if (!root.contains(event.relatedTarget)) startAutoplay();
+  };
+
+  previousButton.addEventListener('click', () => {
+    scrollToPage(page - 1);
+    restartAutoplay();
+  });
+  nextButton.addEventListener('click', () => {
+    scrollToPage(page + 1);
+    restartAutoplay();
+  });
+  viewport.addEventListener('scroll', syncPageFromScroll, { passive: true });
+  root.addEventListener('mouseenter', stopAutoplay);
+  root.addEventListener('mouseleave', startAutoplay);
+  root.addEventListener('focusin', stopAutoplay);
+  root.addEventListener('focusout', handleFocusOut);
+  window.addEventListener('resize', handleResize);
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+
+  updateUi();
+  startAutoplay();
+
+  return () => {
+    stopAutoplay();
+    if (scrollTimerId) window.clearTimeout(scrollTimerId);
+    viewport.removeEventListener('scroll', syncPageFromScroll);
+    root.removeEventListener('mouseenter', stopAutoplay);
+    root.removeEventListener('mouseleave', startAutoplay);
+    root.removeEventListener('focusin', stopAutoplay);
+    root.removeEventListener('focusout', handleFocusOut);
+    window.removeEventListener('resize', handleResize);
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
+  };
+}
+
+function renderContentCarousel(root, kind, cardsMarkup) {
+  destroyContentCarousel(kind);
+  const sectionLabel = kind === 'projects'
+    ? state.data.carousel.projectsLabel
+    : state.data.carousel.certificatesLabel;
+
+  root.className = `content-carousel content-carousel-${kind}`;
+  root.setAttribute('aria-label', sectionLabel);
+  root.innerHTML = `
+    <div class="content-carousel-viewport" data-carousel-viewport tabindex="0">
+      <div class="content-carousel-track" data-carousel-track>${cardsMarkup}</div>
+    </div>
+    <div class="content-carousel-controls" data-carousel-controls>
+      <div class="content-carousel-dots" data-carousel-dots></div>
+      <button class="content-carousel-button" type="button" data-carousel-previous aria-label="${replacePlaceholders(state.data.carousel.previousLabel, { section: sectionLabel })}">
+        <svg class="icon"><use href="#icon-chevron-left"></use></svg>
+      </button>
+      <button class="content-carousel-button" type="button" data-carousel-next aria-label="${replacePlaceholders(state.data.carousel.nextLabel, { section: sectionLabel })}">
+        <svg class="icon"><use href="#icon-chevron-right"></use></svg>
+      </button>
+      <span class="sr-only" data-carousel-status aria-live="polite"></span>
+    </div>
+  `;
+
+  state.carousels[kind] = initContentCarousel(root, kind);
+}
+
+function renderProjectCard(project) {
+  const gallery = getProjectGallery(project);
+  const cover = gallery[0];
+  const tabs = getProjectTabs(project);
+  const sectionCount = tabs.length;
+  const sectionCountLabel = sectionCount === 1
+    ? state.data.projectsSection.sectionCountSingle
+    : replacePlaceholders(state.data.projectsSection.sectionCountMultiple, { count: sectionCount });
+
+  const media = cover
+    ? `
+      <button
+        type="button"
+        class="project-media project-gallery-trigger"
+        data-project-index="${state.data.projects.indexOf(project)}"
+        aria-label="${replacePlaceholders(state.data.projectsSection.detailsAriaLabel, {
+          title: project.title,
+          countLabel: sectionCountLabel
+        })}">
+        ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
+        <img src="${cover.src}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy">
+        <span class="project-cover-fallback" aria-hidden="true">
+          <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
+          <strong>${state.data.modal.unavailableTitle}</strong>
+        </span>
+        <span class="project-media-overlay" aria-hidden="true"></span>
+        <span class="project-gallery-affordance" aria-hidden="true">
+          <span class="project-gallery-affordance-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
+          <span class="project-gallery-affordance-copy">
+            <strong>${state.data.projectsSection.detailsCta}</strong>
+            <small>${sectionCountLabel}</small>
+          </span>
+          <span class="project-gallery-affordance-arrow"><svg class="icon"><use href="#icon-arrow-up-right"></use></svg></span>
+        </span>
+      </button>
+    `
+    : `
+      <div class="project-media project-media-empty" aria-label="${replacePlaceholders(state.data.projectsSection.noImagesAriaLabel, { title: project.title })}">
+        ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
+        <div class="project-media-empty-content">
+          <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
+          <strong>${state.data.projectsSection.noImagesTitle}</strong>
+          <span>${state.data.projectsSection.noImagesText}</span>
+        </div>
+      </div>
+    `;
+
+  return `
+    <article class="project-card reveal ${project.comingSoon ? 'is-coming-soon' : ''}">
+      ${media}
+      <div class="project-body">
+        <div class="project-meta">
+          <span class="project-tag">${state.data.categories.find((item) => item.id === project.category)?.label ?? state.data.projectsSection.defaultCategory}</span>
+          ${project.status ? `<span class="project-status">${project.status}</span>` : ''}
+        </div>
+        <h3>${project.title}</h3>
+        <p>${project.description}</p>
+        ${Array.isArray(project.stack) && project.stack.length ? `
+          <ul class="project-stack" aria-label="${state.data.projectsSection.stackAriaLabel}">
+            ${project.stack.map((item) => `<li>${item}</li>`).join('')}
+          </ul>
+        ` : ''}
+      </div>
+    </article>
+  `;
+}
+
 function renderProjects() {
   const root = qs('#projects-list');
   const projects = state.activeCategory === 'all'
     ? state.data.projects
     : state.data.projects.filter((project) => project.category === state.activeCategory);
+  const cardsMarkup = projects.map(renderProjectCard).join('');
 
-  root.innerHTML = projects.map((project) => {
-    const gallery = getProjectGallery(project);
-    const cover = gallery[0];
-    const tabs = getProjectTabs(project);
-    const sectionCount = tabs.length;
-    const sectionCountLabel = sectionCount === 1
-      ? state.data.projectsSection.sectionCountSingle
-      : replacePlaceholders(state.data.projectsSection.sectionCountMultiple, { count: sectionCount });
-
-    const media = cover
-      ? `
-        <button
-          type="button"
-          class="project-media project-gallery-trigger"
-          data-project-index="${state.data.projects.indexOf(project)}"
-          aria-label="${replacePlaceholders(state.data.projectsSection.detailsAriaLabel, {
-            title: project.title,
-            countLabel: sectionCountLabel
-          })}">
-          ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
-          <img src="${cover.src}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy">
-          <span class="project-cover-fallback" aria-hidden="true">
-            <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
-            <strong>${state.data.modal.unavailableTitle}</strong>
-          </span>
-          <span class="project-media-overlay" aria-hidden="true"></span>
-          <span class="project-gallery-affordance" aria-hidden="true">
-            <span class="project-gallery-affordance-icon">
-              <svg class="icon"><use href="#icon-details"></use></svg>
-            </span>
-            <span class="project-gallery-affordance-copy">
-              <strong>${state.data.projectsSection.detailsCta}</strong>
-              <small>${sectionCountLabel}</small>
-            </span>
-            <span class="project-gallery-affordance-arrow">
-              <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
-            </span>
-          </span>
-        </button>
-      `
-      : `
-        <div class="project-media project-media-empty" aria-label="${replacePlaceholders(state.data.projectsSection.noImagesAriaLabel, { title: project.title })}">
-          ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
-          <div class="project-media-empty-content">
-            <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
-            <strong>${state.data.projectsSection.noImagesTitle}</strong>
-            <span>${state.data.projectsSection.noImagesText}</span>
-          </div>
-        </div>
-      `;
-
-    return `
-      <article class="project-card reveal ${project.comingSoon ? 'is-coming-soon' : ''}">
-        ${media}
-        <div class="project-body">
-          <div class="project-meta">
-            <span class="project-tag">${state.data.categories.find((item) => item.id === project.category)?.label ?? state.data.projectsSection.defaultCategory}</span>
-            ${project.status ? `<span class="project-status">${project.status}</span>` : ''}
-          </div>
-          <h3>${project.title}</h3>
-          <p>${project.description}</p>
-          ${Array.isArray(project.stack) && project.stack.length ? `
-            <ul class="project-stack" aria-label="${state.data.projectsSection.stackAriaLabel}">
-              ${project.stack.map((item) => `<li>${item}</li>`).join('')}
-            </ul>
-          ` : ''}
-        </div>
-      </article>
-    `;
-  }).join('');
+  if (isFeatureEnabled('projectsCarousel')) {
+    renderContentCarousel(root, 'projects', cardsMarkup);
+  } else {
+    destroyContentCarousel('projects');
+    root.className = 'project-grid';
+    root.removeAttribute('aria-label');
+    root.innerHTML = cardsMarkup;
+  }
 
   initProjectMediaFallbacks();
   initProjectGallery();
@@ -458,11 +780,8 @@ function initProjectMediaFallbacks() {
 }
 
 
-function renderCertificates() {
-  const root = qs('#certificates-list');
-  if (!root || !Array.isArray(state.data.certificates)) return;
-
-  root.innerHTML = state.data.certificates.map((item, index) => `
+function renderCertificateCard(item, index) {
+  return `
     <article class="certificate-card reveal" data-certificate-index="${index}">
       <div class="certificate-media-wrap">
         <img class="certificate-media" src="${item.image || ''}" alt="${replacePlaceholders(state.data.certificatesSection.imageAlt, { title: item.title })}" loading="lazy">
@@ -495,7 +814,22 @@ function renderCertificates() {
         ` : ''}
       </div>
     </article>
-  `).join('');
+  `;
+}
+
+function renderCertificates() {
+  const root = qs('#certificates-list');
+  if (!root || !Array.isArray(state.data.certificates)) return;
+
+  const cardsMarkup = state.data.certificates.map(renderCertificateCard).join('');
+  if (isFeatureEnabled('certificatesCarousel')) {
+    renderContentCarousel(root, 'certificates', cardsMarkup);
+  } else {
+    destroyContentCarousel('certificates');
+    root.className = 'certificate-grid';
+    root.removeAttribute('aria-label');
+    root.innerHTML = cardsMarkup;
+  }
 
   initCertificateDescriptionToggles();
 }
@@ -557,11 +891,11 @@ function renderContacts() {
 
 function initRoleRotation() {
   const target = qs('#typed-role');
-  if (!target) return;
-
   if (state.roleIntervalId) {
     window.clearInterval(state.roleIntervalId);
+    state.roleIntervalId = null;
   }
+  if (!target || !isFeatureEnabled('hero')) return;
 
   const roles = state.data.hero.roles;
   let index = 0;
@@ -638,7 +972,6 @@ function fitGalleryImageToStage() {
   if (!modal?.classList.contains('is-open') || !stage || !modalImage) return;
   if (state.gallery.isZoomed || modalImage.hidden || !modalImage.complete || !modalImage.naturalWidth || !modalImage.naturalHeight) return;
 
-  // The mobile lightbox already has the desired CSS-driven behaviour. Keep it untouched.
   if (window.innerWidth <= 920) {
     clearGalleryImageSizing();
     return;
@@ -1169,6 +1502,16 @@ function initModalEvents() {
 }
 
 
+function initBackToTop() {
+  qsa('a[href="#topo"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      window.scrollTo({ top: 0, behavior });
+    });
+  });
+}
+
 function initLanguageSwitcher() {
   qsa('[data-lang-trigger]').forEach((trigger) => {
     trigger.addEventListener('click', (event) => {
@@ -1216,6 +1559,8 @@ async function applyLocale(locale) {
   state.activeCategory = 'all';
 
   updateMeta();
+  applyFeatureVisibility();
+  renderSocialLinks();
   renderStaticText();
   renderHeroStats();
   renderSkills();
@@ -1233,9 +1578,13 @@ async function applyLocale(locale) {
 }
 
 async function init() {
+  applyTheme();
+  renderBranding();
+  applyFeatureVisibility();
   initMenu();
   initModalEvents();
   initLanguageSwitcher();
+  initBackToTop();
 
   const locale = detectLocale();
   syncLanguageSelects(locale);
