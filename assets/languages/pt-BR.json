@@ -43,11 +43,11 @@
       },
       {
         "title": "8+ anos de experiência",
-        "text": "Desenvolvedor e líder com mais de 7 anos de experiência e atuação prática, com foco em entrega, evolução técnica e colaboração com a equipe."
+        "text": "Desenvolvedor e líder com mais de 8 anos de experiência e atuação prática, com foco em entrega, evolução técnica e colaboração com a equipe."
       },
       {
         "title": "100+ apps publicados",
-        "text": "Produtos mobile publicados ao longo de 7 anos de carreira."
+        "text": "Produtos mobile publicados ao longo de 8 anos de carreira."
       }
     ]
   },
@@ -311,113 +311,122 @@
       }
     },
     {
-      "title": "XtremeFut - App de exercícios em parceria com Ferrão",
+      "title": "XtremeFut — treinamento de futsal com Ferrão",
       "category": "mobile",
       "image": "assets/img/portfolio/xtreme_fut.png",
       "status": "Privado",
-      "description": "App de treino e preparação física com planos recomendados, biblioteca de exercícios, rotinas guiadas, vídeos, dietas e assinatura premium.",
+      "description": "Aplicativo de preparação física e treino de futsal com conteúdo elaborado por profissionais, vídeos guiados e recomendações personalizadas a partir do perfil do atleta.",
       "stack": [
         "Expo / React Native",
+        "TypeScript",
         "Firebase",
-        "PHP API",
-        "IAP"
+        "PHP API"
       ],
       "details": {
-        "description": "Aplicativo de treino e preparação física desenvolvido em parceria com Ferrão, criado para transformar um catálogo amplo de conteúdo em uma jornada guiada. O usuário cria seu perfil, recebe recomendações de nível e objetivo, encontra exercícios por equipamento, grupo muscular, nível ou meta e acompanha treinos organizados por dias com demonstrações em vídeo e temporizador. A experiência também reúne busca, favoritos, dietas, conteúdos vinculados ao usuário e acesso a recursos premium por assinatura.",
+        "description": "XtremeFut transforma orientação profissional de treino em uma experiência mobile organizada e fácil de acompanhar. Desenvolvido em parceria com o jogador de futsal Ferrão, o aplicativo reúne sequências e exercícios preparados por profissionais, demonstrações em vídeo, intervalos, dias de descanso e recomendações compatíveis com o perfil do usuário. Dados como faixa etária, altura e peso ajudam a sugerir nível e objetivo, enquanto o atleta pode explorar o catálogo, acompanhar rotinas por dia, rever exercícios e manter conteúdos importantes por perto.",
         "features": [
-          "Recomendação de nível e objetivo a partir dos dados do perfil, faixa etária e indicadores físicos",
-          "Biblioteca de exercícios navegável por equipamento, grupo muscular, nível e objetivo",
-          "Treinos estruturados por dias, com detalhes de cada exercício, vídeo e temporizador de execução",
-          "Busca de treinos e navegação por metas e níveis para encontrar rotinas compatíveis com cada objetivo",
-          "Favoritos locais para treinos e dietas, mantendo conteúdos importantes acessíveis rapidamente",
-          "Área autenticada com perfil, recuperação de conta e conteúdos associados ao usuário",
-          "Assinaturas in-app para liberar planos e conteúdos premium dentro do aplicativo"
+          "Treinos e exercícios estruturados a partir de conteúdo elaborado por profissionais da área",
+          "Parceria com Ferrão como referência esportiva e presença central na proposta do aplicativo",
+          "Recomendação de nível e objetivo considerando idade, altura, peso e indicadores derivados do perfil",
+          "Sequências organizadas por dias, incluindo dias de descanso quando previstos no plano",
+          "Exercícios com vídeo, séries, repetições, intervalo e orientação de execução",
+          "Catálogo por nível, objetivo, equipamento e grupo muscular para explorar outras rotinas",
+          "Busca, favoritos e perfil para manter treinos e conteúdos relevantes acessíveis",
+          "Autenticação, recuperação de acesso, preferências e suporte a português, inglês, espanhol e árabe"
         ],
         "technicalSpecs": [
           {
             "label": "Base mobile",
-            "value": "Expo 54, React Native 0.81 e TypeScript, com componentes funcionais e uma base compartilhada para Android e iOS."
+            "value": "Expo 54, React Native 0.81 e TypeScript compartilham a mesma base entre Android e iOS, com configuração centralizada, módulos nativos e fluxo de build via EAS."
           },
           {
-            "label": "Navegação",
-            "value": "React Navigation organiza drawers, stacks e top tabs para separar autenticação, catálogo, detalhes, perfil e jornadas de treino."
+            "label": "Arquitetura de navegação",
+            "value": "React Navigation combina stacks, drawer e top tabs para separar autenticação, plano, catálogo, exercícios, perfil e fluxos de treino."
+          },
+          {
+            "label": "Personalização",
+            "value": "Serviços locais normalizam os dados do perfil, calculam idade e IMC e pontuam níveis e objetivos do catálogo para sugerir uma combinação compatível com o usuário."
           },
           {
             "label": "Identidade e perfil",
-            "value": "Firebase Authentication cuida de entrada, cadastro e recuperação de conta; Firestore mantém os dados de perfil utilizados pela experiência personalizada."
+            "value": "Firebase Authentication gerencia cadastro, login e recuperação; Cloud Firestore mantém dados do usuário e os indicadores usados nas recomendações."
           },
           {
-            "label": "Catálogo de conteúdo",
-            "value": "Camada de serviços consome uma API PHP em JSON para treinos, exercícios, dietas, produtos, posts, metas, níveis, músculos, equipamentos e demais filtros do catálogo."
+            "label": "Catálogo remoto",
+            "value": "Uma camada de serviços consome API PHP/JSON para treinos, exercícios, dietas, metas, níveis, músculos, equipamentos, posts e demais entidades do conteúdo."
           },
           {
-            "label": "Recomendação",
-            "value": "Motor local normaliza dados do perfil, calcula indicadores como idade e IMC e pontua níveis e objetivos para sugerir uma combinação compatível com o usuário."
+            "label": "Execução do treino",
+            "value": "As rotinas são divididas em dias e exercícios; a interface combina detalhes, mídia, temporizador e progressão, tratando também dias sem atividade como descanso planejado."
           },
           {
-            "label": "Treino guiado",
-            "value": "Fluxos de detalhe e execução combinam mídia dos exercícios, temporizador e progressão pelos itens do treino até a conclusão da rotina."
+            "label": "Mídia",
+            "value": "Expo AV/Video e componentes de player suportam demonstrações dos exercícios dentro do fluxo de detalhe e execução."
           },
           {
             "label": "Persistência local",
-            "value": "AsyncStorage mantém favoritos e preferências que precisam continuar disponíveis entre sessões."
+            "value": "AsyncStorage mantém favoritos e preferências entre sessões, reduzindo dependência de novas consultas para estados pessoais simples."
           },
           {
-            "label": "Assinaturas",
-            "value": "Integração com expo-iap encapsula carregamento de ofertas, solicitação de compra, eventos de atualização e finalização da transação."
+            "label": "Compras no aplicativo",
+            "value": "A integração com expo-iap isola conexão com a loja, catálogo de assinaturas, atualização de compra e finalização de transações, com tratamento específico para runtimes sem suporte nativo."
+          },
+          {
+            "label": "Internacionalização",
+            "value": "A camada de idiomas suporta português, inglês, espanhol e árabe, incluindo adaptação de navegação para interfaces RTL."
           }
         ],
         "technologies": [
           {
             "name": "Expo 54",
-            "description": "Toolchain mobile para empacotamento, módulos nativos e fluxo de build em Android e iOS."
+            "description": "Toolchain mobile, configuração de builds, módulos nativos e integração com EAS."
           },
           {
             "name": "React Native 0.81",
-            "description": "Camada principal de interface e experiência mobile compartilhada entre plataformas."
+            "description": "Base da interface compartilhada entre Android e iOS."
           },
           {
             "name": "React 19 + TypeScript",
-            "description": "Componentização tipada, hooks e contratos mais seguros para estado, navegação e dados remotos."
+            "description": "Componentização, hooks e contratos tipados para navegação, perfil e dados remotos."
           },
           {
             "name": "Firebase Authentication",
-            "description": "Cadastro, login, recuperação de acesso e ciclo de identidade do usuário."
+            "description": "Cadastro, login, recuperação de acesso e identidade do usuário."
           },
           {
             "name": "Cloud Firestore",
-            "description": "Persistência do perfil utilizado para personalização e dados associados à conta."
+            "description": "Persistência do perfil e dos dados utilizados na personalização."
           },
           {
             "name": "PHP JSON API",
-            "description": "Backend de conteúdo para exercícios, treinos, dietas, metas, níveis e demais entidades exibidas no app."
+            "description": "Backend de conteúdo para treinos, exercícios, dietas, níveis, metas e filtros do catálogo."
           },
           {
             "name": "React Navigation 7",
-            "description": "Composição de stacks, drawers e abas para os diferentes fluxos da aplicação."
+            "description": "Stacks, drawer e abas para os diferentes fluxos do aplicativo."
           },
           {
             "name": "AsyncStorage",
-            "description": "Persistência local de favoritos e preferências do usuário."
+            "description": "Persistência local de favoritos e preferências."
           },
           {
             "name": "expo-iap",
             "description": "Integração com compras e assinaturas nas lojas mobile."
           },
           {
-            "name": "Expo Video",
-            "description": "Reprodução dos vídeos usados nas demonstrações e etapas dos exercícios."
+            "name": "Expo AV / Video",
+            "description": "Reprodução das demonstrações em vídeo associadas aos exercícios."
           }
         ],
         "pricing": []
       }
     },
     {
-      "title": "SDK e Plugin de Acessibilidade Universal",
+      "title": "Accessibility Plugin — SDK de acessibilidade web",
       "category": "tool",
       "image": "assets/img/portfolio/accessibility_plugin.png",
       "status": "Privado",
-      "description": "SDK web plugável com ajustes de leitura, contraste, tipografia, fala, foco e movimento, persistência de preferências e suporte white-label.",
+      "description": "SDK plugável que adiciona recursos de leitura, contraste, foco, voz e personalização visual a sites e sistemas sem exigir reconstrução da aplicação hospedeira.",
       "stack": [
         "JavaScript SDK",
         "Shadow DOM",
@@ -425,67 +434,71 @@
         "Web Crypto"
       ],
       "details": {
-        "description": "SDK web plugável que adiciona uma camada de personalização de acessibilidade a produtos digitais sem exigir que a aplicação hospedeira seja reconstruída. O usuário pode ampliar texto, trocar tipografia, ajustar espaçamento, contraste e saturação, usar cursores ampliados, ativar foco de leitura, ouvir conteúdo por voz e reduzir estímulos visuais. As preferências ficam salvas, a interface pode seguir a identidade da marca e o componente oferece português, inglês e espanhol de forma independente do idioma do site.",
+        "description": "Accessibility Plugin adiciona uma camada de personalização de acessibilidade a produtos digitais já existentes. O usuário pode escolher perfis prontos ou combinar ajustes de texto, contraste, cores, cursor, foco de leitura, redução de movimento e leitura por voz conforme sua necessidade. A interface funciona em desktop e mobile, mantém preferências entre sessões e pode receber identidade visual própria para integrar-se a diferentes marcas sem interferir no layout do sistema hospedeiro.",
         "features": [
-          "Escala de texto, famílias tipográficas e ajustes de espaçamento para melhorar legibilidade",
-          "Modos de contraste, controle de saturação e redução de estímulos e movimento",
-          "Cursores ampliados e lupa de texto para facilitar acompanhamento e seleção visual",
-          "Foco de leitura que acompanha ponteiro ou foco de teclado e ajuda a isolar a região atual da página",
-          "Leitura por voz com interação por mouse ou toque, destaque visual e controles de pausa, retomada e navegação",
-          "Presets de preferências e restauração completa para o estado original da página",
-          "Preferências persistentes e interface disponível em português, inglês e espanhol",
-          "Personalização white-label e arquitetura de licenciamento para distribuição do SDK em diferentes produtos"
+          "Presets voltados a TDAH, autismo, baixa visão, daltonismo e deficiência visual",
+          "Escala de texto, fonte amigável para dislexia, espaçamento e transformação de caixa",
+          "Contraste, saturação, escala de cinza e ajustes de cor para diferentes necessidades visuais",
+          "Cursores ampliados, lupa e recursos de acompanhamento visual do conteúdo",
+          "Guia e máscara de leitura para reduzir distrações e manter o foco na região atual",
+          "Leitura por voz com interação por mouse ou toque, destaque e controles de reprodução",
+          "Redução de movimento e estímulos visuais com restauração completa do estado original",
+          "Preferências persistentes, português/inglês/espanhol e personalização white-label"
         ],
         "technicalSpecs": [
           {
             "label": "Arquitetura modular",
-            "value": "Core independente da interface, registro de features e atualização por diff: somente os grupos de preferência realmente alterados são reaplicados ao documento."
+            "value": "Core independente da interface, registro de features e atualização por diff fazem com que apenas os grupos de preferências alterados sejam reaplicados."
           },
           {
-            "label": "Isolamento da UI",
-            "value": "A interface do widget roda em Shadow DOM, evitando colisões de CSS com o produto hospedeiro e preservando os efeitos de acessibilidade somente onde eles devem atuar."
+            "label": "Isolamento da interface",
+            "value": "O widget roda em Shadow DOM para evitar colisões de CSS e JavaScript com o produto hospedeiro, mantendo os efeitos de acessibilidade fora da UI encapsulada."
           },
           {
             "label": "Ciclo reversível",
-            "value": "Cada feature possui atualização, reset e dispose. Estilos originais são preservados para permitir ligar, desligar ou destruir o widget sem deixar alterações residuais na página."
+            "value": "Cada feature implementa atualização, reset e dispose; estilos e atributos originais são preservados para desligar ou destruir o SDK sem deixar resíduos."
           },
           {
             "label": "DOM dinâmico",
-            "value": "MutationObserver acompanha conteúdo adicionado após o carregamento e o adapter pode trabalhar com Document, ShadowRoots abertos registrados e iframes de mesma origem."
+            "value": "MutationObserver acompanha conteúdo inserido após o carregamento, com suporte a Document, ShadowRoots abertos registrados e iframes de mesma origem."
           },
           {
             "label": "Leitura por voz",
-            "value": "SpeechEngine isolado usa APIs nativas do navegador, gerencia seleção/elemento/seção/página, mantém destaque visual e trata interações de desktop e touch."
+            "value": "Um SpeechEngine isolado usa APIs nativas do navegador, controla seleção, elemento, seção e página e mantém destaque visual em desktop e touch."
           },
           {
             "label": "Estado persistente",
-            "value": "Preferências são salvas com esquema versionado e migrações, permitindo evolução do formato sem perder configurações já gravadas pelo usuário."
+            "value": "Preferências são armazenadas com esquema versionado e migrações, permitindo evoluir o formato sem perder configurações já gravadas."
           },
           {
             "label": "Licenciamento",
-            "value": "Camada de providers suporta licenças locais assinadas, validação remota ou implementação customizada, com verificação criptográfica de assinatura e regras de host, validade e entitlement."
+            "value": "A camada de providers suporta licenças locais assinadas, validação remota ou implementação customizada, com regras de host, validade e entitlement."
           },
           {
-            "label": "Qualidade e acessibilidade",
-            "value": "Suíte cobre estado, migrações, licenças, reversibilidade, teclado, TTS, DOM dinâmico, Shadow DOM, iframe, reset/destroy e validações em navegador, incluindo árvore de acessibilidade."
+            "label": "Criptografia",
+            "value": "Web Crypto API valida assinaturas ECDSA P-256/SHA-256 para cenários de distribuição licenciada do SDK."
           },
           {
-            "label": "Dependências",
-            "value": "O núcleo de produção não depende de bibliotecas externas em runtime, reduzindo peso e conflitos de integração."
+            "label": "Qualidade",
+            "value": "A suíte cobre estado, migrações, teclado, TTS, reversibilidade, DOM dinâmico, Shadow DOM, iframe, reset/destroy e validações em navegador."
+          },
+          {
+            "label": "Runtime enxuto",
+            "value": "O núcleo de produção não depende de framework externo em runtime, reduzindo peso, conflitos e custo de integração."
           }
         ],
         "technologies": [
           {
             "name": "JavaScript ES Modules",
-            "description": "Código modular do SDK, core, features, adapters e interface sem dependência de framework no runtime."
+            "description": "Core, features, adapters e UI organizados em módulos independentes de framework."
           },
           {
             "name": "Shadow DOM",
-            "description": "Encapsula a interface visual do widget para impedir interferência entre os estilos do host e do componente."
+            "description": "Encapsulamento da interface para impedir interferência entre estilos do host e do widget."
           },
           {
             "name": "Web Speech API",
-            "description": "Base nativa para leitura por voz, pausa, retomada e navegação entre trechos de conteúdo."
+            "description": "Síntese de voz, pausa, retomada e navegação entre trechos de conteúdo."
           },
           {
             "name": "Web Crypto API",
@@ -493,19 +506,19 @@
           },
           {
             "name": "MutationObserver",
-            "description": "Detecta novos nós no DOM para manter as preferências aplicadas em interfaces dinâmicas."
+            "description": "Aplicação contínua das preferências em interfaces que modificam o DOM dinamicamente."
           },
           {
             "name": "LocalStorage",
-            "description": "Persiste preferências e idioma da interface usando um esquema versionado com migrações."
+            "description": "Persistência de preferências e idioma com esquema versionado."
           },
           {
             "name": "CSS Custom Properties",
-            "description": "Tokens visuais e configuração de tema/white-label sem acoplar o SDK ao CSS do produto hospedeiro."
+            "description": "Tokens de tema e configuração white-label desacoplados do CSS do produto hospedeiro."
           },
           {
             "name": "Node.js 20+",
-            "description": "Toolchain de build, lint e execução da suíte automatizada do SDK."
+            "description": "Toolchain de build, lint e execução da suíte automatizada."
           }
         ],
         "pricing": []
@@ -594,303 +607,114 @@
       }
     },
     {
-      "title": "Encurtador de URL Mobile com Histórico Offline",
-      "category": "mobile",
-      "image": "assets/img/portfolio/url_shortener.png",
-      "status": "Público",
-      "description": "App mobile para criar links curtos, manter histórico e favoritos no dispositivo e enfileirar solicitações quando estiver offline.",
-      "stack": [
-        "Expo / React Native",
-        "TypeScript",
-        "AsyncStorage",
-        "Offline-first"
-      ],
-      "details": {
-        "description": "Aplicativo mobile para criar e organizar links curtos com foco em uso contínuo mesmo quando a conexão não está disponível. Cada link entra em um histórico persistente, pode ser marcado como favorito, localizado por busca ou filtro e copiado diretamente para a área de transferência. No modo offline, novas solicitações ficam em uma fila local para sincronização posterior; o app também apresenta estatísticas de links, pendências, favoritos e cópias para facilitar o gerenciamento do histórico.",
-        "features": [
-          "Criação de links curtos com validação da URL antes de adicionar ao histórico",
-          "Modo offline que mantém novas solicitações em fila e permite sincronizá-las posteriormente",
-          "Histórico persistente com estados pronto, pendente e falhou para acompanhar cada item",
-          "Favoritos, busca e filtros por status para encontrar rapidamente links já criados",
-          "Cópia do link curto para a área de transferência com contador de utilização",
-          "Resumo com quantidade de links, pendências, favoritos e itens recentes",
-          "Configuração de sincronização automática e comportamento offline diretamente no aplicativo"
-        ],
-        "technicalSpecs": [
-          {
-            "label": "Base mobile",
-            "value": "Expo 54, React Native 0.81 e TypeScript em uma arquitetura baseada em componentes e hooks."
-          },
-          {
-            "label": "Persistência offline",
-            "value": "Estado de links e configurações é serializado no AsyncStorage para sobreviver ao fechamento do aplicativo sem depender de um banco SQL local."
-          },
-          {
-            "label": "Fila de sincronização",
-            "value": "Links criados offline recebem estado pendente e podem transicionar para pronto ou falhou durante a sincronização; a preferência de auto-sync controla a retomada automática."
-          },
-          {
-            "label": "Provider de encurtamento",
-            "value": "A estratégia de geração do link curto fica atrás de uma abstração de provider, desacoplando a interface e o estado da implementação responsável por produzir a URL encurtada."
-          },
-          {
-            "label": "Validação",
-            "value": "Somente URLs HTTP e HTTPS válidas são aceitas, bloqueando esquemas inadequados antes do processamento."
-          },
-          {
-            "label": "Consulta do histórico",
-            "value": "Filtros derivados combinam texto, status e favoritos sem duplicar o estado persistido, permitindo busca por URL original, alias ou link curto."
-          },
-          {
-            "label": "Integrações do dispositivo",
-            "value": "Expo Clipboard cuida da cópia dos links e Expo Linking integra abertura e navegação quando necessário."
-          },
-          {
-            "label": "Testes",
-            "value": "Jest e React Native Testing Library cobrem geração de alias, provider, filtros, validação, fluxos de interface e comportamento principal do hook de gerenciamento."
-          }
-        ],
-        "technologies": [
-          {
-            "name": "Expo 54",
-            "description": "Toolchain mobile e integração dos módulos nativos usados pela aplicação."
-          },
-          {
-            "name": "React Native 0.81",
-            "description": "Interface mobile compartilhada e componentes para as telas de criação, histórico e configurações."
-          },
-          {
-            "name": "TypeScript",
-            "description": "Contratos tipados para links, estados de sincronização, configurações, providers e filtros."
-          },
-          {
-            "name": "AsyncStorage",
-            "description": "Persistência local do histórico e das preferências para funcionamento offline entre sessões."
-          },
-          {
-            "name": "Expo Clipboard",
-            "description": "Integração com a área de transferência para copiar links curtos diretamente do app."
-          },
-          {
-            "name": "Expo Linking",
-            "description": "Integração segura com URLs e recursos de navegação externa do dispositivo."
-          },
-          {
-            "name": "Jest + React Native Testing Library",
-            "description": "Testes automatizados das regras de validação, filtros, provider, hooks e fluxos de interface."
-          }
-        ],
-        "pricing": []
-      }
-    },
-    {
-      "title": "Website de Compressão e Conversão de Assets",
-      "category": "tool",
-      "image": "assets/img/portfolio/media_forge.png",
-      "status": "Público",
-      "description": "Ferramenta web para compactar, converter e redimensionar imagens em lote, com presets, fila, preview, downloads e histórico local.",
-      "stack": [
-        "Next.js 15",
-        "TypeScript",
-        "Sharp",
-        "IndexedDB"
-      ],
-      "details": {
-        "description": "Ferramenta web para preparar imagens para sites, aplicativos, lojas e outros produtos digitais sem depender de múltiplos programas. O usuário pode enviar uma ou várias imagens, escolher entre compactação e conversão, definir qualidade e limites de dimensão e usar presets para acelerar configurações recorrentes. Cada arquivo passa por uma fila com acompanhamento de status, preview, tamanho antes e depois, percentual de redução e download; os resultados também ficam no histórico local para consulta e novo download.",
-        "features": [
-          "Upload individual ou em lote para processar várias imagens no mesmo fluxo",
-          "Compactação mantendo o formato ou conversão para JPEG, PNG, WebP e AVIF",
-          "Controle de qualidade e limites máximos de largura e altura sem ampliar imagens menores",
-          "Presets rápidos para aplicar combinações recorrentes de qualidade, formato e dimensão",
-          "Fila de processamento com status por arquivo e preview do resultado",
-          "Comparação de tamanho original e final com percentual de redução antes do download",
-          "Histórico persistente com busca, novo download, exclusão individual e limpeza completa"
-        ],
-        "technicalSpecs": [
-          {
-            "label": "Frontend",
-            "value": "Next.js 15 com App Router, React 19 e TypeScript para a interface, estados do estúdio e fluxo de processamento."
-          },
-          {
-            "label": "Pipeline de imagem",
-            "value": "Rota server-side em Node usa Sharp para autorrotação, resize e codificação dos arquivos processados."
-          },
-          {
-            "label": "Formatos",
-            "value": "Entrada aceita PNG, JPEG, WebP, AVIF, GIF e TIFF; saída pode ser gerada em JPEG, PNG, WebP ou AVIF."
-          },
-          {
-            "label": "Redimensionamento",
-            "value": "Resize usa estratégia fit inside e impede enlargement, preservando proporção e evitando perda causada por ampliar assets menores que o limite solicitado."
-          },
-          {
-            "label": "Otimização",
-            "value": "O pipeline aplica parâmetros específicos por codec, incluindo mozjpeg para JPEG, compressão avançada de PNG e controle de qualidade em WebP e AVIF."
-          },
-          {
-            "label": "Processamento em lote",
-            "value": "Arquivos são organizados em fila, processados com FormData e acompanhados individualmente até o resultado, erro ou download."
-          },
-          {
-            "label": "Histórico local",
-            "value": "IndexedDB armazena metadados e o Blob processado, permitindo pesquisar resultados e baixar novamente sem refazer o processamento."
-          },
-          {
-            "label": "Testes",
-            "value": "Vitest e JSDOM dão suporte à validação automatizada das regras e utilitários da aplicação."
-          }
-        ],
-        "technologies": [
-          {
-            "name": "Next.js 15",
-            "description": "App Router e runtime Node usados para unir a interface web ao endpoint de processamento de imagem."
-          },
-          {
-            "name": "React 19",
-            "description": "Componentes e estado da fila, configurações, previews e histórico da ferramenta."
-          },
-          {
-            "name": "TypeScript",
-            "description": "Tipagem dos arquivos, presets, configurações de processamento, histórico e contratos entre frontend e endpoint."
-          },
-          {
-            "name": "Sharp / libvips",
-            "description": "Motor de alto desempenho para rotação, redimensionamento, compressão e conversão das imagens."
-          },
-          {
-            "name": "IndexedDB + idb",
-            "description": "Persistência local de histórico e Blobs processados para busca e novos downloads."
-          },
-          {
-            "name": "File / Blob / FormData APIs",
-            "description": "APIs nativas do navegador para upload, preview, transferência do arquivo e geração de download."
-          },
-          {
-            "name": "Vitest + JSDOM",
-            "description": "Ambiente de testes automatizados para lógica e comportamento do frontend."
-          }
-        ],
-        "pricing": []
-      }
-    },
-    {
-      "title": "Realtime Messaging · Chat em Tempo Real",
+      "title": "Radar Público · Busca e Inteligência de Editais",
       "category": "product",
-      "image": "assets/img/portfolio/realtime_messaging.png",
+      "image": "assets/img/portfolio/radar_publico.png",
       "status": "Público",
-      "description": "Plataforma de mensagens em tempo real com DMs, canais, presença, replay após reconexão e observabilidade completa da infraestrutura.",
+      "description": "Plataforma web para encontrar e acompanhar editais e contratações públicas brasileiras com pesquisa contextual, filtros avançados, recomendações por perfil empresarial, alertas e acesso direto às fontes e documentos oficiais.",
       "stack": [
         ".NET 10",
-        "WebSockets",
+        "React + TypeScript",
         "PostgreSQL",
-        "NATS",
-        "Grafana"
+        "PNCP / Compras.gov.br",
+        "Docker"
       ],
       "details": {
-        "description": "Plataforma de mensagens em tempo real para conversas diretas e canais, com convites, presença, indicador de digitação, não lidas persistentes, bloqueio, imagens e histórico. A experiência foi construída para continuar confiável durante quedas de conexão: o cliente reconecta e recupera mensagens ausentes a partir do histórico persistido, enquanto múltiplos gateways distribuem as conexões em tempo real. A operação também possui telemetria ponta a ponta para acompanhar conexões, volume de mensagens, replay, latência e comportamento da infraestrutura.",
+        "description": "Radar Público centraliza oportunidades reais publicadas em fontes oficiais e transforma a procura por editais em um fluxo mais simples para empresas e profissionais que não querem navegar portal por portal. A pesquisa aceita termos do dia a dia e combina palavras, contexto e assuntos relacionados para encontrar oportunidades mais úteis — por exemplo, uma busca por “jogos educacionais” pode considerar jogos pedagógicos, softwares de aprendizagem, plataformas web educacionais e equipamentos voltados ao ensino, sem misturar resultados sem relação com o objetivo pesquisado. A consulta pública funciona sem cadastro. Ao criar uma conta e configurar a empresa, o usuário pode salvar filtros, receber avisos de novas oportunidades, acompanhar alterações, organizar editais em um pipeline e receber uma indicação de aderência explicada por critérios como área de atuação, região, faixa de valor e requisitos. Cada oportunidade concentra identificadores, órgão, situação, valores, datas, itens, documentos e links para os sistemas oficiais, mantendo a fonte governamental como referência.",
         "features": [
-          "Conversas diretas e canais com convites e controle de participação",
-          "Presença online, indicador de digitação e estados de leitura e não lidas persistentes",
-          "Bloqueio de usuários e envio de anexos de imagem com validação do arquivo",
-          "Reconexão com replay das mensagens ausentes a partir da sequência persistida",
-          "Identificação idempotente de mensagens para reduzir duplicações durante reenvios",
-          "Múltiplos gateways para distribuir conexões HTTP e WebSocket",
-          "Métricas, traces e dashboards para acompanhar disponibilidade, latência e fluxo de mensagens"
+          "Pesquisa pública sem necessidade de conta, com consulta por objeto, órgão, itens, localização, valores, datas e outros dados do edital",
+          "Busca contextual que amplia termos relacionados e combina intenções para melhorar relevância sem depender apenas de correspondência literal de palavras",
+          "Filtros avançados com seleção múltipla para UF, município, órgão, modalidade, situação e fonte, além de faixas de valor e períodos",
+          "Resultados ordenados por relevância e apresentados com identificadores oficiais, órgão, localização, valor estimado, prazos, modalidade e situação",
+          "Detalhe completo da oportunidade com número da contratação, processo, objeto, itens, valores, datas, unidade responsável, documentos e histórico de alterações quando disponível",
+          "Links diretos para o PNCP, sistema de origem e processo eletrônico quando a fonte oficial disponibiliza esses endereços",
+          "Perfil empresarial com capacidades, regiões de interesse, faixa de valor e requisitos para gerar recomendações e uma aderência explicável por oportunidade",
+          "Buscas salvas com avisos quando novas contratações compatíveis aparecem ou quando oportunidades acompanhadas recebem mudanças relevantes",
+          "Acompanhamento comercial com pipeline, responsáveis, notas, tarefas, decisão e valor planejado para transformar uma oportunidade encontrada em processo interno",
+          "Interface responsiva para desktop e mobile, com pesquisa, filtros, cadastro, notificações, acompanhamento e gerenciamento da empresa no mesmo produto"
         ],
         "technicalSpecs": [
           {
-            "label": "Topologia distribuída",
-            "value": "Nginx balanceia tráfego HTTP e WebSocket entre múltiplos gateways ASP.NET Core, permitindo executar mais de uma instância do serviço de tempo real."
+            "label": "Arquitetura",
+            "value": "Monólito modular em ASP.NET Core / .NET 10. Backend, autenticação, serviços em segundo plano e API ficam no mesmo host, enquanto React, TypeScript e Vite compõem a interface e são publicados como arquivos estáticos pelo próprio ASP.NET Core."
           },
           {
-            "label": "Caminho durável",
-            "value": "Mensagens persistentes são gravadas no PostgreSQL junto com um transactional outbox e publicadas no NATS JetStream, reduzindo o risco de divergência entre banco e barramento."
+            "label": "Fontes oficiais",
+            "value": "A ingestão usa integrações públicas do PNCP e do Compras.gov.br atrás de uma abstração de fonte, preservando o caminho para incluir novos portais governamentais sem acoplar controllers e interface ao formato externo."
           },
           {
-            "label": "Eventos efêmeros",
-            "value": "Core NATS é usado para fan-out de sinais que não precisam de persistência, como presença e digitação, mantendo o caminho efêmero separado do histórico durável."
+            "label": "Pipeline de ingestão",
+            "value": "Contratações são descobertas, preservadas primeiro como payload bruto em JSONB e depois normalizadas em órgãos, oportunidades, itens, documentos e alterações. Filas persistidas e HostedServices permitem retomar processamento e executar sincronizações incrementais."
           },
           {
-            "label": "Presença distribuída",
-            "value": "Redis mantém o estado de presença compartilhado entre gateways para que conexões diferentes enxerguem uma visão consistente dos usuários online."
+            "label": "Busca e relevância",
+            "value": "PostgreSQL executa a pesquisa com Full Text Search em português, pg_trgm, unaccent e índices específicos. Uma camada determinística de intenção expande contextos e combina grupos de termos para melhorar precisão e recall sem transformar a busca em simples substring."
           },
           {
-            "label": "Protocolo WebSocket",
-            "value": "O fluxo suporta subscribe/resume, heartbeat, delivery ack, mark-read, typing e replay paginado após uma sequência conhecida, além de limites de payload e backpressure."
+            "label": "Recomendações",
+            "value": "A aderência da empresa é calculada por regras auditáveis sobre capacidades, região, faixa de valor, requisitos e outros sinais do perfil. O score é acompanhado das razões que contribuíram positiva ou negativamente para o resultado."
           },
           {
-            "label": "Consistência",
-            "value": "clientMessageId idempotente, sequência persistida e replay permitem retomar a sessão sem duplicar mensagens já aceitas e recuperar lacunas após reconexão."
+            "label": "Documentos",
+            "value": "Metadados e URLs oficiais permanecem vinculados ao edital. Quando documentos são processados localmente, o sistema calcula SHA-256, mantém versões imutáveis por checksum e extrai texto de PDFs digitais com PdfPig, sinalizando documentos que exigem OCR."
           },
           {
-            "label": "Segurança",
-            "value": "Tokens assinados com HMAC-SHA256, senhas derivadas com PBKDF2-SHA512, comparação em tempo constante, rate limiting por conexão e validação de MIME e assinatura binária dos anexos."
+            "label": "Detecção de mudanças",
+            "value": "Checksums e dados normalizados permitem identificar alterações de prazo, valor, situação, payload e documentos, registrando o histórico e alimentando notificações de oportunidades acompanhadas."
           },
           {
-            "label": "Observabilidade",
-            "value": "OpenTelemetry instrumenta a aplicação; Prometheus coleta métricas; Grafana apresenta dashboards e Jaeger permite investigar traces distribuídos."
+            "label": "Contas e autorização",
+            "value": "Usuários e empresas são armazenados no PostgreSQL do próprio Radar. A autenticação usa cookie same-origin e hash local de senha, com papéis owner, analyst e viewer e autorização vinculada à organização."
           },
           {
-            "label": "Qualidade e carga",
-            "value": "xUnit cobre o backend e k6 executa cenários funcionais e de carga, incluindo autenticação, DMs, persistência, bloqueio, canais, convites e WebSockets."
+            "label": "Automação",
+            "value": "HostedServices cuidam da atualização de propostas abertas, sincronização incremental, processamento documental, alertas de prazo e reavaliação de buscas salvas sem depender de Redis, broker ou serviços pagos."
           },
           {
-            "label": "Entrega",
-            "value": "Docker Compose monta o stack completo e GitHub Actions valida backend, frontend, containers, readiness e cenários integrados antes da publicação."
+            "label": "Execução",
+            "value": "Docker Compose sobe aplicação e PostgreSQL em um fluxo reproduzível. O frontend é compilado durante o build e o runtime final não exige um servidor Node separado."
           }
         ],
         "technologies": [
           {
             "name": "ASP.NET Core / .NET 10",
-            "description": "Backend de autenticação, APIs e gateways WebSocket com processamento concorrente e serviços de infraestrutura."
+            "description": "Backend principal, endpoints, autenticação, autorização, HostedServices e coordenação dos fluxos de ingestão, busca e acompanhamento."
           },
           {
-            "name": "React 19 + TypeScript + Vite",
-            "description": "Frontend tipado para autenticação, conversas, canais, presença, mensagens e reconexão."
+            "name": "React + TypeScript + Vite",
+            "description": "SPA responsiva para pesquisa pública, filtros, detalhes, cadastro, recomendações, notificações, pipeline e configuração da empresa."
           },
           {
-            "name": "WebSockets",
-            "description": "Canal bidirecional para mensagens, typing, presença, acknowledgements e retomada de sessão em tempo real."
+            "name": "PostgreSQL",
+            "description": "Fonte de verdade para usuários, empresas, contratações, itens, documentos, histórico e filas, além do motor de Full Text Search e índices de similaridade."
           },
           {
-            "name": "PostgreSQL 17",
-            "description": "Fonte de verdade para usuários, salas, mensagens, leitura, anexos, sequências e transactional outbox."
+            "name": "Entity Framework Core + Npgsql",
+            "description": "Mapeamento do domínio, migrations, persistência transacional e integração da aplicação .NET com PostgreSQL."
           },
           {
-            "name": "Redis",
-            "description": "Estado distribuído de presença compartilhado entre instâncias do gateway."
+            "name": "PNCP",
+            "description": "Fonte governamental principal para descoberta e detalhamento de contratações, itens, documentos e links oficiais."
           },
           {
-            "name": "NATS JetStream",
-            "description": "Barramento durável para eventos de mensagem que precisam sobreviver a falhas temporárias de consumidores."
+            "name": "Compras.gov.br",
+            "description": "Integração pública complementar utilizada na estratégia de cobertura de contratações governamentais."
           },
           {
-            "name": "Core NATS",
-            "description": "Fan-out de eventos efêmeros de baixa latência que não precisam ser persistidos."
+            "name": "PostgreSQL FTS + pg_trgm + unaccent",
+            "description": "Recursos de busca textual, similaridade e normalização usados em conjunto com o motor contextual do Radar."
           },
           {
-            "name": "Nginx",
-            "description": "Balanceamento das requisições HTTP e upgrades WebSocket entre os gateways."
+            "name": "PdfPig",
+            "description": "Extração local de texto de PDFs digitais para apoiar leitura estruturada, requisitos e versionamento documental."
           },
           {
-            "name": "OpenTelemetry",
-            "description": "Instrumentação unificada de métricas e traces do backend e dos principais fluxos de mensageria."
+            "name": "ASP.NET Core Identity",
+            "description": "Infraestrutura local de hash de senha, sessão por cookie e identidade dos usuários armazenados no próprio banco da aplicação."
           },
           {
-            "name": "Prometheus + Grafana",
-            "description": "Coleta, consulta e visualização operacional de métricas como conexões, mensagens, replay, rate limiting e latência de persistência."
-          },
-          {
-            "name": "Jaeger",
-            "description": "Análise de traces distribuídos para localizar gargalos e entender o percurso de uma operação entre componentes."
-          },
-          {
-            "name": "xUnit + k6",
-            "description": "Testes automatizados do backend e cenários de carga/fluxo real incluindo WebSocket e persistência."
-          },
-          {
-            "name": "Docker Compose + GitHub Actions",
-            "description": "Stack reproduzível e pipeline de validação integrada do backend, frontend e infraestrutura."
+            "name": "Docker Compose",
+            "description": "Ambiente reproduzível com aplicação e PostgreSQL, incluindo build do frontend, migrations e inicialização dos serviços internos."
           }
         ],
         "pricing": []
@@ -1019,114 +843,347 @@
       }
     },
     {
-      "title": "Radar Público · Busca e Inteligência de Editais",
-      "category": "product",
-      "image": "assets/img/portfolio/radar_publico.png",
+      "title": "MediaForge — processamento e engenharia de mídia",
+      "category": "tool",
+      "image": "assets/img/portfolio/media_forge.png",
       "status": "Público",
-      "description": "Plataforma web para encontrar e acompanhar editais e contratações públicas brasileiras com pesquisa contextual, filtros avançados, recomendações por perfil empresarial, alertas e acesso direto às fontes e documentos oficiais.",
+      "description": "Suíte web para otimizar imagens, remover fundos, limpar metadados, comparar versões, processar vídeos e trabalhar com arquivos, cores e assets em um único fluxo.",
       "stack": [
-        ".NET 10",
-        "React + TypeScript",
-        "PostgreSQL",
-        "PNCP / Compras.gov.br",
-        "Docker"
+        "Next.js 15",
+        "TypeScript",
+        "Sharp",
+        "FFmpeg.wasm"
       ],
       "details": {
-        "description": "Radar Público centraliza oportunidades reais publicadas em fontes oficiais e transforma a procura por editais em um fluxo mais simples para empresas e profissionais que não querem navegar portal por portal. A pesquisa aceita termos do dia a dia e combina palavras, contexto e assuntos relacionados para encontrar oportunidades mais úteis — por exemplo, uma busca por “jogos educacionais” pode considerar jogos pedagógicos, softwares de aprendizagem, plataformas web educacionais e equipamentos voltados ao ensino, sem misturar resultados sem relação com o objetivo pesquisado. A consulta pública funciona sem cadastro. Ao criar uma conta e configurar a empresa, o usuário pode salvar filtros, receber avisos de novas oportunidades, acompanhar alterações, organizar editais em um pipeline e receber uma indicação de aderência explicada por critérios como área de atuação, região, faixa de valor e requisitos. Cada oportunidade concentra identificadores, órgão, situação, valores, datas, itens, documentos e links para os sistemas oficiais, mantendo a fonte governamental como referência.",
+        "description": "MediaForge reúne em uma única interface tarefas que normalmente exigem várias ferramentas separadas. É possível otimizar imagens, remover fundos, limpar metadados de privacidade, comparar duas versões, extrair paletas, processar vídeo, proteger arquivos, calcular hashes, gerar senhas, montar pacotes de assets e trabalhar com cores e gradientes. O foco é manter o fluxo rápido e previsível, priorizando processamento no próprio dispositivo e usando rotas server-side somente quando agregam compatibilidade ou qualidade.",
         "features": [
-          "Pesquisa pública sem necessidade de conta, com consulta por objeto, órgão, itens, localização, valores, datas e outros dados do edital",
-          "Busca contextual que amplia termos relacionados e combina intenções para melhorar relevância sem depender apenas de correspondência literal de palavras",
-          "Filtros avançados com seleção múltipla para UF, município, órgão, modalidade, situação e fonte, além de faixas de valor e períodos",
-          "Resultados ordenados por relevância e apresentados com identificadores oficiais, órgão, localização, valor estimado, prazos, modalidade e situação",
-          "Detalhe completo da oportunidade com número da contratação, processo, objeto, itens, valores, datas, unidade responsável, documentos e histórico de alterações quando disponível",
-          "Links diretos para o PNCP, sistema de origem e processo eletrônico quando a fonte oficial disponibiliza esses endereços",
-          "Perfil empresarial com capacidades, regiões de interesse, faixa de valor e requisitos para gerar recomendações e uma aderência explicável por oportunidade",
-          "Buscas salvas com avisos quando novas contratações compatíveis aparecem ou quando oportunidades acompanhadas recebem mudanças relevantes",
-          "Acompanhamento comercial com pipeline, responsáveis, notas, tarefas, decisão e valor planejado para transformar uma oportunidade encontrada em processo interno",
-          "Interface responsiva para desktop e mobile, com pesquisa, filtros, cadastro, notificações, acompanhamento e gerenciamento da empresa no mesmo produto"
+          "Otimização e conversão de JPEG, PNG, WebP e AVIF com controle de qualidade e dimensão",
+          "Remoção de fundo por tolerância de cor com suavização e exportação transparente",
+          "Inspeção e limpeza de EXIF, GPS, XMP e IPTC, incluindo suporte a HEIC/HEIF",
+          "Comparação de imagens com modos para conteúdo normalizado ou layout exato e mapa visual de diferenças",
+          "Extração de paleta dominante e ferramentas de contraste, harmonias e conversão de cores",
+          "Processamento de vídeo para compressão, conversão, recorte, extração de áudio e captura de frame",
+          "Criptografia de arquivos, hashes SHA-256/SHA-512 e geração/análise de senhas",
+          "Geração de pacote de assets para favicon, PWA, Android e iOS, além de criador de gradientes",
+          "Histórico local das operações e interface responsiva para desktop, tablet e mobile"
         ],
         "technicalSpecs": [
           {
-            "label": "Arquitetura",
-            "value": "Monólito modular em ASP.NET Core / .NET 10. Backend, autenticação, serviços em segundo plano e API ficam no mesmo host, enquanto React, TypeScript e Vite compõem a interface e são publicados como arquivos estáticos pelo próprio ASP.NET Core."
+            "label": "Frontend",
+            "value": "Next.js 15, React 19 e TypeScript estruturam o estúdio, o histórico e os fluxos independentes de cada ferramenta."
           },
           {
-            "label": "Fontes oficiais",
-            "value": "A ingestão usa integrações públicas do PNCP e do Compras.gov.br atrás de uma abstração de fonte, preservando o caminho para incluir novos portais governamentais sem acoplar controllers e interface ao formato externo."
+            "label": "Pipeline híbrido de imagem",
+            "value": "Canvas executa operações locais e uma rota Node com Sharp/libvips cobre processamento server-side quando necessário, incluindo autorrotação, resize e codificação."
           },
           {
-            "label": "Pipeline de ingestão",
-            "value": "Contratações são descobertas, preservadas primeiro como payload bruto em JSONB e depois normalizadas em órgãos, oportunidades, itens, documentos e alterações. Filas persistidas e HostedServices permitem retomar processamento e executar sincronizações incrementais."
+            "label": "Remoção de fundo",
+            "value": "Algoritmo flood-fill parte das bordas, estima a cor de fundo, aplica tolerância RGB e cria uma transição de alpha para preservar contornos sem depender de serviço externo."
           },
           {
-            "label": "Busca e relevância",
-            "value": "PostgreSQL executa a pesquisa com Full Text Search em português, pg_trgm, unaccent e índices específicos. Uma camada determinística de intenção expande contextos e combina grupos de termos para melhorar precisão e recall sem transformar a busca em simples substring."
+            "label": "Privacidade",
+            "value": "A inspeção usa metadados EXIF/TIFF/GPS/XMP/IPTC; imagens podem ser reconstruídas sem esses blocos e HEIC/HEIF é decodificado localmente antes da sanitização."
           },
           {
-            "label": "Recomendações",
-            "value": "A aderência da empresa é calculada por regras auditáveis sobre capacidades, região, faixa de valor, requisitos e outros sinais do perfil. O score é acompanhado das razões que contribuíram positiva ou negativamente para o resultado."
+            "label": "Image Diff",
+            "value": "Comparação pixel a pixel com limiar configurável, modo de layout exato e normalização de conteúdo para logos e artes com margens ou dimensões diferentes."
           },
           {
-            "label": "Documentos",
-            "value": "Metadados e URLs oficiais permanecem vinculados ao edital. Quando documentos são processados localmente, o sistema calcula SHA-256, mantém versões imutáveis por checksum e extrai texto de PDFs digitais com PdfPig, sinalizando documentos que exigem OCR."
+            "label": "Vídeo no navegador",
+            "value": "FFmpeg WebAssembly é carregado sob demanda e executa conversão MP4/WebM/GIF, compressão, recorte, extração WAV e captura de frames, com tratamento para vídeos sem áudio."
           },
           {
-            "label": "Detecção de mudanças",
-            "value": "Checksums e dados normalizados permitem identificar alterações de prazo, valor, situação, payload e documentos, registrando o histórico e alimentando notificações de oportunidades acompanhadas."
+            "label": "Segurança de arquivos",
+            "value": "PBKDF2-SHA-256 com 310 mil iterações deriva chave AES-256-GCM; salt e IV aleatórios protegem o envelope que preserva nome, MIME type e bytes originais."
           },
           {
-            "label": "Contas e autorização",
-            "value": "Usuários e empresas são armazenados no PostgreSQL do próprio Radar. A autenticação usa cookie same-origin e hash local de senha, com papéis owner, analyst e viewer e autorização vinculada à organização."
+            "label": "Integridade e senhas",
+            "value": "Web Crypto API calcula SHA-256/SHA-512 e crypto.getRandomValues alimenta a geração de senhas, evitando PRNG não criptográfico."
           },
           {
-            "label": "Automação",
-            "value": "HostedServices cuidam da atualização de propostas abertas, sincronização incremental, processamento documental, alertas de prazo e reavaliação de buscas salvas sem depender de Redis, broker ou serviços pagos."
+            "label": "Assets e design",
+            "value": "Canvas gera variações de ícone, manifesto e arquivos organizados em ZIP; utilitários adicionais calculam contraste, harmonias, HEX/RGB/HSL e CSS de gradientes."
           },
           {
-            "label": "Execução",
-            "value": "Docker Compose sobe aplicação e PostgreSQL em um fluxo reproduzível. O frontend é compilado durante o build e o runtime final não exige um servidor Node separado."
+            "label": "Persistência",
+            "value": "IndexedDB mantém metadados e resultados recentes para consulta e nova utilização sem exigir conta de usuário."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Next.js 15",
+            "description": "App Router e runtime Node para a interface web e rotas de processamento híbrido."
+          },
+          {
+            "name": "React 19",
+            "description": "Componentização e estado dos diferentes laboratórios e resultados."
+          },
+          {
+            "name": "TypeScript",
+            "description": "Contratos tipados para arquivos, operações, históricos e respostas de processamento."
+          },
+          {
+            "name": "Sharp / libvips",
+            "description": "Processamento server-side de imagem com resize, rotação e codecs modernos."
+          },
+          {
+            "name": "FFmpeg.wasm",
+            "description": "Transcodificação e edição de vídeo executadas no navegador via WebAssembly."
+          },
+          {
+            "name": "Web Crypto API",
+            "description": "AES-GCM, PBKDF2, hashes e aleatoriedade criptográfica para ferramentas de segurança."
+          },
+          {
+            "name": "Canvas / File APIs",
+            "description": "Rasterização, previews, transformações locais e geração de arquivos no navegador."
+          },
+          {
+            "name": "exifr + HEIC decoder",
+            "description": "Leitura de metadados e compatibilidade com fotos HEIC/HEIF."
+          },
+          {
+            "name": "IndexedDB",
+            "description": "Histórico local de operações e resultados persistidos no dispositivo."
+          },
+          {
+            "name": "Vitest",
+            "description": "Validação automatizada de regras e utilitários do projeto."
+          }
+        ],
+        "pricing": []
+      }
+    },
+    {
+      "title": "Pocket Links — gestão de links, QR Codes e analytics",
+      "category": "mobile",
+      "image": "assets/img/portfolio/pocket_links.png",
+      "status": "Público",
+      "description": "Aplicativo e plataforma web para criar links gerenciáveis, personalizar aliases, gerar QR Codes, acompanhar acessos e manter ações sincronizadas mesmo com conexão instável.",
+      "stack": [
+        "Expo / React Native",
+        "Next.js 16",
+        "PostgreSQL / Neon",
+        "TypeScript"
+      ],
+      "details": {
+        "description": "Pocket Links transforma um endereço curto em um recurso que pode continuar sendo administrado depois de compartilhado. O usuário cria links com alias próprio, QR Code, tags, parâmetros UTM e expiração configurável; depois pode alterar o destino sem trocar o endereço publicado, desativar ou reativar o link e acompanhar seus acessos. O aplicativo mobile trabalha integrado à plataforma web/API, mantém dados locais e uma fila de sincronização para continuar operando quando a conexão oscila.",
+        "features": [
+          "Criação de links persistentes com código curto ou alias personalizado e verificação de disponibilidade",
+          "QR Code vinculado ao endereço gerenciável para compartilhamento digital ou material impresso",
+          "Edição do destino sem alterar o link já distribuído, com ativação, desativação e exclusão",
+          "Expiração por período predefinido ou quantidade personalizada de dias",
+          "Analytics de acessos com totais, atividade recente e informações de dispositivo, navegador e origem quando disponíveis",
+          "Tags, favoritos, busca e filtros para organizar links em listas maiores",
+          "Construtor de parâmetros UTM para campanhas sem expor URLs longas ao público",
+          "Fila offline, sincronização automática/manual e feedback visual para operações pendentes",
+          "Interface web responsiva e aplicativo mobile consumindo a mesma API e o mesmo banco"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Cliente mobile",
+            "value": "Expo 54, React Native 0.81 e TypeScript concentram criação, gerenciamento, QR Code, analytics, preferências e sincronização em Android e iOS."
+          },
+          {
+            "label": "Plataforma web/API",
+            "value": "Next.js 16 fornece interface web responsiva, endpoints HTTP, validação e a rota pública responsável pelo redirecionamento dos links."
+          },
+          {
+            "label": "Persistência",
+            "value": "PostgreSQL no Neon armazena links, status e eventos de acesso; Drizzle ORM mantém schema tipado e migrations versionadas."
+          },
+          {
+            "label": "Redirecionamento",
+            "value": "Cada código público é resolvido no servidor, validado contra status e expiração, contabilizado e respondido com redirect HTTP para o destino atual."
+          },
+          {
+            "label": "Analytics",
+            "value": "Eventos de acesso alimentam totais e detalhamento de atividade, permitindo que app e web consultem a mesma fonte de dados."
+          },
+          {
+            "label": "Idempotência",
+            "value": "clientRequestId acompanha criações e sincronizações para que uma repetição causada por perda de conexão não produza links duplicados."
+          },
+          {
+            "label": "Gerenciamento seguro",
+            "value": "O servidor entrega um token de gerenciamento separado do código público; no mobile ele é armazenado com Expo SecureStore e utilizado nas operações administrativas."
+          },
+          {
+            "label": "Offline-first",
+            "value": "AsyncStorage mantém estado e fila local, enquanto NetInfo e o health check da API coordenam reenvio, transições pendentes e recuperação de conectividade."
+          },
+          {
+            "label": "Proteções da API",
+            "value": "Validação restringe destinos a HTTP/HTTPS, aliases possuem unicidade e palavras reservadas, e rate limiting reduz abuso dos endpoints públicos."
+          },
+          {
+            "label": "Qualidade",
+            "value": "Jest/React Native Testing Library no mobile e Vitest/TypeScript/ESLint no web cobrem validações, providers, persistência, contratos e regras do fluxo."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Expo 54",
+            "description": "Toolchain e módulos nativos usados pelo aplicativo mobile."
+          },
+          {
+            "name": "React Native 0.81",
+            "description": "Interface mobile compartilhada para criação, links, detalhes e configurações."
+          },
+          {
+            "name": "Next.js 16",
+            "description": "Frontend web, API e serviço de redirecionamento executados na mesma aplicação."
+          },
+          {
+            "name": "TypeScript",
+            "description": "Contratos compartilhados conceitualmente entre cliente, API, persistência e testes."
+          },
+          {
+            "name": "PostgreSQL / Neon",
+            "description": "Banco remoto para links persistentes e eventos de analytics."
+          },
+          {
+            "name": "Drizzle ORM",
+            "description": "Schema tipado, consultas e migrations versionadas do PostgreSQL."
+          },
+          {
+            "name": "Expo SecureStore",
+            "description": "Armazenamento protegido dos tokens utilizados para gerenciar links."
+          },
+          {
+            "name": "AsyncStorage + NetInfo",
+            "description": "Persistência local, fila offline e detecção de conectividade no aplicativo."
+          },
+          {
+            "name": "QR Code + UTM",
+            "description": "Distribuição por QR e composição estruturada de parâmetros de campanha."
+          },
+          {
+            "name": "Jest + Vitest",
+            "description": "Suítes automatizadas do aplicativo e da plataforma web/API."
+          }
+        ],
+        "pricing": []
+      }
+    },
+    {
+      "title": "Realtime Messaging · Chat em Tempo Real",
+      "category": "product",
+      "image": "assets/img/portfolio/realtime_messaging.png",
+      "status": "Público",
+      "description": "Plataforma de mensagens em tempo real com DMs, canais, presença, replay após reconexão e observabilidade completa da infraestrutura.",
+      "stack": [
+        ".NET 10",
+        "WebSockets",
+        "PostgreSQL",
+        "NATS",
+        "Grafana"
+      ],
+      "details": {
+        "description": "Plataforma de mensagens em tempo real para conversas diretas e canais, com convites, presença, indicador de digitação, não lidas persistentes, bloqueio, imagens e histórico. A experiência foi construída para continuar confiável durante quedas de conexão: o cliente reconecta e recupera mensagens ausentes a partir do histórico persistido, enquanto múltiplos gateways distribuem as conexões em tempo real. A operação também possui telemetria ponta a ponta para acompanhar conexões, volume de mensagens, replay, latência e comportamento da infraestrutura.",
+        "features": [
+          "Conversas diretas e canais com convites e controle de participação",
+          "Presença online, indicador de digitação e estados de leitura e não lidas persistentes",
+          "Bloqueio de usuários e envio de anexos de imagem com validação do arquivo",
+          "Reconexão com replay das mensagens ausentes a partir da sequência persistida",
+          "Identificação idempotente de mensagens para reduzir duplicações durante reenvios",
+          "Múltiplos gateways para distribuir conexões HTTP e WebSocket",
+          "Métricas, traces e dashboards para acompanhar disponibilidade, latência e fluxo de mensagens"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Topologia distribuída",
+            "value": "Nginx balanceia tráfego HTTP e WebSocket entre múltiplos gateways ASP.NET Core, permitindo executar mais de uma instância do serviço de tempo real."
+          },
+          {
+            "label": "Caminho durável",
+            "value": "Mensagens persistentes são gravadas no PostgreSQL junto com um transactional outbox e publicadas no NATS JetStream, reduzindo o risco de divergência entre banco e barramento."
+          },
+          {
+            "label": "Eventos efêmeros",
+            "value": "Core NATS é usado para fan-out de sinais que não precisam de persistência, como presença e digitação, mantendo o caminho efêmero separado do histórico durável."
+          },
+          {
+            "label": "Presença distribuída",
+            "value": "Redis mantém o estado de presença compartilhado entre gateways para que conexões diferentes enxerguem uma visão consistente dos usuários online."
+          },
+          {
+            "label": "Protocolo WebSocket",
+            "value": "O fluxo suporta subscribe/resume, heartbeat, delivery ack, mark-read, typing e replay paginado após uma sequência conhecida, além de limites de payload e backpressure."
+          },
+          {
+            "label": "Consistência",
+            "value": "clientMessageId idempotente, sequência persistida e replay permitem retomar a sessão sem duplicar mensagens já aceitas e recuperar lacunas após reconexão."
+          },
+          {
+            "label": "Segurança",
+            "value": "Tokens assinados com HMAC-SHA256, senhas derivadas com PBKDF2-SHA512, comparação em tempo constante, rate limiting por conexão e validação de MIME e assinatura binária dos anexos."
+          },
+          {
+            "label": "Observabilidade",
+            "value": "OpenTelemetry instrumenta a aplicação; Prometheus coleta métricas; Grafana apresenta dashboards e Jaeger permite investigar traces distribuídos."
+          },
+          {
+            "label": "Qualidade e carga",
+            "value": "xUnit cobre o backend e k6 executa cenários funcionais e de carga, incluindo autenticação, DMs, persistência, bloqueio, canais, convites e WebSockets."
+          },
+          {
+            "label": "Entrega",
+            "value": "Docker Compose monta o stack completo e GitHub Actions valida backend, frontend, containers, readiness e cenários integrados antes da publicação."
           }
         ],
         "technologies": [
           {
             "name": "ASP.NET Core / .NET 10",
-            "description": "Backend principal, endpoints, autenticação, autorização, HostedServices e coordenação dos fluxos de ingestão, busca e acompanhamento."
+            "description": "Backend de autenticação, APIs e gateways WebSocket com processamento concorrente e serviços de infraestrutura."
           },
           {
-            "name": "React + TypeScript + Vite",
-            "description": "SPA responsiva para pesquisa pública, filtros, detalhes, cadastro, recomendações, notificações, pipeline e configuração da empresa."
+            "name": "React 19 + TypeScript + Vite",
+            "description": "Frontend tipado para autenticação, conversas, canais, presença, mensagens e reconexão."
           },
           {
-            "name": "PostgreSQL",
-            "description": "Fonte de verdade para usuários, empresas, contratações, itens, documentos, histórico e filas, além do motor de Full Text Search e índices de similaridade."
+            "name": "WebSockets",
+            "description": "Canal bidirecional para mensagens, typing, presença, acknowledgements e retomada de sessão em tempo real."
           },
           {
-            "name": "Entity Framework Core + Npgsql",
-            "description": "Mapeamento do domínio, migrations, persistência transacional e integração da aplicação .NET com PostgreSQL."
+            "name": "PostgreSQL 17",
+            "description": "Fonte de verdade para usuários, salas, mensagens, leitura, anexos, sequências e transactional outbox."
           },
           {
-            "name": "PNCP",
-            "description": "Fonte governamental principal para descoberta e detalhamento de contratações, itens, documentos e links oficiais."
+            "name": "Redis",
+            "description": "Estado distribuído de presença compartilhado entre instâncias do gateway."
           },
           {
-            "name": "Compras.gov.br",
-            "description": "Integração pública complementar utilizada na estratégia de cobertura de contratações governamentais."
+            "name": "NATS JetStream",
+            "description": "Barramento durável para eventos de mensagem que precisam sobreviver a falhas temporárias de consumidores."
           },
           {
-            "name": "PostgreSQL FTS + pg_trgm + unaccent",
-            "description": "Recursos de busca textual, similaridade e normalização usados em conjunto com o motor contextual do Radar."
+            "name": "Core NATS",
+            "description": "Fan-out de eventos efêmeros de baixa latência que não precisam ser persistidos."
           },
           {
-            "name": "PdfPig",
-            "description": "Extração local de texto de PDFs digitais para apoiar leitura estruturada, requisitos e versionamento documental."
+            "name": "Nginx",
+            "description": "Balanceamento das requisições HTTP e upgrades WebSocket entre os gateways."
           },
           {
-            "name": "ASP.NET Core Identity",
-            "description": "Infraestrutura local de hash de senha, sessão por cookie e identidade dos usuários armazenados no próprio banco da aplicação."
+            "name": "OpenTelemetry",
+            "description": "Instrumentação unificada de métricas e traces do backend e dos principais fluxos de mensageria."
           },
           {
-            "name": "Docker Compose",
-            "description": "Ambiente reproduzível com aplicação e PostgreSQL, incluindo build do frontend, migrations e inicialização dos serviços internos."
+            "name": "Prometheus + Grafana",
+            "description": "Coleta, consulta e visualização operacional de métricas como conexões, mensagens, replay, rate limiting e latência de persistência."
+          },
+          {
+            "name": "Jaeger",
+            "description": "Análise de traces distribuídos para localizar gargalos e entender o percurso de uma operação entre componentes."
+          },
+          {
+            "name": "xUnit + k6",
+            "description": "Testes automatizados do backend e cenários de carga/fluxo real incluindo WebSocket e persistência."
+          },
+          {
+            "name": "Docker Compose + GitHub Actions",
+            "description": "Stack reproduzível e pipeline de validação integrada do backend, frontend e infraestrutura."
           }
         ],
         "pricing": []

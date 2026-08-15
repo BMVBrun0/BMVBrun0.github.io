@@ -43,6 +43,21 @@ assets/languages/es.json
 
 Os arquivos de imagem e documentos ficam em `assets/img` e `assets/docs`. Depois de adicionar um asset, use o caminho relativo correspondente na configuração ou no arquivo de idioma.
 
+
+### Convenção de imagens dos projetos
+
+As capas de marketing ficam diretamente em `assets/img/portfolio` usando o slug do produto, por exemplo `media_forge.png` e `pocket_links.png`.
+
+As imagens internas de galeria ficam em uma pasta com o mesmo slug e seguem numeração com dois dígitos:
+
+```text
+assets/img/portfolio/pocket_links/pocket_links_01.png
+assets/img/portfolio/pocket_links/pocket_links_02.png
+assets/img/portfolio/pocket_links/pocket_links_03.jpeg
+```
+
+A mesma regra vale para todos os projetos com galeria: `<slug>/<slug>_NN.ext`.
+
 ### Ativar ou ocultar blocos
 
 Em `assets/js/data.js`, altere as flags de `features`:
