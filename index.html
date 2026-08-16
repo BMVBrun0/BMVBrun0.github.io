@@ -14,6 +14,79 @@
   <link rel="preload" href="assets/css/main.css" as="style">
   <link rel="stylesheet" href="assets/css/main.css">
 
+  <!-- Crédito permanente do template: mantido fora dos arquivos de configuração editáveis. -->
+  <style>
+    .site-footer .footer-shell {
+      flex-wrap: wrap !important;
+    }
+
+    .bm-template-credit {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 12px !important;
+      flex-wrap: wrap !important;
+      width: 100% !important;
+      flex: 1 0 100% !important;
+      margin-top: 16px !important;
+      padding-top: 14px !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+      font-size: 0.92rem !important;
+      line-height: 1.4 !important;
+      opacity: 0.86 !important;
+    }
+
+    .bm-template-credit__logo {
+      display: block !important;
+      width: auto !important;
+      height: 34px !important;
+      max-width: 116px !important;
+      object-fit: contain !important;
+      flex: 0 0 auto !important;
+    }
+
+    .bm-template-credit__text {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .bm-template-credit__name,
+    .bm-template-credit__email {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+
+    .bm-template-credit__name {
+      font-weight: 700 !important;
+    }
+
+    .bm-template-credit__email:hover,
+    .bm-template-credit__email:focus-visible {
+      text-decoration: underline !important;
+    }
+
+    @media (max-width: 640px) {
+      .bm-template-credit {
+        margin-top: 12px !important;
+        padding-top: 12px !important;
+        gap: 8px !important;
+        text-align: center !important;
+      }
+
+      .bm-template-credit__logo {
+        width: auto !important;
+        height: 30px !important;
+        max-width: 102px !important;
+      }
+
+      .bm-template-credit__text {
+        justify-content: center !important;
+      }
+    }
+  </style>
+
 </head>
 <body>
   <div id="topo" aria-hidden="true"></div>
@@ -291,6 +364,16 @@
     <div class="container footer-shell">
       <p id="footer-copy">© <span id="current-year"></span> Bruno Getten Triches. Todos os direitos reservados.</p>
       <a href="#topo" class="back-top" id="footer-back-top">Voltar ao topo</a>
+
+      <div class="bm-template-credit" id="bm-template-credit" aria-label="Crédito do template">
+        <img class="bm-template-credit__logo" src="assets/img/brand/logo-bm-white.png" alt="Logo BM">
+        <span class="bm-template-credit__text">
+          <span>Template por</span>
+          <strong class="bm-template-credit__name">Bruno Getten Triches</strong>
+          <span aria-hidden="true">·</span>
+          <a class="bm-template-credit__email" href="mailto:trichesbruno@gmail.com">trichesbruno@gmail.com</a>
+        </span>
+      </div>
     </div>
   </footer>
 
@@ -349,6 +432,37 @@
       </div>
     </div>
   </div>
+
+  <script>
+    (() => {
+      const CREDIT_ID = 'bm-template-credit';
+      const FOOTER_SELECTOR = '.site-footer .footer-shell';
+      const CREDIT_HTML = `
+        <div class="bm-template-credit" id="${CREDIT_ID}" aria-label="Crédito do template">
+          <img class="bm-template-credit__logo" src="assets/img/brand/logo-bm-white.png" alt="Logo BM">
+          <span class="bm-template-credit__text">
+            <span>Template por</span>
+            <strong class="bm-template-credit__name">Bruno Getten Triches</strong>
+            <span aria-hidden="true">·</span>
+            <a class="bm-template-credit__email" href="mailto:trichesbruno@gmail.com">trichesbruno@gmail.com</a>
+          </span>
+        </div>`;
+
+      const ensureTemplateCredit = () => {
+        const footer = document.querySelector(FOOTER_SELECTOR);
+        if (footer && !document.getElementById(CREDIT_ID)) {
+          footer.insertAdjacentHTML('beforeend', CREDIT_HTML);
+        }
+      };
+
+      ensureTemplateCredit();
+
+      const footer = document.querySelector(FOOTER_SELECTOR);
+      if (footer) {
+        new MutationObserver(ensureTemplateCredit).observe(footer, { childList: true });
+      }
+    })();
+  </script>
 
   <script src="assets/js/data.js"></script>
   <script src="assets/js/main.js"></script>
