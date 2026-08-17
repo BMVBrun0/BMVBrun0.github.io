@@ -96,6 +96,39 @@ https://SEU-USUARIO.github.io/
 
 Também é possível publicar a partir de um repositório com outro nome; nesse caso, o GitHub Pages usa uma URL de projeto que inclui o nome do repositório.
 
+## Analytics com GoatCounter
+
+Para acompanhar o número de acessos ao portfólio, é possível usar o [GoatCounter](https://www.goatcounter.com/). Crie uma conta e informe o domínio usado pelo GitHub Pages, sem `https://` e sem a barra final:
+
+```text
+SEU-USUARIO.github.io
+```
+
+Depois de criar a conta, adicione o código de rastreamento antes do fechamento de `</body>` no arquivo `index.html`:
+
+```html
+<script
+  data-goatcounter="https://SEU-CODIGO.goatcounter.com/count"
+  async
+  src="//gc.zgo.at/count.js">
+</script>
+```
+
+Substitua `SEU-CODIGO` pelo nome escolhido ao criar a conta no GoatCounter. Por exemplo, para uma conta disponível em `meuportfolio.goatcounter.com`, use:
+
+```html
+<script
+  data-goatcounter="https://meuportfolio.goatcounter.com/count"
+  async
+  src="//gc.zgo.at/count.js">
+</script>
+```
+
+Depois de enviar a alteração para o GitHub, os novos acessos ao site começarão a aparecer no painel do GoatCounter.
+
+O uso de analytics é opcional e não interfere no funcionamento do portfólio.
+
+
 ## Estrutura essencial
 
 ```text
