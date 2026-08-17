@@ -129,6 +129,34 @@ Depois de enviar a alteração para o GitHub, os novos acessos ao site começar�
 O uso de analytics é opcional e não interfere no funcionamento do portfólio.
 
 
+## Analytics com Google Analytics
+
+Para acompanhar os acessos ao portfólio, crie uma conta no [Google Analytics](https://analytics.google.com/) e adicione um fluxo da Web usando a URL publicada no GitHub Pages:
+
+```text
+https://SEU-USUARIO.github.io/
+```
+
+Na etapa **Configurar uma tag do Google**, escolha **Instalar manualmente** e copie o código fornecido pelo Google, semelhante a:
+
+```html
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+```
+
+Cole o código no arquivo `index.html`, logo após a abertura de `<head>`. O código fornecido pelo Google já vem com o identificador correto da propriedade.
+
+Depois, envie a alteração para o GitHub e aguarde a atualização do GitHub Pages. Os novos acessos começarão a aparecer no Google Analytics.
+
+O uso de analytics é opcional e não interfere no funcionamento do portfólio.
+
 ## Estrutura essencial
 
 ```text
