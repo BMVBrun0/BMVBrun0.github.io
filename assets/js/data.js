@@ -31,7 +31,9 @@ window.portfolioConfig = {
     services: 1,
     projects: 1,
     projectsCarousel: 1,
+    projectLinks: 0,
     certificates: 1,
+    education: 0,
     certificatesCarousel: 1,
     contact: 1,
     socialLinks: 1,
@@ -69,6 +71,20 @@ window.portfolioConfig = {
     { id: 'instagram', label: 'Instagram', icon: 'icon-instagram', url: 'https://www.instagram.com/bruno_getten' },
     { id: 'whatsapp', label: 'WhatsApp', icon: 'icon-whatsapp', url: 'https://wa.me/5549988427624' }
   ],
+  // Links opcionais de acesso aos projetos.
+  // A chave é o nome do arquivo de capa sem extensão (ex.: pocket_links.png -> pocket_links).
+  // Mantenha enabled: 0 ou url vazio para não exibir o botão.
+  projectLinks: {
+    whitelabel_booking: { enabled: 0, url: '' },
+    xtreme_fut: { enabled: 0, url: '' },
+    accessibility_plugin: { enabled: 0, url: '' },
+    truco_game: { enabled: 0, url: '' },
+    radar_publico: { enabled: 0, url: '' },
+    support_circle: { enabled: 0, url: '' },
+    media_forge: { enabled: 0, url: '' },
+    pocket_links: { enabled: 0, url: '' },
+    realtime_messaging: { enabled: 0, url: '' }
+  },
   // A imagem de capa de cada projeto continua definida nos arquivos de idioma.
   // Adicione aqui somente as imagens extras da galeria; a capa entra automaticamente como a primeira imagem.
   // Dessa forma, novos prints são cadastrados uma única vez e aparecem em todos os idiomas.

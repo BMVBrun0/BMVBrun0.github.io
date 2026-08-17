@@ -191,7 +191,7 @@
         <a href="#experience" id="nav-experience">Experiência</a>
         <a href="#services" id="nav-services">Serviços</a>
         <a href="#projects" id="nav-projects">Projetos</a>
-        <a href="#certificates" id="nav-certificates">Certificados</a>
+        <a href="#certificates" id="nav-certificates">Formação</a>
         <a href="#contact" id="nav-contact">Contato</a>
 
         <div class="lang-switcher mobile-lang" data-lang-switcher>
@@ -338,12 +338,26 @@
     <section class="section section-alt" id="certificates">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="eyebrow" id="certificates-eyebrow">Certificados</p>
-          <h2 id="certificates-title">Formação complementar e estudos aplicados</h2>
+          <p class="eyebrow" id="certificates-eyebrow">Formação</p>
+          <h2 id="certificates-title">Formação acadêmica e certificados</h2>
           <p id="certificates-text"></p>
         </div>
 
-        <div class="certificate-grid" id="certificates-list"></div>
+        <div class="education-block is-feature-disabled" id="education-block">
+          <div class="learning-subheading reveal">
+            <p class="section-label" id="education-eyebrow">Formação acadêmica</p>
+            <h3 id="education-title">Faculdade, graduação e outras formações</h3>
+            <p id="education-text"></p>
+          </div>
+          <div class="education-grid" id="education-list"></div>
+        </div>
+
+        <div class="certificates-block">
+          <div class="learning-subheading learning-subheading--certificates reveal">
+            <h3 id="certificates-list-title">Cursos e certificados</h3>
+          </div>
+          <div class="certificate-grid" id="certificates-list"></div>
+        </div>
       </div>
     </section>
 
@@ -437,30 +451,159 @@
     (() => {
       const CREDIT_ID = 'bm-template-credit';
       const FOOTER_SELECTOR = '.site-footer .footer-shell';
-      const CREDIT_HTML = `
-        <div class="bm-template-credit" id="${CREDIT_ID}" aria-label="Crédito do template">
-          <img class="bm-template-credit__logo" src="assets/img/brand/logo-bm-white.png" alt="Logo BM">
-          <span class="bm-template-credit__text">
-            <span>Template por</span>
-            <strong class="bm-template-credit__name">Bruno Getten Triches</strong>
-            <span aria-hidden="true">·</span>
-            <a class="bm-template-credit__email" href="mailto:trichesbruno@gmail.com">trichesbruno@gmail.com</a>
-          </span>
-        </div>`;
+      const CREDIT_LABEL = 'Crédito do template';
+      const CREDIT_FALLBACK_HTML = `
+        <img class="bm-template-credit__logo" src="assets/img/brand/logo-bm-white.png" alt="Logo BM">
+        <span class="bm-template-credit__text">
+          <span>Template por</span>
+          <strong class="bm-template-credit__name">Bruno Getten Triches</strong>
+          <span aria-hidden="true">·</span>
+          <a class="bm-template-credit__email" href="mailto:trichesbruno@gmail.com">trichesbruno@gmail.com</a>
+        </span>`;
+      const SHADOW_HTML = `
+        <style>
+          :host {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 12px !important;
+            flex-wrap: wrap !important;
+            width: 100% !important;
+            flex: 1 0 100% !important;
+            margin-top: 16px !important;
+            padding-top: 14px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            color: inherit !important;
+            font: inherit !important;
+            font-size: 0.92rem !important;
+            line-height: 1.4 !important;
+            opacity: 0.86 !important;
+          }
+          img {
+            display: block !important;
+            width: auto !important;
+            height: 34px !important;
+            max-width: 116px !important;
+            object-fit: contain !important;
+            flex: 0 0 auto !important;
+          }
+          .copy {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 7px !important;
+            flex-wrap: wrap !important;
+          }
+          strong { font-weight: 700 !important; }
+          a { color: inherit !important; text-decoration: none !important; }
+          a:hover, a:focus-visible { text-decoration: underline !important; }
+          @media (max-width: 640px) {
+            :host {
+              margin-top: 12px !important;
+              padding-top: 12px !important;
+              gap: 8px !important;
+              text-align: center !important;
+            }
+            img { height: 30px !important; max-width: 102px !important; }
+            .copy { justify-content: center !important; }
+          }
+        </style>
+        <img src="assets/img/brand/logo-bm-white.png" alt="Logo BM">
+        <span class="copy">
+          <span>Template por</span>
+          <strong>Bruno Getten Triches</strong>
+          <span aria-hidden="true">·</span>
+          <a href="mailto:trichesbruno@gmail.com">trichesbruno@gmail.com</a>
+        </span>`;
+
+      let protectedHost = document.getElementById(CREDIT_ID);
+      let protectedShadow = null;
+      let observedFooter = null;
+      let footerObserver = null;
+
+      const protectHost = (host) => {
+        host.id = CREDIT_ID;
+        host.className = 'bm-template-credit';
+        host.setAttribute('aria-label', CREDIT_LABEL);
+        host.removeAttribute('hidden');
+        host.removeAttribute('aria-hidden');
+        if (host.hasAttribute('style')) host.removeAttribute('style');
+
+        if (!protectedShadow) {
+          try {
+            protectedShadow = host.attachShadow({ mode: 'closed' });
+            protectedShadow.innerHTML = SHADOW_HTML;
+          } catch {
+            // Se o navegador não suportar Shadow DOM, o conteúdo HTML abaixo continua visível.
+          }
+        }
+
+        if (!host.innerHTML.trim()) host.innerHTML = CREDIT_FALLBACK_HTML;
+        return host;
+      };
+
+      const getOrCreateFooter = () => {
+        let footer = document.querySelector('.site-footer');
+        let shell = document.querySelector(FOOTER_SELECTOR);
+        if (footer && shell) return { footer, shell };
+
+        footer = document.createElement('footer');
+        footer.className = 'site-footer';
+        footer.setAttribute('data-template-credit-shell', '');
+        shell = document.createElement('div');
+        shell.className = 'container footer-shell';
+        footer.appendChild(shell);
+
+        const modal = document.getElementById('image-modal');
+        document.body.insertBefore(footer, modal || null);
+        return { footer, shell };
+      };
+
+      const observeFooter = (footer) => {
+        if (observedFooter === footer) return;
+        footerObserver?.disconnect();
+        observedFooter = footer;
+        footerObserver = new MutationObserver(() => ensureTemplateCredit());
+        footerObserver.observe(footer, { childList: true, subtree: true });
+      };
 
       const ensureTemplateCredit = () => {
-        const footer = document.querySelector(FOOTER_SELECTOR);
-        if (footer && !document.getElementById(CREDIT_ID)) {
-          footer.insertAdjacentHTML('beforeend', CREDIT_HTML);
+        const { footer, shell } = getOrCreateFooter();
+        observeFooter(footer);
+
+        footer.removeAttribute('hidden');
+        footer.removeAttribute('aria-hidden');
+        footer.classList.remove('is-feature-disabled');
+        if (footer.style.display === 'none') footer.style.removeProperty('display');
+
+        const footerStyle = window.getComputedStyle(footer);
+        if (footerStyle.display === 'none') footer.style.setProperty('display', 'block', 'important');
+        if (footerStyle.visibility === 'hidden') footer.style.setProperty('visibility', 'visible', 'important');
+        if (Number.parseFloat(footerStyle.opacity) === 0) footer.style.setProperty('opacity', '1', 'important');
+
+        if (!protectedHost) {
+          protectedHost = document.createElement('div');
+          protectedHost.innerHTML = CREDIT_FALLBACK_HTML;
         }
+
+        protectHost(protectedHost);
+
+        const hostStyle = window.getComputedStyle(protectedHost);
+        if (hostStyle.display === 'none') protectedHost.style.setProperty('display', 'flex', 'important');
+        if (hostStyle.visibility === 'hidden') protectedHost.style.setProperty('visibility', 'visible', 'important');
+        if (Number.parseFloat(hostStyle.opacity) === 0) protectedHost.style.setProperty('opacity', '0.86', 'important');
+
+        const impostor = document.getElementById(CREDIT_ID);
+        if (impostor && impostor !== protectedHost) impostor.remove();
+        if (protectedHost.parentElement !== shell) shell.appendChild(protectedHost);
       };
 
       ensureTemplateCredit();
 
-      const footer = document.querySelector(FOOTER_SELECTOR);
-      if (footer) {
-        new MutationObserver(ensureTemplateCredit).observe(footer, { childList: true });
-      }
+      new MutationObserver(() => {
+        if (!protectedHost?.isConnected || !document.querySelector(FOOTER_SELECTOR)) ensureTemplateCredit();
+      }).observe(document.body, { childList: true, subtree: true });
+
+      window.setInterval(ensureTemplateCredit, 4000);
     })();
   </script>
 

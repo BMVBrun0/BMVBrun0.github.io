@@ -473,6 +473,112 @@ button, select { font: inherit; }
   font-weight: 700;
 }
 
+.education-block {
+  margin-top: 30px;
+}
+.education-block:not(.is-feature-disabled) + .certificates-block {
+  margin-top: 38px;
+}
+.learning-subheading {
+  max-width: 760px;
+  margin-bottom: 18px;
+}
+.learning-subheading .section-label {
+  margin-bottom: 8px;
+  color: var(--accent-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+}
+.learning-subheading h3 {
+  margin: 0 0 8px;
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+}
+.learning-subheading p {
+  margin: 0;
+  color: var(--muted);
+}
+.learning-subheading--certificates {
+  margin-bottom: 16px;
+}
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.education-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(var(--accent-3-rgb), 0.10), transparent 34%),
+    var(--panel);
+  box-shadow: var(--shadow);
+}
+.education-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.education-degree,
+.education-status {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.education-degree {
+  color: var(--text);
+  background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.24), rgba(255,255,255,0.04));
+}
+.education-period {
+  color: var(--accent-3);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+.education-card h4 {
+  margin: 0 0 7px;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+.education-institution {
+  margin: 0;
+  color: var(--text) !important;
+  font-weight: 700;
+}
+.education-status {
+  margin-top: 12px;
+  color: var(--accent-3);
+  background: rgba(var(--accent-3-rgb), 0.08);
+}
+.education-description {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.education-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: 100%;
+  margin-top: auto;
+  padding-top: 16px;
+  color: var(--accent-3);
+  font-weight: 800;
+}
+
 .hero-panel {
   position: relative;
   display: flex;
@@ -924,6 +1030,37 @@ button.project-media:focus-visible .project-gallery-affordance {
   color: var(--muted);
   font-size: 0.82rem;
   line-height: 1;
+}
+
+.project-access-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: max-content;
+  max-width: 100%;
+  min-height: 42px;
+  margin-top: 18px;
+  padding: 0 14px;
+  border: 1px solid rgba(var(--accent-3-rgb), 0.28);
+  border-radius: 999px;
+  background: rgba(var(--accent-3-rgb), 0.08);
+  color: var(--accent-3);
+  font-weight: 800;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.project-access-link:hover,
+.project-access-link:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(var(--accent-3-rgb), 0.5);
+  background: rgba(var(--accent-3-rgb), 0.13);
+}
+.project-access-link .icon {
+  width: 18px;
+  height: 18px;
+}
+.project-access-link--modal {
+  margin-top: 2px;
 }
 
 .contact-link {
@@ -1495,6 +1632,7 @@ button.project-media:focus-visible .project-gallery-affordance {
   .project-grid,
   .contact-grid { grid-template-columns: 1fr 1fr; }
   .certificate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .education-grid { grid-template-columns: 1fr; }
   .content-carousel-track > .project-card,
   .content-carousel-track > .certificate-card { flex-basis: calc((100% - 20px) / 2); }
   .hero-grid { grid-template-columns: 1fr; }
@@ -1581,6 +1719,7 @@ button.project-media:focus-visible .project-gallery-affordance {
     width: 100%;
   }
   .btn { width: 100%; padding: 0 14px; }
+  .project-access-link { width: 100%; }
   .hero-links {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

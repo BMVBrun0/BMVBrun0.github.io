@@ -35,7 +35,8 @@ const featureTargets = {
   projects: ['#projects', '#nav-projects'],
   certificates: ['#certificates', '#nav-certificates'],
   contact: ['#contact', '#nav-contact'],
-  footer: ['.site-footer']
+  // O crédito do template é permanente; esta flag controla apenas o conteúdo personalizável do rodapé.
+  footer: ['#footer-copy', '#footer-back-top']
 };
 
 function isFeatureEnabled(name) {
@@ -144,6 +145,62 @@ function applyFeatureVisibility() {
 
 function replacePlaceholders(template, values = {}) {
   return String(template).replace(/\{(\w+)\}/g, (_, key) => values[key] ?? '');
+}
+
+function getProjectConfigKey(project) {
+  if (project?.id) return String(project.id).trim();
+  const image = String(project?.image || '').split('/').pop() || '';
+  return image.replace(/\.[^.]+$/, '');
+}
+
+function normalizeHttpUrl(value) {
+  const rawUrl = String(value || '').trim();
+  if (!rawUrl) return null;
+
+  try {
+    const url = new URL(rawUrl, window.location.href);
+    return ['http:', 'https:'].includes(url.protocol) ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function getProjectAccessLink(project) {
+  if (!isFeatureEnabled('projectLinks')) return null;
+
+  const key = getProjectConfigKey(project);
+  const linkConfig = key ? config.projectLinks?.[key] : null;
+  if (!linkConfig || linkConfig.enabled === 0 || linkConfig.enabled === false) return null;
+
+  const url = normalizeHttpUrl(linkConfig.url);
+  return url ? { key, url } : null;
+}
+
+function escapeAttribute(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function renderProjectAccessLink(project, className = 'project-access-link') {
+  const access = getProjectAccessLink(project);
+  if (!access) return '';
+
+  const label = state.data.projectsSection.accessCta;
+  const ariaLabel = replacePlaceholders(state.data.projectsSection.accessAriaLabel, { title: project.title });
+  return `
+    <a
+      class="${className}"
+      href="${escapeAttribute(access.url)}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="${escapeAttribute(ariaLabel)}">
+      <span>${label}</span>
+      <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
+    </a>
+  `;
 }
 
 function detectLocale() {
@@ -271,6 +328,10 @@ function renderStaticText() {
   qs('#certificates-eyebrow').textContent = certificatesSection.eyebrow;
   qs('#certificates-title').textContent = certificatesSection.title;
   qs('#certificates-text').textContent = certificatesSection.text;
+  qs('#education-eyebrow').textContent = certificatesSection.educationEyebrow;
+  qs('#education-title').textContent = certificatesSection.educationTitle;
+  qs('#education-text').textContent = certificatesSection.educationText;
+  qs('#certificates-list-title').textContent = certificatesSection.certificatesListTitle;
 
   qs('#contact-eyebrow').textContent = contactSection.eyebrow;
   qs('#contact-title').textContent = contactSection.title;
@@ -742,6 +803,7 @@ function renderProjectCard(project) {
             ${project.stack.map((item) => `<li>${item}</li>`).join('')}
           </ul>
         ` : ''}
+        ${renderProjectAccessLink(project)}
       </div>
     </article>
   `;
@@ -779,6 +841,46 @@ function initProjectMediaFallbacks() {
   });
 }
 
+
+
+function renderEducationCard(item) {
+  const status = item.status ? `<span class="education-status">${item.status}</span>` : '';
+  const educationUrl = normalizeHttpUrl(item.url);
+  const credentialLink = educationUrl ? `
+    <a class="education-link" href="${escapeAttribute(educationUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeAttribute(replacePlaceholders(state.data.certificatesSection.educationLinkAriaLabel, { title: item.course }))}">
+      <span>${state.data.certificatesSection.educationLinkCta}</span>
+      <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
+    </a>
+  ` : '';
+
+  return `
+    <article class="education-card reveal">
+      <div class="education-card-top">
+        <span class="education-degree">${item.degree || state.data.certificatesSection.educationDefaultDegree}</span>
+        <span class="education-period">${item.period || ''}</span>
+      </div>
+      <h4>${item.course || ''}</h4>
+      <p class="education-institution">${item.institution || ''}</p>
+      ${status}
+      ${item.description ? `<p class="education-description">${item.description}</p>` : ''}
+      ${credentialLink}
+    </article>
+  `;
+}
+
+function renderEducation() {
+  const block = qs('#education-block');
+  const root = qs('#education-list');
+  if (!block || !root) return;
+
+  const items = Array.isArray(state.data.education)
+    ? state.data.education.filter((item) => item && item.enabled !== 0 && item.enabled !== false)
+    : [];
+  const enabled = isFeatureEnabled('education') && items.length > 0;
+
+  block.classList.toggle('is-feature-disabled', !enabled);
+  root.innerHTML = enabled ? items.map(renderEducationCard).join('') : '';
+}
 
 function renderCertificateCard(item, index) {
   return `
@@ -1121,6 +1223,7 @@ function renderProjectOverview(project) {
           </ul>
         </div>
       ` : ''}
+      ${renderProjectAccessLink(project, 'project-access-link project-access-link--modal')}
     </section>
   `;
 }
@@ -1570,6 +1673,7 @@ async function applyLocale(locale) {
   renderServices();
   renderFilters();
   renderProjects();
+  renderEducation();
   renderCertificates();
   renderContacts();
   initRoleRotation();

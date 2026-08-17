@@ -22,7 +22,7 @@
     "services": "Serviços",
     "projects": "Projetos",
     "contact": "Contato",
-    "certificates": "Certificados"
+    "certificates": "Formação"
   },
   "hero": {
     "eyebrow": "Tech Lead · Software Engineer",
@@ -187,7 +187,9 @@
     "detailsCta": "Ver detalhes",
     "detailsAriaLabel": "Abrir detalhes do projeto {title}. {countLabel}.",
     "sectionCountSingle": "1 seção disponível",
-    "sectionCountMultiple": "{count} seções disponíveis"
+    "sectionCountMultiple": "{count} seções disponíveis",
+    "accessCta": "Acessar projeto",
+    "accessAriaLabel": "Abrir acesso do projeto {title}"
   },
   "categories": [
     {
@@ -1265,10 +1267,22 @@
     "technologiesTitle": "Tecnologias utilizadas",
     "pricingTitle": "Preços e planos"
   },
+  "education": [
+    {
+      "enabled": 0,
+      "institution": "Nome da instituição",
+      "course": "Nome do curso",
+      "degree": "Graduação",
+      "period": "2022 — 2026",
+      "status": "Concluído",
+      "description": "Breve descrição da formação, área de estudo ou principais aprendizados.",
+      "url": ""
+    }
+  ],
   "certificatesSection": {
-    "eyebrow": "Certificados",
-    "title": "Certificados e formação complementar",
-    "text": "Uma seleção dos cursos mais relevantes em backend, mobile, jogos, arquitetura e fundamentos que reforçam minha atuação prática em projetos reais.",
+    "eyebrow": "Formação",
+    "title": "Formação acadêmica e certificados",
+    "text": "Graduação, cursos e certificações que complementam a experiência prática e registram minha evolução técnica contínua.",
     "tagsAriaLabel": "Tecnologias e temas do certificado",
     "providerBadgeLabel": "Instituição",
     "credentialCta": "Ver certificado",
@@ -1276,7 +1290,14 @@
     "imageAlt": "Imagem ilustrativa do certificado {title}",
     "showMore": "Ver mais",
     "showLess": "Mostrar menos",
-    "descriptionToggleAria": "Alternar descrição do certificado {title}"
+    "descriptionToggleAria": "Alternar descrição do certificado {title}",
+    "educationEyebrow": "Formação acadêmica",
+    "educationTitle": "Faculdade, graduação e outras formações",
+    "educationText": "Graduação e outras formações que compõem minha base acadêmica e profissional.",
+    "certificatesListTitle": "Cursos e certificados",
+    "educationDefaultDegree": "Formação",
+    "educationLinkCta": "Ver formação",
+    "educationLinkAriaLabel": "Abrir referência da formação {title}"
   },
   "certificates": [
     {

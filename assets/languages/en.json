@@ -22,7 +22,7 @@
     "services": "Services",
     "projects": "Projects",
     "contact": "Contact",
-    "certificates": "Certificates"
+    "certificates": "Education"
   },
   "hero": {
     "eyebrow": "Tech Lead · Software Engineer",
@@ -187,7 +187,9 @@
     "detailsCta": "View details",
     "detailsAriaLabel": "Open details for project {title}. {countLabel}.",
     "sectionCountSingle": "1 section available",
-    "sectionCountMultiple": "{count} sections available"
+    "sectionCountMultiple": "{count} sections available",
+    "accessCta": "Open project",
+    "accessAriaLabel": "Open the live project {title}"
   },
   "categories": [
     {
@@ -1265,10 +1267,22 @@
     "technologiesTitle": "Technologies used",
     "pricingTitle": "Pricing and plans"
   },
+  "education": [
+    {
+      "enabled": 0,
+      "institution": "Institution name",
+      "course": "Course or degree name",
+      "degree": "Degree",
+      "period": "2022 — 2026",
+      "status": "Completed",
+      "description": "Short description of the program, field of study or key learning areas.",
+      "url": ""
+    }
+  ],
   "certificatesSection": {
-    "eyebrow": "Certificates",
-    "title": "Certificates and continuing education",
-    "text": "A curated selection of the most relevant courses in backend, mobile, games, architecture and software fundamentals that reinforce my hands-on work on real products.",
+    "eyebrow": "Education",
+    "title": "Academic education and certificates",
+    "text": "Degrees, courses and certifications that complement hands-on experience and document my continuous technical development.",
     "tagsAriaLabel": "Certificate topics and technologies",
     "providerBadgeLabel": "Provider",
     "credentialCta": "View certificate",
@@ -1276,7 +1290,14 @@
     "imageAlt": "Illustrative image for certificate {title}",
     "showMore": "Show more",
     "showLess": "Show less",
-    "descriptionToggleAria": "Toggle certificate description for {title}"
+    "descriptionToggleAria": "Toggle certificate description for {title}",
+    "educationEyebrow": "Academic education",
+    "educationTitle": "College, degrees and other education",
+    "educationText": "Degrees and other education that form the academic and professional foundation of my work.",
+    "certificatesListTitle": "Courses and certificates",
+    "educationDefaultDegree": "Education",
+    "educationLinkCta": "View education",
+    "educationLinkAriaLabel": "Open reference for education {title}"
   },
   "certificates": [
     {

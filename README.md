@@ -27,13 +27,14 @@ A configuração principal fica em `assets/js/data.js`:
 - `profile`: nome exibido no portfólio;
 - `branding`: logo, favicon, imagem social e foto da seção Sobre;
 - `theme.colors`: cores principais do tema;
-- `features`: ativa ou desativa seções com `1` ou `0`;
+- `features`: ativa ou desativa seções e recursos com `1` ou `0`;
+- `projectLinks`: links opcionais de acesso aos projetos;
 - `carousel`: autoplay e intervalo dos carrosséis;
 - `cvByLocale`: PDFs do currículo;
 - `contactLinks` e `socialLinks`: links pessoais;
 - `projectGalleries`: imagens extras dos projetos.
 
-Os textos, projetos, certificados e traduções ficam em:
+Os textos, projetos, formação acadêmica, certificados e traduções ficam em:
 
 ```text
 assets/languages/pt-BR.json
@@ -43,6 +44,50 @@ assets/languages/es.json
 
 Os arquivos de imagem e documentos ficam em `assets/img` e `assets/docs`. Depois de adicionar um asset, use o caminho relativo correspondente na configuração ou no arquivo de idioma.
 
+
+### Links de acesso dos projetos
+
+Os botões de acesso são controlados em `assets/js/data.js`. A flag global `features.projectLinks` ativa ou desativa o recurso inteiro. Cada projeto também possui sua própria flag `enabled`.
+
+A chave usada em `projectLinks` é o nome do arquivo da capa sem a extensão. Por exemplo, `assets/img/portfolio/pocket_links.png` usa a chave `pocket_links`:
+
+```js
+features: {
+  projectLinks: 1
+},
+
+projectLinks: {
+  pocket_links: {
+    enabled: 1,
+    url: 'https://seu-projeto.com'
+  }
+}
+```
+
+Com `enabled: 0`, URL vazia ou `features.projectLinks: 0`, o botão não é exibido. Por segurança, os botões aceitam somente URLs HTTP/HTTPS. Quando ativo, o link aparece no card e também nos detalhes do projeto.
+
+### Formação acadêmica
+
+A formação acadêmica aparece na mesma área dos certificados. O recurso é controlado por `features.education` em `assets/js/data.js`, e os dados ficam no array `education` de cada arquivo de idioma.
+
+O template já inclui um item-modelo desativado. Edite os dados e troque `enabled` para `1`:
+
+```json
+"education": [
+  {
+    "enabled": 1,
+    "institution": "Nome da faculdade",
+    "course": "Nome do curso",
+    "degree": "Bacharelado",
+    "period": "2022 — 2026",
+    "status": "Concluído",
+    "description": "Breve descrição da formação.",
+    "url": "https://site-da-instituicao.com"
+  }
+]
+```
+
+O campo `url` é opcional. Para manter os idiomas sincronizados, cadastre a mesma formação em `pt-BR.json`, `en.json` e `es.json`, traduzindo somente os textos.
 
 ### Convenção de imagens dos projetos
 
@@ -67,7 +112,9 @@ features: {
   about: 1,
   services: 1,
   projects: 1,
+  projectLinks: 1,
   certificates: 1,
+  education: 1,
   contact: 1,
   projectsCarousel: 0,
   certificatesCarousel: 0
@@ -77,6 +124,12 @@ features: {
 `0` oculta/desativa. `1` exibe/ativa. Por exemplo, `contact: 0` remove a área de contato e seu acesso no menu; `socialLinks: 0` oculta os links sociais.
 
 Com `projectsCarousel: 1` ou `certificatesCarousel: 1`, a grade correspondente vira um carrossel automático: 3 cards por vez no desktop, 2 em telas intermediárias e 1 no mobile.
+
+## Crédito do template
+
+O crédito “Template por Bruno Getten Triches” foi mantido propositalmente fora de `data.js` e recebeu uma camada adicional de proteção no navegador: o conteúdo é renderizado em **Shadow DOM fechado** e um verificador restaura o bloco caso ele seja removido ou substituído durante a execução da página. A flag `features.footer` controla somente o copyright e o botão de voltar ao topo; ela não remove o crédito do template.
+
+Como este é um projeto HTML/CSS/JavaScript estático e distribuído com o código-fonte, nenhuma proteção no frontend pode impedir de forma absoluta que alguém com acesso aos arquivos edite ou apague o código responsável pelo crédito. A proteção serve para evitar remoções acidentais e tornar alterações casuais mais trabalhosas, sem introduzir backend, build ou dependências extras.
 
 ## Publicar no GitHub Pages
 
