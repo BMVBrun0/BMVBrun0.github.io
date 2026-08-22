@@ -41,7 +41,7 @@ window.portfolioConfig = {
   },
   carousel: {
     autoplay: 1,
-    intervalMs: 5000
+    intervalMs: 10000
   },
   locales: ['pt-BR', 'en', 'es'],
   defaultLocale: 'pt-BR',

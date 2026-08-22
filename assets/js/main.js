@@ -21,7 +21,8 @@ const state = {
     activeTab: null,
     lastTrigger: null,
     pointerStartX: null,
-    isZoomed: false
+    isFullscreen: false,
+    imageRequestId: 0
   }
 };
 
@@ -344,11 +345,9 @@ function renderStaticText() {
   closeButton.setAttribute('aria-label', state.data.modal.closeLabel);
   qs('#image-modal-prev').setAttribute('aria-label', state.data.modal.previousLabel);
   qs('#image-modal-next').setAttribute('aria-label', state.data.modal.nextLabel);
-  const zoomButton = qs('#image-modal-zoom');
-  if (zoomButton) {
-    const zoomLabel = state.gallery.isZoomed ? state.data.modal.zoomOutLabel : state.data.modal.zoomInLabel;
-    zoomButton.setAttribute('aria-label', zoomLabel);
-    zoomButton.setAttribute('title', zoomLabel);
+  const fullscreenButton = qs('#image-modal-fullscreen');
+  if (fullscreenButton) {
+    updateGalleryFullscreenButton();
   }
   qs('#image-modal-kicker').textContent = state.data.modal.kicker;
   qs('#image-modal-title').textContent = state.data.modal.title;
@@ -1056,6 +1055,8 @@ function setCurrentYear() {
 }
 
 
+const galleryImagePreloadCache = new Map();
+
 function clearGalleryImageSizing() {
   const modalImage = qs('#image-modal-image');
   if (!modalImage) return;
@@ -1066,28 +1067,30 @@ function clearGalleryImageSizing() {
   modalImage.style.removeProperty('max-height');
 }
 
-function fitGalleryImageToStage() {
-  const modal = qs('#image-modal');
+function getGalleryStageAvailableSize() {
   const stage = qs('.image-modal-stage');
-  const modalImage = qs('#image-modal-image');
-
-  if (!modal?.classList.contains('is-open') || !stage || !modalImage) return;
-  if (state.gallery.isZoomed || modalImage.hidden || !modalImage.complete || !modalImage.naturalWidth || !modalImage.naturalHeight) return;
-
-  if (window.innerWidth <= 920) {
-    clearGalleryImageSizing();
-    return;
-  }
+  if (!stage) return null;
 
   const style = window.getComputedStyle(stage);
   const horizontalPadding = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
   const verticalPadding = (parseFloat(style.paddingTop) || 0) + (parseFloat(style.paddingBottom) || 0);
-  const availableWidth = Math.max(1, stage.clientWidth - horizontalPadding - 4);
-  const availableHeight = Math.max(1, stage.clientHeight - verticalPadding - 4);
 
-  const naturalWidth = modalImage.naturalWidth;
-  const naturalHeight = modalImage.naturalHeight;
-  const containScale = Math.min(availableWidth / naturalWidth, availableHeight / naturalHeight, 1);
+  return {
+    width: Math.max(1, stage.clientWidth - horizontalPadding - 4),
+    height: Math.max(1, stage.clientHeight - verticalPadding - 4)
+  };
+}
+
+function applyGalleryImageSizing(naturalWidth, naturalHeight) {
+  const modalImage = qs('#image-modal-image');
+  const available = getGalleryStageAvailableSize();
+  if (!modalImage || !available || !naturalWidth || !naturalHeight) return;
+
+  const containScale = Math.min(
+    available.width / naturalWidth,
+    available.height / naturalHeight,
+    1
+  );
   const fittedWidth = Math.max(1, Math.floor(naturalWidth * containScale));
   const fittedHeight = Math.max(1, Math.floor(naturalHeight * containScale));
 
@@ -1097,65 +1100,159 @@ function fitGalleryImageToStage() {
   modalImage.style.maxHeight = 'none';
 }
 
-function setGalleryZoom(enabled, { center = true } = {}) {
-  const stage = qs('.image-modal-stage');
-  const modalImage = qs('#image-modal-image');
-  const zoomButton = qs('#image-modal-zoom');
-  if (!stage || !modalImage || !zoomButton) return;
-
-  const canZoom = !modalImage.hidden && modalImage.complete && modalImage.naturalWidth > 0;
-  state.gallery.isZoomed = Boolean(enabled && canZoom);
-
-  stage.classList.toggle('is-zoomed', state.gallery.isZoomed);
-  zoomButton.classList.toggle('is-active', state.gallery.isZoomed);
-  zoomButton.setAttribute('aria-pressed', String(state.gallery.isZoomed));
-
-  const zoomLabel = state.data
-    ? (state.gallery.isZoomed ? state.data.modal.zoomOutLabel : state.data.modal.zoomInLabel)
-    : '';
-  if (zoomLabel) {
-    zoomButton.setAttribute('aria-label', zoomLabel);
-    zoomButton.setAttribute('title', zoomLabel);
-  }
-
-  if (!state.gallery.isZoomed) {
-    clearGalleryImageSizing();
-    stage.scrollTop = 0;
-    stage.scrollLeft = 0;
-    fitGalleryImageToStage();
-    return;
-  }
-
-  const fittedRect = modalImage.getBoundingClientRect();
-  const naturalWidth = modalImage.naturalWidth || fittedRect.width;
-  const zoomWidth = Math.min(naturalWidth, Math.max(fittedRect.width * 1.65, fittedRect.width + 180));
-
-  modalImage.style.width = `${Math.round(zoomWidth)}px`;
-  modalImage.style.height = 'auto';
-  modalImage.style.maxWidth = 'none';
-  modalImage.style.maxHeight = 'none';
-
-  if (center) {
-    window.requestAnimationFrame(() => {
-      stage.scrollLeft = Math.max(0, (stage.scrollWidth - stage.clientWidth) / 2);
-      stage.scrollTop = Math.max(0, (stage.scrollHeight - stage.clientHeight) / 2);
-    });
-  }
-}
-
-function resetGalleryZoom() {
-  setGalleryZoom(false, { center: false });
-}
-
-function updateGalleryImageShape() {
+function fitGalleryImageToStage() {
   const modal = qs('#image-modal');
   const modalImage = qs('#image-modal-image');
-  if (!modal || !modalImage || !modalImage.naturalWidth || !modalImage.naturalHeight) return;
 
-  const ratio = modalImage.naturalWidth / modalImage.naturalHeight;
+  if (!modal?.classList.contains('is-open') || !modalImage) return;
+  if (modalImage.hidden || !modalImage.complete || !modalImage.naturalWidth || !modalImage.naturalHeight) return;
+
+  applyGalleryImageSizing(modalImage.naturalWidth, modalImage.naturalHeight);
+}
+
+function preloadGalleryImage(src) {
+  if (!src) return Promise.reject(new Error('Missing gallery image source.'));
+  if (galleryImagePreloadCache.has(src)) return galleryImagePreloadCache.get(src);
+
+  const request = new Promise((resolve, reject) => {
+    const image = new Image();
+    image.decoding = 'async';
+
+    image.addEventListener('load', async () => {
+      try {
+        if (typeof image.decode === 'function') await image.decode();
+      } catch (_) {
+      }
+
+      resolve({
+        src,
+        width: image.naturalWidth,
+        height: image.naturalHeight
+      });
+    }, { once: true });
+
+    image.addEventListener('error', () => {
+      galleryImagePreloadCache.delete(src);
+      reject(new Error(`Unable to load gallery image: ${src}`));
+    }, { once: true });
+
+    image.src = src;
+  });
+
+  galleryImagePreloadCache.set(src, request);
+  return request;
+}
+
+function preloadAdjacentGalleryImages() {
+  const total = state.gallery.items.length;
+  if (total <= 1) return;
+
+  const indexes = [
+    (state.gallery.index - 1 + total) % total,
+    (state.gallery.index + 1) % total
+  ];
+
+  [...new Set(indexes)].forEach((index) => {
+    const src = state.gallery.items[index]?.src;
+    if (src) preloadGalleryImage(src).catch(() => {});
+  });
+}
+
+function updateGalleryImageShapeFromDimensions(naturalWidth, naturalHeight) {
+  const modal = qs('#image-modal');
+  if (!modal || !naturalWidth || !naturalHeight) return;
+
+  const ratio = naturalWidth / naturalHeight;
   modal.classList.toggle('image-is-portrait', ratio < 0.82);
   modal.classList.toggle('image-is-square', ratio >= 0.82 && ratio <= 1.18);
   modal.classList.toggle('image-is-landscape', ratio > 1.18);
+}
+
+function updateGalleryFullscreenButton() {
+  const button = qs('#image-modal-fullscreen');
+  if (!button || !state.data) return;
+
+  const label = state.gallery.isFullscreen
+    ? state.data.modal.fullscreenExitLabel
+    : state.data.modal.fullscreenEnterLabel;
+  button.classList.toggle('is-active', state.gallery.isFullscreen);
+  button.setAttribute('aria-pressed', String(state.gallery.isFullscreen));
+  button.setAttribute('aria-label', label);
+  button.setAttribute('title', label);
+
+  const use = qs('use', button);
+  if (use) use.setAttribute('href', state.gallery.isFullscreen ? '#icon-compress' : '#icon-expand');
+}
+
+function syncGalleryFullscreenState() {
+  const modal = qs('#image-modal');
+  if (!modal) return;
+
+  const nativeFullscreen = document.fullscreenElement === modal;
+  const fallbackFullscreen = modal.classList.contains('is-fullscreen-fallback');
+  state.gallery.isFullscreen = nativeFullscreen || fallbackFullscreen;
+  modal.classList.toggle('is-gallery-fullscreen', state.gallery.isFullscreen);
+  updateGalleryFullscreenButton();
+  window.requestAnimationFrame(fitGalleryImageToStage);
+}
+
+async function setGalleryFullscreen(enabled) {
+  const modal = qs('#image-modal');
+  if (!modal) return;
+  if (enabled && state.gallery.activeTab !== 'images') return;
+
+  if (!enabled) {
+    modal.classList.remove('is-fullscreen-fallback');
+    if (document.fullscreenElement === modal && document.exitFullscreen) {
+      try {
+        await document.exitFullscreen();
+      } catch (error) {
+        console.warn('Unable to exit fullscreen mode.', error);
+      }
+    }
+    syncGalleryFullscreenState();
+    return;
+  }
+
+  if (document.fullscreenElement === modal || modal.classList.contains('is-fullscreen-fallback')) {
+    syncGalleryFullscreenState();
+    return;
+  }
+
+  if (modal.requestFullscreen && document.fullscreenEnabled !== false) {
+    try {
+      await modal.requestFullscreen({ navigationUI: 'hide' });
+    } catch (error) {
+      try {
+        await modal.requestFullscreen();
+      } catch (fallbackError) {
+        modal.classList.add('is-fullscreen-fallback');
+      }
+    }
+  } else {
+    modal.classList.add('is-fullscreen-fallback');
+  }
+
+  syncGalleryFullscreenState();
+}
+
+function exitGalleryFullscreenImmediately() {
+  const modal = qs('#image-modal');
+  if (!modal) return;
+
+  modal.classList.remove('is-fullscreen-fallback', 'is-gallery-fullscreen');
+  if (document.fullscreenElement === modal && document.exitFullscreen) {
+    document.exitFullscreen().catch(() => {});
+  }
+  state.gallery.isFullscreen = false;
+  updateGalleryFullscreenButton();
+}
+
+function updateGalleryImageShape() {
+  const modalImage = qs('#image-modal-image');
+  if (!modalImage || !modalImage.naturalWidth || !modalImage.naturalHeight) return;
+
+  updateGalleryImageShapeFromDimensions(modalImage.naturalWidth, modalImage.naturalHeight);
 }
 
 function renderProjectModalTabs() {
@@ -1311,10 +1408,15 @@ function setProjectModalTab(tabId) {
   const galleryPane = qs('#project-modal-gallery');
   const contentPane = qs('#project-modal-content');
   const counter = qs('#image-modal-counter');
-  const zoomButton = qs('#image-modal-zoom');
+  const fullscreenButton = qs('#image-modal-fullscreen');
   const isImages = tabId === 'images';
 
-  resetGalleryZoom();
+  if (!isImages) {
+    state.gallery.imageRequestId += 1;
+    qs('.image-modal-frame')?.classList.remove('is-image-loading');
+    qs('.image-modal-frame')?.setAttribute('aria-busy', 'false');
+    if (state.gallery.isFullscreen) setGalleryFullscreen(false);
+  }
   if (galleryPane) {
     galleryPane.hidden = !isImages;
     if (isImages) galleryPane.setAttribute('aria-labelledby', `project-tab-${tabId}`);
@@ -1326,7 +1428,7 @@ function setProjectModalTab(tabId) {
     else contentPane.removeAttribute('aria-labelledby');
   }
   if (counter) counter.hidden = !isImages;
-  if (zoomButton) zoomButton.hidden = !isImages;
+  if (fullscreenButton) fullscreenButton.hidden = !isImages;
 
   updateProjectModalTabState();
 
@@ -1336,6 +1438,63 @@ function setProjectModalTab(tabId) {
   } else {
     renderProjectModalContent(tabId);
   }
+}
+
+function syncProjectGalleryThumbnails(thumbnails) {
+  if (!thumbnails) return;
+
+  const total = state.gallery.items.length;
+  const hasMultipleImages = total > 1;
+  thumbnails.hidden = !hasMultipleImages;
+
+  if (!hasMultipleImages) {
+    thumbnails.innerHTML = '';
+    return;
+  }
+
+  let buttons = qsa('[data-gallery-index]', thumbnails);
+  const needsRebuild = buttons.length !== total || buttons.some((button, index) => Number(button.dataset.galleryIndex) !== index);
+
+  if (needsRebuild) {
+    thumbnails.innerHTML = state.gallery.items.map((galleryItem, index) => `
+      <button
+        type="button"
+        class="image-modal-thumbnail"
+        data-gallery-index="${index}"
+        aria-label="${replacePlaceholders(state.data.modal.thumbnailLabel, {
+          index: index + 1,
+          title: state.gallery.title
+        })}"
+        aria-current="false">
+        <img src="${galleryItem.src}" alt="" loading="lazy">
+        <span>${String(index + 1).padStart(2, '0')}</span>
+      </button>
+    `).join('');
+
+    buttons = qsa('[data-gallery-index]', thumbnails);
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const nextIndex = Number(button.dataset.galleryIndex);
+        if (!Number.isInteger(nextIndex) || nextIndex === state.gallery.index) return;
+        state.gallery.index = nextIndex;
+        updateProjectGallery();
+      });
+    });
+  }
+
+  buttons.forEach((button, index) => {
+    const isActive = index === state.gallery.index;
+    button.classList.toggle('is-active', isActive);
+    button.setAttribute('aria-current', isActive ? 'true' : 'false');
+  });
+
+  const activeThumbnail = buttons[state.gallery.index];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  activeThumbnail?.scrollIntoView({
+    behavior: reducedMotion ? 'auto' : 'smooth',
+    block: 'nearest',
+    inline: 'center'
+  });
 }
 
 function updateProjectGallery() {
@@ -1351,16 +1510,17 @@ function updateProjectGallery() {
   const previousButton = qs('#image-modal-prev');
   const nextButton = qs('#image-modal-next');
   const thumbnails = qs('#image-modal-thumbnails');
+  const frame = qs('.image-modal-frame');
+  if (!modalImage || !modalFallback || !modalCaption || !modalCounter || !previousButton || !nextButton) return;
 
-  resetGalleryZoom();
+  const requestId = ++state.gallery.imageRequestId;
+  const hasVisibleImage = Boolean(modalImage.getAttribute('src')) && !modalImage.hidden;
+
   modal.classList.remove('image-is-portrait', 'image-is-square', 'image-is-landscape');
-  modalImage.hidden = false;
   modalFallback.hidden = true;
-  modalImage.src = item.src;
-  modalImage.alt = item.alt || replacePlaceholders(state.data.modal.imageAlt, {
-    title: state.gallery.title,
-    index: state.gallery.index + 1
-  });
+  frame?.classList.add('is-image-loading');
+  frame?.setAttribute('aria-busy', 'true');
+  if (!hasVisibleImage) modalImage.hidden = true;
 
   modalCaption.textContent = item.caption || replacePlaceholders(state.data.modal.caption, {
     title: state.gallery.title,
@@ -1376,39 +1536,37 @@ function updateProjectGallery() {
   const hasMultipleImages = total > 1;
   previousButton.hidden = !hasMultipleImages;
   nextButton.hidden = !hasMultipleImages;
-  thumbnails.hidden = !hasMultipleImages;
-
   previousButton.disabled = !hasMultipleImages;
   nextButton.disabled = !hasMultipleImages;
+  syncProjectGalleryThumbnails(thumbnails);
 
-  if (hasMultipleImages) {
-    thumbnails.innerHTML = state.gallery.items.map((galleryItem, index) => `
-      <button
-        type="button"
-        class="image-modal-thumbnail ${index === state.gallery.index ? 'is-active' : ''}"
-        data-gallery-index="${index}"
-        aria-label="${replacePlaceholders(state.data.modal.thumbnailLabel, {
-          index: index + 1,
-          title: state.gallery.title
-        })}"
-        aria-current="${index === state.gallery.index ? 'true' : 'false'}">
-        <img src="${galleryItem.src}" alt="" loading="lazy">
-        <span>${String(index + 1).padStart(2, '0')}</span>
-      </button>
-    `).join('');
+  preloadGalleryImage(item.src)
+    .then((loadedImage) => {
+      if (requestId !== state.gallery.imageRequestId) return;
+      if (!modal.classList.contains('is-open') || state.gallery.activeTab !== 'images') return;
 
-    qsa('[data-gallery-index]', thumbnails).forEach((button) => {
-      button.addEventListener('click', () => {
-        state.gallery.index = Number(button.dataset.galleryIndex);
-        updateProjectGallery();
+      applyGalleryImageSizing(loadedImage.width, loadedImage.height);
+      updateGalleryImageShapeFromDimensions(loadedImage.width, loadedImage.height);
+
+      modalImage.alt = item.alt || replacePlaceholders(state.data.modal.imageAlt, {
+        title: state.gallery.title,
+        index: state.gallery.index + 1
       });
-    });
+      modalImage.src = loadedImage.src;
+      modalImage.hidden = false;
+      modalFallback.hidden = true;
 
-    const activeThumbnail = qs('.image-modal-thumbnail.is-active', thumbnails);
-    activeThumbnail?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-  } else {
-    thumbnails.innerHTML = '';
-  }
+      frame?.classList.remove('is-image-loading');
+      frame?.setAttribute('aria-busy', 'false');
+      preloadAdjacentGalleryImages();
+    })
+    .catch(() => {
+      if (requestId !== state.gallery.imageRequestId) return;
+      modalImage.hidden = true;
+      modalFallback.hidden = false;
+      frame?.classList.remove('is-image-loading');
+      frame?.setAttribute('aria-busy', 'false');
+    });
 }
 
 function openProjectGallery(project, trigger) {
@@ -1427,7 +1585,7 @@ function openProjectGallery(project, trigger) {
   state.gallery.activeTab = tabs[0].id;
   state.gallery.lastTrigger = trigger;
   state.gallery.pointerStartX = null;
-  state.gallery.isZoomed = false;
+  state.gallery.isFullscreen = false;
 
   modalTitle.textContent = project.title;
   modal.classList.add('is-open');
@@ -1466,13 +1624,18 @@ function closeProjectGallery() {
   if (!modal || !modalImage) return;
 
   const lastTrigger = state.gallery.lastTrigger;
+  state.gallery.imageRequestId += 1;
 
-  resetGalleryZoom();
+  exitGalleryFullscreenImmediately();
+  clearGalleryImageSizing();
   modal.classList.remove('image-is-portrait', 'image-is-square', 'image-is-landscape');
   modal.classList.remove('is-open');
   modal.setAttribute('aria-hidden', 'true');
   modalImage.src = '';
   modalImage.alt = '';
+  modalImage.hidden = true;
+  qs('.image-modal-frame')?.classList.remove('is-image-loading');
+  qs('.image-modal-frame')?.setAttribute('aria-busy', 'false');
   if (thumbnails) thumbnails.innerHTML = '';
   if (tabs) tabs.innerHTML = '';
   if (content) content.innerHTML = '';
@@ -1486,7 +1649,7 @@ function closeProjectGallery() {
   state.gallery.activeTab = null;
   state.gallery.lastTrigger = null;
   state.gallery.pointerStartX = null;
-  state.gallery.isZoomed = false;
+  state.gallery.isFullscreen = false;
 
   if (lastTrigger && document.contains(lastTrigger)) {
     window.requestAnimationFrame(() => lastTrigger.focus());
@@ -1500,6 +1663,8 @@ function handleGalleryImageError() {
 
   modalImage.hidden = true;
   fallback.hidden = false;
+  qs('.image-modal-frame')?.classList.remove('is-image-loading');
+  qs('.image-modal-frame')?.setAttribute('aria-busy', 'false');
 }
 
 function trapModalFocus(event) {
@@ -1534,21 +1699,19 @@ function initModalEvents() {
   modalImage?.addEventListener('error', handleGalleryImageError);
   modalImage?.addEventListener('load', () => {
     updateGalleryImageShape();
-    resetGalleryZoom();
-    window.requestAnimationFrame(fitGalleryImageToStage);
+    fitGalleryImageToStage();
   });
 
-  qs('#image-modal-zoom')?.addEventListener('click', () => {
-    setGalleryZoom(!state.gallery.isZoomed);
+  qs('#image-modal-fullscreen')?.addEventListener('click', () => {
+    setGalleryFullscreen(!state.gallery.isFullscreen);
   });
 
   const stage = qs('.image-modal-stage');
   stage?.addEventListener('pointerdown', (event) => {
-    if (state.gallery.isZoomed) return;
     state.gallery.pointerStartX = event.clientX;
   });
   stage?.addEventListener('pointerup', (event) => {
-    if (state.gallery.isZoomed || state.gallery.pointerStartX === null || state.gallery.items.length <= 1) return;
+    if (state.gallery.pointerStartX === null || state.gallery.items.length <= 1) return;
 
     const distance = event.clientX - state.gallery.pointerStartX;
     state.gallery.pointerStartX = null;
@@ -1565,7 +1728,11 @@ function initModalEvents() {
     if (!modal?.classList.contains('is-open')) return;
 
     if (event.key === 'Escape') {
-      closeProjectGallery();
+      if (state.gallery.isFullscreen) {
+        setGalleryFullscreen(false);
+      } else {
+        closeProjectGallery();
+      }
       return;
     }
 
@@ -1590,18 +1757,30 @@ function initModalEvents() {
 
   document.addEventListener('keydown', trapModalFocus);
 
-  let galleryResizeFrame = null;
-  window.addEventListener('resize', () => {
+  document.addEventListener('fullscreenchange', () => {
     const modal = qs('#image-modal');
-    syncCertificateDescriptionToggles();
-    if (!modal?.classList.contains('is-open') || state.gallery.isZoomed || state.gallery.activeTab !== 'images') return;
+    if (!modal?.classList.contains('is-open')) return;
+    if (document.fullscreenElement !== modal) modal.classList.remove('is-fullscreen-fallback');
+    syncGalleryFullscreenState();
+  });
+
+  let galleryResizeFrame = null;
+  const scheduleGalleryFit = () => {
+    const modal = qs('#image-modal');
+    if (!modal?.classList.contains('is-open') || state.gallery.activeTab !== 'images') return;
 
     if (galleryResizeFrame) window.cancelAnimationFrame(galleryResizeFrame);
     galleryResizeFrame = window.requestAnimationFrame(() => {
       galleryResizeFrame = null;
       fitGalleryImageToStage();
     });
+  };
+
+  window.addEventListener('resize', () => {
+    syncCertificateDescriptionToggles();
+    scheduleGalleryFit();
   });
+  window.visualViewport?.addEventListener('resize', scheduleGalleryFit);
 }
 
 
@@ -1636,7 +1815,7 @@ function initLanguageSwitcher() {
 
       const nav = qs('.site-nav');
       const toggle = qs('.nav-toggle');
-      if (window.innerWidth <= 920 && nav && toggle) {
+      if (window.innerWidth <= 1120 && nav && toggle) {
         nav.classList.remove('is-open');
         toggle.setAttribute('aria-expanded', 'false');
       }
