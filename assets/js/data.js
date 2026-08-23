@@ -4,9 +4,9 @@ window.portfolioConfig = {
   },
   branding: {
     logo: 'assets/img/brand/logo-bm-white.png',
-    logoAlt: 'Logo BM',
+    logoAlt: 'Bruno Getten Triches — Software Architect & Software Engineer',
     favicon: 'favicon.ico',
-    socialPreview: 'assets/img/brand/logo-bm.png',
+    socialPreview: 'assets/img/brand/social-preview.jpg',
     aboutImage: 'assets/img/about/1.jpg'
   },
   theme: {

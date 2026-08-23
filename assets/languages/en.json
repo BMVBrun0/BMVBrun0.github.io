@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "{name} | Portfolio",
-    "description": "Public portfolio of {name}, covering software engineering and architecture, web/mobile development, cloud, DevOps, data, games, and technical leadership.",
-    "ogTitle": "{name} | Portfolio",
-    "ogDescription": "Projects, architecture, engineering, experience, services, and contact information."
+    "title": "{name} | Software Architect & Engineer",
+    "description": "Portfolio of {name}, Software Architect, Software Engineer, Tech Lead and Full-Stack Developer. Scalable systems, cloud, DevOps, web, mobile and game projects.",
+    "ogTitle": "{name} | Software Architecture & Engineering",
+    "ogDescription": "Software architecture, Full Stack, cloud, DevOps, mobile, games, scalable systems and real-world projects."
   },
   "accessibility": {
     "skipToContent": "Skip to content",
@@ -61,7 +61,7 @@
       "My day-to-day work also includes CI/CD and GitHub Actions, automated builds and deployments, health checks, backups, load balancing, cloud object storage, unit and E2E testing with Playwright, and performance optimization. I can translate these technical decisions into clear language for product, sales, clients, companies, and investors, connecting engineering to real business needs."
     ],
     "skillsLabel": "Core skills",
-    "imageAlt": "Portfolio presentation image"
+    "imageAlt": "Bruno Getten Triches, Software Architect and Software Engineer"
   },
   "skills": [
     {

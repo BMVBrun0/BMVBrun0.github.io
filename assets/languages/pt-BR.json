@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "{name} | Portfólio",
-    "description": "Portfólio público de {name} com atuação em engenharia e arquitetura de software, desenvolvimento web/mobile, cloud, DevOps, dados, jogos e liderança técnica.",
-    "ogTitle": "{name} | Portfólio",
-    "ogDescription": "Projetos, arquitetura, engenharia, experiência, serviços e formas de contato."
+    "title": "{name} | Arquiteto e Engenheiro de Software",
+    "description": "Portfólio de {name}, arquiteto e engenheiro de software, Tech Lead e desenvolvedor Full Stack. Projetos em cloud, DevOps, web, mobile, games e sistemas escaláveis.",
+    "ogTitle": "{name} | Arquitetura e Engenharia de Software",
+    "ogDescription": "Arquitetura de software, Full Stack, cloud, DevOps, mobile, games, sistemas escaláveis e projetos reais."
   },
   "accessibility": {
     "skipToContent": "Pular para o conteúdo",
@@ -61,7 +61,7 @@
       "No dia a dia também estruturo CI/CD e GitHub Actions, builds e deploys automatizados, health checks, backups, load balancing, armazenamento em nuvem, testes unitários e E2E com Playwright e otimizações de performance. Consigo transformar essas decisões técnicas em linguagem clara para produto, comercial, clientes, empresas e investidores, conectando engenharia às necessidades reais do negócio."
     ],
     "skillsLabel": "Principais habilidades",
-    "imageAlt": "Imagem de apresentação do portfólio"
+    "imageAlt": "Bruno Getten Triches, arquiteto e engenheiro de software"
   },
   "skills": [
     {

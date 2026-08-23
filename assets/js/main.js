@@ -104,8 +104,11 @@ function renderBranding() {
   const favicon = qs('link[rel="icon"]');
   if (favicon && branding.favicon) favicon.href = branding.favicon;
 
+  const socialPreview = branding.socialPreview ? new URL(branding.socialPreview, document.baseURI).href : '';
   const ogImage = qs('meta[property="og:image"]');
-  if (ogImage && branding.socialPreview) ogImage.setAttribute('content', branding.socialPreview);
+  const twitterImage = qs('meta[name="twitter:image"]');
+  if (ogImage && socialPreview) ogImage.setAttribute('content', socialPreview);
+  if (twitterImage && socialPreview) twitterImage.setAttribute('content', socialPreview);
 
   const heroName = qs('#hero-name');
   if (heroName && profileName) heroName.textContent = profileName;
@@ -266,10 +269,19 @@ function updateMeta() {
   const description = qs('meta[name="description"]');
   const ogTitle = qs('meta[property="og:title"]');
   const ogDescription = qs('meta[property="og:description"]');
+  const ogLocale = qs('meta[property="og:locale"]');
+  const twitterTitle = qs('meta[name="twitter:title"]');
+  const twitterDescription = qs('meta[name="twitter:description"]');
+  const socialTitle = replacePlaceholders(meta.ogTitle, values);
+  const socialDescription = replacePlaceholders(meta.ogDescription, values);
+  const ogLocales = { 'pt-BR': 'pt_BR', en: 'en_US', es: 'es_ES' };
 
   if (description) description.setAttribute('content', replacePlaceholders(meta.description, values));
-  if (ogTitle) ogTitle.setAttribute('content', replacePlaceholders(meta.ogTitle, values));
-  if (ogDescription) ogDescription.setAttribute('content', replacePlaceholders(meta.ogDescription, values));
+  if (ogTitle) ogTitle.setAttribute('content', socialTitle);
+  if (ogDescription) ogDescription.setAttribute('content', socialDescription);
+  if (ogLocale) ogLocale.setAttribute('content', ogLocales[state.locale] || 'pt_BR');
+  if (twitterTitle) twitterTitle.setAttribute('content', socialTitle);
+  if (twitterDescription) twitterDescription.setAttribute('content', socialDescription);
 }
 
 function renderStaticText() {
