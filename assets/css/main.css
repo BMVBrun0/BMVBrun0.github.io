@@ -598,8 +598,8 @@ button, select { font: inherit; }
     radial-gradient(circle at 76% 80%, rgba(var(--accent-2-rgb), 0.22), transparent 26%);
   pointer-events: none;
 }
-.hero-panel-logo { position: relative; width: min(100%, 540px); margin: 0 auto 18px; }
-.hero-stats { position: relative; display: grid; gap: 14px; }
+.hero-panel-logo { position: relative; width: min(100%, 420px); margin: 0 auto; }
+.hero-stats { position: relative; display: grid; gap: 14px; z-index: 2; }
 .hero-stats article {
   padding: 16px 18px;
   border: 1px solid rgba(255,255,255,0.08);
@@ -786,11 +786,85 @@ button, select { font: inherit; }
 }
 .service-card,
 .contact-card { padding: 24px; }
+.service-card--enhanced {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 100%;
+}
+.service-card__glow {
+  position: absolute;
+  inset: -18% auto auto -14%;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.16), transparent 72%);
+  pointer-events: none;
+}
+.service-card__header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.service-card__index {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--accent-3-rgb), 0.22);
+  background: rgba(255,255,255,0.03);
+  color: var(--accent-3);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+.service-card__icon-shell {
+  display: inline-grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(var(--accent-rgb), 0.14), rgba(var(--accent-2-rgb), 0.08));
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
 .service-icon {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 16px;
+  width: 42px;
+  height: 42px;
+  margin: 0;
   object-fit: contain;
+}
+.service-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.service-card__footer-line {
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.65), transparent 80%);
+}
+.service-card__footer-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .filters { margin-bottom: 24px; }
@@ -1756,6 +1830,7 @@ button.project-media:focus-visible .project-gallery-affordance {
 }
 
 
+/* Gallery responsive layout: fullscreen media viewer on small screens */
 @media (max-width: 920px) {
   .image-modal.is-open {
     padding: 8px;
@@ -2261,6 +2336,7 @@ button.project-media:focus-visible .project-gallery-affordance {
   padding-left: 18px;
 }
 
+/* Compact certificate cards with expandable descriptions */
 .certificate-card {
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
@@ -2373,6 +2449,7 @@ button.project-media:focus-visible .project-gallery-affordance {
 }
 
 
+/* Responsive hardening: tablets, touch devices and project media viewer */
 html,
 body {
   max-width: 100%;
@@ -2392,6 +2469,7 @@ body {
   min-width: 0;
 }
 
+/* Collapse the desktop header before tablet widths become cramped. */
 @media (max-width: 1120px) {
   .desktop-lang {
     display: none;
@@ -2450,6 +2528,7 @@ body {
   }
 }
 
+/* The image is always contained in the measured stage on every viewport. */
 .image-modal-stage {
   min-height: 0;
 }
@@ -2468,6 +2547,7 @@ body {
   cursor: default;
 }
 
+/* Real fullscreen when supported, viewport fallback when it is not (notably older mobile browsers). */
 .image-modal:fullscreen,
 .image-modal.is-fullscreen-fallback {
   width: 100vw;
@@ -2541,6 +2621,7 @@ body {
   box-shadow: none;
 }
 
+/* Tablet modal: use more of the actual viewport and preserve safe areas. */
 @media (min-width: 641px) and (max-width: 920px) {
   .image-modal.is-open {
     padding:
@@ -2596,6 +2677,7 @@ body {
   }
 }
 
+/* Touch targets remain comfortable without changing desktop density. */
 @media (pointer: coarse) {
   .nav-toggle,
   .image-modal-fullscreen,
@@ -2665,4 +2747,75 @@ body {
   .image-modal-thumbnails {
     max-height: 48px;
   }
+}
+
+/* Fullscreen belongs exclusively to the Images tab. */
+.image-modal-fullscreen[hidden],
+.image-modal-counter[hidden] { display: none !important; }
+
+/* V4 — stronger "Como posso agregar" visual hierarchy */
+#services { position: relative; overflow: clip; }
+#services::before {
+  content: "";
+  position: absolute;
+  width: min(70vw, 880px);
+  height: min(70vw, 880px);
+  left: 50%;
+  top: 54%;
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(var(--accent-3-rgb),.075);
+  box-shadow: 0 0 0 70px rgba(var(--accent-rgb),.018), 0 0 0 150px rgba(var(--accent-2-rgb),.012);
+  pointer-events: none;
+}
+#services .section-heading { max-width: 760px; }
+.service-grid { position: relative; gap: 18px; }
+.service-card--enhanced {
+  min-height: 290px;
+  padding: 22px;
+  border-color: rgba(255,255,255,.095);
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.052),rgba(255,255,255,.018)),
+    radial-gradient(circle at 90% 10%,rgba(var(--accent-3-rgb),.07),transparent 36%);
+  box-shadow: 0 18px 56px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.035);
+  transition: transform 220ms ease,border-color 220ms ease,box-shadow 220ms ease;
+}
+.service-card--enhanced::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 22px;
+  width: 42%;
+  height: 2px;
+  background: linear-gradient(90deg,var(--accent),var(--accent-3),transparent);
+  opacity: .72;
+}
+.service-card--enhanced::after {
+  content: "";
+  position: absolute;
+  right: 17px;
+  bottom: 16px;
+  width: 48px;
+  height: 48px;
+  border-right: 1px solid rgba(var(--accent-3-rgb),.13);
+  border-bottom: 1px solid rgba(var(--accent-3-rgb),.13);
+  border-radius: 0 0 16px 0;
+  pointer-events: none;
+}
+.service-card--enhanced:hover { transform: translateY(-6px); border-color: rgba(var(--accent-3-rgb),.24); box-shadow: 0 26px 72px rgba(0,0,0,.22),0 0 38px rgba(var(--accent-rgb),.055); }
+.service-card__glow { width: 210px; height: 210px; opacity: .9; }
+.service-card__index { font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+.service-card__icon-shell { width: 76px; height: 76px; border-radius: 24px; box-shadow: inset 0 1px 0 rgba(255,255,255,.08),0 14px 34px rgba(0,0,0,.14); }
+.service-card--enhanced h3 { position: relative; z-index: 1; margin: 8px 0 0; font-size: clamp(1.12rem,1.7vw,1.35rem); }
+.service-card--enhanced p { position: relative; z-index: 1; margin: 0; line-height: 1.65; }
+.service-card__footer { margin-top: auto; }
+.service-card__footer-line { height: 2px; opacity: .7; }
+.service-card__footer-chip { width: 24px; min-width: 24px; height: 24px; min-height: 24px; padding: 0; justify-content: center; color: var(--accent-3); }
+
+@media (max-width:640px) {
+  #services::before { width: 130vw; height: 130vw; opacity: .72; }
+  .service-grid { gap: 14px; }
+  .service-card--enhanced { min-height: 235px; padding: 18px; }
+  .service-card__icon-shell { width: 64px; height: 64px; border-radius: 20px; }
+  .service-icon { width: 38px; height: 38px; }
 }

@@ -30,6 +30,7 @@ A configuração principal fica em `assets/js/data.js`:
 - `features`: ativa ou desativa seções e recursos com `1` ou `0`;
 - `projectLinks`: links opcionais de acesso aos projetos;
 - `carousel`: autoplay e intervalo dos carrosséis;
+- `experience`: intensidade, presets e parâmetros das experiências interativas;
 - `cvByLocale`: PDFs do currículo;
 - `contactLinks` e `socialLinks`: links pessoais;
 - `projectGalleries`: imagens extras dos projetos.
@@ -124,6 +125,64 @@ features: {
 `0` oculta/desativa. `1` exibe/ativa. Por exemplo, `contact: 0` remove a área de contato e seu acesso no menu; `socialLinks: 0` oculta os links sociais.
 
 Com `projectsCarousel: 1` ou `certificatesCarousel: 1`, a grade correspondente vira um carrossel automático: 3 cards por vez no desktop, 2 em telas intermediárias e 1 no mobile.
+
+## Experience Lab e efeitos interativos
+
+O template inclui uma camada opcional de experiências visuais em HTML, CSS e JavaScript. O showcase principal usa **Three.js** carregado por uma URL configurável; se a biblioteca externa não carregar, o restante do portfólio continua funcionando normalmente. As experiências podem ser ligadas ou desligadas individualmente em `assets/js/data.js`:
+
+```js
+features: {
+  experienceLab: 1,      // botão LAB e painel de demonstração
+  themePlayground: 1,    // troca de paleta, cores, cantos e intensidade
+  interactiveCanvas: 0,  // canvas 2D legado; pode ser reativado se desejado
+  physicsShowcase: 1,    // logo BM 3D com partículas e física no hero
+  microInteractions: 1,  // spotlight em cards e botões magnéticos
+  ambientDepth: 1,       // profundidade visual no header, seções e footer
+  projectStory: 1        // narrativa dos projetos
+}
+```
+
+`experienceLab: 0` remove apenas o painel público de personalização. O showcase 3D, as microinterações e a História continuam independentes. O Canvas 2D original fica desligado por padrão para não competir visualmente com a experiência Three.js.
+
+Os principais parâmetros ficam no objeto `experience`:
+
+```js
+experience: {
+  dockPosition: 'left',
+  persistPlayground: 1,
+  cardRadius: 24,
+  motionStrength: 0.75,
+  physicsShowcase: {
+    moduleUrl: 'https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.min.js',
+    logoTexture: 'assets/img/brand/logo-bm-white.png',
+    particlesDesktop: 1500,
+    particlesMobile: 780,
+    dustDesktop: 260,
+    dustMobile: 120,
+    logoWidth: 5.35,
+    logoDepth: 0.48,
+    interactionRadius: 2.25,
+    attraction: 0.022,
+    pointerForce: 0.15,
+    pulseForce: 0.46,
+    damping: 0.918,
+    maxDevicePixelRatio: 1.5
+  },
+  story: {
+    maxFeatureSteps: 3
+  }
+}
+```
+
+O **showcase 3D** reconstrói a própria logo configurada em `branding.logo` como uma nuvem tridimensional de partículas, com profundidade e poeira ambiente. Ele reage ao mouse e ao toque: as partículas são puxadas de volta para a marca por uma força elástica, afastadas pelo ponteiro e recebem um impulso adicional ao clicar/tocar. O efeito pausa quando a seção sai da tela ou a aba fica oculta e reduz movimento quando o sistema usa `prefers-reduced-motion`.
+
+O **Playground visual** altera o tema somente no navegador do visitante e, com `persistPlayground: 1`, salva a preferência em `localStorage`. O botão **Restaurar padrão** volta para as cores e valores definidos em `data.js`. O botão **Copiar configuração** gera um trecho pronto com a personalização atual.
+
+Os detalhes dos projetos foram mantidos intencionalmente enxutos: **Visão geral**, **História**, **Técnico** e **Imagens**. Preços, quando existirem, aparecem dentro da Visão geral. A área Técnica reúne especificações, tecnologias, justificativas e o fluxo de arquitetura no mesmo lugar, evitando abas repetitivas. A História usa navegação por etapas clicáveis e um carrossel horizontal com `scroll-snap`, deixando a primeira e a última etapa determinísticas mesmo em touch.
+
+`ambientDepth` adiciona uma linguagem visual compartilhada ao header, às seções e ao footer, inclusive no mobile. O efeito também pode ser ligado/desligado no LAB sem afetar o conteúdo.
+
+Em dispositivos touch, as interações usam feedback de toque em vez de depender de hover. No mobile, o LAB funciona como um painel vertical rolável e o botão é reduzido para ocupar menos espaço permanente na interface.
 
 ## Crédito do template
 

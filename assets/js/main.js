@@ -446,11 +446,19 @@ function renderExperience() {
 
 function renderServices() {
   const root = qs('#services-list');
-  root.innerHTML = state.data.services.map((item) => `
-    <article class="service-card reveal">
-      <img src="${item.icon}" alt="" class="service-icon">
+  root.innerHTML = state.data.services.map((item, index) => `
+    <article class="service-card service-card--enhanced reveal">
+      <div class="service-card__glow" aria-hidden="true"></div>
+      <div class="service-card__header">
+        <span class="service-card__index">${String(index + 1).padStart(2, '0')}</span>
+        <span class="service-card__icon-shell"><img src="${item.icon}" alt="" class="service-icon"></span>
+      </div>
       <h3>${item.title}</h3>
       <p>${item.description}</p>
+      <div class="service-card__footer" aria-hidden="true">
+        <span class="service-card__footer-line"></span>
+        <span class="service-card__footer-chip">◆</span>
+      </div>
     </article>
   `).join('');
 }
@@ -537,20 +545,18 @@ function getProjectTabs(project) {
   const gallery = getProjectGallery(project);
   const tabs = [];
 
-  if (hasProjectContent(details.description) || hasProjectContent(details.features)) {
+  if (hasProjectContent(details.description) || hasProjectContent(details.features) || hasProjectContent(details.pricing)) {
     tabs.push({ id: 'overview', label: state.data.modal.overviewTab });
   }
-  if (hasProjectContent(details.technicalSpecs)) {
+  if (hasProjectContent(details.technicalSpecs) || hasProjectContent(details.technologies) || hasProjectContent(project.stack)) {
     tabs.push({ id: 'technical', label: state.data.modal.technicalTab });
-  }
-  if (hasProjectContent(details.technologies)) {
-    tabs.push({ id: 'technologies', label: state.data.modal.technologiesTab });
   }
   if (gallery.length) {
     tabs.push({ id: 'images', label: state.data.modal.imagesTab });
   }
-  if (hasProjectContent(details.pricing)) {
-    tabs.push({ id: 'pricing', label: state.data.modal.pricingTab });
+
+  if (window.PortfolioExperience?.extendProjectTabs) {
+    return window.PortfolioExperience.extendProjectTabs(tabs, project, state.data);
   }
 
   return tabs;
@@ -1122,6 +1128,7 @@ function preloadGalleryImage(src) {
       try {
         if (typeof image.decode === 'function') await image.decode();
       } catch (_) {
+        // The image is already loaded; a decode rejection does not invalidate it.
       }
 
       resolve({
@@ -1302,6 +1309,7 @@ function updateProjectModalTabState() {
 
 function renderProjectOverview(project) {
   const details = project.details || {};
+  const pricing = Array.isArray(details.pricing) ? details.pricing : [];
   return `
     <section class="project-detail-section project-detail-overview">
       ${hasProjectContent(details.description) ? `
@@ -1320,71 +1328,49 @@ function renderProjectOverview(project) {
           </ul>
         </div>
       ` : ''}
+      ${pricing.length ? `
+        <div class="project-detail-block">
+          <h3>${state.data.modal.pricingTitle}</h3>
+          <div class="project-pricing-grid">
+            ${pricing.map((plan) => {
+              if (typeof plan === 'string') return `<article class="project-pricing-card"><strong>${plan}</strong></article>`;
+              const items = Array.isArray(plan.items) ? plan.items : [];
+              return `<article class="project-pricing-card"><div class="project-pricing-heading"><strong>${plan.name || plan.title || ''}</strong>${plan.price ? `<span>${plan.price}</span>` : ''}</div>${plan.description ? `<p>${plan.description}</p>` : ''}${items.length ? `<ul>${items.map((item) => `<li>${item}</li>`).join('')}</ul>` : ''}</article>`;
+            }).join('')}
+          </div>
+        </div>
+      ` : ''}
       ${renderProjectAccessLink(project, 'project-access-link project-access-link--modal')}
     </section>
   `;
 }
 
 function renderProjectTechnical(project) {
-  const specs = project.details?.technicalSpecs || [];
+  const details = project.details || {};
+  const specs = Array.isArray(details.technicalSpecs) ? details.technicalSpecs : [];
+  const technologies = Array.isArray(details.technologies) ? details.technologies : [];
+  const stack = Array.isArray(project.stack) ? project.stack.filter(Boolean) : [];
+  const architectureNodes = stack.length ? stack : technologies.map((item) => typeof item === 'string' ? item : item.name || item.label || '').filter(Boolean);
+  const decisionsLabel = state.data.modal.technicalDecisionsTitle || state.data.modal.technicalTitle;
+  const technologiesLabel = state.data.modal.technologiesAndWhyTitle || state.data.modal.technologiesTitle;
   return `
-    <section class="project-detail-section">
-      <div class="project-detail-block">
-        <h3>${state.data.modal.technicalTitle}</h3>
-        <dl class="project-spec-grid">
-          ${specs.map((spec) => {
-            if (typeof spec === 'string') return `<div class="project-spec-item"><dd>${spec}</dd></div>`;
-            return `<div class="project-spec-item"><dt>${spec.label || ''}</dt><dd>${spec.value || ''}</dd></div>`;
-          }).join('')}
-        </dl>
-      </div>
-    </section>
-  `;
-}
-
-function renderProjectTechnologies(project) {
-  const technologies = project.details?.technologies || [];
-  return `
-    <section class="project-detail-section">
-      <div class="project-detail-block">
-        <h3>${state.data.modal.technologiesTitle}</h3>
-        <ul class="project-technology-grid">
-          ${technologies.map((technology) => {
-            const label = typeof technology === 'string' ? technology : technology.name || technology.label || '';
-            const detail = typeof technology === 'object' ? technology.description || technology.detail || '' : '';
-            return `<li><strong>${label}</strong>${detail ? `<span>${detail}</span>` : ''}</li>`;
-          }).join('')}
-        </ul>
-      </div>
-    </section>
-  `;
-}
-
-function renderProjectPricing(project) {
-  const pricing = project.details?.pricing || [];
-  return `
-    <section class="project-detail-section">
-      <div class="project-detail-block">
-        <h3>${state.data.modal.pricingTitle}</h3>
-        <div class="project-pricing-grid">
-          ${pricing.map((plan) => {
-            if (typeof plan === 'string') return `<article class="project-pricing-card"><strong>${plan}</strong></article>`;
-            const items = Array.isArray(plan.items) ? plan.items : [];
-            return `
-              <article class="project-pricing-card">
-                <div class="project-pricing-heading">
-                  <strong>${plan.name || plan.title || ''}</strong>
-                  ${plan.price ? `<span>${plan.price}</span>` : ''}
-                </div>
-                ${plan.description ? `<p>${plan.description}</p>` : ''}
-                ${items.length ? `<ul>${items.map((item) => `<li>${item}</li>`).join('')}</ul>` : ''}
-              </article>
-            `;
-          }).join('')}
+    <section class="project-detail-section project-technical-story">
+      <header class="project-technical-hero">
+        <div class="project-technical-hero__copy">
+          <span class="project-detail-label">${state.data.modal.technicalEyebrow || state.data.modal.technicalTitle}</span>
+          <h3>${state.data.modal.technicalTitle}</h3>
+          <p>${state.data.modal.technicalDescription || ''}</p>
         </div>
-      </div>
-    </section>
-  `;
+        <div class="project-technical-hero__metrics" aria-hidden="true">
+          ${specs.length ? `<span><strong>${String(specs.length).padStart(2, '0')}</strong><small>${decisionsLabel}</small></span>` : ''}
+          ${technologies.length ? `<span><strong>${String(technologies.length).padStart(2, '0')}</strong><small>${technologiesLabel}</small></span>` : ''}
+          ${architectureNodes.length ? `<span><strong>${String(Math.min(architectureNodes.length, 8)).padStart(2, '0')}</strong><small>${state.data.modal.architectureTitle || 'Stack'}</small></span>` : ''}
+        </div>
+      </header>
+      ${specs.length ? `<div class="project-detail-block project-technical-decisions"><div class="project-technical-section-heading"><span>01</span><h3>${decisionsLabel}</h3></div><ol class="project-decision-timeline">${specs.map((spec,index)=>{const label=typeof spec==='string'?'':spec.label||'';const body=typeof spec==='string'?spec:spec.value||spec.description||'';return `<li class="project-decision-item"><span class="project-decision-index">${String(index+1).padStart(2,'0')}</span><div>${label?`<strong>${label}</strong>`:''}<p>${body}</p></div></li>`;}).join('')}</ol></div>` : ''}
+      ${technologies.length ? `<div class="project-detail-block project-technical-technologies"><div class="project-technical-section-heading"><span>02</span><h3>${technologiesLabel}</h3></div><ul class="project-technology-list project-technology-grid--rationale">${technologies.map((technology,index)=>{const label=typeof technology==='string'?technology:technology.name||technology.label||'';const detail=typeof technology==='object'?technology.description||technology.detail||'':'';return `<li><span class="project-technology-order">${String(index+1).padStart(2,'0')}</span><div><strong>${label}</strong>${detail?`<span>${detail}</span>`:''}</div><i aria-hidden="true"></i></li>`;}).join('')}</ul></div>` : ''}
+      ${architectureNodes.length ? `<div class="project-detail-block project-architecture-block"><div class="project-technical-section-heading"><span>03</span><h3>${state.data.modal.architectureTitle || 'Arquitetura / stack'}</h3></div><div class="project-architecture-canvas"><div class="project-architecture-flow" aria-label="${state.data.modal.architectureAria || ''}">${architectureNodes.slice(0,8).map((node,index)=>`<span class="project-architecture-node"><i>${String(index+1).padStart(2,'0')}</i><strong>${node}</strong></span>${index<Math.min(architectureNodes.length,8)-1?'<b aria-hidden="true">→</b>':''}`).join('')}</div></div></div>` : ''}
+    </section>`;
 }
 
 function renderProjectModalContent(tabId) {
@@ -1394,9 +1380,15 @@ function renderProjectModalContent(tabId) {
 
   if (tabId === 'overview') root.innerHTML = renderProjectOverview(project);
   else if (tabId === 'technical') root.innerHTML = renderProjectTechnical(project);
-  else if (tabId === 'technologies') root.innerHTML = renderProjectTechnologies(project);
-  else if (tabId === 'pricing') root.innerHTML = renderProjectPricing(project);
-  else root.innerHTML = '';
+  else if (window.PortfolioExperience?.renderProjectTab) {
+    const handled = window.PortfolioExperience.renderProjectTab({
+      tabId,
+      project,
+      data: state.data,
+      root
+    });
+    if (!handled) root.innerHTML = '';
+  } else root.innerHTML = '';
 
   root.scrollTop = 0;
 }
@@ -1428,7 +1420,12 @@ function setProjectModalTab(tabId) {
     else contentPane.removeAttribute('aria-labelledby');
   }
   if (counter) counter.hidden = !isImages;
-  if (fullscreenButton) fullscreenButton.hidden = !isImages;
+  if (fullscreenButton) {
+    fullscreenButton.hidden = !isImages;
+    fullscreenButton.disabled = !isImages;
+    fullscreenButton.setAttribute('aria-hidden', String(!isImages));
+    fullscreenButton.tabIndex = isImages ? 0 : -1;
+  }
 
   updateProjectModalTabState();
 
@@ -1545,6 +1542,8 @@ function updateProjectGallery() {
       if (requestId !== state.gallery.imageRequestId) return;
       if (!modal.classList.contains('is-open') || state.gallery.activeTab !== 'images') return;
 
+      // Size the next image before changing src. The browser paints both changes
+      // together, so the natural-size frame can never flash on screen.
       applyGalleryImageSizing(loadedImage.width, loadedImage.height);
       updateGalleryImageShapeFromDimensions(loadedImage.width, loadedImage.height);
 
@@ -1650,6 +1649,7 @@ function closeProjectGallery() {
   state.gallery.lastTrigger = null;
   state.gallery.pointerStartX = null;
   state.gallery.isFullscreen = false;
+  window.PortfolioExperience?.onProjectModalClose?.();
 
   if (lastTrigger && document.contains(lastTrigger)) {
     window.requestAnimationFrame(() => lastTrigger.focus());
@@ -1858,6 +1858,7 @@ async function applyLocale(locale) {
   initRoleRotation();
   initReveal();
   setCurrentYear();
+  window.PortfolioExperience?.setLocale?.(normalized, state.data);
 }
 
 async function init() {

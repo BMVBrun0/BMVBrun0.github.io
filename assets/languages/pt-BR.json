@@ -1,9 +1,9 @@
 {
   "meta": {
     "title": "{name} | Portfólio",
-    "description": "Portfólio público de {name} com experiência em desenvolvimento web, mobile, jogos, liderança técnica e arquitetura de software.",
+    "description": "Portfólio público de {name} com atuação em engenharia e arquitetura de software, desenvolvimento web/mobile, cloud, DevOps, dados, jogos e liderança técnica.",
     "ogTitle": "{name} | Portfólio",
-    "ogDescription": "Projetos, experiência, serviços e formas de contato."
+    "ogDescription": "Projetos, arquitetura, engenharia, experiência, serviços e formas de contato."
   },
   "accessibility": {
     "skipToContent": "Pular para o conteúdo",
@@ -25,15 +25,17 @@
     "certificates": "Formação"
   },
   "hero": {
-    "eyebrow": "Tech Lead · Software Engineer",
+    "eyebrow": "Tech Lead · Software Architect · Software Engineer",
     "rolePrefix": "Eu sou",
     "roles": [
-      "Desenvolvedor Web",
+      "Arquiteto de Software",
+      "Engenheiro de Software",
+      "Desenvolvedor Full Stack",
       "Desenvolvedor Mobile",
       "Desenvolvedor de Jogos",
       "Tech Lead"
     ],
-    "text": "Tech Lead e software engineer com atuação hands-on em web, mobile, backend, DevOps, jogos 2D/3D e produtos white-label, com histórico de padronizar stacks, acelerar implantações e destravar operações críticas.",
+    "text": "Atuação hands-on da arquitetura à produção em web, mobile, backend, jogos, bancos de dados, cloud e DevOps, estruturando sistemas escaláveis, automações de build e deploy, qualidade e infraestrutura para produtos críticos.",
     "primaryCta": "Ver projetos",
     "secondaryCta": "Baixar CV",
     "stats": [
@@ -53,10 +55,10 @@
   },
   "about": {
     "eyebrow": "Sobre mim",
-    "title": "Desenvolvimento com foco em arquitetura, produto, entrega e escalabilidade.",
+    "title": "Da arquitetura à produção: software, infraestrutura e produto.",
     "paragraphs": [
-      "Meu nome é Bruno Getten Triches. Atuo como Tech Lead e desenvolvedor full-stack com experiência real em soluções web, mobile, backend, DevOps, integrações, jogos e produtos digitais ponta a ponta.",
-      "Minha carreira foi construída em ambientes com alta responsabilidade: padronização de stacks, implantação de produtos white-label, refatoração de legados, suporte a clientes estratégicos, ERP, setor público, marketplace, saúde, games e liderança prática de times."
+      "Meu nome é Bruno Getten Triches. Atuo como Tech Lead, arquiteto de software e engenheiro de software com responsabilidade de ponta a ponta: além de desenvolver web, mobile, backend e jogos, desenho arquitetura, bancos de dados, containers, ambientes, estratégia de hospedagem, disponibilidade, latência e escalabilidade dos sistemas.",
+      "No dia a dia também estruturo CI/CD e GitHub Actions, builds e deploys automatizados, health checks, backups, load balancing, armazenamento em nuvem, testes unitários e E2E com Playwright e otimizações de performance. Consigo transformar essas decisões técnicas em linguagem clara para produto, comercial, clientes, empresas e investidores, conectando engenharia às necessidades reais do negócio."
     ],
     "skillsLabel": "Principais habilidades",
     "imageAlt": "Imagem de apresentação do portfólio"
@@ -104,7 +106,7 @@
     {
       "title": "Tech Lead · Sensorama Play",
       "period": "2025 · Atual",
-      "description": "Atuo como Tech Lead e principal referência de desenvolvimento, com trabalho hands-on em produtos web, mobile, APIs, DevOps, jogos 2D/3D em Unity e relacionamento com clientes. Além da liderança técnica e da definição de padrões, participo de POCs para editais, apoio a evolução do time e conduzo entregas críticas do produto."
+      "description": "Atuo como Tech Lead e principal referência de desenvolvimento, com responsabilidade hands-on sobre arquitetura de software, produtos web/mobile, APIs, bancos de dados, DevOps, infraestrutura e jogos 2D/3D em Unity. Estruturo containers, CI/CD e GitHub Actions, automação de builds e deploys, health checks, backups, escalabilidade e decisões de hospedagem, além de apoiar POCs, clientes, evolução do time e entregas críticas."
     },
     {
       "title": "Desenvolvedor Pleno · Amplimed",
@@ -119,7 +121,7 @@
     {
       "title": "Desenvolvedor Pleno · Infogen Sistemas",
       "period": "2022 · 2023",
-      "description": "Atuei em APIs, aplicativos mobile, ERP em GeneXus e portal web em .NET. Contribuí para a padronização de apps white-label, manutenção de contas de lojas, suporte de migração e evolução de módulos críticos do ERP, incluindo contabilidade e o módulo leite, com regras ligadas a cooperativas, crédito, pagamentos e operação do produtor."
+      "description": "Atuei em APIs, aplicativos mobile, ERP em GeneXus, portal web em .NET e estrutura de bancos de dados dos sistemas. Contribuí para a padronização de apps white-label, manutenção de contas de lojas, suporte de migração e evolução de módulos críticos do ERP, incluindo contabilidade e o módulo leite, com regras ligadas a cooperativas, crédito, pagamentos e operação do produtor."
     },
     {
       "title": "Desenvolvedor Freelancer",
@@ -130,38 +132,38 @@
   "servicesSection": {
     "eyebrow": "Serviços",
     "title": "Como posso agregar",
-    "text": "Serviços organizados em torno de produto, arquitetura, performance, integrações e evolução de sistemas."
+    "text": "Da definição de arquitetura e infraestrutura à entrega do produto, combinando desenvolvimento, automação, qualidade, escalabilidade e comunicação técnica orientada ao negócio."
   },
   "services": [
     {
       "icon": "assets/img/service/4.png",
       "title": "Arquitetura de Software",
-      "description": "Definição de arquitetura, padrões técnicos, separação de responsabilidades, documentação e base sólida para crescimento do produto."
+      "description": "System design de ponta a ponta: serviços, dados, containers, ambientes, disponibilidade, latência, load balancing, estratégia de cloud e decisões preparadas para crescimento."
     },
     {
       "icon": "assets/img/service/5.png",
       "title": "Desenvolvimento Web",
-      "description": "Criação e evolução de plataformas, dashboards, sistemas administrativos, marketplaces, landing pages e soluções web com foco em performance e clareza de UX."
+      "description": "Criação e evolução de plataformas, dashboards, sistemas administrativos, marketplaces e produtos web, conectando arquitetura, backend, frontend, performance e experiência do usuário."
     },
     {
       "icon": "assets/img/service/6.png",
-      "title": "Desenvolvimento Mobile",
-      "description": "Desenvolvimento e refatoração de aplicativos Android e iOS com foco em estabilidade, publicação, manutenção contínua e padronização técnica."
+      "title": "Mobile e Games",
+      "description": "Desenvolvimento e refatoração de aplicativos Android/iOS e jogos 2D/3D, com foco em estabilidade, publicação, otimização de builds, manutenção e integração com serviços de backend."
     },
     {
       "icon": "assets/img/service/1.png",
-      "title": "APIs e Integrações",
-      "description": "Integrações com gateways de pagamento, autenticação, serviços em nuvem, REST APIs, OAuth, SSO, WebSockets e serviços externos."
+      "title": "Cloud, DevOps e Infraestrutura",
+      "description": "Estruturação de ambientes em cloud, containers, CI/CD, GitHub Actions, deploy automatizado, health checks, backups, armazenamento de objetos, observabilidade e operação segura de novas versões."
     },
     {
       "icon": "assets/img/service/2.png",
-      "title": "Soluções White-Label",
-      "description": "Construção de produtos reutilizáveis e personalizáveis para diferentes clientes, acelerando implantação, consistência técnica e expansão comercial."
+      "title": "APIs, Dados e Integrações",
+      "description": "Arquitetura e evolução de APIs, bancos SQL/NoSQL, filas, autenticação, WebSockets e integrações externas, com atenção a consistência, desempenho, segurança e manutenção."
     },
     {
       "icon": "assets/img/service/3.png",
-      "title": "Refatoração e Escalabilidade",
-      "description": "Reorganização de código, melhoria de sistemas legados, redução de retrabalho e preparação estrutural para aumento de demanda e novos módulos."
+      "title": "Produto, Qualidade e Comunicação",
+      "description": "Testes unitários e E2E, refatoração, escalabilidade e tradução de decisões técnicas para clientes, produto, comercial e investidores, ajudando tecnologia e negócio a avançarem na mesma direção."
     }
   ],
   "projectsSection": {
@@ -1069,6 +1071,224 @@
       }
     },
     {
+      "title": "Imobly — plataforma imobiliária e gestão de leads",
+      "category": "product",
+      "image": "assets/img/portfolio/imobly.png",
+      "status": "Público",
+      "description": "Plataforma imobiliária responsiva para catálogo, mapa, simulador de financiamento, corretores, captação de imóveis e gestão de leads em um painel administrativo completo.",
+      "stack": [
+        "Next.js 16",
+        "React 19 + TypeScript",
+        "PostgreSQL / Neon",
+        "Drizzle ORM",
+        "Leaflet + Vercel Blob"
+      ],
+      "details": {
+        "description": "Imobly reúne a experiência pública de descoberta de imóveis e a operação diária da imobiliária em uma única aplicação. O visitante pesquisa venda ou locação, combina filtros, navega pelo mapa, abre a ficha completa do imóvel, simula financiamento e entra em contato com o corretor responsável. A operação administrativa mantém imóveis, imagens, corretores, tipos, características, configurações da marca, usuários e leads, enquanto eventos de navegação ajudam a medir interesse e canais de conversão.",
+        "features": [
+          "Catálogo de imóveis com busca por finalidade, tipo, bairro, faixa de preço, quartos, vagas e código",
+          "Mapa interativo com imóveis georreferenciados e controle de privacidade para ocultar a localização exata",
+          "Ficha completa com galeria, valores, áreas, comodidades, vídeo, tour virtual, mapa e compartilhamento",
+          "Simulador de financiamento com sistemas SAC e Price, entrada, prazo e taxa anual configuráveis",
+          "Perfis de corretores com contatos, CRECI e geração de cartão vCard para salvar no celular",
+          "Contato contextual por WhatsApp, telefone, e-mail e formulário, com responsável e mensagem por imóvel",
+          "Fluxo público para proprietários enviarem imóveis para avaliação e captação",
+          "Painel administrativo para imóveis, corretores, cadastros auxiliares, identidade do site, usuários e atendimento de leads",
+          "Eventos de visualização, compartilhamento, mapa e canais de contato para acompanhar interesse nos imóveis",
+          "Experiência responsiva com catálogo, navegação e menu adaptados para desktop e mobile"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Arquitetura",
+            "value": "Next.js 16 com App Router, React Server Components e Server Actions concentram páginas públicas, painel administrativo e endpoints internos na mesma aplicação TypeScript."
+          },
+          {
+            "label": "Persistência",
+            "value": "PostgreSQL hospedado no Neon é modelado com Drizzle ORM para imóveis, imagens, tipos, características, corretores, leads, configurações, sessões, eventos e auditoria."
+          },
+          {
+            "label": "Catálogo e cache",
+            "value": "Consultas do catálogo hidratam relações de imagens, características e corretores e usam cache/tag invalidation do Next.js para manter páginas rápidas sem perder consistência após mudanças administrativas."
+          },
+          {
+            "label": "Mapa e privacidade",
+            "value": "Leaflet renderiza a exploração geográfica. Quando o endereço exato não é público, a aplicação reduz a precisão das coordenadas e evita expor marcador e direções precisas."
+          },
+          {
+            "label": "Financiamento",
+            "value": "O simulador implementa cálculos SAC e Price a partir da taxa efetiva anual, prazo, entrada e valor do imóvel; os helpers matemáticos possuem testes automatizados com cenários de referência."
+          },
+          {
+            "label": "Mídia",
+            "value": "Fotos e assets administráveis podem usar Vercel Blob privado, com upload no servidor e rota de leitura controlada para não expor credenciais do storage ao navegador."
+          },
+          {
+            "label": "Autenticação",
+            "value": "Senhas administrativas usam scrypt com salt; sessões usam tokens aleatórios armazenados como hash SHA-256 e cookies HttpOnly, SameSite e Secure em produção."
+          },
+          {
+            "label": "Operação administrativa",
+            "value": "O painel registra auditoria de alterações, permite administrar acessos e suporta impersonação controlada para suporte sem compartilhar credenciais."
+          },
+          {
+            "label": "Leads e atribuição",
+            "value": "Consultas e propostas de captação possuem estados de atendimento, enquanto eventos registram visualizações, compartilhamentos, abertura do mapa e cliques nos canais de contato."
+          },
+          {
+            "label": "Entrega",
+            "value": "A aplicação está preparada para Vercel com Node.js 24, Neon, Vercel Blob, migrations e seed versionados, além de health check, sitemap e robots."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Next.js 16",
+            "description": "App Router, renderização server-side, Server Actions, rotas de API, cache e metadata da aplicação."
+          },
+          {
+            "name": "React 19 + TypeScript",
+            "description": "Interface responsiva e componentes tipados para catálogo, mapas, formulários e administração."
+          },
+          {
+            "name": "PostgreSQL / Neon",
+            "description": "Banco relacional remoto para catálogo, corretores, leads, configurações, eventos e sessões."
+          },
+          {
+            "name": "Drizzle ORM",
+            "description": "Schema tipado, relações, queries e migrations versionadas sobre PostgreSQL."
+          },
+          {
+            "name": "Leaflet",
+            "description": "Mapas interativos do catálogo e das páginas de imóveis com georreferenciamento."
+          },
+          {
+            "name": "Vercel Blob",
+            "description": "Armazenamento de mídia administrável com suporte a objetos privados e leitura mediada pelo servidor."
+          },
+          {
+            "name": "Zod",
+            "description": "Validação de dados nos fluxos de entrada e integração da aplicação."
+          },
+          {
+            "name": "Node.js Crypto",
+            "description": "scrypt, tokens aleatórios e hashes de sessão para autenticação administrativa."
+          },
+          {
+            "name": "Vitest",
+            "description": "Testes dos cálculos de financiamento, geração de contato e helpers de formatação."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Garimpei — curadoria de moda, listas e gestão de catálogo",
+      "category": "product",
+      "image": "assets/img/portfolio/garimpei.png",
+      "status": "Público",
+      "description": "Plataforma de curadoria de moda e peças únicas com catálogo, favoritos, listas compartilháveis, avaliações, contato direto e painel administrativo orientado por interesse.",
+      "stack": [
+        "Next.js 16",
+        "React 19 + TypeScript",
+        "PostgreSQL / Neon",
+        "Drizzle ORM",
+        "Vercel Blob"
+      ],
+      "details": {
+        "description": "Garimpei foi construído para um fluxo de compra por curadoria e conversa, sem simular um checkout que não existe. O visitante explora novidades, categorias, ofertas e peças em destaque, aplica filtros detalhados e consulta fotos, medidas, estado, tamanhos e preço. Usuários autenticados podem favoritar peças, organizar múltiplas listas, compartilhar listas públicas e enviar avaliações. No administrativo, catálogo, descontos, aparência, usuários, avaliações e indicadores de interesse ficam concentrados em um painel próprio.",
+        "features": [
+          "Home editorial com novidades, categorias, ofertas, peças em destaque e avaliações publicadas",
+          "Catálogo com busca, categoria, tag, tamanho, estado, cor, faixa de preço, descontos e ordenação",
+          "Página da peça com galeria, condição, tamanhos, medidas, material, código, tags, preço final e itens relacionados",
+          "Favoritos e múltiplas listas por usuário, com opção de tornar uma lista pública e compartilhável",
+          "Contato direto por WhatsApp e e-mail usando mensagens contextuais com dados e link da peça",
+          "Estados reservado e vendido tratados explicitamente, com configuração para manter itens vendidos visíveis",
+          "Avaliações de usuários com fila de moderação antes da publicação no site",
+          "Descontos por peça e descontos em massa por categoria, com cálculo centralizado do preço final",
+          "Dashboard administrativo com visualizações, contatos iniciados, favoritos, avaliações pendentes e ranking de interesse",
+          "Personalização de marca, cores, hero, contatos e conteúdo principal sem alterar o código da aplicação"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Arquitetura",
+            "value": "Next.js 16 com App Router, React Server Components e Server Actions organiza catálogo público, conta do usuário, administração e APIs em uma única aplicação TypeScript."
+          },
+          {
+            "label": "Persistência",
+            "value": "PostgreSQL no Neon armazena usuários, sessões, categorias, tags, peças, imagens, favoritos, listas, avaliações, descontos, eventos, configurações e trilha de auditoria via Drizzle ORM."
+          },
+          {
+            "label": "Catálogo e preço",
+            "value": "A camada de serviço combina relações de categoria, tags e imagens, aplica filtros e paginação no banco e calcula o desconto final usando a maior condição válida entre desconto da peça e da categoria."
+          },
+          {
+            "label": "Conta e compartilhamento",
+            "value": "Cada usuário pode manter favoritos e várias listas privadas ou públicas; páginas públicas de listas são compartilháveis sem expor e-mail ou outros dados privados do proprietário."
+          },
+          {
+            "label": "Autenticação e autorização",
+            "value": "Senhas usam scrypt com salt, sessões são baseadas em tokens aleatórios armazenados como hash e cookies HttpOnly, e o painel exige role administrativa."
+          },
+          {
+            "label": "Proteções operacionais",
+            "value": "Rate limiting persistido reduz abuso em fluxos sensíveis, sessões podem ser revogadas e administradores podem usar impersonação controlada para suporte e validação de contas."
+          },
+          {
+            "label": "Mídia privada",
+            "value": "Vercel Blob privado recebe uploads no servidor; imagens públicas são entregues por uma rota intermediária, mantendo tokens e credenciais fora do cliente."
+          },
+          {
+            "label": "Analytics de intenção",
+            "value": "Eventos registram visualização, favorito, compartilhamento, inclusão em lista e contatos por WhatsApp/e-mail para destacar peças que realmente geram interesse."
+          },
+          {
+            "label": "SEO",
+            "value": "Páginas de peças geram metadata, canonical, Open Graph e JSON-LD Product/Offer, além de sitemap e robots para indexação consistente."
+          },
+          {
+            "label": "Cache e entrega",
+            "value": "Dados de navegação, home, catálogo e avaliações usam cache revalidável com tags. O deploy alvo usa Vercel, Node.js 24, Neon e migrations versionadas."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Next.js 16",
+            "description": "Frontend server-rendered, Server Actions, APIs, metadata, cache e rotas públicas/administrativas."
+          },
+          {
+            "name": "React 19 + TypeScript",
+            "description": "Componentização e contratos tipados para catálogo, conta, listas, favoritos e painel."
+          },
+          {
+            "name": "PostgreSQL / Neon",
+            "description": "Persistência remota para usuários, peças, listas, avaliações, descontos e eventos."
+          },
+          {
+            "name": "Drizzle ORM",
+            "description": "Schema relacional tipado, queries e migrations da aplicação."
+          },
+          {
+            "name": "Vercel Blob",
+            "description": "Storage privado para imagens do catálogo e assets configuráveis da marca."
+          },
+          {
+            "name": "Next.js Cache",
+            "description": "unstable_cache e tags de invalidação para equilibrar desempenho e atualização do catálogo."
+          },
+          {
+            "name": "Node.js Crypto",
+            "description": "scrypt, tokens seguros e hash de sessão na autenticação própria."
+          },
+          {
+            "name": "Zod",
+            "description": "Validação estruturada dos dados recebidos pelos fluxos da aplicação."
+          },
+          {
+            "name": "Vitest",
+            "description": "Cobertura de templates de contato, URLs, moeda, slugs e regras públicas de formatação."
+          }
+        ]
+      }
+    },
+    {
       "title": "Realtime Messaging · Chat em Tempo Real",
       "category": "product",
       "image": "assets/img/portfolio/realtime_messaging.png",
@@ -1257,15 +1477,31 @@
     "fullscreenExitLabel": "Sair da tela inteira",
     "tabsLabel": "Seções do projeto",
     "overviewTab": "Visão geral",
-    "technicalTab": "Especificações",
-    "technologiesTab": "Tecnologias",
+    "technicalTab": "Técnico",
     "imagesTab": "Imagens",
-    "pricingTab": "Preços",
     "overviewTitle": "Sobre o projeto",
     "featuresTitle": "Funcionalidades para o usuário",
     "technicalTitle": "Especificações técnicas",
     "technologiesTitle": "Tecnologias utilizadas",
-    "pricingTitle": "Preços e planos"
+    "pricingTitle": "Preços e planos",
+    "storyTab": "História",
+    "storyEyebrow": "CASE INTERATIVO",
+    "storyTitle": "Do problema à implementação",
+    "storyChallengeTitle": "Contexto",
+    "storySolutionTitle": "Solução",
+    "storyFeatureTitle": "Decisão de produto",
+    "storyArchitectureTitle": "Decisão técnica",
+    "storyStackTitle": "Base tecnológica",
+    "storyProgress": "Etapa {current} de {count}",
+    "technicalEyebrow": "VISÃO TÉCNICA",
+    "technicalDescription": "Tecnologias, decisões de arquitetura e escolhas de implementação reunidas em uma única leitura.",
+    "technicalDecisionsTitle": "Decisões de arquitetura",
+    "technologiesAndWhyTitle": "Tecnologias e escolhas",
+    "architectureTitle": "Arquitetura / stack",
+    "architectureAria": "Fluxo técnico do projeto",
+    "storyPreviousLabel": "Etapa anterior da história",
+    "storyNextLabel": "Próxima etapa da história",
+    "storyJumpLabel": "Abrir etapa {index}: {title}"
   },
   "education": [
     {
@@ -1482,12 +1718,12 @@
     {
       "company": "Sensorama Play",
       "period": "Atual",
-      "title": "Liderança técnica com entrega multi-stack",
-      "result": "Atuação como Tech Lead e principal figura de desenvolvimento, cobrindo web, mobile, APIs, DevOps, jogos 2D/3D em Unity e relacionamento com clientes.",
+      "title": "Arquitetura, infraestrutura e entrega multi-produto",
+      "result": "Atuo como Tech Lead e referência principal de engenharia, cobrindo arquitetura, web, mobile, APIs, dados, cloud/DevOps, automação de entrega, jogos 2D/3D e relacionamento direto com clientes e equipes internas.",
       "bullets": [
-        "Participação prática em POCs e entregas para editais públicos",
-        "Criação de aplicativos, produtos web e fluxos internos de trabalho",
-        "Implantação de sprints, dailys, feedbacks e apoio em entrevistas"
+        "Apoio técnico em 4+ editais públicos com POCs, apps, portais e entregas de validação",
+        "Estruturação de containers, CI/CD, deploys, health checks, backups, testes automatizados e rotinas de operação",
+        "Decisões de arquitetura, escalabilidade e hospedagem alinhadas a produto, clientes e necessidades comerciais"
       ]
     },
     {
@@ -1515,12 +1751,12 @@
     {
       "company": "Infogen Sistemas",
       "period": "2022 · 2023",
-      "title": "Base forte em apps, APIs, ERP e operação",
-      "result": "Atuação estratégica em APIs, aplicativos mobile, ERP GeneXus e portal web em .NET, com impacto direto em operação, migração, suporte e manutenção.",
+      "title": "Base sólida em apps, APIs, ERP e dados",
+      "result": "Fui uma peça importante no time de APIs e desenvolvimento online, criando apps, padronizando estruturas white-label, apoiando migração e suporte e atuando também na estrutura e evolução dos bancos de dados ligados aos sistemas e ao ERP.",
       "bullets": [
-        "Padronização de apps white-label e manutenção das contas de lojas",
-        "Contato direto com migração, suporte e resolução de problemas recorrentes",
-        "Contribuição relevante em contabilidade e no módulo leite para cooperativas e produtores"
+        "Criação de várias apps, manutenção de contas de lojas e apoio em publicação e suporte",
+        "Contato direto com migração, bancos de dados, suporte e resolução de problemas recorrentes de clientes",
+        "Influência relevante em contabilidade e módulo leite, com regras de crédito, cooperativas, cálculos, pagamentos e dívidas"
       ]
     }
   ],
@@ -1537,20 +1773,50 @@
   },
   "recruiterHighlights": [
     {
-      "title": "Escopo de atuação",
-      "text": "Full-stack com atuação real em web, mobile, backend, games 2D/3D, integrações, DevOps, suporte e liderança técnica."
+      "title": "Arquitetura e engenharia",
+      "text": "Atuação real em system design, web, mobile, backend, games 2D/3D, bancos de dados, integrações e definição de estruturas técnicas de ponta a ponta."
     },
     {
-      "title": "Contextos de negócio",
-      "text": "Experiência prática em white-label, ERP, setor público, saúde, marketplace, games, assinaturas e produtos digitais em produção."
+      "title": "Cloud, DevOps e escala",
+      "text": "Containers, CI/CD, GitHub Actions, deploys automatizados, health checks, backups, load balancing, armazenamento em nuvem, disponibilidade e planejamento de escalabilidade."
     },
     {
-      "title": "Liderança e execução",
-      "text": "Criação de pipeline, documentação, treinamento de novos colaboradores, participação em entrevistas, definição de processo e entrega hands-on."
+      "title": "Qualidade e execução",
+      "text": "Testes unitários e E2E com Playwright, refatoração, otimização de builds e performance, documentação, liderança técnica e entrega hands-on."
     },
     {
-      "title": "Stack e adaptabilidade",
-      "text": "Atuação com React Native, Laravel, PHP, JavaScript, TypeScript, C#, Unity, GeneXus, .NET e infraestrutura, sempre com foco em resolver o problema real do produto."
+      "title": "Produto e comunicação",
+      "text": "Capacidade de traduzir arquitetura e decisões técnicas para gestores, POs, clientes, áreas comerciais e investidores, conectando engenharia a impacto de negócio."
     }
-  ]
+  ],
+  "experienceLab": {
+    "openLabel": "Abrir laboratório interativo",
+    "buttonLabel": "LAB",
+    "title": "Experience Lab",
+    "subtitle": "Personalize o visual e compare as interações do portfólio em tempo real.",
+    "closeLabel": "Fechar laboratório",
+    "appearanceTitle": "Playground visual",
+    "appearanceText": "Troque a identidade do template em tempo real. As mudanças acontecem somente no seu navegador.",
+    "presetsLabel": "Paletas",
+    "presetOriginal": "Original",
+    "presetOcean": "Oceano",
+    "presetEmber": "Ember",
+    "presetForest": "Floresta",
+    "accentLabel": "Cor principal",
+    "accentSecondaryLabel": "Cor secundária",
+    "radiusLabel": "Arredondamento",
+    "motionLabel": "Intensidade do movimento",
+    "effectsTitle": "Interações",
+    "effectsText": "Ative ou pause os efeitos locais para comparar a experiência.",
+    "canvasToggle": "Canvas interativo",
+    "microToggle": "Microinterações",
+    "resetButton": "Restaurar padrão",
+    "copyButton": "Copiar configuração",
+    "copiedButton": "Configuração copiada",
+    "reducedMotionNote": "Movimentos intensos são reduzidos automaticamente quando o sistema solicita menos animações.",
+    "physicsToggle": "Escultura 3D interativa",
+    "ambientToggle": "Profundidade visual das seções",
+    "networkToggle": "Rede 3D e constelações",
+    "particleFieldToggle": "Partículas 3D interativas no fundo"
+  }
 }
