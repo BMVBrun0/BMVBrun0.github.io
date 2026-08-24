@@ -121,8 +121,8 @@ function renderSocialLinks() {
   const links = Array.isArray(config.socialLinks) ? config.socialLinks.filter((item) => item?.url) : [];
   root.innerHTML = links.map((item) => `
     <li>
-      <a href="${item.url}" target="_blank" rel="noopener">
-        <svg class="icon"><use href="#${item.icon || 'icon-arrow-up-right'}"></use></svg>
+      <a href="${item.url}" target="_blank" rel="noopener" data-social="${item.id || ''}">
+        <i class="bi ${item.icon || 'bi-arrow-up-right'} social-brand-icon" aria-hidden="true"></i>
         <span>${item.label || item.id || ''}</span>
       </a>
     </li>
@@ -463,7 +463,7 @@ function renderServices() {
       <div class="service-card__glow" aria-hidden="true"></div>
       <div class="service-card__header">
         <span class="service-card__index">${String(index + 1).padStart(2, '0')}</span>
-        <span class="service-card__icon-shell"><img src="${item.icon}" alt="" class="service-icon"></span>
+        <span class="service-card__icon-shell" aria-hidden="true"><i class="bi ${item.icon} service-icon"></i></span>
       </div>
       <h3>${item.title}</h3>
       <p>${item.description}</p>
@@ -994,9 +994,9 @@ function initCertificateDescriptionToggles() {
 function renderContacts() {
   const root = qs('#contact-grid');
   root.innerHTML = state.data.contacts.map((item) => `
-    <a class="contact-card contact-link reveal" href="${config.contactLinks[item.id]}" ${item.external ? 'target="_blank" rel="noopener"' : ''} aria-label="${item.ariaLabel}">
+    <a class="contact-card contact-link reveal" href="${config.contactLinks[item.id]}" ${item.external ? 'target="_blank" rel="noopener"' : ''} aria-label="${item.ariaLabel}" data-contact="${item.id}">
       <div class="contact-icon-wrap">
-        <svg class="icon"><use href="#${item.icon}"></use></svg>
+        <i class="bi ${item.icon} contact-icon" aria-hidden="true"></i>
       </div>
       <div class="contact-content">
         <h3>${item.title}</h3>

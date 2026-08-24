@@ -136,32 +136,32 @@
   },
   "services": [
     {
-      "icon": "assets/img/service/4.png",
+      "icon": "bi-diagram-3",
       "title": "Software Architecture",
       "description": "End-to-end system design covering services, data, containers, environments, availability, latency, load balancing, cloud strategy, and decisions prepared for growth."
     },
     {
-      "icon": "assets/img/service/5.png",
+      "icon": "bi-code-slash",
       "title": "Web Development",
       "description": "Building and evolving platforms, dashboards, admin systems, marketplaces, and web products by connecting architecture, backend, frontend, performance, and user experience."
     },
     {
-      "icon": "assets/img/service/6.png",
+      "icon": "bi-controller",
       "title": "Mobile and Games",
       "description": "Development and refactoring of Android/iOS apps and 2D/3D games, focused on stability, publishing, build optimization, long-term maintenance, and backend integration."
     },
     {
-      "icon": "assets/img/service/1.png",
+      "icon": "bi-cloud-arrow-up",
       "title": "Cloud, DevOps and Infrastructure",
       "description": "Cloud environments, containers, CI/CD, GitHub Actions, automated deployments, health checks, backups, object storage, observability, and safe operation of new releases."
     },
     {
-      "icon": "assets/img/service/2.png",
+      "icon": "bi-hdd-network",
       "title": "APIs, Data and Integrations",
       "description": "Architecture and evolution of APIs, SQL/NoSQL databases, queues, authentication, WebSockets, and external integrations with attention to consistency, performance, security, and maintainability."
     },
     {
-      "icon": "assets/img/service/3.png",
+      "icon": "bi-kanban",
       "title": "Product, Quality and Communication",
       "description": "Unit and E2E testing, refactoring, scalability, and translation of technical decisions for clients, product, sales, and investors so engineering and business can move in the same direction."
     }
@@ -1420,7 +1420,7 @@
   "contacts": [
     {
       "id": "whatsapp",
-      "icon": "icon-whatsapp",
+      "icon": "bi-whatsapp",
       "title": "WhatsApp / Phone",
       "value": "+55 (49) 98842-7624",
       "text": "Click to open a direct WhatsApp conversation.",
@@ -1429,7 +1429,7 @@
     },
     {
       "id": "email",
-      "icon": "icon-envelope",
+      "icon": "bi-envelope",
       "title": "Email",
       "value": "trichesbruno@gmail.com",
       "text": "Click to open your email client and start a conversation.",
@@ -1438,7 +1438,7 @@
     },
     {
       "id": "linkedin",
-      "icon": "icon-linkedin",
+      "icon": "bi-linkedin",
       "title": "LinkedIn",
       "value": "Bruno Getten profile",
       "text": "Click to view the full profile and professional background.",

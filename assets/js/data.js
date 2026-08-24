@@ -235,10 +235,10 @@ window.portfolioConfig = {
     linkedin: 'https://www.linkedin.com/in/bruno-getten-triches-152952207/'
   },
   socialLinks: [
-    { id: 'github', label: 'GitHub', icon: 'icon-github', url: 'https://github.com/BMVBrun0' },
-    { id: 'linkedin', label: 'LinkedIn', icon: 'icon-linkedin', url: 'https://www.linkedin.com/in/bruno-getten-triches-152952207/' },
-    { id: 'instagram', label: 'Instagram', icon: 'icon-instagram', url: 'https://www.instagram.com/bruno_getten' },
-    { id: 'whatsapp', label: 'WhatsApp', icon: 'icon-whatsapp', url: 'https://wa.me/5549988427624' }
+    { id: 'github', label: 'GitHub', icon: 'bi-github', url: 'https://github.com/BMVBrun0' },
+    { id: 'linkedin', label: 'LinkedIn', icon: 'bi-linkedin', url: 'https://www.linkedin.com/in/bruno-getten-triches-152952207/' },
+    { id: 'instagram', label: 'Instagram', icon: 'bi-instagram', url: 'https://www.instagram.com/bruno_getten' },
+    { id: 'whatsapp', label: 'WhatsApp', icon: 'bi-whatsapp', url: 'https://wa.me/5549988427624' }
   ],
   // Links opcionais de acesso aos projetos.
   // A chave é o nome do arquivo de capa sem extensão (ex.: pocket_links.png -> pocket_links).
