@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "{name} | Software Architect & Engineer",
-    "description": "Portfolio of {name}, Software Architect, Software Engineer, Tech Lead and Full-Stack Developer. Scalable systems, cloud, DevOps, web, mobile and game projects.",
-    "ogTitle": "{name} | Software Architecture & Engineering",
-    "ogDescription": "Software architecture, Full Stack, cloud, DevOps, mobile, games, scalable systems and real-world projects."
+    "title": "{name} | Tech Lead, Software Architect & Software Engineer",
+    "description": "Portfolio of {name}: 8+ years in software development, engineering, architecture, and consulting; strong mobile specialization with hands-on work across cloud, DevOps, APIs, data, and scalable systems.",
+    "ogTitle": "{name} | Software Architecture, Engineering & Mobile",
+    "ogDescription": "8+ years building software, 3+ years with recurring end-to-end architectural ownership, and strong experience in mobile, cloud, APIs, data, and DevOps."
   },
   "accessibility": {
     "skipToContent": "Skip to content",
@@ -26,155 +26,189 @@
   },
   "hero": {
     "eyebrow": "Tech Lead · Software Architect · Software Engineer",
-    "rolePrefix": "I am",
+    "rolePrefix": "I am a",
     "roles": [
+      "Hands-on Software Engineer",
       "Software Architect",
-      "Software Engineer",
-      "Full-Stack Developer",
-      "Mobile Developer",
-      "Game Developer",
-      "Tech Lead"
+      "Tech Lead",
+      "Mobile Engineer",
+      "Software Consultant",
+      "Full Stack Developer"
     ],
-    "text": "Hands-on from architecture to production across web, mobile, backend, games, databases, cloud, and DevOps, designing scalable systems, build/deploy automation, quality practices, and infrastructure for critical products.",
+    "text": "For more than 8 years I have turned ideas, products, and existing systems into software that has to work in the real world. I remain hands-on in engineering, with a strong mobile specialization and responsibility across architecture, backend, data, cloud, DevOps, quality, and technical evolution.",
     "primaryCta": "View projects",
     "secondaryCta": "Download CV",
     "stats": [
       {
-        "title": "8+ years",
-        "text": "building software"
+        "title": "8+ years building software",
+        "text": "Development, engineering, architecture, and consulting across web, mobile, backend, games, and integrations."
       },
       {
-        "title": "Web · Mobile · Games",
-        "text": "end-to-end delivery"
+        "title": "3+ years of end-to-end architectural ownership",
+        "text": "Recurring responsibility for system design, data, cloud, CI/CD, testing, performance, security, and operations."
       },
       {
-        "title": "Tech Lead",
-        "text": "execution, mentoring, and architecture"
+        "title": "100+ apps and variants published",
+        "text": "Mobile experience from code to stores, including white-label, releases, maintenance, and continuous evolution."
       }
     ]
   },
   "about": {
     "eyebrow": "About me",
-    "title": "From architecture to production: software, infrastructure, and product.",
+    "title": "Hands-on engineering, architecture, and product in the same context.",
     "paragraphs": [
-      "My name is Bruno Getten Triches. I work as a Tech Lead, Software Architect, and Software Engineer with end-to-end responsibility: beyond building web, mobile, backend, and game products, I design architectures, databases, containers, environments, hosting strategies, availability, latency, and system scalability.",
-      "My day-to-day work also includes CI/CD and GitHub Actions, automated builds and deployments, health checks, backups, load balancing, cloud object storage, unit and E2E testing with Playwright, and performance optimization. I can translate these technical decisions into clear language for product, sales, clients, companies, and investors, connecting engineering to real business needs."
+      "I have worked professionally with software since 2018, building, evolving, and supporting real products. My career started in execution and expanded into engineering, architecture, technical leadership, and consulting without taking me away from the code.",
+      "Today I work end to end when a product requires it: application architecture, mobile, backend, data, cloud, CI/CD, testing, performance, and operations. Mobile is my deepest specialty, but my role is to make the whole system work coherently."
     ],
-    "skillsLabel": "Core skills",
-    "imageAlt": "Bruno Getten Triches, Software Architect and Software Engineer"
+    "skillsLabel": "Capability map",
+    "imageAlt": "Bruno Getten Triches, Tech Lead, Software Architect, and Software Engineer"
   },
   "skills": [
     {
-      "name": "Laravel",
-      "level": 95
+      "name": "Architecture & System Design",
+      "description": "End-to-end system design with decisions driven by context, cost, risk, scale, and maintainability.",
+      "tags": [
+        "Distributed systems",
+        "Multi-tenant / white-label",
+        "Queues & cache",
+        "Load balancing",
+        "Scalability"
+      ]
     },
     {
-      "name": "React Native",
-      "level": 100
+      "name": "Mobile Engineering",
+      "description": "Primary specialty: building, maintaining, releasing, and evolving mobile products from code to the app stores.",
+      "tags": [
+        "React Native CLI / Expo",
+        "Java / Android",
+        "Swift / Objective-C",
+        "Flutter",
+        "App Store / Google Play"
+      ]
     },
     {
-      "name": "TypeScript",
-      "level": 90
+      "name": "Backend & APIs",
+      "description": "Services, integrations, and business logic across different stacks, choosing technology for the problem rather than by preference.",
+      "tags": [
+        "Node.js / NestJS",
+        "PHP / Laravel / Livewire",
+        "C# / .NET",
+        "Java / Spring Boot",
+        "REST / WebSockets / OAuth"
+      ]
     },
     {
-      "name": "PHP",
-      "level": 85
+      "name": "Web & Frontend",
+      "description": "Web products, dashboards, portals, and public/admin experiences focused on clarity, performance, and long-term evolution.",
+      "tags": [
+        "React / Next.js",
+        "Vue",
+        "Angular",
+        "TypeScript / JavaScript",
+        "HTML / CSS"
+      ]
     },
     {
-      "name": "JavaScript",
-      "level": 90
+      "name": "Cloud, DevOps & Quality",
+      "description": "Hosting, delivery automation, observability, and testing treated as part of the product rather than a later stage.",
+      "tags": [
+        "Docker",
+        "GitHub Actions / CI/CD",
+        "AWS / Azure / DigitalOcean",
+        "Playwright / Selenium",
+        "Backups / health checks"
+      ]
     },
     {
-      "name": "C#",
-      "level": 80
-    },
-    {
-      "name": "Unity",
-      "level": 60
-    },
-    {
-      "name": "Databases (SQL/MongoDB)",
-      "level": 70
+      "name": "Data & Performance",
+      "description": "Modeling, indexing, and combining SQL/NoSQL stores based on reads, consistency, latency, and operational needs.",
+      "tags": [
+        "MySQL / SQL Server",
+        "MongoDB",
+        "Redis",
+        "Indexing / profiling",
+        "Python: data, automation & ML"
+      ]
     }
   ],
   "experienceSection": {
     "eyebrow": "Experience",
-    "title": "Professional journey",
-    "text": "A concise view of the experiences that best represent my technical profile, leadership, and product-building background."
+    "title": "My professional journey",
+    "text": "A career built through progressive responsibility: development, engineering, architecture, leadership, and consulting without stepping away from hands-on execution."
   },
   "experience": [
     {
       "title": "Tech Lead · Sensorama Play",
-      "period": "2025 · Present",
-      "description": "I work as Tech Lead and the main development reference, with hands-on responsibility for software architecture, web/mobile products, APIs, databases, DevOps, infrastructure, and 2D/3D Unity games. I structure containers, CI/CD and GitHub Actions, build/deploy automation, health checks, backups, scalability, and hosting decisions while supporting POCs, clients, team growth, and critical deliveries."
+      "period": "2025 · Current",
+      "description": "Hands-on Tech Lead and technical reference across multiple products, defining and evolving architecture, standards, APIs, data, web/mobile, infrastructure, and delivery automation. I also contribute directly to development, refactoring, POCs, procurement processes, documentation, tests, and critical problem solving."
     },
     {
-      "title": "Mid-level Developer · Amplimed",
+      "title": "Full Stack & Mobile Developer · Amplimed",
       "period": "2024 · 2025",
-      "description": "Main technical contributor for marketplace products, including online scheduling, telemedicine, mobile apps, and service queues. Worked on marketplace refactoring, the scheduling app, and white-label microservices and solutions."
+      "description": "Responsible for marketplace products around scheduling, telemedicine, mobile apps, and service queues. I refactored web/mobile channels, evolved legacy APIs, and contributed to the white-label foundation adopted by dozens of clients, with direct impact on commercial goals and product scalability."
     },
     {
       "title": "Tech Lead · Astronfy",
       "period": "2023 · 2024",
-      "description": "Technical owner for the marketplace, affiliate dashboard, support system, and 2D/3D products. Led web and mobile structures, national and international payment integrations, crypto flows, and technical communication with clients from Europe and Asia."
+      "description": "Led the marketplace, affiliate dashboard, support systems, web/mobile products, and games. Worked on white-label architecture, national/international and crypto payments, infrastructure, and client relationships across Europe and Asia while remaining hands-on in implementation."
     },
     {
-      "title": "Mid-level Developer · Infogen Sistemas",
+      "title": "Full Stack & Mobile Developer · Infogen Sistemas",
       "period": "2022 · 2023",
-      "description": "I worked on APIs, mobile applications, a GeneXus ERP, a .NET web portal, and the database structures supporting those systems. I contributed to standardizing white-label apps, store-account maintenance, migration support, and the evolution of critical ERP modules, including accounting and the dairy module with rules around cooperatives, credit, payments, and producer operations."
+      "description": "Progressed from trainee to mid-level while working across mobile, GeneXus ERP, .NET portal, APIs, databases, and integrations. Led React Native refactors, handled store publishing/maintenance, built white-label modules, supported clients, and moved into mentoring and onboarding new developers."
     },
     {
-      "title": "Freelance Developer",
-      "period": "2018 · Present",
-      "description": "On-demand projects for different industries, including landing pages, intranets, mini ERPs, real-time dashboards, mobile applications, integrations, and 3D multiplayer games, with direct client and partner communication."
+      "title": "Software Engineer & Consultant · Freelance",
+      "period": "2018 · Current",
+      "description": "Independent development and consulting across web/mobile products, dashboards, internal systems, ERPs, integrations, and games. I work both greenfield and on focused needs, translating business requirements into architecture, implementation, maintenance, and technical evolution."
     }
   ],
   "servicesSection": {
-    "eyebrow": "Services",
-    "title": "How I can help",
-    "text": "From architecture and infrastructure decisions to product delivery, combining development, automation, quality, scalability, and business-oriented technical communication."
+    "eyebrow": "Work & consulting",
+    "title": "Where I can help",
+    "text": "From a complete product to a focused technical need, I step in where there is risk, a bottleneck, or an opportunity and move it toward a usable solution."
   },
   "services": [
     {
       "icon": "bi-diagram-3",
-      "title": "Software Architecture",
-      "description": "End-to-end system design covering services, data, containers, environments, availability, latency, load balancing, cloud strategy, and decisions prepared for growth."
+      "title": "Architecture & System Design",
+      "description": "Architecture design or review across data, integrations, multi-tenancy, queues, cache, availability, security, hosting, and scaling strategy."
+    },
+    {
+      "icon": "bi-phone",
+      "title": "End-to-end Mobile",
+      "description": "Android/iOS apps with React Native, Expo, Java, Swift/Objective-C, or Flutter, including builds, publishing, white-label, maintenance, and store evolution."
     },
     {
       "icon": "bi-code-slash",
-      "title": "Web Development",
-      "description": "Building and evolving platforms, dashboards, admin systems, marketplaces, and web products by connecting architecture, backend, frontend, performance, and user experience."
-    },
-    {
-      "icon": "bi-controller",
-      "title": "Mobile and Games",
-      "description": "Development and refactoring of Android/iOS apps and 2D/3D games, focused on stability, publishing, build optimization, long-term maintenance, and backend integration."
+      "title": "Web Products, Backend & APIs",
+      "description": "Platforms, dashboards, internal systems, marketplaces, APIs, and integrations using stacks such as React/Next, Node/Nest, Laravel, .NET, and Spring Boot."
     },
     {
       "icon": "bi-cloud-arrow-up",
-      "title": "Cloud, DevOps and Infrastructure",
-      "description": "Cloud environments, containers, CI/CD, GitHub Actions, automated deployments, health checks, backups, object storage, observability, and safe operation of new releases."
+      "title": "Cloud, DevOps & Quality",
+      "description": "Docker, environments, CI/CD, GitHub Actions, automated deployments, backups, observability, build optimization, and testing with Playwright/Selenium."
     },
     {
       "icon": "bi-hdd-network",
-      "title": "APIs, Data and Integrations",
-      "description": "Architecture and evolution of APIs, SQL/NoSQL databases, queues, authentication, WebSockets, and external integrations with attention to consistency, performance, security, and maintainability."
+      "title": "Data, Integrations & Performance",
+      "description": "SQL/NoSQL, Redis, indexing, queues, WebSockets, OAuth/SSO, external integrations, latency analysis, and bottleneck optimization."
     },
     {
-      "icon": "bi-kanban",
-      "title": "Product, Quality and Communication",
-      "description": "Unit and E2E testing, refactoring, scalability, and translation of technical decisions for clients, product, sales, and investors so engineering and business can move in the same direction."
+      "icon": "bi-tools",
+      "title": "Legacy, Consulting & Focused Delivery",
+      "description": "Diagnosis, fixes, pragmatic refactoring, new features, maintenance, technical reviews, or support for teams that need a specific part of a product solved."
     }
   ],
   "projectsSection": {
     "eyebrow": "Projects",
     "title": "Featured projects",
-    "text": "A selection of projects and visual studies that represent my background in interfaces, digital products, implementation, accessibility, integrations, and system organization.",
+    "text": "Products, studies, and tools that show both technical and commercial range. I keep projects of different kinds because this portfolio also supports consulting and freelance work; open the details to explore architecture, features, stack, and galleries.",
     "filtersLabel": "Project filters",
     "zoomCta": "Tap to enlarge",
     "zoomAriaLabel": "Enlarge image for project {title}",
     "imageAlt": "Preview image for project {title}",
-    "stackAriaLabel": "Expected stack",
+    "stackAriaLabel": "Technology stack",
     "defaultCategory": "Project",
     "comingSoonLabel": "Coming soon",
     "galleryCta": "View gallery",
@@ -220,7 +254,7 @@
       "title": "Scheduling and Administration Web Panel",
       "category": "product",
       "image": "assets/img/portfolio/whitelabel_booking.png",
-      "status": "Planned",
+      "status": "Private",
       "description": "White-label platform for online booking, schedules, services, staff, customers and day-to-day operations in one panel.",
       "stack": [
         "Laravel 13",
@@ -1414,8 +1448,8 @@
   ],
   "contactSection": {
     "eyebrow": "Contact",
-    "title": "Contact information",
-    "text": "If you are interested in a partnership, service, technical leadership, consulting, mentoring, or a project, you can reach me through any of the channels below."
+    "title": "Let’s talk",
+    "text": "I am open to professional opportunities, hands-on technical leadership, architecture, consulting, freelance, and fractional work. If there is a technical problem or an idea that is still unclear, I can help turn it into an executable path."
   },
   "contacts": [
     {
@@ -1505,35 +1539,45 @@
   },
   "education": [
     {
-      "enabled": 0,
-      "institution": "Institution name",
-      "course": "Course or degree name",
-      "degree": "Degree",
-      "period": "2022 — 2026",
-      "status": "Completed",
-      "description": "Short description of the program, field of study or key learning areas.",
+      "enabled": 1,
+      "institution": "Cruzeiro do Sul Virtual",
+      "course": "Information Systems",
+      "degree": "Bachelor’s degree",
+      "period": "2024 · 2027",
+      "status": "In progress · expected completion in 2027",
+      "description": "Current degree program, resumed after a period away from university.",
+      "url": ""
+    },
+    {
+      "enabled": 1,
+      "institution": "UnoChapecó — Universidade Comunitária da Região de Chapecó",
+      "course": "Computer Science",
+      "degree": "Bachelor’s degree",
+      "period": "Started in 2022",
+      "status": "Program later paused",
+      "description": "Initial higher-education path in computing before resuming studies at Cruzeiro do Sul.",
       "url": ""
     }
   ],
   "certificatesSection": {
     "eyebrow": "Education",
-    "title": "Academic education and certificates",
-    "text": "Degrees, courses and certifications that complement hands-on experience and document my continuous technical development.",
-    "tagsAriaLabel": "Certificate topics and technologies",
+    "title": "Academic background & technical depth",
+    "text": "Current degree studies plus a short selection of recent courses that complement practical experience and deepen architecture, data, AI, performance, and game-development topics.",
+    "tagsAriaLabel": "Certificate technologies and topics",
     "providerBadgeLabel": "Provider",
     "credentialCta": "View certificate",
     "credentialAriaLabel": "Open certificate {title}",
     "imageAlt": "Illustrative image for certificate {title}",
     "showMore": "Show more",
     "showLess": "Show less",
-    "descriptionToggleAria": "Toggle certificate description for {title}",
-    "educationEyebrow": "Academic education",
-    "educationTitle": "College, degrees and other education",
-    "educationText": "Degrees and other education that form the academic and professional foundation of my work.",
-    "certificatesListTitle": "Courses and certificates",
+    "descriptionToggleAria": "Toggle certificate description {title}",
+    "educationEyebrow": "Academic background",
+    "educationTitle": "Degree studies",
+    "educationText": "Current academic path and previous studies.",
+    "certificatesListTitle": "Selected recent courses",
     "educationDefaultDegree": "Education",
     "educationLinkCta": "View education",
-    "educationLinkAriaLabel": "Open reference for education {title}"
+    "educationLinkAriaLabel": "Open education reference {title}"
   },
   "certificates": [
     {
@@ -1609,184 +1653,97 @@
       ],
       "url": "https://www.udemy.com/certificate/UC-d057fb56-c6b2-4fb4-bfc8-44b0bd272fe7/",
       "image": "assets/img/certificates/thumbs/udemy-design.jpg"
-    },
-    {
-      "provider": "Alura",
-      "providerClass": "alura",
-      "year": "2023",
-      "title": "PHP Composer: Dependencies, Autoload and Publishing",
-      "description": "Course focused on dependency management, autoloading and PHP application organisation with Composer.",
-      "tags": [
-        "PHP",
-        "Composer",
-        "Backend"
-      ],
-      "url": "https://cursos.alura.com.br/certificate/7f09a468-ba8e-4671-b777-5a8ae9c3c6f9",
-      "image": "assets/img/certificates/thumbs/alura-php-composer.png"
-    },
-    {
-      "provider": "Alura",
-      "providerClass": "alura",
-      "year": "2023",
-      "title": "JavaScript: Browser APIs and Design Patterns",
-      "description": "JavaScript training focused on browser APIs, code organisation and design patterns for web applications.",
-      "tags": [
-        "JavaScript",
-        "Browser",
-        "Patterns"
-      ],
-      "url": "https://cursos.alura.com.br/certificate/75f90563-051c-41d0-a5e0-2960c7b40349",
-      "image": "assets/img/certificates/thumbs/alura-javascript-browser.png"
-    },
-    {
-      "provider": "Alura",
-      "providerClass": "alura",
-      "year": "2023",
-      "title": "JavaScript: Exploring the Language",
-      "description": "JavaScript language fundamentals covering syntax, logic and the base used to build interfaces and business rules.",
-      "tags": [
-        "JavaScript",
-        "Language",
-        "Fundamentals"
-      ],
-      "url": "https://cursos.alura.com.br/certificate/a900b3e0-31f6-4ee7-b2cc-2bc5f3084827",
-      "image": "assets/img/certificates/thumbs/alura-javascript-explorando.png"
-    },
-    {
-      "provider": "Alura",
-      "providerClass": "alura",
-      "year": "2023",
-      "title": "React Native: Using and Creating Hooks",
-      "description": "Hands-on React Native course using Hooks for component design, state, effects and reusable logic.",
-      "tags": [
-        "React Native",
-        "Hooks",
-        "Mobile"
-      ],
-      "url": "https://cursos.alura.com.br/certificate/c5e6edcf-ecf8-4d57-9e92-67252fbdfa64",
-      "image": "assets/img/certificates/thumbs/alura-react-native-hooks.png"
-    },
-    {
-      "provider": "Alura",
-      "providerClass": "alura",
-      "year": "2023",
-      "title": "React Native: Building an App",
-      "description": "Introductory course on building an app in React Native with focus on project structure and mobile flow.",
-      "tags": [
-        "React Native",
-        "App",
-        "Mobile"
-      ],
-      "url": "https://cursos.alura.com.br/certificate/3bdb6829-78f9-4c96-9488-e4b8b1f6abf1",
-      "image": "assets/img/certificates/thumbs/alura-react-native-criando-app.png"
-    },
-    {
-      "provider": "Alura",
-      "providerClass": "alura",
-      "year": "2022",
-      "title": "C# Part 1: First Steps",
-      "description": "C# fundamentals and first contact with the language, useful for both .NET and Unity development.",
-      "tags": [
-        "C#",
-        ".NET",
-        "Fundamentals"
-      ],
-      "url": "https://cursos.alura.com.br/certificate/3606134c-c467-4d12-80d1-75140f65dcc1",
-      "image": "assets/img/certificates/thumbs/alura-csharp-parte1.png"
-    },
-    {
-      "provider": "Alura",
-      "providerClass": "alura",
-      "year": "2022",
-      "title": "ASP.NET Identity Part 1: Manage User Accounts",
-      "description": "Course focused on authentication and user account management with ASP.NET Identity.",
-      "tags": [
-        "ASP.NET",
-        "Identity",
-        "Auth"
-      ],
-      "url": "https://cursos.alura.com.br/certificate/cf13b8a0-d9b2-4578-ae3e-8e50b73b1ed8",
-      "image": "assets/img/certificates/thumbs/alura-aspnet-identity.png"
     }
   ],
   "impactSection": {
     "eyebrow": "Real impact",
-    "title": "Results that help recruiters understand my delivery level",
-    "text": "More than a stack list, these are concrete examples of impact across operations, client onboarding, technical standardization, hands-on leadership, and product evolution."
+    "title": "Results that show scope, seniority, and execution",
+    "text": "Technology matters, but the clearest way to understand my work is through its effect on product, operations, revenue, deployment, and maintainability."
   },
   "impacts": [
     {
       "company": "Sensorama Play",
-      "period": "Present",
-      "title": "Architecture, infrastructure, and multi-product delivery",
-      "result": "I work as Tech Lead and the main engineering reference across architecture, web, mobile, APIs, data, cloud/DevOps, delivery automation, 2D/3D games, and direct collaboration with clients and internal teams.",
+      "period": "2025 · Current",
+      "title": "Architecture and support across multiple products",
+      "result": "Hands-on Tech Lead and technical reference across web, mobile, APIs, data, infrastructure, delivery automation, and 2D/3D games.",
       "bullets": [
-        "Technical support for 4+ public tenders with POCs, apps, portals, and validation deliveries",
-        "Containers, CI/CD, deployments, health checks, backups, automated tests, and operational routines",
-        "Architecture, scalability, and hosting decisions aligned with product, clients, and commercial needs"
+        "Structured and evolved architecture, containers, CI/CD, deployments, health checks, backups, and automated tests",
+        "Technical support for POCs and 4+ public procurement processes involving multiple products",
+        "Refactoring and hosting/performance decisions focused on reliability, maintainability, and cost"
       ]
     },
     {
       "company": "Amplimed",
       "period": "2024 · 2025",
-      "title": "White-label products turned into a business driver",
-      "result": "I refactored the online scheduling app and site, improved legacy APIs, and structured white-label scheduling and queue portals on top of a reusable standard foundation.",
+      "title": "White-label engineering with direct business impact",
+      "result": "Refactored scheduling products and helped create a reusable white-label foundation for multiple clients and operational flows.",
       "bullets": [
-        "Built the white-label scheduling portal and queue portal on a shared structure",
-        "Improved legacy performance and created technical documentation for continuity",
-        "In the quarter after launch, white-label products outperformed a full year of the management product"
+        "New white-label system adopted by dozens of clients",
+        "Commercial targets planned for six months were reached in roughly one quarter",
+        "Performance, scalability, and maintainability improvements across mobile and web products"
       ]
     },
     {
       "company": "Astronfy",
       "period": "2023 · 2024",
-      "title": "Faster client onboarding and stronger commercial support",
-      "result": "I created a technical pipeline for white-label, web, mobile, and game products that reduced the time to onboard new clients to around 3 days and helped the commercial team move faster.",
+      "title": "Architecture, payments, and international expansion",
+      "result": "Technical leadership and implementation across web/mobile products, white-label architecture, payment integrations, and international client operations.",
       "bullets": [
-        "Technical standardization to launch new clients in just a few days",
-        "Hands-on leadership across game, web, and mobile products",
-        "Direct relationship with international clients and support for commercial growth"
+        "Marketplace serving clients in more than 10 countries",
+        "Payment system processing thousands of transactions per month",
+        "White-label pipeline reduced technical onboarding for new clients to around 3 days"
       ]
     },
     {
       "company": "Infogen Sistemas",
       "period": "2022 · 2023",
-      "title": "Strong foundation in apps, APIs, ERP, and data",
-      "result": "I was an important contributor to the APIs and online development team, building apps, standardizing white-label structures, supporting migrations and customer issues, and working on the structure and evolution of databases used by the systems and ERP.",
+      "title": "Fast growth from mobile into technical ownership",
+      "result": "Worked across apps, ERP, .NET portal, integrations, databases, and support, progressing from trainee to mid-level and taking on mentoring responsibilities.",
       "bullets": [
-        "Development of multiple apps, store-account maintenance, publishing, and support",
-        "Hands-on work with migrations, databases, support, and recurring customer issues",
-        "Relevant contribution to accounting and the dairy module, including credit, cooperatives, calculations, payments, and debt rules"
+        "Refactored more than 8 mobile applications",
+        "Built more than 15 modules for white-label applications",
+        "Standardized the mobile stack and created end-to-end documentation for mobile projects"
+      ]
+    },
+    {
+      "company": "Freelance / Consulting",
+      "period": "2018 · Current",
+      "title": "Complete products and focused technical engagements",
+      "result": "Software development and consulting for clients across different industries, from greenfield products to fixes, integrations, maintenance, and evolution of existing systems.",
+      "bullets": [
+        "Web, mobile, dashboards, ERPs, integrations, and 2D/3D game projects",
+        "Clients and partners across multiple countries",
+        "Product presented at an international event in Germany and participation in an international sports project"
       ]
     }
   ],
   "recruiterSection": {
-    "eyebrow": "For recruiters",
-    "title": "A quick summary of my professional positioning",
-    "text": "If you want to evaluate seniority, technical breadth, and delivery capability, this is the most direct summary of my profile.",
+    "eyebrow": "Quick view",
+    "title": "What I can own when I join a product",
+    "text": "For recruiters, managers, and clients: a direct view of the technical responsibility I can take on.",
     "actions": {
-      "cvPt": "Download PT-BR CV",
-      "cvEn": "Download English CV",
-      "whatsapp": "Chat on WhatsApp",
+      "cvPt": "Download CV PT-BR",
+      "cvEn": "Download CV English",
+      "whatsapp": "Contact on WhatsApp",
       "linkedin": "Open LinkedIn"
     }
   },
   "recruiterHighlights": [
     {
-      "title": "Architecture and engineering",
-      "text": "Hands-on system design across web, mobile, backend, 2D/3D games, databases, integrations, and end-to-end technical structures."
+      "title": "Architecture + execution",
+      "text": "I design architecture and stay in the code: system design, integrations, APIs, data, queues, cache, multi-tenancy, white-label, performance, and technical evolution."
     },
     {
-      "title": "Cloud, DevOps, and scale",
-      "text": "Containers, CI/CD, GitHub Actions, automated deployments, health checks, backups, load balancing, cloud storage, availability, and scalability planning."
+      "title": "End-to-end mobile",
+      "text": "React Native CLI/Expo, Java, Swift/Objective-C, and Flutter, covering architecture, builds, signing, publishing, stores, white-label, and maintenance."
     },
     {
-      "title": "Quality and execution",
-      "text": "Unit and E2E testing with Playwright, refactoring, build and performance optimization, documentation, technical leadership, and hands-on delivery."
+      "title": "Cloud, DevOps & quality",
+      "text": "Docker, CI/CD, GitHub Actions, environments, deployments, backups, health checks, observability, and automated testing with Playwright and Selenium."
     },
     {
-      "title": "Product and communication",
-      "text": "Ability to translate architecture and technical decisions for managers, POs, clients, sales teams, and investors, connecting engineering with business impact."
+      "title": "Product & communication",
+      "text": "I translate risk, cost, alternatives, and technical decisions for engineering, product, commercial teams, and clients through documentation, diagrams, mentoring, and POCs."
     }
   ],
   "experienceLab": {
@@ -1818,5 +1775,176 @@
     "ambientToggle": "Section visual depth",
     "networkToggle": "3D network and constellations",
     "particleFieldToggle": "Interactive 3D background particles"
+  },
+  "workProfileSection": {
+    "eyebrow": "How I work",
+    "title": "Context-aware architecture, hands-on engineering, and clear communication",
+    "text": "I do not separate architecture from code or technology from the business. I adapt the solution to the product stage, risk, and actual objective."
+  },
+  "workProfileHighlights": [
+    {
+      "icon": "bi-diagram-3",
+      "title": "Architecture without dogma",
+      "text": "There is no silver bullet. I choose structure, data, integrations, sync/async flows, hosting, security, and scale based on the problem, cost, and product horizon."
+    },
+    {
+      "icon": "bi-code-square",
+      "title": "Hands-on by choice",
+      "text": "I keep developing, reviewing code, debugging, shipping, and joining critical deliveries. Architecture should survive contact with implementation."
+    },
+    {
+      "icon": "bi-phone",
+      "title": "Mobile from concept to store",
+      "text": "My deepest area: architecture, React Native/Expo, native development, builds, signing, stores, white-label, releases, and post-launch maintenance."
+    },
+    {
+      "icon": "bi-tools",
+      "title": "Pragmatic legacy work",
+      "text": "Before proposing a rewrite I assess risk, cost, tests, coupling, and product lifetime. Often the best engineering is to stabilize, isolate, and evolve incrementally."
+    },
+    {
+      "icon": "bi-chat-dots",
+      "title": "Technical communication",
+      "text": "I can discuss implementation details with engineers and explain the same decision in plain language to clients, product, business, managers, and collaborators."
+    },
+    {
+      "icon": "bi-briefcase",
+      "title": "Product & consulting",
+      "text": "I can own a full product or a focused need: diagnosis, integration, critical bug, performance, architecture, feature, maintenance, or technical support."
+    }
+  ],
+  "profileExplorer": {
+    "eyebrow": "Professional profile",
+    "title": "Explore my profile from the perspective that matters most to you",
+    "text": "The same experience, organized into short perspectives. Switch tabs to go deeper without turning the page into a wall of text.",
+    "tabsLabel": "Professional profile areas",
+    "resultsTitle": "Selected outcomes",
+    "resultsText": "A few concrete outcomes from my career. Expand only the ones you want to explore.",
+    "actionsTitle": "Quick links",
+    "actions": {
+      "cvPt": "CV in PT-BR",
+      "cvEn": "CV in English",
+      "whatsapp": "WhatsApp",
+      "linkedin": "LinkedIn"
+    },
+    "tabs": [
+      {
+        "id": "overview",
+        "label": "Overview",
+        "icon": "bi-compass",
+        "title": "Engineering that connects code, architecture, and business",
+        "text": "I have more than 8 years of professional software experience with progressively broader ownership. Over the last 3+ years I have repeatedly taken end-to-end architectural responsibility while remaining directly involved in implementation and operations.",
+        "cards": [
+          {
+            "icon": "bi-code-slash",
+            "title": "Hands-on execution",
+            "text": "I still build, review code, debug, integrate, release, and participate in critical deliveries."
+          },
+          {
+            "icon": "bi-diagram-3",
+            "title": "End-to-end architecture",
+            "text": "Application structure, data, integrations, security, scalability, hosting, CI/CD, testing, and observability."
+          },
+          {
+            "icon": "bi-phone",
+            "title": "Mobile specialization",
+            "text": "React Native/Expo, native development, Flutter, builds, stores, white-label, releases, maintenance, and post-launch evolution."
+          },
+          {
+            "icon": "bi-briefcase",
+            "title": "Product & consulting",
+            "text": "Full products or focused engagements: diagnosis, legacy, integrations, performance, features, and ongoing support."
+          }
+        ],
+        "showImpacts": true
+      },
+      {
+        "id": "architecture",
+        "label": "Architecture & Engineering",
+        "icon": "bi-diagram-3",
+        "title": "Architecture that has to survive implementation",
+        "text": "I do not treat architecture as an isolated diagram. Decisions account for context, risk, cost, maintainability, operations, and the product horizon.",
+        "cards": [
+          {
+            "icon": "bi-boxes",
+            "title": "System design",
+            "text": "Distributed systems, multi-tenancy, white-label, APIs, queues, cache, WebSockets, authentication, and service integration."
+          },
+          {
+            "icon": "bi-cloud-check",
+            "title": "Cloud & operations",
+            "text": "Docker, environments, deployments, GitHub Actions, CI/CD, backups, health checks, availability, observability, and infrastructure cost."
+          },
+          {
+            "icon": "bi-speedometer2",
+            "title": "Data & performance",
+            "text": "SQL and NoSQL, indexing, Redis, profiling, latency, bottlenecks, and choosing stores around read patterns and consistency needs."
+          },
+          {
+            "icon": "bi-tools",
+            "title": "Pragmatic legacy work",
+            "text": "Before rewriting, I evaluate risk, coupling, test coverage, and useful life. Refactor, isolate, or keep are engineering decisions, not dogma."
+          }
+        ]
+      },
+      {
+        "id": "mobile",
+        "label": "Mobile & Product",
+        "icon": "bi-phone",
+        "title": "Mobile from concept to store — and after release",
+        "text": "This is the area where I have the deepest expertise and most enjoy working. My experience covers the full mobile product lifecycle and its integration with the rest of the platform.",
+        "cards": [
+          {
+            "icon": "bi-phone-fill",
+            "title": "React Native & Expo",
+            "text": "React Native CLI, Expo, TypeScript, app architecture, integrations, performance, and maintenance of shared codebases."
+          },
+          {
+            "icon": "bi-apple",
+            "title": "Native & cross-platform",
+            "text": "Java/Android, Swift/Objective-C, Flutter, and reading or changing native code when the cross-platform layer is not enough."
+          },
+          {
+            "icon": "bi-box-arrow-up-right",
+            "title": "Publishing & releases",
+            "text": "Builds, signing, App Store, Google Play, automation, versioning, troubleshooting, and continuous maintenance after delivery."
+          },
+          {
+            "icon": "bi-layers",
+            "title": "White-label at scale",
+            "text": "Experience across dozens of clients and 100+ published apps/variants, balancing customization, automation, and maintainability."
+          }
+        ]
+      },
+      {
+        "id": "leadership",
+        "label": "Leadership & Consulting",
+        "icon": "bi-people",
+        "title": "Technical depth without losing the product language",
+        "text": "I can move between engineering, product, sales, and clients. My role is to reduce ambiguity and turn problems into decisions and deliveries people can understand.",
+        "cards": [
+          {
+            "icon": "bi-chat-dots",
+            "title": "Technical communication",
+            "text": "I explain architecture, risk, cost, and alternatives to engineers and non-technical stakeholders without hiding the complexity that matters."
+          },
+          {
+            "icon": "bi-people-fill",
+            "title": "Technical leadership",
+            "text": "Standards, code review, mentoring, documentation, diagrams, delivery organization, and support for critical decisions."
+          },
+          {
+            "icon": "bi-lightbulb",
+            "title": "Idea → product",
+            "text": "I help structure needs that are still unclear, translating business goals into requirements, architecture, and an executable path."
+          },
+          {
+            "icon": "bi-wrench-adjustable",
+            "title": "Flexible consulting",
+            "text": "I can own a complete product or work fractionally on integrations, critical bugs, performance, architecture, legacy, maintenance, or new features."
+          }
+        ]
+      }
+    ]
   }
 }

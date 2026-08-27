@@ -7,7 +7,9 @@ window.portfolioConfig = {
     logoAlt: 'Bruno Getten Triches — Software Architect & Software Engineer',
     favicon: 'favicon.ico',
     socialPreview: 'assets/img/brand/social-preview.jpg',
-    aboutImage: 'assets/img/about/1.jpg'
+    aboutImage: 'assets/img/about/1.jpg',
+    // Ponto focal da foto do bloco Sobre. Aceita qualquer valor CSS de object-position.
+    aboutImagePosition: '50% 56%'
   },
   theme: {
     colors: {
@@ -25,15 +27,17 @@ window.portfolioConfig = {
     languageSwitcher: 1,
     hero: 1,
     about: 1,
+    profileExplorer: 1,
     impact: 1,
     recruiter: 1,
+    workProfile: 1,
     experience: 1,
     services: 1,
     projects: 1,
     projectsCarousel: 1,
     projectLinks: 1,
     certificates: 1,
-    education: 0,
+    education: 1,
     certificatesCarousel: 1,
     contact: 1,
     socialLinks: 1,
@@ -53,6 +57,17 @@ window.portfolioConfig = {
   carousel: {
     autoplay: 1,
     intervalMs: 5000
+  },
+
+  profileExplorer: {
+    defaultTab: 'overview',
+    rememberSelection: 1,
+    mobileScrollActiveTab: 1,
+    // 'grid' mostra as quatro opções no celular; 'scroll' mantém a faixa horizontal.
+    phoneTabLayout: 'grid',
+    showImpactDetails: 1,
+    openFirstImpact: 0,
+    compactSkillsOnMobile: 1
   },
 
   // Configurações das experiências visuais/interativas do template.
@@ -232,11 +247,11 @@ window.portfolioConfig = {
   contactLinks: {
     whatsapp: 'https://wa.me/5549988427624',
     email: 'mailto:trichesbruno@gmail.com',
-    linkedin: 'https://www.linkedin.com/in/bruno-getten-triches-152952207/'
+    linkedin: 'https://www.linkedin.com/in/bruno-getten-triches/'
   },
   socialLinks: [
     { id: 'github', label: 'GitHub', icon: 'bi-github', url: 'https://github.com/BMVBrun0' },
-    { id: 'linkedin', label: 'LinkedIn', icon: 'bi-linkedin', url: 'https://www.linkedin.com/in/bruno-getten-triches-152952207/' },
+    { id: 'linkedin', label: 'LinkedIn', icon: 'bi-linkedin', url: 'https://www.linkedin.com/in/bruno-getten-triches/' },
     { id: 'instagram', label: 'Instagram', icon: 'bi-instagram', url: 'https://www.instagram.com/bruno_getten' },
     { id: 'whatsapp', label: 'WhatsApp', icon: 'bi-whatsapp', url: 'https://wa.me/5549988427624' }
   ],

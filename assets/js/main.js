@@ -6,6 +6,7 @@ const state = {
   locale: config.defaultLocale,
   data: null,
   activeCategory: 'all',
+  profileTab: window.localStorage.getItem('portfolio-profile-tab') || config.profileExplorer?.defaultTab || 'overview',
   roleIntervalId: null,
   loadedLocales: new Map(),
   carousels: {
@@ -29,8 +30,10 @@ const state = {
 const featureTargets = {
   hero: ['.hero-section'],
   about: ['#about', '#nav-about'],
+  profileExplorer: ['#profile-explorer'],
   impact: ['#impact'],
   recruiter: ['#recruiter'],
+  workProfile: ['#work-profile'],
   experience: ['#experience', '#nav-experience'],
   services: ['#services', '#nav-services'],
   projects: ['#projects', '#nav-projects'],
@@ -100,6 +103,7 @@ function renderBranding() {
 
   const aboutImage = qs('#about-image');
   if (aboutImage && branding.aboutImage) aboutImage.src = branding.aboutImage;
+  if (aboutImage && branding.aboutImagePosition) aboutImage.style.objectPosition = branding.aboutImagePosition;
 
   const favicon = qs('link[rel="icon"]');
   if (favicon && branding.favicon) favicon.href = branding.favicon;
@@ -313,17 +317,21 @@ function renderStaticText() {
   qs('#about-eyebrow').textContent = about.eyebrow;
   qs('#about-title').textContent = about.title;
   qs('#about-text-1').textContent = about.paragraphs[0];
-  qs('#about-text-2').textContent = about.paragraphs[1];
+  qs('#about-text-2').textContent = about.paragraphs[1] || '';
   qs('#skills-label').textContent = about.skillsLabel;
   qs('#about-image').alt = about.imageAlt;
 
-  qs('#impact-eyebrow').textContent = state.data.impactSection.eyebrow;
-  qs('#impact-title').textContent = state.data.impactSection.title;
-  qs('#impact-text').textContent = state.data.impactSection.text;
-
-  qs('#recruiter-eyebrow').textContent = state.data.recruiterSection.eyebrow;
-  qs('#recruiter-title').textContent = state.data.recruiterSection.title;
-  qs('#recruiter-text').textContent = state.data.recruiterSection.text;
+  const profileExplorer = state.data.profileExplorer;
+  if (profileExplorer) {
+    const explorerEyebrow = qs('#profile-explorer-eyebrow');
+    const explorerTitle = qs('#profile-explorer-title');
+    const explorerText = qs('#profile-explorer-text');
+    const tabsRoot = qs('#profile-tabs');
+    if (explorerEyebrow) explorerEyebrow.textContent = profileExplorer.eyebrow;
+    if (explorerTitle) explorerTitle.textContent = profileExplorer.title;
+    if (explorerText) explorerText.textContent = profileExplorer.text;
+    if (tabsRoot) tabsRoot.setAttribute('aria-label', profileExplorer.tabsLabel);
+  }
 
   qs('#experience-eyebrow').textContent = experienceSection.eyebrow;
   qs('#experience-title').textContent = experienceSection.title;
@@ -384,16 +392,209 @@ function renderHeroStats() {
 function renderSkills() {
   const root = qs('#skills-list');
   root.innerHTML = state.data.skills.map((item) => `
-    <article class="skill-item reveal">
-      <header>
-        <span>${item.name}</span>
-        <strong>${item.level}%</strong>
-      </header>
-      <div class="skill-bar" aria-hidden="true">
-        <span style="width:${item.level}%"></span>
+    <details class="skill-item reveal" ${config.profileExplorer?.compactSkillsOnMobile === 0 ? 'open' : ''}>
+      <summary>
+        <h3>${item.name}</h3>
+        <i class="bi bi-chevron-down skill-toggle-icon" aria-hidden="true"></i>
+      </summary>
+      <div class="skill-item-body">
+        <p>${item.description || ''}</p>
+        <div class="skill-tags" aria-label="${item.name}">
+          ${(item.tags || []).map((tag) => `<span>${tag}</span>`).join('')}
+        </div>
       </div>
-    </article>
+    </details>
   `).join('');
+}
+
+function renderProfileImpactList(explorer) {
+  if (!isFeatureEnabled('impact') || config.profileExplorer?.showImpactDetails === 0) return '';
+  const impacts = Array.isArray(state.data.impacts) ? state.data.impacts : [];
+  if (!impacts.length) return '';
+
+  return `
+    <section class="profile-impact-block" id="profile-impact-block">
+      <div class="profile-subheading">
+        <div>
+          <span class="profile-subheading-kicker">${explorer.resultsTitle}</span>
+          <p>${explorer.resultsText}</p>
+        </div>
+      </div>
+      <div class="profile-impact-list">
+        ${impacts.map((item, index) => `
+          <details class="profile-impact-item" ${config.profileExplorer?.openFirstImpact && index === 0 ? 'open' : ''}>
+            <summary>
+              <span class="profile-impact-marker" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
+              <span class="profile-impact-summary">
+                <strong>${item.title}</strong>
+                <small>${item.company} · ${item.period}</small>
+              </span>
+              <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </summary>
+            <div class="profile-impact-content">
+              <p>${item.result}</p>
+              <ul>${(item.bullets || []).map((bullet) => `<li>${bullet}</li>`).join('')}</ul>
+            </div>
+          </details>
+        `).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function renderProfileActions(explorer) {
+  if (!isFeatureEnabled('recruiter')) return '';
+  const actions = [
+    { href: config.cvByLocale['pt-BR'], label: explorer.actions?.cvPt, icon: 'bi-file-earmark-text' },
+    { href: config.cvByLocale.en, label: explorer.actions?.cvEn, icon: 'bi-file-earmark-text' },
+    { href: config.contactLinks?.linkedin, label: explorer.actions?.linkedin, icon: 'bi-linkedin' },
+    { href: config.contactLinks?.whatsapp, label: explorer.actions?.whatsapp, icon: 'bi-whatsapp' }
+  ].filter((item) => item.href && item.label);
+
+  if (!actions.length) return '';
+
+  return `
+    <div class="profile-actions" id="profile-actions">
+      <span class="profile-actions-title">${explorer.actionsTitle}</span>
+      <div class="profile-actions-links">
+        ${actions.map((item) => `<a href="${escapeAttribute(item.href)}" target="_blank" rel="noopener"><i class="bi ${item.icon}" aria-hidden="true"></i><span>${item.label}</span></a>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderProfilePanel(tab, explorer) {
+  const cards = Array.isArray(tab.cards) ? tab.cards : [];
+  const showImpacts = tab.showImpacts === true;
+
+  return `
+    <section
+      class="profile-panel"
+      id="profile-panel-${tab.id}"
+      role="tabpanel"
+      data-profile-panel="${tab.id}"
+      aria-labelledby="profile-tab-${tab.id}"
+      hidden>
+      <div class="profile-panel-intro">
+        <span class="profile-panel-icon" aria-hidden="true"><i class="bi ${tab.icon || 'bi-check2-circle'}"></i></span>
+        <div>
+          <h4>${tab.title}</h4>
+          <p>${tab.text}</p>
+        </div>
+      </div>
+      <div class="profile-card-grid">
+        ${cards.map((card) => `
+          <article class="profile-card">
+            <span class="profile-card-icon" aria-hidden="true"><i class="bi ${card.icon || 'bi-check2-circle'}"></i></span>
+            <div>
+              <h5>${card.title}</h5>
+              <p>${card.text}</p>
+            </div>
+          </article>
+        `).join('')}
+      </div>
+      ${showImpacts ? renderProfileImpactList(explorer) : ''}
+      ${showImpacts ? renderProfileActions(explorer) : ''}
+    </section>
+  `;
+}
+
+function setProfileExplorerTab(tabId, options = {}) {
+  const tabs = Array.isArray(state.data?.profileExplorer?.tabs) ? state.data.profileExplorer.tabs : [];
+  const fallback = tabs.find((tab) => tab.id === config.profileExplorer?.defaultTab)?.id || tabs[0]?.id;
+  const nextId = tabs.some((tab) => tab.id === tabId) ? tabId : fallback;
+  if (!nextId) return;
+
+  state.profileTab = nextId;
+  qsa('[data-profile-tab]').forEach((button) => {
+    const active = button.dataset.profileTab === nextId;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-selected', String(active));
+    button.tabIndex = active ? 0 : -1;
+  });
+
+  qsa('[data-profile-panel]').forEach((panel) => {
+    const active = panel.dataset.profilePanel === nextId;
+    panel.hidden = !active;
+    panel.classList.toggle('is-active', active);
+  });
+
+  if (config.profileExplorer?.rememberSelection !== 0) {
+    window.localStorage.setItem('portfolio-profile-tab', nextId);
+  }
+
+  if (options.focus) qs(`[data-profile-tab="${nextId}"]`)?.focus();
+
+  const phoneTabLayout = ['grid', 'scroll'].includes(config.profileExplorer?.phoneTabLayout)
+    ? config.profileExplorer.phoneTabLayout
+    : 'grid';
+  const phoneGridLayout = phoneTabLayout === 'grid' && window.innerWidth <= 520;
+  if (config.profileExplorer?.mobileScrollActiveTab !== 0 && window.innerWidth <= 760 && !phoneGridLayout) {
+    const activeButton = qs(`[data-profile-tab="${nextId}"]`);
+    activeButton?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+}
+
+function renderProfileExplorer() {
+  const explorer = state.data?.profileExplorer;
+  const tabsRoot = qs('#profile-tabs');
+  const panelsRoot = qs('#profile-panels');
+  if (!explorer || !tabsRoot || !panelsRoot) return;
+
+  const phoneTabLayout = ['grid', 'scroll'].includes(config.profileExplorer?.phoneTabLayout)
+    ? config.profileExplorer.phoneTabLayout
+    : 'grid';
+  tabsRoot.dataset.phoneLayout = phoneTabLayout;
+
+  const tabs = Array.isArray(explorer.tabs) ? explorer.tabs : [];
+  if (!tabs.length) {
+    tabsRoot.innerHTML = '';
+    panelsRoot.innerHTML = '';
+    return;
+  }
+
+  tabsRoot.innerHTML = tabs.map((tab) => `
+    <button
+      class="profile-tab"
+      type="button"
+      role="tab"
+      id="profile-tab-${tab.id}"
+      data-profile-tab="${tab.id}"
+      aria-controls="profile-panel-${tab.id}"
+      aria-selected="false"
+      tabindex="-1">
+      <i class="bi ${tab.icon || 'bi-circle'}" aria-hidden="true"></i>
+      <span>${tab.label}</span>
+    </button>
+  `).join('');
+
+  panelsRoot.innerHTML = tabs.map((tab) => renderProfilePanel(tab, explorer)).join('');
+
+  qsa('[data-profile-tab]', tabsRoot).forEach((button) => {
+    button.addEventListener('click', () => setProfileExplorerTab(button.dataset.profileTab));
+    button.addEventListener('keydown', (event) => {
+      const buttons = qsa('[data-profile-tab]', tabsRoot);
+      const currentIndex = buttons.indexOf(event.currentTarget);
+      let nextIndex = currentIndex;
+
+      if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
+      else if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = buttons.length - 1;
+      else return;
+
+      event.preventDefault();
+      setProfileExplorerTab(buttons[nextIndex].dataset.profileTab, { focus: true });
+    });
+  });
+
+  const remembered = config.profileExplorer?.rememberSelection !== 0
+    ? window.localStorage.getItem('portfolio-profile-tab')
+    : null;
+  const initial = tabs.some((tab) => tab.id === state.profileTab)
+    ? state.profileTab
+    : (tabs.some((tab) => tab.id === remembered) ? remembered : config.profileExplorer?.defaultTab);
+  setProfileExplorerTab(initial || tabs[0].id);
 }
 
 
@@ -410,6 +611,20 @@ function renderImpact() {
       <ul class="impact-bullets">
         ${item.bullets.map((bullet) => `<li>${bullet}</li>`).join('')}
       </ul>
+    </article>
+  `).join('');
+}
+
+function renderWorkProfile() {
+  const root = qs('#work-profile-grid');
+  if (!root || !Array.isArray(state.data.workProfileHighlights)) return;
+  root.innerHTML = state.data.workProfileHighlights.map((item) => `
+    <article class="work-profile-card reveal">
+      <span class="work-profile-icon" aria-hidden="true"><i class="bi ${item.icon || 'bi-check2-circle'}"></i></span>
+      <div>
+        <h3>${item.title}</h3>
+        <p>${item.text}</p>
+      </div>
     </article>
   `).join('');
 }
@@ -1857,9 +2072,8 @@ async function applyLocale(locale) {
   renderSocialLinks();
   renderStaticText();
   renderHeroStats();
+  renderProfileExplorer();
   renderSkills();
-  renderImpact();
-  renderRecruiterHighlights();
   renderExperience();
   renderServices();
   renderFilters();
