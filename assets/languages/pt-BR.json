@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "{name} | Tech Lead, Arquiteto e Engenheiro de Software",
-    "description": "Portfólio de {name}: 8+ anos em desenvolvimento, engenharia, arquitetura e consultoria de software; forte especialização mobile e atuação hands-on em cloud, DevOps, APIs, dados e sistemas escaláveis.",
-    "ogTitle": "{name} | Arquitetura, Engenharia de Software e Mobile",
-    "ogDescription": "8+ anos construindo software, 3+ anos com responsabilidade arquitetural ponta a ponta e forte experiência mobile, cloud, APIs, dados e DevOps."
+    "title": "{name} | Desenvolvedor Full Stack & Mobile",
+    "description": "Portfólio de {name}: 8+ anos desenvolvendo produtos web, mobile, backend e APIs, com experiência em React, React Native, Node.js, C#/.NET, PHP/Laravel, dados, cloud e liderança técnica hands-on.",
+    "ogTitle": "{name} | Full Stack & Mobile Developer",
+    "ogDescription": "8+ anos construindo e evoluindo produtos web, mobile e backend, do código à produção, com experiência em múltiplas stacks e liderança técnica hands-on."
   },
   "accessibility": {
     "skipToContent": "Pular para o conteúdo",
@@ -19,191 +19,190 @@
   "nav": {
     "about": "Sobre",
     "experience": "Experiência",
-    "services": "Serviços",
+    "services": "Atuação",
     "projects": "Projetos",
     "contact": "Contato",
     "certificates": "Formação"
   },
   "hero": {
-    "eyebrow": "Tech Lead · Arquiteto de Software · Engenheiro de Software",
-    "rolePrefix": "Eu sou",
+    "eyebrow": "Desenvolvedor Full Stack & Mobile",
+    "rolePrefix": "Atuo como",
     "roles": [
-      "Engenheiro de Software hands-on",
-      "Arquiteto de Software",
-      "Tech Lead",
-      "Engenheiro Mobile",
-      "Consultor de Software",
-      "Desenvolvedor Full Stack"
+      "Desenvolvedor Full Stack",
+      "Desenvolvedor Mobile",
+      "Software Engineer",
+      "Tech Lead hands-on",
+      "Desenvolvedor Backend"
     ],
-    "text": "Há mais de 8 anos transformo ideias, produtos e sistemas existentes em software que precisa funcionar de verdade. Atuo hands-on em desenvolvimento e engenharia, com forte especialização mobile e responsabilidade sobre arquitetura, backend, dados, cloud, DevOps, qualidade e evolução técnica.",
+    "text": "Há mais de 8 anos construo, evoluo e sustento produtos web, mobile, APIs e sistemas corporativos. Trabalho hands-on entre frontend, backend, mobile, dados e infraestrutura, com experiência em diferentes stacks e maturidade para também assumir decisões técnicas, arquitetura e liderança quando o produto exige.",
     "primaryCta": "Ver projetos",
     "secondaryCta": "Baixar CV",
     "stats": [
       {
-        "title": "8+ anos construindo software",
-        "text": "Desenvolvimento, engenharia, arquitetura e consultoria em produtos web, mobile, backend, jogos e integrações."
+        "title": "8+ anos desenvolvendo software",
+        "text": "Produtos web, mobile, backend, APIs, integrações e sistemas corporativos do código à produção."
       },
       {
-        "title": "3+ anos com responsabilidade arquitetural ponta a ponta",
-        "text": "Responsabilidade recorrente por system design, dados, cloud, CI/CD, testes, performance, segurança e operação."
+        "title": "Full Stack + Mobile de ponta a ponta",
+        "text": "Frontend, backend, dados, sincronização offline, testes, CI/CD, publicação Android/iOS e operação em produção."
       },
       {
-        "title": "100+ apps e variantes publicados",
-        "text": "Experiência mobile do código às lojas, incluindo white-label, releases, manutenção e evolução contínua."
+        "title": "Liderança técnica sem sair do código",
+        "text": "Code review, mentoria, decisões de arquitetura e evolução de produto como consequência da experiência hands-on."
       }
     ]
   },
   "about": {
     "eyebrow": "Sobre mim",
-    "title": "Engenharia prática, arquitetura e produto no mesmo contexto.",
+    "title": "Desenvolvimento Full Stack & Mobile com profundidade de engenharia.",
     "paragraphs": [
-      "Trabalho profissionalmente com software desde 2018, construindo, evoluindo e sustentando produtos reais. Minha trajetória começou na execução e cresceu para engenharia, arquitetura, liderança técnica e consultoria sem me afastar do código.",
-      "Hoje atuo de ponta a ponta quando o produto exige: arquitetura de aplicações, mobile, backend, dados, cloud, CI/CD, testes, performance e operação. Mobile é minha especialidade mais profunda, mas minha função é fazer o sistema inteiro funcionar de forma coerente."
+      "Trabalho profissionalmente com software desde 2018. Minha trajetória passou por ERP e bancos de grande volume, backend e APIs, desenvolvimento web, mobile nativo e multiplataforma, infraestrutura e produtos completos em produção.",
+      "Hoje meu foco principal continua sendo desenvolvimento. Arquitetura, performance, cloud, dados e liderança técnica entram como ferramentas para construir soluções melhores — não como uma distância do código. Tenho facilidade para transitar entre stacks e assumir sistemas existentes sem depender de uma única tecnologia."
     ],
-    "skillsLabel": "Mapa de competências",
-    "imageAlt": "Bruno Getten Triches, Tech Lead, arquiteto e engenheiro de software"
+    "skillsLabel": "Competências técnicas",
+    "imageAlt": "Bruno Getten Triches, Desenvolvedor Full Stack e Mobile"
   },
   "skills": [
     {
-      "name": "Arquitetura & System Design",
-      "description": "Desenho de sistemas ponta a ponta, com decisões orientadas a contexto, custo, risco, escala e manutenção.",
+      "name": "Web & Frontend",
+      "description": "Interfaces, portais, dashboards e produtos web com foco em clareza, performance, responsividade e evolução.",
       "tags": [
-        "Sistemas distribuídos",
-        "Multi-tenant / white-label",
-        "Filas e cache",
-        "Load balancing",
-        "Escalabilidade"
+        "React / Next.js",
+        "Vue / Angular",
+        "TypeScript / JavaScript",
+        "Blade / Livewire",
+        "HTML / CSS / Tailwind"
       ]
     },
     {
-      "name": "Engenharia Mobile",
-      "description": "Especialidade principal: desenvolvimento, manutenção, publicação e evolução de aplicativos do código às lojas.",
+      "name": "Mobile",
+      "description": "Experiência do desenvolvimento à publicação e manutenção nas lojas, incluindo apps online/offline e bases white-label.",
       "tags": [
-        "React Native CLI / Expo",
+        "React Native / Expo",
+        "Flutter",
         "Java / Android",
         "Swift / Objective-C",
-        "Flutter",
         "App Store / Google Play"
       ]
     },
     {
       "name": "Backend & APIs",
-      "description": "Serviços, integrações e regras de negócio com diferentes stacks, escolhendo tecnologia pelo problema e não por preferência.",
+      "description": "APIs, serviços, integrações e regras de negócio em diferentes ecossistemas conforme o contexto do produto.",
       "tags": [
         "Node.js / NestJS",
-        "PHP / Laravel / Livewire",
         "C# / .NET",
+        "PHP / Laravel",
         "Java / Spring Boot",
-        "REST / WebSockets / OAuth"
+        "REST / WebSockets"
       ]
     },
     {
-      "name": "Web & Frontend",
-      "description": "Produtos web, dashboards, portais e experiências administrativas ou públicas com foco em clareza, performance e evolução.",
+      "name": "Dados & Mensageria",
+      "description": "Modelagem e otimização de dados, cache, filas e processamento assíncrono para aplicações operacionais e de alta carga.",
       "tags": [
-        "React / Next.js",
-        "Vue",
-        "Angular",
-        "TypeScript / JavaScript",
-        "HTML / CSS"
+        "SQL Server / PostgreSQL",
+        "MySQL / MariaDB / Oracle",
+        "MongoDB / Firebase",
+        "Redis",
+        "RabbitMQ / Kafka / SQS"
       ]
     },
     {
-      "name": "Cloud, DevOps & Qualidade",
-      "description": "Estrutura de hospedagem, automação de entrega, observabilidade e testes como parte do produto, não como etapa posterior.",
+      "name": "Infraestrutura & Qualidade",
+      "description": "Containers, pipelines, deploy, observabilidade e testes tratados como parte do ciclo de desenvolvimento.",
       "tags": [
         "Docker",
-        "GitHub Actions / CI/CD",
-        "AWS / Azure / DigitalOcean",
-        "Playwright / Selenium",
-        "Backups / health checks"
+        "Jenkins / GitHub Actions / CI/CD",
+        "AWS / Azure / VPS",
+        "Jest / Playwright / Selenium",
+        "Load balancing / CDN / backups"
       ]
     },
     {
-      "name": "Dados & Performance",
-      "description": "Modelagem, indexação e combinação de bancos SQL/NoSQL conforme leitura, consistência, latência e necessidade operacional.",
+      "name": "Engenharia & IA aplicada",
+      "description": "Arquitetura, performance, legado, escalabilidade e uso complementar de IA/ML quando agregam valor ao produto.",
       "tags": [
-        "MySQL / SQL Server",
-        "MongoDB",
-        "Redis",
-        "Indexação / profiling",
-        "Python: dados, automação e ML"
+        "Sistemas distribuídos",
+        "Multi-tenant / white-label",
+        "Performance / profiling",
+        "LLMs / OpenAI",
+        "Python / dados / ML"
       ]
     }
   ],
   "experienceSection": {
     "eyebrow": "Experiência",
     "title": "Minha trajetória profissional",
-    "text": "Uma carreira construída com aumento progressivo de responsabilidade: desenvolvimento, engenharia, arquitetura, liderança e consultoria sem abandonar a execução técnica."
+    "text": "Uma trajetória que começou na execução e cresceu em escopo e responsabilidade sem abandonar o desenvolvimento hands-on."
   },
   "experience": [
     {
       "title": "Tech Lead · Sensorama Play",
       "period": "2025 · Atual",
-      "description": "Atuo como Tech Lead e referência técnica hands-on em múltiplos produtos, definindo e evoluindo arquitetura, padrões, APIs, dados, web/mobile, infraestrutura e automação de entrega. Também participo diretamente do desenvolvimento, refatorações, POCs, editais, documentação, testes e resolução de problemas críticos."
+      "description": "Desenvolvimento hands-on e liderança técnica em produtos web, mobile, backend/APIs e C#/Unity. Evoluí uma base educacional para uma plataforma white-label/multitenant com diferentes produtos e aplicativos, incluindo acessibilidade própria, gamificação, biblioteca digital, fluência leitora e recursos complementares com LLMs/OpenAI. Também atuo em Docker, dados, performance, testes de carga, Jest/Playwright, deploys e operação em produção."
     },
     {
       "title": "Desenvolvedor Full Stack e Mobile Pleno · Amplimed",
       "period": "2024 · 2025",
-      "description": "Fui responsável por produtos do marketplace ligados a agendamento, telemedicina, aplicativos e filas. Refatorei canais web/mobile, evoluí APIs e participei da criação da estrutura white-label adotada por dezenas de clientes, com impacto direto nas metas comerciais e na escalabilidade dos produtos."
+      "description": "Atuação em React Web, React Native, PHP/Laravel/Blade, Node.js e integrações em produtos de marketplace, agendamento e telemedicina. Trabalhei com filas de atendimento, Twilio, microserviços, testes com Jest, white-label e ambientes Docker/Dev Containers, além de participar do ciclo mobile e de deployments sobre infraestrutura Kubernetes."
     },
     {
       "title": "Tech Lead · Astronfy",
       "period": "2023 · 2024",
-      "description": "Liderei tecnicamente marketplace, dashboard de afiliados, suporte, aplicações web/mobile e jogos. Atuei em arquitetura white-label, pagamentos nacionais/internacionais e cripto, infraestrutura e relacionamento com clientes da Europa e Ásia, mantendo participação hands-on nas implementações."
+      "description": "Responsabilidade técnica e desenvolvimento hands-on de marketplace e produtos web/mobile com forte uso de PHP/Laravel, Blade/Livewire e MariaDB, além de Angular, Node.js/Next.js e automações em Python. Atuei em performance, servidores/VPS, backups, segurança, AWS/Azure, pagamentos e clientes internacionais, mantendo o foco direto na implementação."
     },
     {
       "title": "Desenvolvedor Full Stack e Mobile Pleno · Infogen Sistemas",
       "period": "2022 · 2023",
-      "description": "Evoluí de trainee para pleno trabalhando com mobile, ERP GeneXus, portal .NET, APIs, bancos e integrações. Liderei refatorações para React Native, cuidei de publicação/manutenção nas lojas, desenvolvi módulos white-label, apoiei clientes e passei a fazer mentoria e onboarding de novos desenvolvedores."
+      "description": "Progressão de trainee para pleno passando por GeneXus 9/10 e SQL Server, C#/.NET Framework 4.x e .NET Core, Vue.js e três gerações mobile: Java/Android, Flutter e React Native/Expo. Trabalhei com sincronização offline, Firebase, IIS/Jenkins, Python para scripts e automações, publicação nas lojas, refatorações e mentoria de desenvolvedores."
     },
     {
-      "title": "Engenheiro de Software & Consultor · Freelance",
+      "title": "Desenvolvedor Full Stack & Mobile · Freelance",
       "period": "2018 · Atual",
-      "description": "Desenvolvimento independente e consultoria em produtos web/mobile, dashboards, sistemas internos, ERPs, integrações e jogos. Atuo tanto do zero quanto em demandas pontuais, transformando necessidades de negócio em arquitetura, implementação, manutenção e evolução técnica."
+      "description": "Desenvolvimento e consultoria em produtos web/mobile, APIs e sistemas internos usando React/Next.js, React Native, Node.js, C#/.NET, PHP/Laravel, Java/Spring Boot, Vue/Angular, Flutter, Swift/Objective-C e Python. Atuo do levantamento e desenho técnico à publicação, infraestrutura e evolução, com clientes e parceiros em diferentes países."
     }
   ],
   "servicesSection": {
-    "eyebrow": "Trabalho & consultoria",
-    "title": "Onde posso ajudar",
-    "text": "De produto completo a uma necessidade específica, entro no ponto em que existe risco, gargalo ou oportunidade e avanço até uma solução utilizável."
+    "eyebrow": "Áreas de atuação",
+    "title": "Onde entrego mais valor como desenvolvedor",
+    "text": "Meu núcleo é desenvolvimento Full Stack e Mobile. Arquitetura, dados, infraestrutura e liderança técnica entram para sustentar a entrega quando o contexto exige."
   },
   "services": [
     {
-      "icon": "bi-diagram-3",
-      "title": "Arquitetura & System Design",
-      "description": "Desenho ou revisão de arquitetura, dados, integrações, multi-tenancy, filas, cache, disponibilidade, segurança, hospedagem e estratégia de escala."
+      "icon": "bi-code-slash",
+      "title": "Desenvolvimento Web & Full Stack",
+      "description": "Produtos web, portais, dashboards, sistemas internos, marketplaces, APIs e integrações com stacks como React/Next.js, Node.js, Laravel, .NET e Java."
     },
     {
       "icon": "bi-phone",
       "title": "Mobile ponta a ponta",
-      "description": "Aplicativos Android/iOS com React Native, Expo, Java, Swift/Objective-C ou Flutter, incluindo builds, publicação, white-label, manutenção e evolução nas lojas."
+      "description": "Aplicativos Android/iOS com React Native/Expo, Flutter e desenvolvimento nativo, incluindo offline sync, builds, testes, publicação, white-label e manutenção."
     },
     {
-      "icon": "bi-code-slash",
-      "title": "Produtos Web, Backend & APIs",
-      "description": "Plataformas, dashboards, sistemas internos, marketplaces, APIs e integrações usando stacks como React/Next, Node/Nest, Laravel, .NET e Spring Boot."
-    },
-    {
-      "icon": "bi-cloud-arrow-up",
-      "title": "Cloud, DevOps & Qualidade",
-      "description": "Docker, ambientes, CI/CD, GitHub Actions, deploy automatizado, backups, observabilidade, otimização de builds e testes com Playwright/Selenium."
+      "icon": "bi-server",
+      "title": "Backend, APIs & Integrações",
+      "description": "Serviços, APIs REST/WebSockets, autenticação, integrações externas, filas, cache, mensageria e processamento assíncrono em diferentes stacks."
     },
     {
       "icon": "bi-hdd-network",
-      "title": "Dados, Integrações & Performance",
-      "description": "SQL/NoSQL, Redis, indexação, filas, WebSockets, OAuth/SSO, integrações externas, análise de latência e otimização de gargalos."
+      "title": "Dados & Performance",
+      "description": "SQL/NoSQL, modelagem, stored procedures, indexação, agregações, particionamento, profiling, cache e investigação de gargalos de aplicação e banco."
     },
     {
-      "icon": "bi-tools",
-      "title": "Legado, Consultoria & Entregas Pontuais",
-      "description": "Diagnóstico, correções, refatoração criteriosa, novas funcionalidades, manutenção, revisão técnica ou apoio a equipes que precisam resolver uma parte específica do produto."
+      "icon": "bi-cloud-arrow-up",
+      "title": "Infraestrutura, DevOps & Qualidade",
+      "description": "Docker, ambientes, CI/CD, Jenkins/GitHub Actions, deploys, cloud/VPS, load balancing, CDN, backups, testes automatizados e observabilidade."
+    },
+    {
+      "icon": "bi-diagram-3",
+      "title": "Arquitetura & Liderança Técnica",
+      "description": "System design, modernização de legado, decisões de stack, code review, mentoria e evolução técnica sem separar arquitetura da implementação."
     }
   ],
   "projectsSection": {
     "eyebrow": "Projetos",
     "title": "Projetos em destaque",
-    "text": "Produtos, estudos e ferramentas que mostram amplitude técnica e comercial. Mantive projetos de naturezas diferentes porque também uso este portfólio para consultoria e freelance; abra os detalhes para ver arquitetura, funcionalidades, stack e galerias.",
+    "text": "Produtos e sistemas que mostram meu trabalho na prática em web, mobile, backend, dados e infraestrutura. Abra os detalhes para explorar funcionalidades, decisões técnicas, stack e galerias.",
     "filtersLabel": "Filtros de projeto",
     "zoomCta": "Clique para ampliar",
     "zoomAriaLabel": "Ampliar imagem do projeto {title}",
@@ -1449,7 +1448,7 @@
   "contactSection": {
     "eyebrow": "Contato",
     "title": "Vamos conversar",
-    "text": "Estou aberto a oportunidades profissionais, liderança técnica hands-on, arquitetura, consultoria, freelance e trabalhos fracionados. Se existe um problema técnico ou uma ideia ainda pouco definida, posso ajudar a transformar isso em um caminho executável."
+    "text": "Estou aberto a oportunidades como Desenvolvedor Full Stack/Mobile e Software Engineer, inclusive em posições hands-on com liderança técnica. Também avalio projetos freelance e consultoria quando fizer sentido."
   },
   "contacts": [
     {
@@ -1545,24 +1544,14 @@
       "degree": "Bacharelado",
       "period": "2024 · 2027",
       "status": "Em andamento · conclusão prevista em 2027",
-      "description": "Graduação atual, retomada após um período fora da faculdade.",
-      "url": ""
-    },
-    {
-      "enabled": 1,
-      "institution": "UnoChapecó — Universidade Comunitária da Região de Chapecó",
-      "course": "Ciência da Computação",
-      "degree": "Bacharelado",
-      "period": "Iniciado em 2022",
-      "status": "Curso posteriormente trancado",
-      "description": "Início da formação superior em computação antes da retomada dos estudos na Cruzeiro do Sul.",
+      "description": "Graduação atual em Sistemas de Informação, complementando a experiência profissional prática em desenvolvimento de software.",
       "url": ""
     }
   ],
   "certificatesSection": {
     "eyebrow": "Formação",
     "title": "Formação acadêmica e aprofundamento técnico",
-    "text": "Graduação em andamento e uma seleção curta de cursos recentes que complementam a experiência prática e aprofundam temas de arquitetura, dados, IA, performance e jogos.",
+    "text": "Graduação em andamento e uma seleção curta de cursos que complementam a experiência prática em desenvolvimento, dados, IA, performance e jogos.",
     "tagsAriaLabel": "Tecnologias e temas do certificado",
     "providerBadgeLabel": "Instituição",
     "credentialCta": "Ver certificado",
@@ -1573,7 +1562,7 @@
     "descriptionToggleAria": "Alternar descrição do certificado {title}",
     "educationEyebrow": "Formação acadêmica",
     "educationTitle": "Graduação",
-    "educationText": "Trajetória acadêmica atual e formação anterior.",
+    "educationText": "Graduação atual em Sistemas de Informação.",
     "certificatesListTitle": "Cursos recentes selecionados",
     "educationDefaultDegree": "Formação",
     "educationLinkCta": "Ver formação",
@@ -1657,19 +1646,19 @@
   ],
   "impactSection": {
     "eyebrow": "Impacto real",
-    "title": "Resultados que mostram escopo, senioridade e capacidade de execução",
-    "text": "Tecnologia importa, mas o que melhor explica meu trabalho é o efeito que ela produz em produto, operação, receita, implantação e manutenção."
+    "title": "Resultados que mostram execução, produto e maturidade técnica",
+    "text": "Stacks mudam de projeto para projeto. Estes resultados mostram melhor minha capacidade de desenvolver, evoluir e sustentar produtos reais."
   },
   "impacts": [
     {
       "company": "Sensorama Play",
       "period": "2025 · Atual",
-      "title": "Arquitetura e sustentação de múltiplos produtos",
-      "result": "Atuação como Tech Lead e referência técnica hands-on em web, mobile, APIs, dados, infraestrutura, automação de entrega e jogos 2D/3D.",
+      "title": "Evolução técnica de múltiplos produtos educacionais",
+      "result": "Desenvolvimento hands-on e liderança técnica em web, mobile, APIs, dados, infraestrutura, automação de entrega e produtos 2D/3D.",
       "bullets": [
-        "Estruturação e evolução de arquitetura, containers, CI/CD, deploys, health checks, backups e testes automatizados",
-        "Apoio técnico a POCs e 4+ editais públicos com múltiplos produtos",
-        "Refatorações e decisões de hospedagem/performance com foco em confiabilidade, manutenção e custo"
+        "Evolução para uma base white-label/multitenant com diferentes produtos e perfis de aplicativo",
+        "Acessibilidade própria, gamificação, biblioteca digital, fluência leitora e recursos educacionais",
+        "Docker, CI/CD, testes automatizados, performance, dados e operação em produção"
       ]
     },
     {
@@ -1719,8 +1708,8 @@
   ],
   "recruiterSection": {
     "eyebrow": "Visão rápida",
-    "title": "O que eu assumo quando entro em um produto",
-    "text": "Para recrutadores, gestores e clientes: um recorte direto do tipo de responsabilidade técnica que consigo assumir.",
+    "title": "O que levo para um time de desenvolvimento",
+    "text": "Um recorte direto das responsabilidades que consigo assumir sem deixar de participar da implementação.",
     "actions": {
       "cvPt": "Baixar CV PT-BR",
       "cvEn": "Baixar CV English",
@@ -1730,20 +1719,20 @@
   },
   "recruiterHighlights": [
     {
-      "title": "Arquitetura + execução",
-      "text": "Desenho arquitetura e continuo no código: system design, integrações, APIs, dados, filas, cache, multi-tenant, white-label, performance e decisões de evolução."
+      "title": "Full Stack de ponta a ponta",
+      "text": "Frontend, backend, APIs, integrações, dados e operação em diferentes stacks, do desenvolvimento à sustentação em produção."
     },
     {
-      "title": "Mobile ponta a ponta",
-      "text": "React Native CLI/Expo, Java, Swift/Objective-C e Flutter, passando por arquitetura, builds, assinatura, publicação, lojas, white-label e manutenção."
+      "title": "Mobile do código às lojas",
+      "text": "React Native/Expo, Flutter, Java/Android e Swift/Objective-C, incluindo offline sync, builds, testes, publicação e manutenção."
     },
     {
-      "title": "Cloud, DevOps e qualidade",
-      "text": "Docker, CI/CD, GitHub Actions, ambientes, deploys, backups, health checks, observabilidade e testes automatizados com Playwright e Selenium."
+      "title": "Engenharia & arquitetura",
+      "text": "Performance, sistemas distribuídos, multi-tenant, white-label, filas, cache, dados, cloud e decisões técnicas orientadas ao contexto."
     },
     {
-      "title": "Produto e comunicação",
-      "text": "Traduzo risco, custo, alternativas e decisões técnicas para engenharia, produto, comercial e clientes, com documentação, diagramas, mentoria e participação em POCs."
+      "title": "Liderança técnica colaborativa",
+      "text": "Code review, mentoria, documentação e decisões técnicas mantendo comunicação clara com engenharia, produto, clientes e parceiros."
     }
   ],
   "experienceLab": {
@@ -1778,45 +1767,45 @@
   },
   "workProfileSection": {
     "eyebrow": "Como eu trabalho",
-    "title": "Arquitetura com contexto, engenharia hands-on e comunicação clara",
-    "text": "Não separo arquitetura do código nem tecnologia do negócio. Minha forma de trabalhar é adaptar a solução ao estágio, risco e objetivo real de cada produto."
+    "title": "Desenvolvedor primeiro, com visão de produto e engenharia",
+    "text": "Gosto de estar no código e entender o produto inteiro. A experiência em arquitetura e liderança serve para reduzir gargalos e melhorar a entrega, não para me afastar da implementação."
   },
   "workProfileHighlights": [
     {
-      "icon": "bi-diagram-3",
-      "title": "Arquitetura sem dogma",
-      "text": "Não existe bala de prata. Defino estrutura, dados, integrações, sincronismo, hospedagem, segurança e escala de acordo com o problema, custo e horizonte do produto."
+      "icon": "bi-code-square",
+      "title": "Hands-on por padrão",
+      "text": "Desenvolvo, reviso código, depuro, integro, publico e participo diretamente de entregas críticas e evolução de produtos."
     },
     {
-      "icon": "bi-code-square",
-      "title": "Hands-on por escolha",
-      "text": "Continuo desenvolvendo, revisando código, depurando, publicando e participando de entregas críticas. Arquitetura, para mim, precisa sobreviver ao contato com a implementação."
+      "icon": "bi-diagram-3",
+      "title": "Arquitetura com contexto",
+      "text": "Escolho estrutura, dados, integrações, hospedagem e escala conforme o problema, custo, risco e horizonte do produto."
     },
     {
       "icon": "bi-phone",
-      "title": "Mobile do papel à loja",
-      "text": "É minha área de maior profundidade: arquitetura, React Native/Expo, desenvolvimento nativo, builds, assinatura, lojas, white-label, releases e manutenção pós-publicação."
+      "title": "Mobile ponta a ponta",
+      "text": "React Native/Expo, nativo e Flutter, cobrindo sincronização, builds, lojas, releases, white-label e manutenção pós-publicação."
     },
     {
       "icon": "bi-tools",
       "title": "Legado com critério",
-      "text": "Antes de propor reescrita, avalio risco, custo, testes, acoplamento e vida útil. Muitas vezes a melhor engenharia é estabilizar, isolar e evoluir de forma incremental."
+      "text": "Antes de reescrever, avalio risco, testes, acoplamento e vida útil. Muitas vezes estabilizar e evoluir gradualmente é a melhor engenharia."
+    },
+    {
+      "icon": "bi-speedometer2",
+      "title": "Performance e dados",
+      "text": "Investigo gargalos em frontend, backend e banco, trabalhando com modelagem, agregações, cache, queries e infraestrutura para melhorar resposta e escala."
     },
     {
       "icon": "bi-chat-dots",
-      "title": "Comunicação técnica",
-      "text": "Consigo discutir detalhes com engenheiros e transformar a mesma decisão em linguagem comum para clientes, produto, comercial, gestores e colaboradores."
-    },
-    {
-      "icon": "bi-briefcase",
-      "title": "Produto e consultoria",
-      "text": "Posso assumir um produto completo ou uma necessidade fracionada: diagnóstico, integração, bug crítico, performance, arquitetura, funcionalidade, manutenção ou apoio técnico."
+      "title": "Comunicação e liderança",
+      "text": "Consigo discutir detalhes técnicos e transformar as mesmas decisões em linguagem clara para produto, clientes, gestores e outros desenvolvedores."
     }
   ],
   "profileExplorer": {
     "eyebrow": "Perfil profissional",
-    "title": "Explore meu perfil pelo que mais importa para você",
-    "text": "A mesma experiência, organizada em perspectivas curtas. Troque de aba para aprofundar sem transformar a página em uma parede de texto.",
+    "title": "Explore meu perfil pelo que mais importa para a vaga",
+    "text": "A mesma experiência organizada em perspectivas curtas: Full Stack, Mobile, Engenharia e Liderança Técnica.",
     "tabsLabel": "Áreas do perfil profissional",
     "resultsTitle": "Resultados selecionados",
     "resultsText": "Alguns resultados concretos da trajetória. Abra apenas os que quiser aprofundar.",
@@ -1832,35 +1821,35 @@
         "id": "overview",
         "label": "Visão geral",
         "icon": "bi-compass",
-        "title": "Engenharia que conecta código, arquitetura e negócio",
-        "text": "São mais de 8 anos desenvolvendo e mantendo software, com aumento progressivo de responsabilidade. Nos últimos 3+ anos passei a assumir de forma recorrente a arquitetura ponta a ponta, mantendo atuação direta na implementação e na operação dos produtos.",
+        "title": "Desenvolvimento que conecta web, mobile, backend e produto",
+        "text": "São mais de 8 anos desenvolvendo e mantendo software, com aumento progressivo de escopo e responsabilidade. Meu foco continua sendo hands-on, com arquitetura e liderança técnica como extensão da experiência.",
         "cards": [
           {
             "icon": "bi-code-slash",
-            "title": "Execução técnica",
-            "text": "Continuo desenvolvendo, revisando código, depurando, integrando, publicando e participando de entregas críticas."
-          },
-          {
-            "icon": "bi-diagram-3",
-            "title": "Arquitetura ponta a ponta",
-            "text": "Estrutura de aplicações, dados, integrações, segurança, escalabilidade, hospedagem, CI/CD, testes e observabilidade."
+            "title": "Full Stack hands-on",
+            "text": "React/Next.js, Node.js, PHP/Laravel, C#/.NET, Java e outras stacks aplicadas conforme o contexto do produto."
           },
           {
             "icon": "bi-phone",
             "title": "Mobile como especialidade",
-            "text": "React Native/Expo, nativo, Flutter, builds, lojas, white-label, releases, manutenção e evolução pós-publicação."
+            "text": "React Native/Expo, Flutter e nativo, com experiência em offline sync, integrações, builds, testes e publicação."
           },
           {
-            "icon": "bi-briefcase",
-            "title": "Produto e consultoria",
-            "text": "Produtos completos ou demandas pontuais: diagnóstico, legado, integrações, performance, funcionalidades e sustentação."
+            "icon": "bi-database",
+            "title": "Dados & Backend",
+            "text": "APIs, bancos SQL/NoSQL, filas, cache, integrações e otimização de performance para fluxos operacionais e de alta escala."
+          },
+          {
+            "icon": "bi-people",
+            "title": "Maturidade técnica",
+            "text": "Code review, mentoria, arquitetura e tomada de decisões sem deixar de desenvolver e resolver problemas diretamente."
           }
         ],
         "showImpacts": true
       },
       {
         "id": "architecture",
-        "label": "Arquitetura & Engenharia",
+        "label": "Engenharia & Arquitetura",
         "icon": "bi-diagram-3",
         "title": "Arquitetura que precisa sobreviver à implementação",
         "text": "Não trato arquitetura como um desenho isolado. As decisões consideram contexto, risco, custo, manutenção, operação e horizonte do produto.",
@@ -1918,10 +1907,10 @@
       },
       {
         "id": "leadership",
-        "label": "Liderança & Consultoria",
+        "label": "Liderança Técnica",
         "icon": "bi-people",
-        "title": "Profundidade técnica sem perder a linguagem de produto",
-        "text": "Consigo circular entre engenharia, produto, comercial e cliente. Meu papel é reduzir ambiguidade e transformar problemas em decisões e entregas compreensíveis.",
+        "title": "Liderança como consequência da experiência hands-on",
+        "text": "Consigo orientar decisões, apoiar pessoas e reduzir ambiguidade mantendo participação direta na execução e no produto.",
         "cards": [
           {
             "icon": "bi-chat-dots",
@@ -1940,8 +1929,8 @@
           },
           {
             "icon": "bi-wrench-adjustable",
-            "title": "Consultoria flexível",
-            "text": "Posso assumir um produto completo ou atuar de forma fracionada em integração, bug crítico, performance, arquitetura, legado, manutenção ou nova funcionalidade."
+            "title": "Execução e apoio técnico",
+            "text": "Posso assumir problemas complexos, integrações, performance, legado, manutenção ou novas funcionalidades sem transformar tudo em um projeto de arquitetura."
           }
         ]
       }

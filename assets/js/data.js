@@ -4,7 +4,7 @@ window.portfolioConfig = {
   },
   branding: {
     logo: 'assets/img/brand/logo-bm-white.png',
-    logoAlt: 'Bruno Getten Triches — Software Architect & Software Engineer',
+    logoAlt: 'Bruno Getten Triches — Full Stack & Mobile Developer',
     favicon: 'favicon.ico',
     socialPreview: 'assets/img/brand/social-preview.jpg',
     aboutImage: 'assets/img/about/1.jpg',
@@ -240,9 +240,9 @@ window.portfolioConfig = {
     'es': 'assets/languages/es.json'
   },
   languageOptions: {
-    'pt-BR': { flag: '🇧🇷', label: 'Português (BR)', helper: 'Currículo BR' },
-    'en': { flag: '🇺🇸', label: 'English', helper: 'CV in English' },
-    'es': { flag: '🇪🇸', label: 'Español', helper: 'CV in English' }
+    'pt-BR': { flag: '🇧🇷', label: 'Português (BR)', helper: 'Currículo PT-BR' },
+    'en': { flag: '🇺🇸', label: 'English', helper: 'Resume in English' },
+    'es': { flag: '🇪🇸', label: 'Español', helper: 'CV en inglés' }
   },
   contactLinks: {
     whatsapp: 'https://wa.me/5549988427624',
