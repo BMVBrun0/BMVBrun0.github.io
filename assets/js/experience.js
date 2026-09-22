@@ -209,8 +209,8 @@
       <aside class="experience-panel" id="experience-panel" aria-hidden="true" aria-labelledby="experience-title">
         <header class="experience-panel__header">
           <div>
-            <span class="experience-panel__eyebrow">INTERACTIVE</span>
-            <h2 id="experience-title">Experience Lab</h2>
+            <span class="experience-panel__eyebrow" id="experience-panel-eyebrow">INTERATIVO</span>
+            <h2 id="experience-title">Laboratório de experiência</h2>
             <p id="experience-subtitle"></p>
           </div>
           <button class="experience-icon-button" id="experience-close" type="button" aria-label="Close">×</button>
@@ -461,12 +461,19 @@
     if (!text) return;
     const launcher = q('#experience-launcher');
     const launcherLabel = q('#experience-launcher-label');
+    const eyebrow = q('#experience-panel-eyebrow');
     const title = q('#experience-title');
     const subtitle = q('#experience-subtitle');
     const close = q('#experience-close');
-    if (launcher) launcher.setAttribute('aria-label', text.openLabel || 'Open lab');
+    const fallback = locale === 'en'
+      ? { open: 'Open experience lab', eyebrow: 'INTERACTIVE', title: 'Experience Lab' }
+      : locale === 'es'
+        ? { open: 'Abrir laboratorio de experiencia', eyebrow: 'INTERACTIVO', title: 'Laboratorio de experiencia' }
+        : { open: 'Abrir laboratório de experiência', eyebrow: 'INTERATIVO', title: 'Laboratório de experiência' };
+    if (launcher) launcher.setAttribute('aria-label', text.openLabel || fallback.open);
+    if (eyebrow) eyebrow.textContent = text.eyebrow || fallback.eyebrow;
     if (launcherLabel) launcherLabel.textContent = text.buttonLabel || 'LAB';
-    if (title) title.textContent = text.title || 'Experience Lab';
+    if (title) title.textContent = text.title || fallback.title;
     if (subtitle) subtitle.textContent = text.subtitle || '';
     if (close) close.setAttribute('aria-label', text.closeLabel || 'Close');
     renderLabBody();
@@ -701,7 +708,7 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, Math.max(1, Number(cfg.maxDevicePixelRatio) || 1.5)));
     stage.appendChild(renderer.domElement);
 
-    const logoUrl = (cfg.logoTexture && String(cfg.logoTexture).trim()) || config.branding?.logo || logo?.getAttribute('src') || 'assets/img/brand/logo-bm-white.png';
+    const logoUrl = (cfg.logoTexture && String(cfg.logoTexture).trim()) || config.branding?.logo || logo?.getAttribute('src') || 'assets/img/brand/logo-bm-white.webp';
     const source = await new Promise((resolve, reject) => {
       const image = new Image();
       image.decoding = 'async';
@@ -1449,13 +1456,24 @@
   function init() {
     restoreSavedState();
     syncRuntimeCss();
-    if (isFeatureEnabled('experienceLab')) renderLab();
-    if (isFeatureEnabled('interactiveCanvas')) initCanvas();
-    if (isFeatureEnabled('ambientDepth')) initAmbientDepth();
+
+    // Keep the hero interaction responsive, but move decorative/non-critical work
+    // out of the initial rendering path. This matters on GitHub Pages and mobile.
     if (isFeatureEnabled('physicsShowcase')) initPhysicsShowcase();
-    if (isFeatureEnabled('spaceNetwork')) initSpaceNetwork();
-    if (isFeatureEnabled('particleField')) initParticleField();
-    if (isFeatureEnabled('microInteractions')) initMicroInteractions();
+    if (isFeatureEnabled('ambientDepth')) initAmbientDepth();
+
+    const runDeferredExperience = () => {
+      if (isFeatureEnabled('experienceLab')) renderLab();
+      if (isFeatureEnabled('interactiveCanvas')) initCanvas();
+      if (isFeatureEnabled('spaceNetwork')) initSpaceNetwork();
+      if (isFeatureEnabled('particleField')) initParticleField();
+      if (isFeatureEnabled('microInteractions')) initMicroInteractions();
+    };
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(runDeferredExperience, { timeout: 1400 });
+    } else {
+      window.setTimeout(runDeferredExperience, 550);
+    }
 
     document.addEventListener('visibilitychange', () => { syncCanvasAnimation(); syncPhysicsAnimation(); syncAmbientCanvasAnimation(); syncSpaceNetworkAnimation(); syncParticleFieldAnimation(); });
     reducedMotionQuery.addEventListener?.('change', () => {

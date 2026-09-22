@@ -45,12 +45,22 @@ assets/languages/es.json
 
 Os arquivos de imagem e documentos ficam em `assets/img` e `assets/docs`. Depois de adicionar um asset, use o caminho relativo correspondente na configuração ou no arquivo de idioma.
 
+### Telas extras
+
+O portfólio agora possui duas páginas adicionais, sem transformar a home em uma página ainda maior:
+
+- `library.html`: biblioteca gamificada de projetos, detalhes técnicos, galerias, certificações e formação;
+- `resume.html`: currículo expandido em HTML, com experiência, contexto por empresa, projetos selecionados e versão amigável para impressão/PDF.
+
+Os projetos, certificados, formação e experiência continuam vindo dos JSONs de idioma existentes. Textos longos específicos das novas telas e detalhes por empresa ficam em `assets/js/extended-data.js`, pensado para ser editado manualmente sem alterar o renderer.
+
+
 
 ### Links de acesso dos projetos
 
 Os botões de acesso são controlados em `assets/js/data.js`. A flag global `features.projectLinks` ativa ou desativa o recurso inteiro. Cada projeto também possui sua própria flag `enabled`.
 
-A chave usada em `projectLinks` é o nome do arquivo da capa sem a extensão. Por exemplo, `assets/img/portfolio/pocket_links.png` usa a chave `pocket_links`:
+A chave usada em `projectLinks` é o nome do arquivo da capa sem a extensão. Por exemplo, `assets/img/portfolio/pocket_links.webp` usa a chave `pocket_links`:
 
 ```js
 features: {
@@ -92,17 +102,17 @@ O campo `url` é opcional. Para manter os idiomas sincronizados, cadastre a mesm
 
 ### Convenção de imagens dos projetos
 
-As capas de marketing ficam diretamente em `assets/img/portfolio` usando o slug do produto, por exemplo `media_forge.png` e `pocket_links.png`.
+As capas de marketing ficam diretamente em `assets/img/portfolio` usando o slug do produto, por exemplo `media_forge.webp` e `pocket_links.webp`.
 
 As imagens internas de galeria ficam em uma pasta com o mesmo slug e seguem numeração com dois dígitos:
 
 ```text
-assets/img/portfolio/pocket_links/pocket_links_01.png
-assets/img/portfolio/pocket_links/pocket_links_02.png
-assets/img/portfolio/pocket_links/pocket_links_03.jpeg
+assets/img/portfolio/pocket_links/pocket_links_01.webp
+assets/img/portfolio/pocket_links/pocket_links_02.webp
+assets/img/portfolio/pocket_links/pocket_links_03.webp
 ```
 
-A mesma regra vale para todos os projetos com galeria: `<slug>/<slug>_NN.ext`.
+A mesma regra vale para todos os projetos com galeria: `<slug>/<slug>_NN.webp`. Para GitHub Pages, prefira WebP para evitar transferir screenshots PNG de vários megabytes.
 
 ### Ativar ou ocultar blocos
 
@@ -125,6 +135,12 @@ features: {
 `0` oculta/desativa. `1` exibe/ativa. Por exemplo, `contact: 0` remove a área de contato e seu acesso no menu; `socialLinks: 0` oculta os links sociais.
 
 Com `projectsCarousel: 1` ou `certificatesCarousel: 1`, a grade correspondente vira um carrossel automático: 3 cards por vez no desktop, 2 em telas intermediárias e 1 no mobile.
+
+## Performance no GitHub Pages
+
+Os assets raster usados pela interface foram convertidos para WebP e redimensionados para uma resolução compatível com o uso real em cards e galerias. As imagens de projeto/certificado usam lazy loading e decodificação assíncrona; efeitos 3D decorativos secundários são inicializados em idle time, deixando o conteúdo principal e o showcase do hero como prioridade.
+
+Ao adicionar novas screenshots, prefira WebP e evite exportar imagens de 3000–4000 px quando a galeria não precisa dessa resolução.
 
 ## Experience Lab e efeitos interativos
 
@@ -154,7 +170,7 @@ experience: {
   motionStrength: 0.75,
   physicsShowcase: {
     moduleUrl: 'https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.min.js',
-    logoTexture: 'assets/img/brand/logo-bm-white.png',
+    logoTexture: 'assets/img/brand/logo-bm-white.webp',
     particlesDesktop: 1500,
     particlesMobile: 780,
     dustDesktop: 260,
@@ -208,78 +224,40 @@ https://SEU-USUARIO.github.io/
 
 Também é possível publicar a partir de um repositório com outro nome; nesse caso, o GitHub Pages usa uma URL de projeto que inclui o nome do repositório.
 
-## Analytics com GoatCounter
+## Analytics
 
-Para acompanhar o número de acessos ao portfólio, é possível usar o [GoatCounter](https://www.goatcounter.com/). Crie uma conta e informe o domínio usado pelo GitHub Pages, sem `https://` e sem a barra final:
+O carregamento de analytics é centralizado em `assets/js/analytics.js` e configurado em `assets/js/data.js`. Assim, Home, Biblioteca e Currículo+ usam a mesma configuração sem duplicar scripts nos arquivos HTML.
 
-```text
-SEU-USUARIO.github.io
+```js
+analytics: {
+  googleAnalyticsId: 'G-XXXXXXXXXX',
+  goatCounterUrl: 'https://SEU-CODIGO.goatcounter.com/count'
+}
 ```
 
-Depois de criar a conta, adicione o código de rastreamento antes do fechamento de `</body>` no arquivo `index.html`:
+- `googleAnalyticsId`: informe o Measurement ID do fluxo Web do Google Analytics 4. Deixe vazio para desativar.
+- `goatCounterUrl`: informe a URL `.../count` da sua conta GoatCounter. Deixe vazio para desativar.
+- Em `localhost`, `127.0.0.1` e `::1`, o script não envia acessos para evitar poluir as métricas durante desenvolvimento.
+- Links com `data-track="cv-download"` enviam também o evento `cv_download` ao GA4, permitindo acompanhar downloads do currículo por idioma e página.
 
-```html
-<script
-  data-goatcounter="https://SEU-CODIGO.goatcounter.com/count"
-  async
-  src="//gc.zgo.at/count.js">
-</script>
-```
-
-Substitua `SEU-CODIGO` pelo nome escolhido ao criar a conta no GoatCounter. Por exemplo, para uma conta disponível em `meuportfolio.goatcounter.com`, use:
-
-```html
-<script
-  data-goatcounter="https://meuportfolio.goatcounter.com/count"
-  async
-  src="//gc.zgo.at/count.js">
-</script>
-```
-
-Depois de enviar a alteração para o GitHub, os novos acessos ao site começarão a aparecer no painel do GoatCounter.
-
-O uso de analytics é opcional e não interfere no funcionamento do portfólio.
-
-
-## Analytics com Google Analytics
-
-Para acompanhar os acessos ao portfólio, crie uma conta no [Google Analytics](https://analytics.google.com/) e adicione um fluxo da Web usando a URL publicada no GitHub Pages:
-
-```text
-https://SEU-USUARIO.github.io/
-```
-
-Na etapa **Configurar uma tag do Google**, escolha **Instalar manualmente** e copie o código fornecido pelo Google, semelhante a:
-
-```html
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
-```
-
-Cole o código no arquivo `index.html`, logo após a abertura de `<head>`. O código fornecido pelo Google já vem com o identificador correto da propriedade.
-
-Depois, envie a alteração para o GitHub e aguarde a atualização do GitHub Pages. Os novos acessos começarão a aparecer no Google Analytics.
-
-O uso de analytics é opcional e não interfere no funcionamento do portfólio.
+O restante dos links externos pode ser acompanhado pelo recurso de medição otimizada do GA4 quando ele estiver habilitado na propriedade.
 
 ## Estrutura essencial
 
 ```text
 assets/
-  css/main.css
+  css/
   docs/
   img/
-  js/data.js
-  js/main.js
+  js/
+    analytics.js
+    data.js
+    main.js
+    pages-common.js
   languages/
 index.html
+library.html
+resume.html
 favicon.ico
 ```
 

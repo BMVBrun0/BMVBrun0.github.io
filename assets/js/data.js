@@ -1,14 +1,18 @@
 window.portfolioConfig = {
   profile: {
-    name: 'Bruno Getten Triches'
+    name: 'Bruno Getten Triches',
+    nickname: 'BMVBrun0'
+  },
+  analytics: {
+    googleAnalyticsId: 'G-DR9CW1GKGN',
+    goatCounterUrl: 'https://bmvbrun0.goatcounter.com/count'
   },
   branding: {
-    logo: 'assets/img/brand/logo-bm-white.png',
+    logo: 'assets/img/brand/logo-bm-white.webp',
     logoAlt: 'Bruno Getten Triches — Full Stack & Mobile Developer',
     favicon: 'favicon.ico',
     socialPreview: 'assets/img/brand/social-preview.jpg',
-    aboutImage: 'assets/img/about/1.jpg',
-    // Ponto focal da foto do bloco Sobre. Aceita qualquer valor CSS de object-position.
+    aboutImage: 'assets/img/about/1.webp',
     aboutImagePosition: '50% 56%'
   },
   theme: {
@@ -27,12 +31,12 @@ window.portfolioConfig = {
     languageSwitcher: 1,
     hero: 1,
     about: 1,
-    profileExplorer: 1,
+    profileExplorer: 0,
     impact: 1,
     recruiter: 1,
     workProfile: 1,
     experience: 1,
-    services: 1,
+    services: 0,
     projects: 1,
     projectsCarousel: 1,
     projectLinks: 1,
@@ -42,8 +46,6 @@ window.portfolioConfig = {
     contact: 1,
     socialLinks: 1,
     footer: 1,
-
-    // Experiências interativas. Todas podem ser desligadas individualmente.
     experienceLab: 1,
     themePlayground: 1,
     interactiveCanvas: 0,
@@ -63,15 +65,11 @@ window.portfolioConfig = {
     defaultTab: 'overview',
     rememberSelection: 1,
     mobileScrollActiveTab: 1,
-    // 'grid' mostra as quatro opções no celular; 'scroll' mantém a faixa horizontal.
     phoneTabLayout: 'grid',
     showImpactDetails: 1,
     openFirstImpact: 0,
     compactSkillsOnMobile: 1
   },
-
-  // Configurações das experiências visuais/interativas do template.
-  // O showcase 3D usa Three.js via CDN configurável e todos os efeitos respeitam prefers-reduced-motion.
   experience: {
     dockPosition: 'left',
     persistPlayground: 1,
@@ -135,39 +133,33 @@ window.portfolioConfig = {
     },
     physicsShowcase: {
       moduleUrl: 'https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.min.js',
-      // 'replace' usa a logo 3D no lugar do asset; 'blend' mantém o asset atrás; 'static' desliga a substituição visual.
       displayMode: 'replace',
       placement: 'panel-logo',
       colorMode: 'source',
       logoTexture: '',
-      // The renderer crops transparent padding automatically before sampling.
       cropTransparentPadding: 1,
       alphaThreshold: 40,
       sampleResolution: 760,
-      // Mais pontos + pontos menores = silhueta definida, sem o efeito de "bolas de algodão".
       particlesDesktop: 10800,
       particlesMobile: 6800,
       dustDesktop: 140,
       dustMobile: 60,
       logoWidth: 5.65,
-      // Profundidade curta mantém a leitura da marca; a interação revela o volume 3D.
       logoDepth: 0.44,
       depthLayers: 7,
-      particleShape: 'pixel', // 'pixel' (padrão) ou 'atom'
+      particleShape: 'pixel',
       pointSizeDesktop: 0.019,
       pointSizeMobile: 0.022,
       particleOpacity: 0.96,
       colorBoost: 1.48,
       blendMode: 'normal',
       initialScatter: 0.065,
-      // Mantém a marca alinhada quase de frente; o 3D aparece no depth/parallax/interação.
       baseTiltX: -0.004,
       baseTiltY: 0.006,
       baseTiltZ: 0,
       tiltAmountX: 0.008,
       tiltAmountY: 0.015,
       tiltAmountZ: 0.004,
-      // A imagem sólida continua desligada. O ghost é apenas um guia quase imperceptível.
       coreOpacityDesktop: 0,
       coreOpacityMobile: 0,
       depthGlowOpacity: 0.018,
@@ -240,8 +232,8 @@ window.portfolioConfig = {
     'es': 'assets/languages/es.json'
   },
   languageOptions: {
-    'pt-BR': { flag: '🇧🇷', label: 'Português (BR)', helper: 'Currículo PT-BR' },
-    'en': { flag: '🇺🇸', label: 'English', helper: 'Resume in English' },
+    'pt-BR': { flag: '🇧🇷', label: 'Português (BR)', helper: 'Currículo em português' },
+    'en': { flag: '🇺🇸', label: 'English', helper: 'Currículo em inglês' },
     'es': { flag: '🇪🇸', label: 'Español', helper: 'CV en inglés' }
   },
   contactLinks: {
@@ -255,9 +247,6 @@ window.portfolioConfig = {
     { id: 'instagram', label: 'Instagram', icon: 'bi-instagram', url: 'https://www.instagram.com/bruno_getten' },
     { id: 'whatsapp', label: 'WhatsApp', icon: 'bi-whatsapp', url: 'https://wa.me/5549988427624' }
   ],
-  // Links opcionais de acesso aos projetos.
-  // A chave é o nome do arquivo de capa sem extensão (ex.: pocket_links.png -> pocket_links).
-  // Mantenha enabled: 0 ou url vazio para não exibir o botão.
   projectLinks: {
     whitelabel_booking: { enabled: 0, url: '' },
     xtreme_fut: { enabled: 0, url: '' },
@@ -271,137 +260,134 @@ window.portfolioConfig = {
     garimpei: { enabled: 1, url: 'https://garimpei-peach.vercel.app/' },
     realtime_messaging: { enabled: 0, url: '' }
   },
-  // A imagem de capa de cada projeto continua definida nos arquivos de idioma.
-  // Adicione aqui somente as imagens extras da galeria; a capa entra automaticamente como a primeira imagem.
-  // Dessa forma, novos prints são cadastrados uma única vez e aparecem em todos os idiomas.
   projectGalleries: {
-    'assets/img/portfolio/whitelabel_booking.png': [
-      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_01.png',
-      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_02.png',
-      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_03.png',
-      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_04.png',
-      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_05.png',
-      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_06.png',
-      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_07.png',
-      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_08.png',
-      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_09.png'
+    'assets/img/portfolio/whitelabel_booking.webp': [
+      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_01.webp',
+      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_02.webp',
+      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_03.webp',
+      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_04.webp',
+      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_05.webp',
+      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_06.webp',
+      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_07.webp',
+      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_08.webp',
+      'assets/img/portfolio/whitelabel_booking/whitelabel_booking_09.webp'
     ],
-    'assets/img/portfolio/xtreme_fut.png': [
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_01.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_02.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_03.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_04.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_05.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_06.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_07.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_08.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_09.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_10.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_11.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_12.jpeg',
-      'assets/img/portfolio/xtreme_fut/xtreme_fut_13.jpeg'
+    'assets/img/portfolio/xtreme_fut.webp': [
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_01.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_02.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_03.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_04.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_05.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_06.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_07.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_08.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_09.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_10.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_11.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_12.webp',
+      'assets/img/portfolio/xtreme_fut/xtreme_fut_13.webp'
     ],
-    'assets/img/portfolio/accessibility_plugin.png': [
-      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_01.png',
-      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_02.png',
-      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_03.png',
-      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_04.png',
-      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_05.png',
-      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_06.png',
-      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_07.png',
-      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_08.png'
+    'assets/img/portfolio/accessibility_plugin.webp': [
+      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_01.webp',
+      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_02.webp',
+      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_03.webp',
+      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_04.webp',
+      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_05.webp',
+      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_06.webp',
+      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_07.webp',
+      'assets/img/portfolio/accessibility_plugin/accessibility_plugin_08.webp'
     ],
-    'assets/img/portfolio/truco_game.png': [],
-    'assets/img/portfolio/pocket_links.png': [
-      'assets/img/portfolio/pocket_links/pocket_links_01.png',
-      'assets/img/portfolio/pocket_links/pocket_links_02.png',
-      'assets/img/portfolio/pocket_links/pocket_links_03.jpeg',
-      'assets/img/portfolio/pocket_links/pocket_links_04.jpeg',
-      'assets/img/portfolio/pocket_links/pocket_links_05.jpeg',
-      'assets/img/portfolio/pocket_links/pocket_links_06.jpeg',
-      'assets/img/portfolio/pocket_links/pocket_links_07.jpeg',
-      'assets/img/portfolio/pocket_links/pocket_links_08.jpeg',
-      'assets/img/portfolio/pocket_links/pocket_links_09.jpeg',
-      'assets/img/portfolio/pocket_links/pocket_links_10.jpeg',
-      'assets/img/portfolio/pocket_links/pocket_links_11.jpeg',
-      'assets/img/portfolio/pocket_links/pocket_links_12.jpeg'
+    'assets/img/portfolio/truco_game.webp': [],
+    'assets/img/portfolio/pocket_links.webp': [
+      'assets/img/portfolio/pocket_links/pocket_links_01.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_02.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_03.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_04.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_05.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_06.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_07.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_08.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_09.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_10.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_11.webp',
+      'assets/img/portfolio/pocket_links/pocket_links_12.webp'
     ],
-    'assets/img/portfolio/media_forge.png': [
-      'assets/img/portfolio/media_forge/media_forge_01.png',
-      'assets/img/portfolio/media_forge/media_forge_02.png',
-      'assets/img/portfolio/media_forge/media_forge_03.png',
-      'assets/img/portfolio/media_forge/media_forge_04.png',
-      'assets/img/portfolio/media_forge/media_forge_05.png',
-      'assets/img/portfolio/media_forge/media_forge_06.png',
-      'assets/img/portfolio/media_forge/media_forge_07.png',
-      'assets/img/portfolio/media_forge/media_forge_08.png',
-      'assets/img/portfolio/media_forge/media_forge_09.png',
-      'assets/img/portfolio/media_forge/media_forge_10.png',
-      'assets/img/portfolio/media_forge/media_forge_11.png',
-      'assets/img/portfolio/media_forge/media_forge_12.png',
-      'assets/img/portfolio/media_forge/media_forge_13.png',
-      'assets/img/portfolio/media_forge/media_forge_14.png',
-      'assets/img/portfolio/media_forge/media_forge_15.png'
+    'assets/img/portfolio/media_forge.webp': [
+      'assets/img/portfolio/media_forge/media_forge_01.webp',
+      'assets/img/portfolio/media_forge/media_forge_02.webp',
+      'assets/img/portfolio/media_forge/media_forge_03.webp',
+      'assets/img/portfolio/media_forge/media_forge_04.webp',
+      'assets/img/portfolio/media_forge/media_forge_05.webp',
+      'assets/img/portfolio/media_forge/media_forge_06.webp',
+      'assets/img/portfolio/media_forge/media_forge_07.webp',
+      'assets/img/portfolio/media_forge/media_forge_08.webp',
+      'assets/img/portfolio/media_forge/media_forge_09.webp',
+      'assets/img/portfolio/media_forge/media_forge_10.webp',
+      'assets/img/portfolio/media_forge/media_forge_11.webp',
+      'assets/img/portfolio/media_forge/media_forge_12.webp',
+      'assets/img/portfolio/media_forge/media_forge_13.webp',
+      'assets/img/portfolio/media_forge/media_forge_14.webp',
+      'assets/img/portfolio/media_forge/media_forge_15.webp'
     ],
-    'assets/img/portfolio/imobly.png': [
-      'assets/img/portfolio/imobly/imobly_01.png',
-      'assets/img/portfolio/imobly/imobly_02.png',
-      'assets/img/portfolio/imobly/imobly_03.png',
-      'assets/img/portfolio/imobly/imobly_04.png',
-      'assets/img/portfolio/imobly/imobly_05.png',
-      'assets/img/portfolio/imobly/imobly_06.png',
-      'assets/img/portfolio/imobly/imobly_07.png',
-      'assets/img/portfolio/imobly/imobly_08.png',
-      'assets/img/portfolio/imobly/imobly_09.png',
-      'assets/img/portfolio/imobly/imobly_10.png',
-      'assets/img/portfolio/imobly/imobly_11.png'
+    'assets/img/portfolio/imobly.webp': [
+      'assets/img/portfolio/imobly/imobly_01.webp',
+      'assets/img/portfolio/imobly/imobly_02.webp',
+      'assets/img/portfolio/imobly/imobly_03.webp',
+      'assets/img/portfolio/imobly/imobly_04.webp',
+      'assets/img/portfolio/imobly/imobly_05.webp',
+      'assets/img/portfolio/imobly/imobly_06.webp',
+      'assets/img/portfolio/imobly/imobly_07.webp',
+      'assets/img/portfolio/imobly/imobly_08.webp',
+      'assets/img/portfolio/imobly/imobly_09.webp',
+      'assets/img/portfolio/imobly/imobly_10.webp',
+      'assets/img/portfolio/imobly/imobly_11.webp'
     ],
-    'assets/img/portfolio/garimpei.png': [
-      'assets/img/portfolio/garimpei/garimpei_01.png',
-      'assets/img/portfolio/garimpei/garimpei_02.png',
-      'assets/img/portfolio/garimpei/garimpei_03.png',
-      'assets/img/portfolio/garimpei/garimpei_04.png',
-      'assets/img/portfolio/garimpei/garimpei_05.png',
-      'assets/img/portfolio/garimpei/garimpei_06.png',
-      'assets/img/portfolio/garimpei/garimpei_07.png',
-      'assets/img/portfolio/garimpei/garimpei_08.png',
-      'assets/img/portfolio/garimpei/garimpei_09.png'
+    'assets/img/portfolio/garimpei.webp': [
+      'assets/img/portfolio/garimpei/garimpei_01.webp',
+      'assets/img/portfolio/garimpei/garimpei_02.webp',
+      'assets/img/portfolio/garimpei/garimpei_03.webp',
+      'assets/img/portfolio/garimpei/garimpei_04.webp',
+      'assets/img/portfolio/garimpei/garimpei_05.webp',
+      'assets/img/portfolio/garimpei/garimpei_06.webp',
+      'assets/img/portfolio/garimpei/garimpei_07.webp',
+      'assets/img/portfolio/garimpei/garimpei_08.webp',
+      'assets/img/portfolio/garimpei/garimpei_09.webp'
     ],
-    'assets/img/portfolio/realtime_messaging.png': [
-      'assets/img/portfolio/realtime_messaging/realtime_messaging_01.png',
-      'assets/img/portfolio/realtime_messaging/realtime_messaging_02.png',
-      'assets/img/portfolio/realtime_messaging/realtime_messaging_03.png',
-      'assets/img/portfolio/realtime_messaging/realtime_messaging_04.png',
-      'assets/img/portfolio/realtime_messaging/realtime_messaging_05.png',
-      'assets/img/portfolio/realtime_messaging/realtime_messaging_06.png',
-      'assets/img/portfolio/realtime_messaging/realtime_messaging_07.png',
-      'assets/img/portfolio/realtime_messaging/realtime_messaging_08.png',
-      'assets/img/portfolio/realtime_messaging/realtime_messaging_09.png'
+    'assets/img/portfolio/realtime_messaging.webp': [
+      'assets/img/portfolio/realtime_messaging/realtime_messaging_01.webp',
+      'assets/img/portfolio/realtime_messaging/realtime_messaging_02.webp',
+      'assets/img/portfolio/realtime_messaging/realtime_messaging_03.webp',
+      'assets/img/portfolio/realtime_messaging/realtime_messaging_04.webp',
+      'assets/img/portfolio/realtime_messaging/realtime_messaging_05.webp',
+      'assets/img/portfolio/realtime_messaging/realtime_messaging_06.webp',
+      'assets/img/portfolio/realtime_messaging/realtime_messaging_07.webp',
+      'assets/img/portfolio/realtime_messaging/realtime_messaging_08.webp',
+      'assets/img/portfolio/realtime_messaging/realtime_messaging_09.webp'
     ],
-    'assets/img/portfolio/support_circle.png': [
-      'assets/img/portfolio/support_circle/support_circle_01.png',
-      'assets/img/portfolio/support_circle/support_circle_02.png',
-      'assets/img/portfolio/support_circle/support_circle_03.png',
-      'assets/img/portfolio/support_circle/support_circle_04.png',
-      'assets/img/portfolio/support_circle/support_circle_05.png',
-      'assets/img/portfolio/support_circle/support_circle_06.png',
-      'assets/img/portfolio/support_circle/support_circle_07.png',
-      'assets/img/portfolio/support_circle/support_circle_08.png',
-      'assets/img/portfolio/support_circle/support_circle_09.png',
-      'assets/img/portfolio/support_circle/support_circle_10.png'
+    'assets/img/portfolio/support_circle.webp': [
+      'assets/img/portfolio/support_circle/support_circle_01.webp',
+      'assets/img/portfolio/support_circle/support_circle_02.webp',
+      'assets/img/portfolio/support_circle/support_circle_03.webp',
+      'assets/img/portfolio/support_circle/support_circle_04.webp',
+      'assets/img/portfolio/support_circle/support_circle_05.webp',
+      'assets/img/portfolio/support_circle/support_circle_06.webp',
+      'assets/img/portfolio/support_circle/support_circle_07.webp',
+      'assets/img/portfolio/support_circle/support_circle_08.webp',
+      'assets/img/portfolio/support_circle/support_circle_09.webp',
+      'assets/img/portfolio/support_circle/support_circle_10.webp'
     ],
-    'assets/img/portfolio/radar_publico.png': [
-      'assets/img/portfolio/radar_publico/radar_publico_01.png',
-      'assets/img/portfolio/radar_publico/radar_publico_02.png',
-      'assets/img/portfolio/radar_publico/radar_publico_03.png',
-      'assets/img/portfolio/radar_publico/radar_publico_04.png',
-      'assets/img/portfolio/radar_publico/radar_publico_05.png',
-      'assets/img/portfolio/radar_publico/radar_publico_06.png',
-      'assets/img/portfolio/radar_publico/radar_publico_07.png',
-      'assets/img/portfolio/radar_publico/radar_publico_08.png',
-      'assets/img/portfolio/radar_publico/radar_publico_09.png',
-      'assets/img/portfolio/radar_publico/radar_publico_10.png'
+    'assets/img/portfolio/radar_publico.webp': [
+      'assets/img/portfolio/radar_publico/radar_publico_01.webp',
+      'assets/img/portfolio/radar_publico/radar_publico_02.webp',
+      'assets/img/portfolio/radar_publico/radar_publico_03.webp',
+      'assets/img/portfolio/radar_publico/radar_publico_04.webp',
+      'assets/img/portfolio/radar_publico/radar_publico_05.webp',
+      'assets/img/portfolio/radar_publico/radar_publico_06.webp',
+      'assets/img/portfolio/radar_publico/radar_publico_07.webp',
+      'assets/img/portfolio/radar_publico/radar_publico_08.webp',
+      'assets/img/portfolio/radar_publico/radar_publico_09.webp',
+      'assets/img/portfolio/radar_publico/radar_publico_10.webp'
     ],
-    'assets/img/portfolio/coming_soon.png': []
+    'assets/img/portfolio/coming_soon.webp': []
   }
 };

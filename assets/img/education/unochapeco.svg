@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Unochapecó</title>
+  <desc id="desc">Identificação visual da Unochapecó.</desc>
+  <rect width="128" height="128" rx="24" fill="#ffffff"/>
+  <path d="M27 22h74v42c0 24-14 36-37 44C41 100 27 88 27 64V22Z" fill="#1026B8"/>
+  <g transform="translate(64 59)" stroke="#fff" stroke-width="5" stroke-linecap="round">
+    <path d="M0 24V-5"/>
+    <path d="M0-5-18-20"/>
+    <path d="M0-5 18-20"/>
+    <path d="M0 3-25 4"/>
+    <path d="M0 3 25 4"/>
+  </g>
+  <g fill="#fff">
+    <circle cx="64" cy="54" r="6"/>
+    <circle cx="46" cy="39" r="6"/>
+    <circle cx="82" cy="39" r="6"/>
+    <circle cx="39" cy="63" r="6"/>
+    <circle cx="89" cy="63" r="6"/>
+  </g>
+</svg>

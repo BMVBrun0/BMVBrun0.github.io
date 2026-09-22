@@ -2,10 +2,20 @@ const config = window.portfolioConfig;
 const qs = (selector, context = document) => context.querySelector(selector);
 const qsa = (selector, context = document) => [...context.querySelectorAll(selector)];
 
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 const state = {
   locale: config.defaultLocale,
   data: null,
   activeCategory: 'all',
+  activeHomeSection: 'topo',
   profileTab: window.localStorage.getItem('portfolio-profile-tab') || config.profileExplorer?.defaultTab || 'overview',
   roleIntervalId: null,
   loadedLocales: new Map(),
@@ -23,7 +33,9 @@ const state = {
     lastTrigger: null,
     pointerStartX: null,
     isFullscreen: false,
-    imageRequestId: 0
+    imageRequestId: 0,
+    zoom: 1,
+    rotation: 0
   }
 };
 
@@ -39,7 +51,6 @@ const featureTargets = {
   projects: ['#projects', '#nav-projects'],
   certificates: ['#certificates', '#nav-certificates'],
   contact: ['#contact', '#nav-contact'],
-  // O crédito do template é permanente; esta flag controla apenas o conteúdo personalizável do rodapé.
   footer: ['#footer-copy', '#footer-back-top']
 };
 
@@ -147,8 +158,6 @@ function applyFeatureVisibility() {
     switcher.classList.toggle('is-feature-disabled', !isFeatureEnabled('languageSwitcher'));
   });
 
-  const projectsCta = qs('#hero-projects-cta');
-  if (projectsCta) projectsCta.classList.toggle('is-feature-disabled', !isFeatureEnabled('projects'));
 }
 
 function replacePlaceholders(template, values = {}) {
@@ -248,9 +257,13 @@ function syncLanguageSelects(locale) {
     if (currentText) currentText.textContent = currentLanguage.label;
 
     qsa('.lang-option', switcher).forEach((option) => {
-      const isActive = option.dataset.locale === activeLocale;
+      const optionLocale = option.dataset.locale;
+      const isActive = optionLocale === activeLocale;
       option.classList.toggle('is-active', isActive);
       option.setAttribute('aria-selected', String(isActive));
+      const helper = option.querySelector('small');
+      const localizedHelper = state.data?.language?.options?.[optionLocale];
+      if (helper && localizedHelper) helper.textContent = localizedHelper;
     });
   });
 }
@@ -266,7 +279,7 @@ function closeLanguageMenus(exceptSwitcher = null) {
 
 function updateMeta() {
   const meta = state.data.meta;
-  const values = { name: config.profile?.name || '' };
+  const values = { name: config.profile?.name || '', nickname: config.profile?.nickname || '' };
   document.documentElement.lang = state.locale;
   document.title = replacePlaceholders(meta.title, values);
 
@@ -297,22 +310,64 @@ function renderStaticText() {
   qs('#site-nav').setAttribute('aria-label', state.data.accessibility.mainNavigation);
   qs('#hero-links').setAttribute('aria-label', state.data.accessibility.socialLinks);
   qs('.hero-panel').setAttribute('aria-label', state.data.accessibility.professionalSummary);
-  qs('#nav-about').textContent = nav.about;
-  qs('#nav-experience').textContent = nav.experience;
-  qs('#nav-services').textContent = nav.services;
-  qs('#nav-projects').textContent = nav.projects;
-  qs('#nav-certificates').textContent = nav.certificates;
-  qs('#nav-contact').textContent = nav.contact;
+  const portfolioLabel = qs('#nav-portfolio-label');
+  if (portfolioLabel) portfolioLabel.textContent = nav.portfolio || 'Portfólio';
+  const homeSectionLabels = {
+    topo: nav.overview || 'Visão geral',
+    about: nav.about,
+    experience: nav.experience,
+    projects: nav.projects,
+    certificates: nav.certificates,
+    contact: nav.contact
+  };
+  qsa('[data-home-section]').forEach((link) => {
+    const label = homeSectionLabels[link.dataset.homeSection];
+    const text = qs('span', link);
+    if (label && text) text.textContent = label;
+  });
+  const libraryNav = qs('#nav-library');
+  const resumeNav = qs('#nav-resume');
+  if (libraryNav) libraryNav.textContent = nav.library || 'Biblioteca';
+  if (resumeNav) resumeNav.textContent = nav.resume || 'Currículo+';
+  const homeCtas = state.data.homeCtas || {};
+  const ctaMap = {
+    '#home-about-link': homeCtas.about,
+    '#home-experience-link': homeCtas.experience,
+    '#home-projects-link': homeCtas.projects,
+    '#home-education-link': homeCtas.education
+  };
+  Object.entries(ctaMap).forEach(([selector, value]) => {
+    const node = qs(selector);
+    if (node && value) node.textContent = value;
+  });
+  setHomeSectionActive(state.activeHomeSection);
 
   qs('#language-label-desktop').textContent = language.label;
   qs('#language-label-mobile').textContent = language.label;
+  const transformLabels = [
+    ['#image-modal-zoom-in', state.data.modal.zoomIn],
+    ['#image-modal-zoom-out', state.data.modal.zoomOut],
+    ['#image-modal-rotate-left', state.data.modal.rotateLeft],
+    ['#image-modal-rotate-right', state.data.modal.rotateRight],
+    ['#image-modal-reset', state.data.modal.resetView]
+  ];
+  transformLabels.forEach(([selector, label]) => {
+    const button = qs(selector);
+    if (!button || !label) return;
+    button.setAttribute('aria-label', label);
+    button.setAttribute('title', label);
+  });
 
   qs('#hero-eyebrow').textContent = hero.eyebrow;
   qs('#hero-role-prefix').textContent = hero.rolePrefix;
   qs('#hero-text').textContent = hero.text;
-  qs('#hero-projects-cta').textContent = hero.primaryCta;
-  qs('#hero-cv-cta').textContent = hero.secondaryCta;
-  qs('#hero-cv-cta').href = config.cvByLocale[state.locale] || config.cvByLocale[config.defaultLocale];
+  const heroCvDownload = qs('#hero-cv-download');
+  const heroCvDownloadLabel = qs('#hero-cv-download-label');
+  if (heroCvDownload) {
+    heroCvDownload.href = config.cvByLocale?.[state.locale] || config.cvByLocale?.[config.defaultLocale] || '#';
+    heroCvDownload.setAttribute('download', state.locale === 'pt-BR' ? 'Bruno_Getten_Triches_Curriculo.pdf' : 'Bruno_Getten_Triches_Resume.pdf');
+  }
+  if (heroCvDownloadLabel) heroCvDownloadLabel.textContent = hero.primaryCta;
 
   qs('#about-eyebrow').textContent = about.eyebrow;
   qs('#about-title').textContent = about.title;
@@ -659,7 +714,7 @@ function renderRecruiterHighlights() {
 
 function renderExperience() {
   const root = qs('#experience-list');
-  root.innerHTML = state.data.experience.map((item) => `
+  root.innerHTML = state.data.experience.slice(0, 4).map((item) => `
     <article class="timeline-item reveal">
       <span class="timeline-dot" aria-hidden="true"></span>
       <div class="timeline-card">
@@ -975,7 +1030,7 @@ function renderContentCarousel(root, kind, cardsMarkup) {
 
 function renderProjectCard(project) {
   const gallery = getProjectGallery(project);
-  const cover = gallery[0];
+  const cover = project.image ? normalizeGalleryItem(project.image, project, 0) : gallery[0];
   const tabs = getProjectTabs(project);
   const sectionCount = tabs.length;
   const sectionCountLabel = sectionCount === 1
@@ -993,7 +1048,7 @@ function renderProjectCard(project) {
           countLabel: sectionCountLabel
         })}">
         ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
-        <img src="${cover.src}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy">
+        <img src="${cover.src}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy" decoding="async" fetchpriority="low">
         <span class="project-cover-fallback" aria-hidden="true">
           <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
           <strong>${state.data.modal.unavailableTitle}</strong>
@@ -1001,10 +1056,7 @@ function renderProjectCard(project) {
         <span class="project-media-overlay" aria-hidden="true"></span>
         <span class="project-gallery-affordance" aria-hidden="true">
           <span class="project-gallery-affordance-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
-          <span class="project-gallery-affordance-copy">
-            <strong>${state.data.projectsSection.detailsCta}</strong>
-            <small>${sectionCountLabel}</small>
-          </span>
+          <span class="project-gallery-affordance-copy"><strong>${state.data.projectsSection.detailsCta}</strong></span>
           <span class="project-gallery-affordance-arrow"><svg class="icon"><use href="#icon-arrow-up-right"></use></svg></span>
         </span>
       </button>
@@ -1084,18 +1136,25 @@ function renderEducationCard(item) {
       <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
     </a>
   ` : '';
+  const initials = String(item.institution || 'EDU').split(/\s+/).map((word) => word[0]).join('').slice(0, 3).toUpperCase();
+  const brand = item.logo
+    ? `<img src="${escapeAttribute(item.logo)}" alt="${escapeAttribute(item.logoAlt || item.institution || '')}" loading="lazy" decoding="async">`
+    : `<span>${escapeHtml(initials)}</span>`;
 
   return `
     <article class="education-card reveal">
-      <div class="education-card-top">
-        <span class="education-degree">${item.degree || state.data.certificatesSection.educationDefaultDegree}</span>
-        <span class="education-period">${item.period || ''}</span>
+      <div class="education-card-brand">${brand}</div>
+      <div class="education-card-copy">
+        <div class="education-card-top">
+          <span class="education-degree">${item.degree || state.data.certificatesSection.educationDefaultDegree}</span>
+          <span class="education-period">${item.period || ''}</span>
+        </div>
+        <h4>${item.course || ''}</h4>
+        <p class="education-institution">${item.institution || ''}</p>
+        ${status}
+        ${item.description ? `<p class="education-description">${item.description}</p>` : ''}
+        ${credentialLink}
       </div>
-      <h4>${item.course || ''}</h4>
-      <p class="education-institution">${item.institution || ''}</p>
-      ${status}
-      ${item.description ? `<p class="education-description">${item.description}</p>` : ''}
-      ${credentialLink}
     </article>
   `;
 }
@@ -1112,13 +1171,42 @@ function renderEducation() {
 
   block.classList.toggle('is-feature-disabled', !enabled);
   root.innerHTML = enabled ? items.map(renderEducationCard).join('') : '';
+
+  const languageStrip = qs('#language-training-strip');
+  const languageCredential = Array.isArray(state.data.certificates)
+    ? state.data.certificates.find((item) => item?.kind === 'language')
+    : null;
+  if (languageStrip) {
+    if (!languageCredential) {
+      languageStrip.hidden = true;
+      languageStrip.innerHTML = '';
+    } else {
+      languageStrip.hidden = false;
+      const languageLogo = languageCredential.logo || '';
+      const languageLogoAlt = languageCredential.logoAlt || languageCredential.provider || 'CCAA';
+      languageStrip.innerHTML = `
+        <div class="language-training-strip__brand">
+          ${languageLogo ? `<img src="${escapeAttribute(languageLogo)}" alt="${escapeAttribute(languageLogoAlt)}" loading="lazy" decoding="async">` : '<span>EN</span>'}
+        </div>
+        <div class="language-training-strip__copy">
+          <div class="language-training-strip__topline">
+            <span>${escapeHtml(state.data.certificatesSection.languageTrainingBadge || 'Formação complementar')}</span>
+            <b>${escapeHtml(languageCredential.year || '')}</b>
+          </div>
+          <strong>${escapeHtml(state.data.certificatesSection.languageTrainingTitle || languageCredential.title || '')}</strong>
+          <span>${escapeHtml(state.data.certificatesSection.languageTrainingText || '')}</span>
+          <em>${escapeHtml(state.data.certificatesSection.languageTrainingHours || '450 horas')}</em>
+        </div>
+        <a href="library.html#formation-library">${escapeHtml(state.data.certificatesSection.languageTrainingCta || state.data.certificatesSection.credentialCta)} <svg class="icon"><use href="#icon-arrow-up-right"></use></svg></a>`;
+    }
+  }
 }
 
 function renderCertificateCard(item, index) {
   return `
     <article class="certificate-card reveal" data-certificate-index="${index}">
       <div class="certificate-media-wrap">
-        <img class="certificate-media" src="${item.image || ''}" alt="${replacePlaceholders(state.data.certificatesSection.imageAlt, { title: item.title })}" loading="lazy">
+        <img class="certificate-media" src="${item.image || ''}" alt="${replacePlaceholders(state.data.certificatesSection.imageAlt, { title: item.title })}" loading="lazy" decoding="async" fetchpriority="low">
       </div>
       <div class="certificate-content">
         <div class="certificate-top">
@@ -1155,7 +1243,7 @@ function renderCertificates() {
   const root = qs('#certificates-list');
   if (!root || !Array.isArray(state.data.certificates)) return;
 
-  const cardsMarkup = state.data.certificates.map(renderCertificateCard).join('');
+  const cardsMarkup = state.data.certificates.slice(0, 4).map(renderCertificateCard).join('');
   if (isFeatureEnabled('certificatesCarousel')) {
     renderContentCarousel(root, 'certificates', cardsMarkup);
   } else {
@@ -1241,6 +1329,84 @@ function initRoleRotation() {
 
   paint();
   state.roleIntervalId = window.setInterval(paint, 2200);
+}
+
+function closeSectionMenu() {
+  const cluster = qs('[data-section-menu]');
+  const trigger = qs('[data-section-menu-trigger]');
+  if (!cluster || !trigger) return;
+  cluster.classList.remove('is-open');
+  trigger.setAttribute('aria-expanded', 'false');
+}
+
+function setHomeSectionActive(sectionId) {
+  const links = qsa('[data-home-section]');
+  if (!links.length) return;
+  const active = links.find((link) => link.dataset.homeSection === sectionId) || links[0];
+  state.activeHomeSection = active.dataset.homeSection || 'topo';
+  links.forEach((link) => {
+    const current = link === active;
+    link.classList.toggle('is-current', current);
+    if (current) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
+  const currentLabel = qs('[data-nav-current-label]');
+  const activeText = qs('span', active)?.textContent?.trim();
+  if (currentLabel && activeText) currentLabel.textContent = activeText;
+  qs('[data-section-menu-trigger]')?.classList.toggle('has-current-section', true);
+}
+
+function initSectionMenu() {
+  const cluster = qs('[data-section-menu]');
+  const trigger = qs('[data-section-menu-trigger]');
+  if (!cluster || !trigger) return;
+
+  trigger.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const open = !cluster.classList.contains('is-open');
+    cluster.classList.toggle('is-open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+  });
+
+  qsa('[data-home-section]').forEach((link) => {
+    link.addEventListener('click', () => closeSectionMenu());
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('[data-section-menu]')) closeSectionMenu();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeSectionMenu();
+  });
+
+  const sectionEntries = [
+    ['topo', qs('.hero-section')],
+    ['about', qs('#about')],
+    ['experience', qs('#experience')],
+    ['projects', qs('#projects')],
+    ['certificates', qs('#certificates')],
+    ['contact', qs('#contact')]
+  ].filter(([, element]) => element && !element.classList.contains('is-feature-disabled'));
+  if (!sectionEntries.length) return;
+
+  let frame = null;
+  const update = () => {
+    frame = null;
+    const headerHeight = qs('.site-header')?.offsetHeight || 70;
+    const position = window.scrollY + headerHeight + Math.min(180, window.innerHeight * 0.24);
+    let active = sectionEntries[0][0];
+    sectionEntries.forEach(([id, element]) => {
+      if (position >= element.offsetTop) active = id;
+    });
+    setHomeSectionActive(active);
+  };
+  const schedule = () => {
+    if (frame) return;
+    frame = window.requestAnimationFrame(update);
+  };
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  update();
 }
 
 function initMenu() {
@@ -1355,7 +1521,6 @@ function preloadGalleryImage(src) {
       try {
         if (typeof image.decode === 'function') await image.decode();
       } catch (_) {
-        // The image is already loaded; a decode rejection does not invalidate it.
       }
 
       resolve({
@@ -1620,6 +1785,19 @@ function renderProjectModalContent(tabId) {
   root.scrollTop = 0;
 }
 
+function applyGalleryTransform() {
+  const image = qs('#image-modal-image');
+  if (!image) return;
+  image.style.transform = `scale(${state.gallery.zoom}) rotate(${state.gallery.rotation}deg)`;
+  image.dataset.zoomed = state.gallery.zoom !== 1 || state.gallery.rotation !== 0 ? 'true' : 'false';
+}
+
+function resetGalleryTransform() {
+  state.gallery.zoom = 1;
+  state.gallery.rotation = 0;
+  applyGalleryTransform();
+}
+
 function setProjectModalTab(tabId) {
   if (!state.gallery.tabs.some((tab) => tab.id === tabId)) return;
 
@@ -1628,6 +1806,7 @@ function setProjectModalTab(tabId) {
   const contentPane = qs('#project-modal-content');
   const counter = qs('#image-modal-counter');
   const fullscreenButton = qs('#image-modal-fullscreen');
+  const transformControls = qs('#image-modal-transform-controls');
   const isImages = tabId === 'images';
 
   if (!isImages) {
@@ -1647,6 +1826,7 @@ function setProjectModalTab(tabId) {
     else contentPane.removeAttribute('aria-labelledby');
   }
   if (counter) counter.hidden = !isImages;
+  if (transformControls) transformControls.hidden = !isImages;
   if (fullscreenButton) {
     fullscreenButton.hidden = !isImages;
     fullscreenButton.disabled = !isImages;
@@ -1690,7 +1870,7 @@ function syncProjectGalleryThumbnails(thumbnails) {
           title: state.gallery.title
         })}"
         aria-current="false">
-        <img src="${galleryItem.src}" alt="" loading="lazy">
+        <img src="${galleryItem.src}" alt="" loading="lazy" decoding="async" fetchpriority="low">
         <span>${String(index + 1).padStart(2, '0')}</span>
       </button>
     `).join('');
@@ -1738,6 +1918,7 @@ function updateProjectGallery() {
   if (!modalImage || !modalFallback || !modalCaption || !modalCounter || !previousButton || !nextButton) return;
 
   const requestId = ++state.gallery.imageRequestId;
+  resetGalleryTransform();
   const hasVisibleImage = Boolean(modalImage.getAttribute('src')) && !modalImage.hidden;
 
   modal.classList.remove('image-is-portrait', 'image-is-square', 'image-is-landscape');
@@ -1768,9 +1949,6 @@ function updateProjectGallery() {
     .then((loadedImage) => {
       if (requestId !== state.gallery.imageRequestId) return;
       if (!modal.classList.contains('is-open') || state.gallery.activeTab !== 'images') return;
-
-      // Size the next image before changing src. The browser paints both changes
-      // together, so the natural-size frame can never flash on screen.
       applyGalleryImageSizing(loadedImage.width, loadedImage.height);
       updateGalleryImageShapeFromDimensions(loadedImage.width, loadedImage.height);
 
@@ -1781,6 +1959,7 @@ function updateProjectGallery() {
       modalImage.src = loadedImage.src;
       modalImage.hidden = false;
       modalFallback.hidden = true;
+      applyGalleryTransform();
 
       frame?.classList.remove('is-image-loading');
       frame?.setAttribute('aria-busy', 'false');
@@ -1812,6 +1991,8 @@ function openProjectGallery(project, trigger) {
   state.gallery.lastTrigger = trigger;
   state.gallery.pointerStartX = null;
   state.gallery.isFullscreen = false;
+  state.gallery.zoom = 1;
+  state.gallery.rotation = 0;
 
   modalTitle.textContent = project.title;
   modal.classList.add('is-open');
@@ -1876,6 +2057,9 @@ function closeProjectGallery() {
   state.gallery.lastTrigger = null;
   state.gallery.pointerStartX = null;
   state.gallery.isFullscreen = false;
+  state.gallery.zoom = 1;
+  state.gallery.rotation = 0;
+  modalImage.style.transform = '';
   window.PortfolioExperience?.onProjectModalClose?.();
 
   if (lastTrigger && document.contains(lastTrigger)) {
@@ -1932,6 +2116,20 @@ function initModalEvents() {
   qs('#image-modal-fullscreen')?.addEventListener('click', () => {
     setGalleryFullscreen(!state.gallery.isFullscreen);
   });
+
+  qs('#image-modal-zoom-in')?.addEventListener('click', () => { state.gallery.zoom = Math.min(3, state.gallery.zoom + .25); applyGalleryTransform(); });
+  qs('#image-modal-zoom-out')?.addEventListener('click', () => { state.gallery.zoom = Math.max(.5, state.gallery.zoom - .25); applyGalleryTransform(); });
+  qs('#image-modal-rotate-left')?.addEventListener('click', () => { state.gallery.rotation -= 90; applyGalleryTransform(); });
+  qs('#image-modal-rotate-right')?.addEventListener('click', () => { state.gallery.rotation += 90; applyGalleryTransform(); });
+  qs('#image-modal-reset')?.addEventListener('click', resetGalleryTransform);
+
+  const modalFrame = qs('.image-modal-frame');
+  modalFrame?.addEventListener('wheel', (event) => {
+    if (state.gallery.activeTab !== 'images' || !event.ctrlKey) return;
+    event.preventDefault();
+    state.gallery.zoom = Math.max(.5, Math.min(3, state.gallery.zoom + (event.deltaY < 0 ? .15 : -.15)));
+    applyGalleryTransform();
+  }, { passive: false });
 
   const stage = qs('.image-modal-stage');
   stage?.addEventListener('pointerdown', (event) => {
@@ -2092,6 +2290,7 @@ async function init() {
   renderBranding();
   applyFeatureVisibility();
   initMenu();
+  initSectionMenu();
   initModalEvents();
   initLanguageSwitcher();
   initBackToTop();

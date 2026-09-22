@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Cruzeiro do Sul Virtual</title>
+  <desc id="desc">Identificação visual da Cruzeiro do Sul Virtual.</desc>
+  <rect width="128" height="128" rx="24" fill="#ffffff"/>
+  <g transform="translate(64 61)">
+    <path d="M0-39 8-12 35-18 13 0 34 21 6 12 0 42-7 13-36 22-14 1-36-18-8-12Z" fill="none" stroke="#98A0AA" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M-47 5C-25-11 14-18 46-9" fill="none" stroke="#00A9CE" stroke-width="7" stroke-linecap="round"/>
+    <path d="M-43 15C-12 28 23 25 45 7" fill="none" stroke="#173A7A" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

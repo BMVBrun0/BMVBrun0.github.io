@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "{name} | Full Stack & Mobile Developer",
-    "description": "Portfolio of {name}: 8+ years building web, mobile, backend and API products, with experience in React, React Native, Node.js, C#/.NET, PHP/Laravel, data, cloud and hands-on technical leadership.",
-    "ogTitle": "{name} | Full Stack & Mobile Developer",
-    "ogDescription": "8+ years building and evolving web, mobile and backend products from code to production, across multiple stacks with hands-on technical leadership."
+    "title": "{name} ({nickname}) | Senior Full Stack & Mobile Developer",
+    "description": "{name} ({nickname}): Senior Full Stack & Mobile Developer with 8+ years across React, React Native, TypeScript, Node.js, Laravel, .NET, APIs, cloud and technical leadership.",
+    "ogTitle": "{name} ({nickname}) | Senior Full Stack & Mobile Developer",
+    "ogDescription": "8+ years building production web, mobile, backend and API products with React/React Native, TypeScript, Node.js, Laravel, .NET, cloud and hands-on leadership."
   },
   "accessibility": {
     "skipToContent": "Skip to content",
@@ -14,7 +14,12 @@
     "professionalSummary": "Professional summary"
   },
   "language": {
-    "label": "Language"
+    "label": "Language",
+    "options": {
+      "pt-BR": "Résumé in Portuguese",
+      "en": "Résumé in English",
+      "es": "Spanish interface · résumé in English"
+    }
   },
   "nav": {
     "about": "About",
@@ -22,10 +27,14 @@
     "services": "Expertise",
     "projects": "Projects",
     "contact": "Contact",
-    "certificates": "Education"
+    "certificates": "Education",
+    "library": "Library",
+    "resume": "Résumé+",
+    "portfolio": "Portfolio",
+    "overview": "Overview"
   },
   "hero": {
-    "eyebrow": "Full Stack & Mobile Developer",
+    "eyebrow": "Senior Full Stack & Mobile Developer",
     "rolePrefix": "I work as a",
     "roles": [
       "Full Stack Developer",
@@ -34,9 +43,9 @@
       "Hands-on Tech Lead",
       "Backend Developer"
     ],
-    "text": "For 8+ years I have built, evolved and supported web products, mobile applications, APIs and business systems. I work hands-on across frontend, backend, mobile, data and infrastructure, using different stacks and taking on technical decisions, architecture and leadership when the product requires it.",
-    "primaryCta": "View projects",
-    "secondaryCta": "Download resume",
+    "text": "For 8+ years I have built, evolved and supported production web products, mobile applications, APIs and business systems. I work hands-on across frontend, backend, mobile, data and infrastructure, taking ownership of architecture, legacy modernization, performance, technical decisions and leadership when the product requires it.",
+    "primaryCta": "Download résumé",
+    "secondaryCta": "Detailed résumé",
     "stats": [
       {
         "title": "8+ years building software",
@@ -56,8 +65,8 @@
     "eyebrow": "About me",
     "title": "Full Stack & Mobile development with engineering depth.",
     "paragraphs": [
-      "I have worked professionally with software since 2018. My path spans ERP and large databases, backend and APIs, web development, native and cross-platform mobile, infrastructure and complete products running in production.",
-      "Development remains my main focus. Architecture, performance, cloud, data and technical leadership are tools I use to build better solutions - not a move away from code. I am comfortable switching stacks and taking ownership of existing systems without depending on one technology."
+      "I have worked professionally with software since 2018. My path spans ERP and large databases, APIs and services, web development, native and cross-platform mobile, offline synchronization, infrastructure, CI/CD and complete products running in production.",
+      "I remain a hands-on developer. Architecture, performance, cloud, data and technical leadership are part of how I deliver software: understanding the business domain, diagnosing existing systems, choosing the stack for the context and taking solutions from code to operations."
     ],
     "skillsLabel": "Technical skills",
     "imageAlt": "Bruno Getten Triches, Full Stack and Mobile Developer"
@@ -252,7 +261,7 @@
     {
       "title": "Scheduling and Administration Web Panel",
       "category": "product",
-      "image": "assets/img/portfolio/whitelabel_booking.png",
+      "image": "assets/img/portfolio/whitelabel_booking.webp",
       "status": "Private",
       "description": "White-label platform for online booking, schedules, services, staff, customers and day-to-day operations in one panel.",
       "stack": [
@@ -350,7 +359,7 @@
     {
       "title": "XtremeFut — futsal training with Ferrão",
       "category": "mobile",
-      "image": "assets/img/portfolio/xtreme_fut.png",
+      "image": "assets/img/portfolio/xtreme_fut.webp",
       "status": "Private",
       "description": "Physical preparation and futsal training app with professionally authored content, guided videos and recommendations tailored to the athlete profile.",
       "stack": [
@@ -461,7 +470,7 @@
     {
       "title": "Accessibility Plugin — web accessibility SDK",
       "category": "tool",
-      "image": "assets/img/portfolio/accessibility_plugin.png",
+      "image": "assets/img/portfolio/accessibility_plugin.webp",
       "status": "Private",
       "description": "Pluggable SDK that adds reading, contrast, focus, speech and visual personalization tools to existing websites and systems without rebuilding the host application.",
       "stack": [
@@ -564,7 +573,7 @@
     {
       "title": "Unity 3D Multiplayer Truco",
       "category": "game",
-      "image": "assets/img/portfolio/truco_game.png",
+      "image": "assets/img/portfolio/truco_game.webp",
       "status": "Private",
       "description": "3D truco game with offline bot matches and online multiplayer for up to four players, with desktop and mobile controls.",
       "stack": [
@@ -646,7 +655,7 @@
     {
       "title": "Radar Público · Public Tender Search & Intelligence",
       "category": "product",
-      "image": "assets/img/portfolio/radar_publico.png",
+      "image": "assets/img/portfolio/radar_publico.webp",
       "status": "Public",
       "description": "Web platform for finding and tracking Brazilian public tenders with contextual search, advanced filters, company-based recommendations, alerts, and direct access to official sources and documents.",
       "stack": [
@@ -760,7 +769,7 @@
     {
       "title": "SupportCircle · Neurodivergence & Support Network",
       "category": "product",
-      "image": "assets/img/portfolio/support_circle.png",
+      "image": "assets/img/portfolio/support_circle.webp",
       "status": "Public",
       "description": "Web platform and mobile app for neurodivergent people and their support networks, bringing reliable information, support profiles, passports, records, routines and communication into one person-centered space.",
       "stack": [
@@ -882,7 +891,7 @@
     {
       "title": "MediaForge — media processing and engineering",
       "category": "tool",
-      "image": "assets/img/portfolio/media_forge.png",
+      "image": "assets/img/portfolio/media_forge.webp",
       "status": "Public",
       "description": "Web suite for image optimization, background removal, metadata cleaning, visual comparison, video processing, file security, colors and asset generation.",
       "stack": [
@@ -994,7 +1003,7 @@
     {
       "title": "Pocket Links — managed links, QR Codes and analytics",
       "category": "mobile",
-      "image": "assets/img/portfolio/pocket_links.png",
+      "image": "assets/img/portfolio/pocket_links.webp",
       "status": "Public",
       "description": "Mobile app and web platform for managed short links, custom aliases, QR Codes, access analytics and synchronization across unstable connections.",
       "stack": [
@@ -1106,7 +1115,7 @@
     {
       "title": "Imobly — real estate platform and lead management",
       "category": "product",
-      "image": "assets/img/portfolio/imobly.png",
+      "image": "assets/img/portfolio/imobly.webp",
       "status": "Public",
       "description": "Responsive real estate platform for listings, maps, financing simulation, agents, property acquisition and lead management through a complete admin panel.",
       "stack": [
@@ -1215,7 +1224,7 @@
     {
       "title": "Garimpei — curated fashion, lists and catalog management",
       "category": "product",
-      "image": "assets/img/portfolio/garimpei.png",
+      "image": "assets/img/portfolio/garimpei.webp",
       "status": "Public",
       "description": "Curated fashion platform for unique pieces with catalog browsing, favorites, shareable lists, reviews, direct contact and an interest-driven admin panel.",
       "stack": [
@@ -1324,7 +1333,7 @@
     {
       "title": "Realtime Messaging · Real-Time Messaging Platform",
       "category": "product",
-      "image": "assets/img/portfolio/realtime_messaging.png",
+      "image": "assets/img/portfolio/realtime_messaging.webp",
       "status": "Public",
       "description": "Real-time messaging platform with DMs, channels, presence, reconnect replay and full infrastructure observability.",
       "stack": [
@@ -1534,7 +1543,12 @@
     "architectureAria": "Project technical flow",
     "storyPreviousLabel": "Previous story step",
     "storyNextLabel": "Next story step",
-    "storyJumpLabel": "Open step {index}: {title}"
+    "storyJumpLabel": "Open step {index}: {title}",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "rotateLeft": "Rotate left",
+    "rotateRight": "Rotate right",
+    "resetView": "Reset image"
   },
   "education": [
     {
@@ -1545,7 +1559,44 @@
       "period": "2024 · 2027",
       "status": "In progress · expected completion in 2027",
       "description": "Current Information Systems degree complementing hands-on professional experience in software development.",
-      "url": ""
+      "url": "https://www.cruzeirodosulvirtual.com.br/",
+      "logo": "assets/img/education/cruzeiro-do-sul-virtual-user-asset-v3.webp",
+      "logoAlt": "Cruzeiro do Sul Virtual"
+    },
+    {
+      "enabled": 1,
+      "institution": "Unochapecó",
+      "course": "Computer Science",
+      "degree": "Bachelor’s degree",
+      "period": "Previous studies",
+      "status": "Previous degree · paused",
+      "description": "Previous Computer Science studies at Unochapecó, before the current Information Systems degree.",
+      "url": "https://www.unochapeco.edu.br/",
+      "logo": "assets/img/education/unochapeco-user-asset-v3.webp",
+      "logoAlt": "Unochapecó"
+    },
+    {
+      "enabled": 1,
+      "institution": "CCAA · Centro de Idiomas Union",
+      "course": "English",
+      "degree": "Complementary education",
+      "period": "2015 · 2019",
+      "status": "Completed · 450 hours",
+      "description": "In-person English education completed across three 150-hour phases — Basic, Intermediate and Intermediate-Advanced — totaling 450 hours.",
+      "logo": "assets/img/education/ccaa-user-asset-v1.webp",
+      "logoAlt": "CCAA",
+      "label": "Complementary education",
+      "credentialLabel": "View records",
+      "credentialTitle": "English education records",
+      "credentialDescription": "Completion certificates and course-content records for the levels completed between 2015 and 2019.",
+      "credentialGallery": [
+        "assets/img/certificates/ccaa/ccaa-certificado-basico-public.webp",
+        "assets/img/certificates/ccaa/ccaa-programa-niveis-1-3.webp",
+        "assets/img/certificates/ccaa/ccaa-certificado-intermediario-public.webp",
+        "assets/img/certificates/ccaa/ccaa-programa-niveis-4-6.webp",
+        "assets/img/certificates/ccaa/ccaa-certificado-intermediario-avancado-public.webp",
+        "assets/img/certificates/ccaa/ccaa-programa-niveis-7-9.webp"
+      ]
     }
   ],
   "certificatesSection": {
@@ -1561,12 +1612,17 @@
     "showLess": "Show less",
     "descriptionToggleAria": "Toggle certificate description {title}",
     "educationEyebrow": "Academic background",
-    "educationTitle": "Degree studies",
-    "educationText": "Current Bachelor's Degree in Information Systems.",
+    "educationTitle": "Education",
+    "educationText": "Information Systems in progress, previous Computer Science studies and complementary training.",
     "certificatesListTitle": "Selected recent courses",
     "educationDefaultDegree": "Education",
     "educationLinkCta": "View education",
-    "educationLinkAriaLabel": "Open education reference {title}"
+    "educationLinkAriaLabel": "Open education reference {title}",
+    "languageTrainingTitle": "English · CCAA training",
+    "languageTrainingText": "450 hours of in-person English training completed from 2015 to 2019 across three full phases.",
+    "languageTrainingCta": "View records in the library",
+    "languageTrainingBadge": "Complementary education",
+    "languageTrainingHours": "450 hours"
   },
   "certificates": [
     {
@@ -1583,7 +1639,7 @@
         "AWS"
       ],
       "url": "https://ude.my/UC-7abce1e3-ba61-41f4-bf98-cfcb1265efd4",
-      "image": "assets/img/certificates/thumbs/udemy-machine-learning.png"
+      "image": "assets/img/certificates/thumbs/udemy-machine-learning.webp"
     },
     {
       "provider": "Udemy",
@@ -1599,7 +1655,7 @@
         "System Design"
       ],
       "url": "https://www.udemy.com/certificate/UC-d9107ade-85d2-4f9d-84c3-9198ef02aa76/",
-      "image": "assets/img/certificates/thumbs/udemy-database-engineering.png"
+      "image": "assets/img/certificates/thumbs/udemy-database-engineering.webp"
     },
     {
       "provider": "Udemy",
@@ -1613,7 +1669,7 @@
         "Profiling"
       ],
       "url": "https://www.udemy.com/certificate/UC-ca3c9b23-19f6-4244-ac50-5c1f534271f6/",
-      "image": "assets/img/certificates/thumbs/udemy-ultimate-guide.jpg"
+      "image": "assets/img/certificates/thumbs/udemy-ultimate-guide.webp"
     },
     {
       "provider": "Udemy",
@@ -1627,7 +1683,7 @@
         "Gameplay"
       ],
       "url": "https://www.udemy.com/certificate/UC-4fbbbb88-6447-4165-ac14-d00b47ddaf07/",
-      "image": "assets/img/certificates/thumbs/udemy-kart.jpg"
+      "image": "assets/img/certificates/thumbs/udemy-kart.webp"
     },
     {
       "provider": "Udemy",
@@ -1641,7 +1697,7 @@
         "Unity"
       ],
       "url": "https://www.udemy.com/certificate/UC-d057fb56-c6b2-4fb4-bfc8-44b0bd272fe7/",
-      "image": "assets/img/certificates/thumbs/udemy-design.jpg"
+      "image": "assets/img/certificates/thumbs/udemy-design.webp"
     }
   ],
   "impactSection": {
@@ -1763,7 +1819,8 @@
     "physicsToggle": "Interactive 3D sculpture",
     "ambientToggle": "Section visual depth",
     "networkToggle": "3D network and constellations",
-    "particleFieldToggle": "Interactive 3D background particles"
+    "particleFieldToggle": "Interactive 3D background particles",
+    "eyebrow": "INTERACTIVE"
   },
   "workProfileSection": {
     "eyebrow": "How I work",
@@ -1935,5 +1992,11 @@
         ]
       }
     ]
+  },
+  "homeCtas": {
+    "about": "View detailed profile and résumé",
+    "experience": "View full career history in Résumé+",
+    "projects": "Explore the full project library",
+    "education": "View education and certifications in the library"
   }
 }
