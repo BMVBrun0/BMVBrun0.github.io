@@ -333,8 +333,7 @@ function renderStaticText() {
   const ctaMap = {
     '#home-about-link': homeCtas.about,
     '#home-experience-link': homeCtas.experience,
-    '#home-projects-link': homeCtas.projects,
-    '#home-education-link': homeCtas.education
+    '#home-projects-link': homeCtas.projects
   };
   Object.entries(ctaMap).forEach(([selector, value]) => {
     const node = qs(selector);
@@ -1129,13 +1128,7 @@ function initProjectMediaFallbacks() {
 
 function renderEducationCard(item) {
   const status = item.status ? `<span class="education-status">${item.status}</span>` : '';
-  const educationUrl = normalizeHttpUrl(item.url);
-  const credentialLink = educationUrl ? `
-    <a class="education-link" href="${escapeAttribute(educationUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeAttribute(replacePlaceholders(state.data.certificatesSection.educationLinkAriaLabel, { title: item.course }))}">
-      <span>${state.data.certificatesSection.educationLinkCta}</span>
-      <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
-    </a>
-  ` : '';
+
   const initials = String(item.institution || 'EDU').split(/\s+/).map((word) => word[0]).join('').slice(0, 3).toUpperCase();
   const brand = item.logo
     ? `<img src="${escapeAttribute(item.logo)}" alt="${escapeAttribute(item.logoAlt || item.institution || '')}" loading="lazy" decoding="async">`
@@ -1153,7 +1146,6 @@ function renderEducationCard(item) {
         <p class="education-institution">${item.institution || ''}</p>
         ${status}
         ${item.description ? `<p class="education-description">${item.description}</p>` : ''}
-        ${credentialLink}
       </div>
     </article>
   `;

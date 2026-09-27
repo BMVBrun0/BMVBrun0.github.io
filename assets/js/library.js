@@ -184,7 +184,6 @@
           ${progress ? `<div class="education-card__timeline" aria-label="${P.escapeHtml(item.period || '')}"><span>${P.escapeHtml(progress.start)}</span><i><b style="--education-progress:${progress.value}%"></b></i><span>${P.escapeHtml(progress.end)}</span></div>` : `<div class="education-card__period">${P.escapeHtml(item.period || '')}</div>`}
           ${Array.isArray(item.credentialGallery) && item.credentialGallery.length ? `<button class="education-card__records" type="button" data-open-education-credential="${index}">${P.escapeHtml(item.credentialLabel || ui.educationRecords)} <b aria-hidden="true">↗</b></button>` : ''}
         </div>
-        ${item.url ? `<a class="education-card__link" href="${P.escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="${P.escapeHtml(item.institution || item.course)}">↗</a>` : ''}
       </article>`;
     }).join('')}</div>`;
   }
