@@ -11,6 +11,34 @@
     es: { rail: 'PROYECTOS EN LA COLECCIÓN', collectionTitle: 'Colección de proyectos', selected: 'PROYECTO DESTACADO', features: 'DESTACADOS', media: 'CAPTURAS', item: 'elemento', items: 'elementos', spotlight: 'Proyecto destacado', spotlightKicker: 'SELECCIÓN DE LA COLECCIÓN', spotlightHelper: 'Selecciona cualquier proyecto para ampliar imágenes, contexto y stack.', select: 'Abrir proyecto', credentialKicker: 'CERTIFICACIONES', credentials: 'Certificaciones', credentialsCount: 'certificaciones', credentialVerified: 'Abrir credencial', educationRecords: 'Ver registros' }
   }[locale] || { rail: 'PROJECTS IN COLLECTION', collectionTitle: 'Project collection', selected: 'FEATURED PROJECT', features: 'HIGHLIGHTS', media: 'MEDIA', item: 'item', items: 'items', spotlight: 'Featured project', spotlightKicker: 'COLLECTION PICK', spotlightHelper: 'Select any project in the collection.', select: 'Open project', credentialKicker: 'CERTIFICATIONS', credentials: 'Certifications', credentialsCount: 'certifications', credentialVerified: 'Open credential', educationRecords: 'View records' };
 
+  const renderCompactCredlyBadgeImage = (badge) => {
+    const badgeId = String(badge?.credlyBadgeId || '').trim();
+    if (!badgeId) return '';
+    const width = Number.isFinite(Number(badge.embedWidth)) ? Number(badge.embedWidth) : 150;
+    const height = Number.isFinite(Number(badge.embedHeight)) ? Number(badge.embedHeight) : 270;
+    const host = String(badge.embedHost || 'https://www.credly.com');
+    const scale = Number.isFinite(Number(badge.libraryScale)) ? Number(badge.libraryScale) : 0.253333;
+    const offsetX = Number.isFinite(Number(badge.libraryOffsetX)) ? Number(badge.libraryOffsetX) : 0;
+    const offsetY = Number.isFinite(Number(badge.libraryOffsetY)) ? Number(badge.libraryOffsetY) : 0;
+    return `<span class="achievement-card__badge-image achievement-card__badge-image--credly" data-credly-badge-id="${P.escapeHtml(badgeId)}" style="--credly-scale:${P.escapeHtml(String(scale))};--credly-x:${P.escapeHtml(String(offsetX))}px;--credly-y:${P.escapeHtml(String(offsetY))}px" aria-hidden="true">
+      <span class="credly-compact-embed">
+        <div data-iframe-width="${P.escapeHtml(String(width))}" data-iframe-height="${P.escapeHtml(String(height))}" data-share-badge-id="${P.escapeHtml(badgeId)}" data-share-badge-host="${P.escapeHtml(host)}"></div>
+      </span>
+    </span>`;
+  };
+
+  const refreshCredlyEmbeds = (root = document) => {
+    if (!root?.querySelector?.('[data-share-badge-id]')) return;
+    const previousScript = document.querySelector('script[data-credly-embed-script]');
+    if (previousScript) previousScript.remove();
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = 'https://cdn.credly.com/assets/utilities/embed.js';
+    script.dataset.credlyEmbedScript = 'true';
+    document.body.appendChild(script);
+  };
+
   let activeCategory = 'all';
   let query = '';
 
@@ -155,7 +183,14 @@
 
   copy('credential-kicker', extra.labels?.credentialKicker || ui.credentialKicker);
   copy('credential-title', ui.credentials);
-  copy('credential-count', `${certificates.length} ${ui.credentialsCount}`);
+  const libraryBadgeCount = certificates.reduce((total, item) => total + (Array.isArray(item.badges) ? item.badges.filter(Boolean).length : 0), 0);
+  const credentialsCountLabel = certificates.length === 1
+    ? (data.certificatesSection?.credentialCountSingular || ui.credentialsCount)
+    : (data.certificatesSection?.credentialCountPlural || ui.credentialsCount);
+  const badgesCountLabel = libraryBadgeCount === 1
+    ? (data.certificatesSection?.badgeCountSingular || data.certificatesSection?.badgesCountLabel || 'badge')
+    : (data.certificatesSection?.badgeCountPlural || data.certificatesSection?.badgesCountLabel || 'badges');
+  copy('credential-count', `${certificates.length} ${credentialsCountLabel}${libraryBadgeCount ? ` · ${libraryBadgeCount} ${badgesCountLabel}` : ''}`);
 
   function educationProgress(period) {
     const years = String(period || '').match(/\b(20\d{2})\b/g) || [];
@@ -193,22 +228,51 @@
   achievementGrid.innerHTML = certificates.map((item, index) => {
     const tags = (item.tags || []).slice(0, 3).map((tag) => `<span>${P.escapeHtml(tag)}</span>`).join('');
     const gallery = Array.isArray(item.gallery) ? item.gallery.filter(Boolean) : [];
-    const content = `
-      <div class="achievement-card__media">
-        <img src="${P.escapeHtml(item.image || '')}" alt="${P.escapeHtml(item.title)}" loading="lazy" decoding="async" fetchpriority="low">
-        <span class="achievement-card__index">${String(index + 1).padStart(2, '0')}</span>
-        ${(gallery.length || item.url) ? `<span class="achievement-card__open" aria-hidden="true">↗</span>` : ''}
+    const badges = Array.isArray(item.badges) ? item.badges.filter((badge) => badge && (badge.image || badge.title)) : [];
+    const hasCredential = gallery.length || item.url;
+    const mediaInner = `
+      <img src="${P.escapeHtml(item.image || '')}" alt="${P.escapeHtml(item.title)}" loading="lazy" decoding="async" fetchpriority="low">
+      <span class="achievement-card__index">${String(index + 1).padStart(2, '0')}</span>
+      ${hasCredential ? `<span class="achievement-card__open" aria-hidden="true">↗</span>` : ''}
+      ${badges.length ? `<span class="achievement-card__badge-count" aria-label="${badges.length} ${P.escapeHtml(data.certificatesSection?.badgesCountLabel || 'badges')}">◆ ${badges.length}</span>` : ''}`;
+
+    const media = gallery.length
+      ? `<button class="achievement-card__media achievement-card__media-button" type="button" data-open-credential="${index}">${mediaInner}</button>`
+      : item.url
+        ? `<a class="achievement-card__media" href="${P.escapeHtml(item.url)}" target="_blank" rel="noopener">${mediaInner}</a>`
+        : `<div class="achievement-card__media">${mediaInner}</div>`;
+
+    const badgeMarkup = badges.length ? `<div class="achievement-card__badges">${badges.map((badge) => `
+      <a href="${P.escapeHtml(badge.url || '#')}" ${badge.url ? 'target="_blank" rel="noopener"' : ''} class="achievement-card__badge">
+        ${badge.credlyBadgeId ? renderCompactCredlyBadgeImage(badge) : `<span class="achievement-card__badge-image"><img src="${P.escapeHtml(badge.image || '')}" alt="" loading="lazy" decoding="async"></span>`}
+        <span><small>${P.escapeHtml(badge.label || data.certificatesSection?.verifiedBadgeLabel || '')}</small><strong>${P.escapeHtml(badge.title || '')}</strong></span>
+        <b aria-hidden="true">↗</b>
+      </a>`).join('')}</div>` : '';
+
+    const actions = [];
+    if (gallery.length) {
+      actions.push(`<button type="button" data-open-credential="${index}">${P.escapeHtml(data.certificatesSection?.credentialCta || ui.credentialVerified)} <b aria-hidden="true">↗</b></button>`);
+    } else if (item.url) {
+      actions.push(`<a href="${P.escapeHtml(item.url)}" target="_blank" rel="noopener">${P.escapeHtml(data.certificatesSection?.credentialCta || ui.credentialVerified)} <b aria-hidden="true">↗</b></a>`);
+    }
+
+    return `<article class="achievement-card ${badges.length ? 'has-badge' : ''}">
+      <div class="achievement-card__inner">
+        ${media}
+        <div class="achievement-card__copy">
+          <div class="achievement-card__meta"><small>${P.escapeHtml(item.provider || '')}</small><span>${P.escapeHtml(item.year || '')}</span></div>
+          ${item.credentialType ? `<span class="achievement-card__type">${P.escapeHtml(item.credentialType)}</span>` : ''}
+          <h3>${P.escapeHtml(item.title)}</h3>
+          ${item.description ? `<p>${P.escapeHtml(item.description)}</p>` : ''}
+          ${tags ? `<div class="achievement-card__tags">${tags}</div>` : ''}
+          ${badgeMarkup}
+          ${actions.length ? `<div class="achievement-card__actions">${actions.join('')}</div>` : ''}
+        </div>
       </div>
-      <div class="achievement-card__copy">
-        <div class="achievement-card__meta"><small>${P.escapeHtml(item.provider || '')}</small><span>${P.escapeHtml(item.year || '')}</span></div>
-        <h3>${P.escapeHtml(item.title)}</h3>
-        ${item.description ? `<p>${P.escapeHtml(item.description)}</p>` : ''}
-        ${tags ? `<div class="achievement-card__tags">${tags}</div>` : ''}
-        ${(gallery.length || item.url) ? `<span class="achievement-card__cta">${P.escapeHtml(ui.credentialVerified)} <b>↗</b></span>` : ''}
-      </div>`;
-    if (gallery.length) return `<article class="achievement-card"><button class="achievement-card__inner achievement-card__button" type="button" data-open-credential="${index}">${content}</button></article>`;
-    return `<article class="achievement-card">${item.url ? `<a class="achievement-card__inner" href="${P.escapeHtml(item.url)}" target="_blank" rel="noopener">${content}</a>` : `<div class="achievement-card__inner">${content}</div>`}</article>`;
+    </article>`;
   }).join('');
+
+  refreshCredlyEmbeds(achievementGrid);
 
   const credentialDialog = P.qs('#credential-dialog');
   const credentialDialogImage = P.qs('#credential-dialog-image');

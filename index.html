@@ -52,7 +52,7 @@
         "name": "Bruno Getten Triches (BMVBrun0) | Desenvolvedor Full Stack & Mobile Sênior",
         "description": "Portfólio profissional de Bruno Getten Triches (BMVBrun0), Desenvolvedor Full Stack & Mobile Sênior com 8+ anos em produtos web, mobile, backend, APIs, cloud e liderança técnica hands-on.",
         "inLanguage": "pt-BR",
-        "dateModified": "2026-09-21",
+        "dateModified": "2026-09-28",
         "mainEntity": { "@id": "https://bmvbrun0.github.io/#person" },
         "isPartOf": { "@id": "https://bmvbrun0.github.io/#website" }
       },
@@ -114,6 +114,24 @@
           "White-label systems",
           "Web scraping",
           "Technical Leadership"
+        ],
+        "hasCredential": [
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "AWS Knowledge: Networking Core",
+            "credentialCategory": "Digital badge",
+            "dateCreated": "2026-09-28",
+            "url": "https://www.credly.com/badges/4c32a2d1-504e-476a-97a4-d1858bd75ec5/public_url",
+            "recognizedBy": { "@type": "Organization", "name": "AWS Training & Certification" }
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "AWS Well-Architected Proficient",
+            "credentialCategory": "Digital badge",
+            "dateCreated": "2026-09-28",
+            "url": "https://www.credly.com/badges/4a79b933-b4cf-48f6-b9f0-8d481847b759/public_url",
+            "recognizedBy": { "@type": "Organization", "name": "AWS Training & Certification" }
+          }
         ]
       }
     ]
@@ -381,11 +399,22 @@
           <div class="language-training-strip reveal" id="language-training-strip" hidden></div>
         </div>
 
-        <div class="certificates-block">
-          <div class="learning-subheading learning-subheading--certificates reveal">
-            <h3 id="certificates-list-title">Cursos e certificados</h3>
+        <div class="certificates-block certificates-block--unified" id="credentials-showcase">
+          <div class="credential-showcase-heading reveal">
+            <div class="learning-subheading learning-subheading--certificates">
+              <p class="section-label" id="certificates-list-kicker">Cursos &amp; credenciais</p>
+              <h3 id="certificates-list-title">Certificados, treinamentos e badges em um só lugar</h3>
+              <p id="certificates-list-text">Credenciais recentes organizadas em um único componente, com origem, data, certificado e badges verificáveis quando disponíveis.</p>
+            </div>
+            <div class="credential-summary" id="credential-summary" aria-label="Resumo das credenciais">
+              <span><strong id="credential-count">0</strong><small id="credential-count-label">credenciais</small></span>
+              <span><strong id="credential-badge-count">0</strong><small id="credential-badge-count-label">badges digitais</small></span>
+            </div>
           </div>
           <div class="certificate-grid" id="certificates-list"></div>
+          <a class="home-detail-link home-detail-link--section credential-library-link reveal" href="library.html#formation-library">
+            <span id="certificates-library-link">Ver todas as credenciais na biblioteca</span><span aria-hidden="true">→</span>
+          </a>
         </div>
       </div>
     </section>

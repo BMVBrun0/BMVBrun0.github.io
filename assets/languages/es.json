@@ -1614,7 +1614,7 @@
     "educationEyebrow": "Formación académica",
     "educationTitle": "Formación",
     "educationText": "Sistemas de Información en curso, formación anterior en Ciencias de la Computación y formación complementaria.",
-    "certificatesListTitle": "Cursos recientes seleccionados",
+    "certificatesListTitle": "Certificados, formación y badges en un solo lugar",
     "educationDefaultDegree": "Formación",
     "educationLinkCta": "Ver formación",
     "educationLinkAriaLabel": "Abrir referencia de formación {title}",
@@ -1622,9 +1622,83 @@
     "languageTrainingText": "450 horas de formación presencial entre 2015 y 2019, distribuidas en tres fases completas.",
     "languageTrainingCta": "Ver registros en la biblioteca",
     "languageTrainingBadge": "Formación complementaria",
-    "languageTrainingHours": "450 horas"
+    "languageTrainingHours": "450 horas",
+    "certificatesListKicker": "Cursos y credenciales",
+    "certificatesListText": "Credenciales recientes organizadas en un único componente, con institución, fecha, certificado y badges verificables cuando están disponibles.",
+    "credentialsCountLabel": "credenciales",
+    "badgesCountLabel": "badges digitales",
+    "summaryAriaLabel": "Resumen de credenciales",
+    "courseType": "Curso con certificado",
+    "verifiedBadgeLabel": "Badge verificable",
+    "verifyBadgeCta": "Verificar en Credly",
+    "libraryCta": "Ver todas las credenciales en la biblioteca",
+    "credentialCountSingular": "credencial",
+    "credentialCountPlural": "credenciales",
+    "badgeCountSingular": "badge digital",
+    "badgeCountPlural": "badges digitales"
   },
   "certificates": [
+    {
+      "provider": "AWS Training & Certification",
+      "providerClass": "aws",
+      "year": "28 sep 2026",
+      "title": "AWS Knowledge: Networking Core",
+      "credentialType": "AWS Knowledge Badge",
+      "description": "Badge de conocimiento de AWS centrado en conceptos y servicios de redes, con foco en Amazon VPC, AWS Cloud WAN, Amazon Route 53 y fundamentos de conectividad en la nube.",
+      "tags": [
+        "Amazon VPC",
+        "AWS Cloud WAN",
+        "Route 53",
+        "Networking"
+      ],
+      "url": "assets/docs/aws/aws-networking-core-knowledge-badge-assessment.pdf",
+      "image": "assets/img/certificates/aws/aws-networking-core-knowledge-badge.webp",
+      "featured": true,
+      "badges": [
+        {
+          "title": "AWS Knowledge: Networking Core",
+          "label": "Badge verificable",
+          "issuer": "AWS / Credly",
+          "image": "https://images.credly.com/images/e1c202b1-bca1-469a-9149-127b4fe891d7/blob",
+          "url": "https://www.credly.com/badges/4c32a2d1-504e-476a-97a4-d1858bd75ec5/public_url"
+        }
+      ]
+    },
+    {
+      "provider": "AWS Training & Certification",
+      "providerClass": "aws",
+      "year": "28 sep 2026",
+      "title": "AWS Well-Architected Foundations",
+      "credentialType": "Formación oficial de AWS",
+      "description": "Principios y pilares del AWS Well-Architected Framework, revisión de workloads e identificación de riesgos y mejoras.",
+      "tags": [
+        "Well-Architected",
+        "Reliability",
+        "Security",
+        "Cost Optimization"
+      ],
+      "url": "assets/docs/aws/aws-well-architected-foundations.pdf",
+      "image": "assets/img/certificates/aws/aws-well-architected-foundations.webp",
+      "featured": true,
+      "badges": [
+        {
+          "title": "AWS Well-Architected Proficient",
+          "label": "Badge de competencia",
+          "issuer": "AWS / Credly",
+          "url": "https://www.credly.com/badges/4a79b933-b4cf-48f6-b9f0-8d481847b759/public_url",
+          "credlyBadgeId": "4a79b933-b4cf-48f6-b9f0-8d481847b759",
+          "embedWidth": 150,
+          "embedHeight": 270,
+          "embedHost": "https://www.credly.com",
+          "compactScale": 0.44,
+          "compactOffsetX": -9,
+          "compactOffsetY": -2,
+          "libraryScale": 0.35,
+          "libraryOffsetX": -7,
+          "libraryOffsetY": -2
+        }
+      ]
+    },
     {
       "provider": "Udemy",
       "providerClass": "udemy",
@@ -1639,7 +1713,8 @@
         "AWS"
       ],
       "url": "https://ude.my/UC-7abce1e3-ba61-41f4-bf98-cfcb1265efd4",
-      "image": "assets/img/certificates/thumbs/udemy-machine-learning.webp"
+      "image": "assets/img/certificates/thumbs/udemy-machine-learning.webp",
+      "credentialType": "Curso con certificado"
     },
     {
       "provider": "Udemy",
@@ -1655,7 +1730,8 @@
         "Diseño de Sistemas"
       ],
       "url": "https://www.udemy.com/certificate/UC-d9107ade-85d2-4f9d-84c3-9198ef02aa76/",
-      "image": "assets/img/certificates/thumbs/udemy-database-engineering.webp"
+      "image": "assets/img/certificates/thumbs/udemy-database-engineering.webp",
+      "credentialType": "Curso con certificado"
     },
     {
       "provider": "Udemy",
@@ -1669,7 +1745,8 @@
         "Profiling"
       ],
       "url": "https://www.udemy.com/certificate/UC-ca3c9b23-19f6-4244-ac50-5c1f534271f6/",
-      "image": "assets/img/certificates/thumbs/udemy-ultimate-guide.webp"
+      "image": "assets/img/certificates/thumbs/udemy-ultimate-guide.webp",
+      "credentialType": "Curso con certificado"
     },
     {
       "provider": "Udemy",
@@ -1683,7 +1760,8 @@
         "Gameplay"
       ],
       "url": "https://www.udemy.com/certificate/UC-4fbbbb88-6447-4165-ac14-d00b47ddaf07/",
-      "image": "assets/img/certificates/thumbs/udemy-kart.webp"
+      "image": "assets/img/certificates/thumbs/udemy-kart.webp",
+      "credentialType": "Curso con certificado"
     },
     {
       "provider": "Udemy",
@@ -1697,7 +1775,8 @@
         "Unity"
       ],
       "url": "https://www.udemy.com/certificate/UC-d057fb56-c6b2-4fb4-bfc8-44b0bd272fe7/",
-      "image": "assets/img/certificates/thumbs/udemy-design.webp"
+      "image": "assets/img/certificates/thumbs/udemy-design.webp",
+      "credentialType": "Curso con certificado"
     }
   ],
   "impactSection": {

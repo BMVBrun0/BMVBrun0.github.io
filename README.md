@@ -136,6 +136,37 @@ features: {
 
 Com `projectsCarousel: 1` ou `certificatesCarousel: 1`, a grade correspondente vira um carrossel automático: 3 cards por vez no desktop, 2 em telas intermediárias e 1 no mobile.
 
+### Cursos, certificados e badges digitais
+
+As credenciais da home e da Biblioteca usam a mesma lista `certificates` de cada arquivo em `assets/languages/`. Não crie blocos HTML específicos por instituição: adicione um item à lista e o componente se adapta automaticamente.
+
+Uma credencial pode ter certificado e zero ou mais badges digitais:
+
+```json
+{
+  "provider": "AWS Training & Certification",
+  "providerClass": "aws",
+  "year": "28 set 2026",
+  "title": "AWS Well-Architected Foundations",
+  "credentialType": "Treinamento oficial AWS",
+  "description": "...",
+  "tags": ["Well-Architected", "Reliability"],
+  "url": "assets/docs/aws/certificado.pdf",
+  "image": "assets/img/certificates/aws/certificado.webp",
+  "badges": [
+    {
+      "title": "AWS Well-Architected Proficient",
+      "label": "Badge de proficiência",
+      "issuer": "Credly",
+      "image": "assets/img/certificates/aws/badge.png",
+      "url": "https://www.credly.com/badges/.../public_url"
+    }
+  ]
+}
+```
+
+O array `badges` é opcional. Quando existir, cada badge é renderizada apenas dentro da credencial correspondente, com imagem única e link de verificação. O mesmo modelo funciona com novas instituições e múltiplas badges sem alterar o HTML da página.
+
 ## Performance no GitHub Pages
 
 Os assets raster usados pela interface foram convertidos para WebP e redimensionados para uma resolução compatível com o uso real em cards e galerias. As imagens de projeto/certificado usam lazy loading e decodificação assíncrona; efeitos 3D decorativos secundários são inicializados em idle time, deixando o conteúdo principal e o showcase do hero como prioridade.

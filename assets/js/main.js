@@ -406,7 +406,13 @@ function renderStaticText() {
   qs('#education-eyebrow').textContent = certificatesSection.educationEyebrow;
   qs('#education-title').textContent = certificatesSection.educationTitle;
   qs('#education-text').textContent = certificatesSection.educationText;
+  qs('#certificates-list-kicker').textContent = certificatesSection.certificatesListKicker || certificatesSection.eyebrow;
   qs('#certificates-list-title').textContent = certificatesSection.certificatesListTitle;
+  qs('#certificates-list-text').textContent = certificatesSection.certificatesListText || certificatesSection.text;
+  qs('#credential-count-label').textContent = certificatesSection.credentialsCountLabel || '';
+  qs('#credential-badge-count-label').textContent = certificatesSection.badgesCountLabel || '';
+  qs('#credential-summary').setAttribute('aria-label', certificatesSection.summaryAriaLabel || certificatesSection.certificatesListTitle);
+  qs('#certificates-library-link').textContent = certificatesSection.libraryCta || certificatesSection.credentialCta;
 
   qs('#contact-eyebrow').textContent = contactSection.eyebrow;
   qs('#contact-title').textContent = contactSection.title;
@@ -1194,35 +1200,104 @@ function renderEducation() {
   }
 }
 
+function renderCompactCredlyBadgeImage(badge, imageClass) {
+  const badgeId = String(badge?.credlyBadgeId || '').trim();
+  if (!badgeId) return '';
+
+  const width = Number.isFinite(Number(badge.embedWidth)) ? Number(badge.embedWidth) : 150;
+  const height = Number.isFinite(Number(badge.embedHeight)) ? Number(badge.embedHeight) : 270;
+  const host = String(badge.embedHost || 'https://www.credly.com');
+  const scale = Number.isFinite(Number(badge.compactScale)) ? Number(badge.compactScale) : 0.32;
+  const offsetX = Number.isFinite(Number(badge.compactOffsetX)) ? Number(badge.compactOffsetX) : 0;
+  const offsetY = Number.isFinite(Number(badge.compactOffsetY)) ? Number(badge.compactOffsetY) : 0;
+
+  return `<span class="${imageClass} ${imageClass}--credly" data-credly-badge-id="${escapeAttribute(badgeId)}" style="--credly-scale:${escapeAttribute(String(scale))};--credly-x:${escapeAttribute(String(offsetX))}px;--credly-y:${escapeAttribute(String(offsetY))}px" aria-hidden="true">
+    <span class="credly-compact-embed">
+      <div data-iframe-width="${escapeAttribute(String(width))}" data-iframe-height="${escapeAttribute(String(height))}" data-share-badge-id="${escapeAttribute(badgeId)}" data-share-badge-host="${escapeAttribute(host)}"></div>
+    </span>
+  </span>`;
+}
+
+function refreshCredlyEmbeds(root = document) {
+  if (!root?.querySelector?.('[data-share-badge-id]')) return;
+
+  const previousScript = document.querySelector('script[data-credly-embed-script]');
+  if (previousScript) previousScript.remove();
+
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.async = true;
+  script.src = 'https://cdn.credly.com/assets/utilities/embed.js';
+  script.dataset.credlyEmbedScript = 'true';
+  document.body.appendChild(script);
+}
+
 function renderCertificateCard(item, index) {
+  const section = state.data.certificatesSection || {};
+  const badges = Array.isArray(item.badges) ? item.badges.filter((badge) => badge && (badge.image || badge.title)) : [];
+  const providerClass = String(item.providerClass || '').replace(/[^a-z0-9_-]/gi, '').toLowerCase();
+  const cardClasses = ['certificate-card', 'reveal'];
+  if (item.featured) cardClasses.push('is-featured');
+  if (badges.length) cardClasses.push('has-digital-badge');
+
+  const imageMarkup = `
+    <div class="certificate-media-wrap">
+      <img class="certificate-media" src="${escapeAttribute(item.image || '')}" alt="${escapeAttribute(replacePlaceholders(section.imageAlt, { title: item.title }))}" loading="lazy" decoding="async" fetchpriority="low">
+      ${item.featured ? `<span class="certificate-featured-mark" aria-hidden="true">${escapeHtml(item.providerClass === 'aws' ? 'AWS' : 'PRO')}</span>` : ''}
+    </div>`;
+
+  const mediaMarkup = item.url
+    ? `<a class="certificate-media-link" href="${escapeAttribute(item.url)}" target="_blank" rel="noopener" aria-label="${escapeAttribute(replacePlaceholders(section.credentialAriaLabel, { title: item.title }))}">${imageMarkup}</a>`
+    : imageMarkup;
+
+  const badgesMarkup = badges.length ? `
+    <div class="certificate-digital-badges" aria-label="${escapeAttribute(section.verifiedBadgeLabel || 'Digital badge')}">
+      ${badges.map((badge) => {
+        const badgeInner = `
+          ${badge.credlyBadgeId ? renderCompactCredlyBadgeImage(badge, 'certificate-digital-badge__image') : `<span class="certificate-digital-badge__image"><img src="${escapeAttribute(badge.image || '')}" alt="" loading="lazy" decoding="async"></span>`}
+          <span class="certificate-digital-badge__copy">
+            <small>${escapeHtml(badge.label || section.verifiedBadgeLabel || 'Digital badge')}</small>
+            <strong>${escapeHtml(badge.title || '')}</strong>
+            <em>${escapeHtml(badge.issuer || '')}</em>
+          </span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>`;
+        return badge.url
+          ? `<a class="certificate-digital-badge" href="${escapeAttribute(badge.url)}" target="_blank" rel="noopener" aria-label="${escapeAttribute(`${section.verifyBadgeCta || 'Verify badge'}: ${badge.title || ''}`)}">${badgeInner}</a>`
+          : `<div class="certificate-digital-badge">${badgeInner}</div>`;
+      }).join('')}
+    </div>` : '';
+
   return `
-    <article class="certificate-card reveal" data-certificate-index="${index}">
-      <div class="certificate-media-wrap">
-        <img class="certificate-media" src="${item.image || ''}" alt="${replacePlaceholders(state.data.certificatesSection.imageAlt, { title: item.title })}" loading="lazy" decoding="async" fetchpriority="low">
-      </div>
+    <article class="${cardClasses.join(' ')}" data-certificate-index="${index}" data-provider="${escapeAttribute(providerClass || 'other')}">
+      ${mediaMarkup}
       <div class="certificate-content">
         <div class="certificate-top">
-          <span class="certificate-provider ${item.providerClass ? `is-${item.providerClass}` : ''}" aria-label="${state.data.certificatesSection.providerBadgeLabel}">${item.provider}</span>
-          <span class="certificate-year">${item.year}</span>
+          <span class="certificate-provider ${providerClass ? `is-${providerClass}` : ''}" aria-label="${escapeAttribute(section.providerBadgeLabel || '')}">${escapeHtml(item.provider || '')}</span>
+          <span class="certificate-year">${escapeHtml(item.year || '')}</span>
         </div>
-        <h3>${item.title}</h3>
+        <div class="certificate-kind-row">
+          <span class="certificate-kind">${escapeHtml(item.credentialType || section.courseType || '')}</span>
+          ${badges.length ? `<span class="certificate-badge-count"><span aria-hidden="true">◆</span>${badges.length}</span>` : ''}
+        </div>
+        <h3>${escapeHtml(item.title || '')}</h3>
         <div class="certificate-description-wrap">
-          <p class="certificate-description is-collapsed">${item.description}</p>
+          <p class="certificate-description is-collapsed">${escapeHtml(item.description || '')}</p>
           <button
             class="certificate-description-toggle"
             type="button"
             aria-expanded="false"
-            aria-label="${replacePlaceholders(state.data.certificatesSection.descriptionToggleAria, { title: item.title })}"
-            hidden>${state.data.certificatesSection.showMore}</button>
+            aria-label="${escapeAttribute(replacePlaceholders(section.descriptionToggleAria, { title: item.title }))}"
+            hidden>${escapeHtml(section.showMore || '')}</button>
         </div>
         ${Array.isArray(item.tags) && item.tags.length ? `
-          <ul class="certificate-tags" aria-label="${state.data.certificatesSection.tagsAriaLabel}">
-            ${item.tags.map((tag) => `<li>${tag}</li>`).join('')}
+          <ul class="certificate-tags" aria-label="${escapeAttribute(section.tagsAriaLabel || '')}">
+            ${item.tags.map((tag) => `<li>${escapeHtml(tag)}</li>`).join('')}
           </ul>
         ` : ''}
+        ${badgesMarkup}
         ${item.url ? `
-          <a class="certificate-link-label" href="${item.url}" target="_blank" rel="noopener" aria-label="${replacePlaceholders(state.data.certificatesSection.credentialAriaLabel, { title: item.title })}">
-            <span>${state.data.certificatesSection.credentialCta}</span>
+          <a class="certificate-link-label" href="${escapeAttribute(item.url)}" target="_blank" rel="noopener" aria-label="${escapeAttribute(replacePlaceholders(section.credentialAriaLabel, { title: item.title }))}">
+            <span>${escapeHtml(section.credentialCta || '')}</span>
             <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
           </a>
         ` : ''}
@@ -1235,7 +1310,22 @@ function renderCertificates() {
   const root = qs('#certificates-list');
   if (!root || !Array.isArray(state.data.certificates)) return;
 
-  const cardsMarkup = state.data.certificates.slice(0, 4).map(renderCertificateCard).join('');
+  const items = state.data.certificates.filter((item) => item && item.enabled !== 0 && item.enabled !== false);
+  const badgeCount = items.reduce((total, item) => total + (Array.isArray(item.badges) ? item.badges.filter(Boolean).length : 0), 0);
+  const credentialCount = qs('#credential-count');
+  const digitalBadgeCount = qs('#credential-badge-count');
+  if (credentialCount) credentialCount.textContent = String(items.length);
+  if (digitalBadgeCount) digitalBadgeCount.textContent = String(badgeCount);
+  const credentialCountLabel = qs('#credential-count-label');
+  const digitalBadgeCountLabel = qs('#credential-badge-count-label');
+  if (credentialCountLabel) credentialCountLabel.textContent = items.length === 1
+    ? (state.data.certificatesSection.credentialCountSingular || state.data.certificatesSection.credentialsCountLabel || '')
+    : (state.data.certificatesSection.credentialCountPlural || state.data.certificatesSection.credentialsCountLabel || '');
+  if (digitalBadgeCountLabel) digitalBadgeCountLabel.textContent = badgeCount === 1
+    ? (state.data.certificatesSection.badgeCountSingular || state.data.certificatesSection.badgesCountLabel || '')
+    : (state.data.certificatesSection.badgeCountPlural || state.data.certificatesSection.badgesCountLabel || '');
+
+  const cardsMarkup = items.map(renderCertificateCard).join('');
   if (isFeatureEnabled('certificatesCarousel')) {
     renderContentCarousel(root, 'certificates', cardsMarkup);
   } else {
@@ -1246,6 +1336,7 @@ function renderCertificates() {
   }
 
   initCertificateDescriptionToggles();
+  refreshCredlyEmbeds(root);
 }
 
 function syncCertificateDescriptionToggles() {
