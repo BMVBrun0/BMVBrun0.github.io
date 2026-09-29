@@ -837,8 +837,45 @@
 .resume-credential-strip::-webkit-scrollbar { display:none; }
 .resume-credential-card { flex:0 0 min(76%,245px); overflow:hidden; border:1px solid rgba(255,255,255,.07); border-radius:12px; background:rgba(4,7,12,.2); scroll-snap-align:start; }
 .resume-credential-card > a,.resume-credential-card > div { display:block; height:100%; color:inherit; }
-.resume-credential-card__media { aspect-ratio:4/3; padding:7px; background:#eef1f5; }
-.resume-credential-card__media img { width:100%; height:100%; object-fit:contain; border-radius:5px; }
+.resume-credential-card__media { position:relative; aspect-ratio:4/3; padding:7px; background:#eef1f5; }
+.resume-credential-card__media > img { width:100%; height:100%; object-fit:contain; border-radius:5px; }
+.resume-credential-card__badge {
+  position:absolute;
+  right:10px;
+  top:10px;
+  display:grid;
+  width:54px;
+  height:54px;
+  place-items:center;
+  overflow:hidden;
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:13px;
+  background:rgba(255,255,255,.94);
+  box-shadow:0 8px 24px rgba(15,23,42,.18);
+}
+.resume-credential-card__badge > img { width:48px; height:48px; object-fit:contain; }
+.resume-credential-card__badge--credly .credly-compact-embed { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.resume-credential-card__badge--credly .credly-compact-embed > div {
+  position:absolute;
+  left:var(--credly-x,-7px);
+  top:var(--credly-y,-2px);
+  width:150px;
+  height:270px;
+  transform:scale(var(--credly-scale,.36));
+  transform-origin:0 0;
+}
+.resume-credential-card__badge--credly .credly-compact-embed > iframe {
+  position:absolute !important;
+  left:var(--credly-x,-7px) !important;
+  top:var(--credly-y,-2px) !important;
+  display:block !important;
+  width:150px !important;
+  height:270px !important;
+  max-width:none !important;
+  border:0 !important;
+  transform:scale(var(--credly-scale,.36));
+  transform-origin:0 0;
+}
 .resume-credential-card__copy { padding:10px; }
 .resume-credential-card__copy small { color:var(--accent-3); font-size:.58rem; font-weight:850; }
 .resume-credential-card__copy h3 { display:-webkit-box; margin:5px 0 0; overflow:hidden; font-size:.78rem; line-height:1.35; -webkit-box-orient:vertical; -webkit-line-clamp:3; }
@@ -1668,5 +1705,57 @@
   }
   .achievement-card__badge-image--credly .credly-compact-embed > iframe {
     transform: scale(var(--credly-scale, .226667));
+  }
+}
+
+.resume-credential-card__badge {
+  box-sizing: border-box;
+  right: 10px;
+  top: 10px;
+  width: 54px;
+  height: 54px;
+  padding: 3px;
+}
+
+.resume-credential-card__badge > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.achievement-card.has-badge .achievement-card__badges {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.achievement-card.has-badge .achievement-card__actions {
+  margin-top: 0;
+}
+
+.achievement-card__badge-image {
+  box-sizing: border-box;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  padding: 2px;
+  place-items: center;
+}
+
+.achievement-card__badge-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 680px) {
+  .achievement-card__badge-image {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+    padding: 2px;
   }
 }

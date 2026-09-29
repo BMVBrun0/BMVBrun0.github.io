@@ -244,7 +244,7 @@
 
     const badgeMarkup = badges.length ? `<div class="achievement-card__badges">${badges.map((badge) => `
       <a href="${P.escapeHtml(badge.url || '#')}" ${badge.url ? 'target="_blank" rel="noopener"' : ''} class="achievement-card__badge">
-        ${badge.credlyBadgeId ? renderCompactCredlyBadgeImage(badge) : `<span class="achievement-card__badge-image"><img src="${P.escapeHtml(badge.image || '')}" alt="" loading="lazy" decoding="async"></span>`}
+        ${badge.image ? `<span class="achievement-card__badge-image"><img src="${P.escapeHtml(badge.image)}" alt="" loading="lazy" decoding="async"></span>` : renderCompactCredlyBadgeImage(badge)}
         <span><small>${P.escapeHtml(badge.label || data.certificatesSection?.verifiedBadgeLabel || '')}</small><strong>${P.escapeHtml(badge.title || '')}</strong></span>
         <b aria-hidden="true">↗</b>
       </a>`).join('')}</div>` : '';

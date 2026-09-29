@@ -190,15 +190,54 @@
 
   const certificates = Array.isArray(data.certificates) ? data.certificates : [];
   const languageCredential = certificates.find((item) => item.kind === 'language');
-  const technicalCredentials = certificates.filter((item) => item.kind !== 'language').slice(0, 3);
-  const credentialPreview = [...technicalCredentials, ...(languageCredential ? [languageCredential] : [])];
-  P.qs('#resume-credential-grid').innerHTML = credentialPreview.map((item) => `
-    <article class="resume-credential-card">
+  const technicalCredentials = certificates.filter((item) => item.kind !== 'language').slice(0, 4);
+  const credentialPreview = [...technicalCredentials, ...(languageCredential ? [languageCredential] : [])].slice(0, 4);
+
+  const renderResumeBadge = (badge) => {
+    if (!badge) return '';
+    const badgeId = String(badge.credlyBadgeId || '').trim();
+    const label = badge.title || badge.label || 'Digital badge';
+    if (badge.image) {
+      return `<span class="resume-credential-card__badge" title="${P.escapeHtml(label)}" aria-hidden="true"><img src="${P.escapeHtml(badge.image)}" alt="" loading="lazy" decoding="async"></span>`;
+    }
+    if (badgeId) {
+      const width = Number.isFinite(Number(badge.embedWidth)) ? Number(badge.embedWidth) : 150;
+      const height = Number.isFinite(Number(badge.embedHeight)) ? Number(badge.embedHeight) : 270;
+      const host = String(badge.embedHost || 'https://www.credly.com');
+      const scale = Number.isFinite(Number(badge.resumeScale)) ? Number(badge.resumeScale) : 0.36;
+      const offsetX = Number.isFinite(Number(badge.resumeOffsetX)) ? Number(badge.resumeOffsetX) : -7;
+      const offsetY = Number.isFinite(Number(badge.resumeOffsetY)) ? Number(badge.resumeOffsetY) : -2;
+      return `<span class="resume-credential-card__badge resume-credential-card__badge--credly" title="${P.escapeHtml(label)}" aria-hidden="true" style="--credly-scale:${P.escapeHtml(String(scale))};--credly-x:${P.escapeHtml(String(offsetX))}px;--credly-y:${P.escapeHtml(String(offsetY))}px">
+        <span class="credly-compact-embed"><div data-iframe-width="${P.escapeHtml(String(width))}" data-iframe-height="${P.escapeHtml(String(height))}" data-share-badge-id="${P.escapeHtml(badgeId)}" data-share-badge-host="${P.escapeHtml(host)}"></div></span>
+      </span>`;
+    }
+    return '';
+  };
+
+  const refreshResumeCredlyEmbeds = () => {
+    const root = P.qs('#resume-credential-grid');
+    if (!root?.querySelector?.('[data-share-badge-id]')) return;
+    const previousScript = document.querySelector('script[data-credly-resume-embed-script]');
+    if (previousScript) previousScript.remove();
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = 'https://cdn.credly.com/assets/utilities/embed.js';
+    script.dataset.credlyResumeEmbedScript = 'true';
+    document.body.appendChild(script);
+  };
+
+  P.qs('#resume-credential-grid').innerHTML = credentialPreview.map((item) => {
+    const badge = Array.isArray(item.badges) ? item.badges.find((entry) => entry && (entry.credlyBadgeId || entry.image)) : null;
+    return `
+    <article class="resume-credential-card ${badge ? 'has-badge' : ''}">
       ${item.url ? `<a href="${P.escapeHtml(item.url)}" target="_blank" rel="noopener">` : '<div>'}
-        <div class="resume-credential-card__media"><img src="${P.escapeHtml(item.image || '')}" alt="${P.escapeHtml(item.title)}" loading="lazy" decoding="async" fetchpriority="low"></div>
+        <div class="resume-credential-card__media"><img src="${P.escapeHtml(item.image || '')}" alt="${P.escapeHtml(item.title)}" loading="lazy" decoding="async" fetchpriority="low">${renderResumeBadge(badge)}</div>
         <div class="resume-credential-card__copy"><small>${P.escapeHtml([item.provider, item.year].filter(Boolean).join(' · '))}</small><h3>${P.escapeHtml(item.title)}</h3></div>
       ${item.url ? '</a>' : '</div>'}
-    </article>`).join('');
+    </article>`;
+  }).join('');
+  refreshResumeCredlyEmbeds();
 
   let printState = [];
   window.addEventListener('beforeprint', () => {

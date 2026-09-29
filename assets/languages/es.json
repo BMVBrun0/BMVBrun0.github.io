@@ -1641,6 +1641,36 @@
     {
       "provider": "AWS Training & Certification",
       "providerClass": "aws",
+      "year": "29 sept 2026",
+      "title": "AWS Knowledge: Compute",
+      "credentialType": "AWS Knowledge Badge",
+      "description": "Badge de conocimiento de AWS sobre conceptos y servicios de computación, con foco en Amazon EC2 y temas como AWS Graviton, AWS Inferentia, AWS Trainium, AWS Nitro System, AWS Lambda, Capacity Manager y Confidential Computing.",
+      "tags": [
+        "Amazon EC2",
+        "AWS Graviton",
+        "AWS Lambda",
+        "AWS Nitro System"
+      ],
+      "url": "assets/docs/aws/aws-compute-knowledge-badge-assessment.pdf",
+      "image": "assets/img/certificates/aws/aws-compute-knowledge-badge.webp",
+      "featured": true,
+      "badges": [
+        {
+          "title": "AWS Knowledge: Compute",
+          "label": "Badge verificable",
+          "issuer": "AWS / Credly",
+          "url": "https://www.credly.com/badges/96bea63f-07ee-4524-bf48-e5d6ca31549e/public_url",
+          "credlyBadgeId": "96bea63f-07ee-4524-bf48-e5d6ca31549e",
+          "embedWidth": 150,
+          "embedHeight": 270,
+          "embedHost": "https://www.credly.com",
+          "image": "https://images.credly.com/images/c2d44375-6567-495a-b868-d17828c62872/blob"
+        }
+      ]
+    },
+    {
+      "provider": "AWS Training & Certification",
+      "providerClass": "aws",
       "year": "28 sep 2026",
       "title": "AWS Knowledge: Networking Core",
       "credentialType": "AWS Knowledge Badge",
@@ -1690,12 +1720,7 @@
           "embedWidth": 150,
           "embedHeight": 270,
           "embedHost": "https://www.credly.com",
-          "compactScale": 0.44,
-          "compactOffsetX": -9,
-          "compactOffsetY": -2,
-          "libraryScale": 0.35,
-          "libraryOffsetX": -7,
-          "libraryOffsetY": -2
+          "image": "https://images.credly.com/images/b870667f-00a3-48d7-b988-9c02b441b883/image.png"
         }
       ]
     },

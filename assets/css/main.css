@@ -4654,3 +4654,40 @@ body:not(.page-shell) .section { padding-block: 74px; }
     transform: scale(var(--credly-scale, .293333));
   }
 }
+
+.certificates-block--unified .certificate-card.has-digital-badge .certificate-digital-badges {
+  margin-top: auto;
+  padding-top: 13px;
+}
+
+.certificates-block--unified .certificate-card.has-digital-badge .certificate-link-label {
+  margin-top: 0;
+}
+
+.certificate-digital-badge__image {
+  box-sizing: border-box;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  padding: 3px;
+  place-items: center;
+}
+
+.certificate-digital-badge__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 760px) {
+  .certificate-digital-badge__image {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+    padding: 3px;
+  }
+}

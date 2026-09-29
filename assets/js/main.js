@@ -1254,7 +1254,7 @@ function renderCertificateCard(item, index) {
     <div class="certificate-digital-badges" aria-label="${escapeAttribute(section.verifiedBadgeLabel || 'Digital badge')}">
       ${badges.map((badge) => {
         const badgeInner = `
-          ${badge.credlyBadgeId ? renderCompactCredlyBadgeImage(badge, 'certificate-digital-badge__image') : `<span class="certificate-digital-badge__image"><img src="${escapeAttribute(badge.image || '')}" alt="" loading="lazy" decoding="async"></span>`}
+          ${badge.image ? `<span class="certificate-digital-badge__image"><img src="${escapeAttribute(badge.image)}" alt="" loading="lazy" decoding="async"></span>` : renderCompactCredlyBadgeImage(badge, 'certificate-digital-badge__image')}
           <span class="certificate-digital-badge__copy">
             <small>${escapeHtml(badge.label || section.verifiedBadgeLabel || 'Digital badge')}</small>
             <strong>${escapeHtml(badge.title || '')}</strong>
