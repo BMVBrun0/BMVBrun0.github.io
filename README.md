@@ -1,6 +1,12 @@
-# Portfólio estático
+# Bruno Getten Triches — Portfólio & template open source
 
-Template de portfólio pessoal feito com HTML, CSS e JavaScript puro. Não exige framework, build ou hospedagem paga e pode ser publicado gratuitamente com GitHub Pages.
+Este repositório é, ao mesmo tempo, o meu portfólio público e um template de portfólio pessoal feito com HTML, CSS e JavaScript puro. A versão publicada apresenta meus projetos autorais, experiência, formação e contatos; a mesma base pode ser reutilizada e personalizada por outras pessoas sem framework, build ou hospedagem paga, inclusive com GitHub Pages.
+
+**Versão publicada:** https://bmvbrun0.github.io/
+
+## Para recrutadores e clientes
+
+A home concentra a visão rápida do perfil e dos projetos. `library.html` reúne projetos, detalhes técnicos e credenciais, enquanto `resume.html` traz uma versão expandida da trajetória profissional. Os currículos em PDF ficam disponíveis em português e inglês pelos botões do site.
 
 ## Obter o projeto
 

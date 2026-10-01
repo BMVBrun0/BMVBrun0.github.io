@@ -34,7 +34,7 @@
     "overview": "Resumen"
   },
   "hero": {
-    "eyebrow": "Desarrollador Full Stack & Mobile Senior",
+    "eyebrow": "Desarrollador Full Stack & Mobile",
     "rolePrefix": "Trabajo como",
     "roles": [
       "Desarrollador Full Stack",
@@ -148,27 +148,27 @@
     {
       "title": "Tech Lead · Sensorama Play",
       "period": "2025 · Actual",
-      "description": "Desarrollo hands-on y liderazgo técnico en productos web, mobile, backend/APIs y C#/Unity. Evolucioné una base educativa hacia una plataforma white-label/multitenant con diferentes productos y aplicaciones, accesibilidad propia, gamificación, biblioteca digital, fluencia lectora y recursos complementarios con LLMs/OpenAI. También trabajo con Docker, datos, rendimiento, pruebas de carga, Jest/Playwright, deployments y producción."
+      "description": "Liderazgo técnico de un equipo de 6 profesionales y ownership de Letrinha Livros, Além das Diferenças y Sensorama Play web/apps, manteniendo trabajo hands-on en web, mobile, APIs, datos y arquitectura. Evolucioné una base acoplada al producto 3D hacia una plataforma educativa white-label/multitenant compartida por tres productos, además de estructurar PR/code review, Jest/Playwright, CI y mejoras de infraestructura con Docker/DigitalOcean."
     },
     {
       "title": "Desarrollador Full Stack y Mobile Pleno · Amplimed",
       "period": "2024 · 2025",
-      "description": "Trabajo con React Web, React Native, PHP/Laravel/Blade, Node.js e integraciones en productos de marketplace, agenda y telemedicina. Implementé flujos de atención, Twilio, microservicios, pruebas con Jest, white-label y entornos Docker/Dev Containers, además del ciclo mobile y deployments sobre infraestructura Kubernetes."
+      "description": "Referencia técnica de marketplace, agenda online, productos white-label y telemedicina por colas en un equipo de 4 profesionales. Trabajé con React/React Native, PHP/Laravel/Node, Twilio, MongoDB, Docker/Kubernetes y tiendas mobile; la estandarización redujo ciclos recurrentes de Jira a tienda de ~30 días a cerca de una semana y la base white-label llegó a decenas de clientes."
     },
     {
       "title": "Tech Lead · Astronfy",
       "period": "2023 · 2024",
-      "description": "Responsabilidad técnica y desarrollo hands-on de marketplace y productos web/mobile con fuerte uso de PHP/Laravel, Blade/Livewire y MariaDB, además de Angular, Node.js/Next.js y automatizaciones en Python. Trabajé con rendimiento, servidores/VPS, backups, seguridad, AWS/Azure, pagos y clientes internacionales."
+      "description": "Liderazgo técnico de un equipo de 5 profesionales, responsable de marketplace, dashboard contable, pagos y aplicaciones white-label. Desarrollo hands-on con PHP/Laravel/Blade/Livewire, Angular, Node.js/Next.js y Python, además de VPS, AWS/Azure y onboarding técnico; el marketplace operó en 10+ países y la implantación de nuevos clientes bajó a cerca de 3 días."
     },
     {
-      "title": "Desarrollador Full Stack y Mobile Pleno · Infogen Sistemas",
+      "title": "Desarrollador Full Stack y Mobile · Infogen Sistemas",
       "period": "2022 · 2023",
-      "description": "Evolucioné de trainee a pleno pasando por GeneXus 9/10 y SQL Server, C#/.NET Framework 4.x y .NET Core, Vue.js y tres generaciones mobile: Java/Android, Flutter y React Native/Expo. Trabajé con sincronización offline, Firebase, IIS/Jenkins, scripts Python, publicación en tiendas, refactorizaciones y mentoría."
+      "description": "Progresión de Trainee a Junior y Pleno en ERP, portales, APIs, datos y mobile. Trabajé con GeneXus/SQL Server, C#/.NET Framework y .NET Core, Vue.js, Java/Android, Flutter y React Native/Expo, incluyendo sincronización offline y tiendas; participé en 20+ apps, refactoricé 8+ y contribuí a 15+ módulos white-label."
     },
     {
-      "title": "Desarrollador Full Stack & Mobile · Freelance",
-      "period": "2018 · Actual",
-      "description": "Desarrollo y consultoría en productos web/mobile, APIs y sistemas internos con React/Next.js, React Native, Node.js, C#/.NET, PHP/Laravel, Java/Spring Boot, Vue/Angular, Flutter, Swift/Objective-C y Python. Trabajo desde requisitos y diseño técnico hasta publicación, infraestructura y evolución, con clientes y socios en distintos países."
+      "title": "Desarrollador Full Stack & Mobile · Freelance y Proyectos Propios",
+      "period": "2018 · Actual · por proyecto",
+      "description": "Desarrollo y consultoría de productos web/mobile, APIs, dashboards, sistemas internos, integraciones y experiencias 2D/3D, eligiendo la stack según el producto. Proyectos recientes incluyen una app de inspecciones inmobiliarias en producción, una app internacional de entrenamiento deportivo con IAP y una plataforma propia de contextualización de noticias/datos públicos, con clientes y socios en 4+ países."
     }
   ],
   "servicesSection": {
@@ -2062,7 +2062,7 @@
           {
             "icon": "bi-layers",
             "title": "White-label a escala",
-            "text": "Experiencia con decenas de clientes y más de 100 apps/variantes publicadas, equilibrando personalización, automatización y mantenimiento."
+            "text": "Experiencia con decenas de apps/variantes y productos white-label, equilibrando personalización, automatización y mantenimiento."
           }
         ]
       },

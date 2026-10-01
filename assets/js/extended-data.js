@@ -149,7 +149,7 @@ window.portfolioExtendedData = {
         "links": "LINKS",
         "timelinePrefix": "ETAPA"
       },
-      "seoTitle": "Currículo · Full Stack & Mobile Sênior",
+      "seoTitle": "Currículo · Full Stack & Mobile",
       "seoDescription": "Currículo detalhado com 8+ anos de experiência em desenvolvimento Full Stack e Mobile, arquitetura, dados, cloud, liderança técnica e produtos em produção."
     },
     "companyDetails": {
@@ -635,7 +635,7 @@ window.portfolioExtendedData = {
         "links": "LINKS",
         "timelinePrefix": "LOG"
       },
-      "seoTitle": "Résumé · Senior Full Stack & Mobile Developer",
+      "seoTitle": "Résumé · Full Stack & Mobile Developer",
       "seoDescription": "Detailed résumé with 8+ years across Full Stack and Mobile development, architecture, data, cloud, technical leadership and production products."
     },
     "companyDetails": {
@@ -1116,7 +1116,7 @@ window.portfolioExtendedData = {
         "links": "ENLACES",
         "timelinePrefix": "ETAPA"
       },
-      "seoTitle": "Currículum · Full Stack & Mobile Senior",
+      "seoTitle": "Currículum · Full Stack & Mobile",
       "seoDescription": "Currículum detallado con 8+ años en desarrollo Full Stack y Mobile, arquitectura, datos, cloud, liderazgo técnico y productos en producción."
     },
     "companyDetails": {
