@@ -31,7 +31,8 @@
     "library": "Biblioteca",
     "resume": "Currículo+",
     "portfolio": "Portfólio",
-    "overview": "Visão geral"
+    "overview": "Visão geral",
+    "recommendations": "Recomendações"
   },
   "hero": {
     "eyebrow": "Desenvolvedor Full Stack & Mobile",

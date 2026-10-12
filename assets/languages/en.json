@@ -31,7 +31,8 @@
     "library": "Library",
     "resume": "Résumé+",
     "portfolio": "Portfolio",
-    "overview": "Overview"
+    "overview": "Overview",
+    "recommendations": "Recommendations"
   },
   "hero": {
     "eyebrow": "Full Stack & Mobile Developer",

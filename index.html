@@ -52,7 +52,7 @@
         "name": "Bruno Getten Triches (BMVBrun0) | Desenvolvedor Full Stack & Mobile Sênior",
         "description": "Portfólio profissional de Bruno Getten Triches (BMVBrun0), Desenvolvedor Full Stack & Mobile Sênior com 8+ anos em produtos web, mobile, backend, APIs, cloud e liderança técnica hands-on.",
         "inLanguage": "pt-BR",
-        "dateModified": "2026-09-29",
+        "dateModified": "2026-10-12",
         "mainEntity": { "@id": "https://bmvbrun0.github.io/#person" },
         "isPartOf": { "@id": "https://bmvbrun0.github.io/#website" }
       },
@@ -149,6 +149,7 @@
   <link rel="preload" href="assets/css/main.css" as="style">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/recommendations.css">
   <link rel="stylesheet" href="assets/css/experience.css">
 
 
@@ -259,6 +260,7 @@
         </div>
         <a href="library.html" id="nav-library" data-main-nav="library">Biblioteca</a>
         <a href="resume.html" id="nav-resume" data-main-nav="resume">Currículo+</a>
+        <a href="recommendations.html" id="nav-recommendations" data-main-nav="recommendations">Recomendações</a>
 
         <div class="lang-switcher mobile-lang" data-lang-switcher>
           <span class="lang-label" id="language-label-mobile">Idioma</span>
@@ -424,6 +426,25 @@
             <span id="certificates-library-link">Ver todas as credenciais na biblioteca</span><span aria-hidden="true">→</span>
           </a>
         </div>
+      </div>
+    </section>
+
+    <section class="section section-alt recommendations-home" id="recommendations" aria-labelledby="recommendations-home-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow" data-recs-eyebrow>QUEM TRABALHOU COMIGO</p>
+          <h2 id="recommendations-home-title" data-recs-title>Gente que esteve do outro lado do código.</h2>
+          <p data-recs-subtitle>Depoimentos de colegas que dividiram projetos e desafios comigo.</p>
+        </div>
+        <div class="recommendations-home__controls reveal">
+          <span class="recommendations-home__count" data-recs-counter aria-live="polite">01 / 05</span>
+          <div class="recommendations-home__arrows">
+            <button type="button" data-recs-prev aria-label="Recomendação anterior"><span aria-hidden="true">←</span></button>
+            <button type="button" data-recs-next aria-label="Próxima recomendação"><span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+        <div class="recommendations-home__track" data-recs-track tabindex="0" role="region" aria-roledescription="carrossel" aria-label="Recomendações profissionais"></div>
+        <a class="home-detail-link home-detail-link--section reveal" href="recommendations.html"><span data-recs-all>Conhecer as 5 recomendações</span><span aria-hidden="true">→</span></a>
       </div>
     </section>
 
@@ -681,6 +702,8 @@
 
   <script defer src="assets/js/data.js"></script>
   <script defer src="assets/js/analytics.js"></script>
+  <script defer src="assets/js/recommendations-data.js"></script>
+  <script defer src="assets/js/recommendations.js"></script>
   <script defer src="assets/js/main.js"></script>
   <script defer src="assets/js/experience.js"></script>
   <script defer src="assets/js/accessibility.js"></script>

@@ -234,7 +234,7 @@
       node.classList.remove('is-current');
       node.removeAttribute('aria-current');
     });
-    const current = currentPage === 'library' ? qs('#nav-library') : currentPage === 'resume' ? qs('#nav-resume') : null;
+    const current = currentPage === 'library' ? qs('#nav-library') : currentPage === 'resume' ? qs('#nav-resume') : currentPage === 'recommendations' ? qs('#nav-recommendations') : null;
     if (current) {
       current.classList.add('is-current');
       current.setAttribute('aria-current', 'page');

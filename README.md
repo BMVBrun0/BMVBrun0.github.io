@@ -6,7 +6,7 @@ Este repositório é, ao mesmo tempo, o meu portfólio público e um template de
 
 ## Para recrutadores e clientes
 
-A home concentra a visão rápida do perfil e dos projetos. `library.html` reúne projetos, detalhes técnicos e credenciais, enquanto `resume.html` traz uma versão expandida da trajetória profissional. Os currículos em PDF ficam disponíveis em português e inglês pelos botões do site.
+A home concentra a visão rápida do perfil e dos projetos. `library.html` reúne projetos, detalhes técnicos e credenciais, enquanto `resume.html` traz uma versão expandida da trajetória profissional e `recommendations.html` reúne recomendações profissionais em português, inglês e espanhol, com acesso aos arquivos originais. Os currículos em PDF ficam disponíveis em português e inglês pelos botões do site.
 
 ## Obter o projeto
 
@@ -53,10 +53,11 @@ Os arquivos de imagem e documentos ficam em `assets/img` e `assets/docs`. Depois
 
 ### Telas extras
 
-O portfólio agora possui duas páginas adicionais, sem transformar a home em uma página ainda maior:
+O portfólio possui páginas adicionais para detalhar o conteúdo sem sobrecarregar a home:
 
 - `library.html`: biblioteca gamificada de projetos, detalhes técnicos, galerias, certificações e formação;
 - `resume.html`: currículo expandido em HTML, com experiência, contexto por empresa, projetos selecionados e versão amigável para impressão/PDF.
+- `recommendations.html`: cartas de colegas da Infogen Sistemas e Sensorama Play, com textos completos traduzidos em português, inglês e espanhol e download dos documentos originais (PT/EN). O carrossel na home apresenta trechos de cada depoimento, com links para as cartas completas. Dados em `assets/js/recommendations-data.js`; visual em `assets/css/recommendations.css`.
 
 Os projetos, certificados, formação e experiência continuam vindo dos JSONs de idioma existentes. Textos longos específicos das novas telas e detalhes por empresa ficam em `assets/js/extended-data.js`, pensado para ser editado manualmente sem alterar o renderer.
 
@@ -172,6 +173,10 @@ Uma credencial pode ter certificado e zero ou mais badges digitais:
 ```
 
 O array `badges` é opcional. Quando existir, cada badge é renderizada apenas dentro da credencial correspondente, com imagem única e link de verificação. O mesmo modelo funciona com novas instituições e múltiplas badges sem alterar o HTML da página.
+
+## Limpeza de assets legados
+
+O projeto inclui `scripts/cleanup-assets.sh`, que remove exclusivamente PNG/JPG antigos já substituídos por WebP. Ao atualizar uma cópia existente com `ditto` (que não exclui arquivos antigos), rode `bash scripts/cleanup-assets.sh` na raiz para liberar o espaço. O ZIP de distribuição também exclui o histórico `.git`, `.DS_Store` e `__MACOSX`, que não fazem parte do site.
 
 ## Performance no GitHub Pages
 

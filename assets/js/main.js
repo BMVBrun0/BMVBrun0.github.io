@@ -221,6 +221,8 @@ function renderProjectAccessLink(project, className = 'project-access-link') {
 }
 
 function detectLocale() {
+  const queryLocale = new URLSearchParams(window.location.search).get('lang');
+  if (queryLocale && config.locales.includes(queryLocale)) return queryLocale;
   const saved = window.localStorage.getItem('portfolio-locale');
   if (saved && config.locales.includes(saved)) return saved;
 
@@ -329,6 +331,8 @@ function renderStaticText() {
   const resumeNav = qs('#nav-resume');
   if (libraryNav) libraryNav.textContent = nav.library || 'Biblioteca';
   if (resumeNav) resumeNav.textContent = nav.resume || 'Currículo+';
+  const recommendationsNav = qs('#nav-recommendations');
+  if (recommendationsNav) recommendationsNav.textContent = nav.recommendations || 'Recomendações';
   const homeCtas = state.data.homeCtas || {};
   const ctaMap = {
     '#home-about-link': homeCtas.about,
@@ -2362,6 +2366,7 @@ async function applyLocale(locale) {
   renderEducation();
   renderCertificates();
   renderContacts();
+  window.PortfolioRecommendationsUI?.render(normalized);
   initRoleRotation();
   initReveal();
   setCurrentYear();
