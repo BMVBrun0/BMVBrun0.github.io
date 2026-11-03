@@ -260,98 +260,203 @@
   ],
   "projects": [
     {
-      "title": "Panel Web de Agenda y Administración",
+      "title": "SettaSynk — inspecciones inmobiliarias web y mobile",
       "category": "product",
-      "image": "assets/img/portfolio/whitelabel_booking.webp",
+      "image": "assets/img/portfolio/setta_synk.webp",
       "status": "Privado",
-      "description": "Plataforma white-label para reservas online, agenda, servicios, profesionales, clientes y operación diaria en un solo panel.",
+      "description": "Plataforma de inspecciones inmobiliarias con app offline-first, panel administrativo, evidencias multimedia, informes y notas de voz apoyadas por servicios propios de IA.",
       "stack": [
         "Laravel 13",
-        "Livewire 4",
-        "MySQL",
-        "Redis"
+        "React + TypeScript",
+        "React Native / Expo",
+        "SQLite / PostgreSQL",
+        "Python / FastAPI"
       ],
       "details": {
-        "description": "Plataforma white-label de reservas online que conecta la experiencia del cliente con la operación diaria del equipo en un solo flujo. El cliente puede elegir servicio o profesional, consultar disponibilidad real, seleccionar fecha y horario, iniciar sesión o crear una cuenta, revisar sus datos y confirmar la reserva. En el área administrativa, el equipo gestiona sedes, profesionales, servicios, clientes, horarios, excepciones de disponibilidad, estados de las citas e identidad visual, además de acompañar indicadores y próximos compromisos desde el dashboard.",
+        "description": "SettaSynk conecta las inspecciones de campo con la gestión de inmuebles, equipos y documentos. La aplicación organiza ambientes e ítems, registra su estado y evidencias fotográficas y audiovisuales y permite seguir trabajando sin conexión, sincronizando los cambios después. El panel web reúne agenda, seguimiento operativo, plantillas de inspección y gestión de informes para profesionales independientes y empresas. Los relatos de voz pueden transcribirse e interpretarse mediante servicios propios para ayudar a completar la inspección; esta etapa avanzada requiere conexión con la API y mantiene la revisión a cargo del profesional.",
         "features": [
-          "Reserva pública guiada con elección de servicio o profesional, calendario, horarios disponibles y revisión antes de confirmar",
-          "Área del cliente para consultar reservas y cancelar citas futuras",
-          "Dashboard operativo con agenda del día, pendientes, próximas citas y distribución por estado",
-          "Gestión de servicios con duración, precio y relación por sede y profesional",
-          "Agenda por profesional con bloques semanales, intervalos, bloqueos y disponibilidad extraordinaria",
-          "Gestión de sedes, equipo y clientes con permisos administrativos por perfil",
-          "Identidad white-label por empresa con logo, favicon, paleta de colores y textos de la experiencia pública"
+          "Inspecciones organizadas por inmueble, ambiente, ítem, estado y observaciones",
+          "Captura y gestión de fotos, videos y audios vinculados a las evidencias de la inspección",
+          "Persistencia local para trabajar sin conexión y centro de sincronización de operaciones pendientes",
+          "Transcripción de voz e interpretación contextual con sugerencias de registros que el profesional puede revisar",
+          "Generación, consulta y gestión de informes de inspección en PDF y sus versiones",
+          "Agenda de inspecciones, seguimiento de estados y organización de las actividades del equipo",
+          "Plantillas de inspección y registros de clientes e inmuebles para estandarizar la operación",
+          "Gestión por empresa y perfiles de acceso para administración, revisión y trabajo de campo"
         ],
         "technicalSpecs": [
           {
-            "label": "Arquitectura",
-            "value": "Laravel 13 con Livewire 4 en una aplicación server-driven que separa el flujo público de reservas, el portal del cliente y los módulos administrativos compartiendo las mismas reglas de dominio."
+            "label": "Arquitectura web/API",
+            "value": "Laravel 13 y PHP 8.5 centralizan el dominio y la API. React 19, Inertia y TypeScript componen el panel web, con PostgreSQL como base de datos relacional."
           },
           {
-            "label": "Alcance y permisos",
-            "value": "Estructura multiempresa con alcance por tenant y perfiles para superadministración, administración de la empresa, gestión, profesionales y clientes."
+            "label": "Mobile offline-first",
+            "value": "React Native 0.86 y Expo 57 utilizan SQLite con Drizzle ORM para conservar los datos en el dispositivo. Los repositorios locales separan la persistencia de las operaciones de dominio."
           },
           {
-            "label": "Motor de disponibilidad",
-            "value": "El cálculo de horarios considera zona horaria, duración del servicio, intervalo entre slots, anticipación mínima, ventana máxima de reserva, agendas, excepciones y conflictos con citas existentes."
+            "label": "Sincronización",
+            "value": "Una outbox persistente registra los cambios locales. Los flujos de envío y recepción utilizan identificadores de operación, revisiones, reanudación y tratamiento de conflictos."
           },
           {
-            "label": "Flujo de reserva",
-            "value": "Proceso por etapas con servicio/profesional, selección complementaria, calendario, autenticación del cliente y revisión. El estado de la reserva puede mantenerse durante el acceso o registro."
+            "label": "Evidencias e informes",
+            "value": "Los archivos multimedia tienen un flujo específico de envío y confirmación. El backend genera informes con Dompdf y ofrece cada versión para consulta y descarga."
           },
           {
-            "label": "Modelo operativo",
-            "value": "Los servicios pueden definir duración y precio y relacionarse con profesionales y sedes. Las citas manejan estados como pendiente, confirmada, completada, cancelada y ausencia."
+            "label": "Inteligencia de voz",
+            "value": "Servicio Python/FastAPI con faster-whisper para transcripción y Ollama/Qwen para interpretación estructurada, combinados con reglas textuales en una estrategia híbrida. La inferencia avanzada requiere acceso a la API."
           },
           {
-            "label": "API y autenticación",
-            "value": "API REST protegida con Laravel Sanctum para integraciones autenticadas de tenants, sedes, profesionales, servicios, clientes y citas."
+            "label": "Acceso y alcance",
+            "value": "Autenticación de la API con Laravel Sanctum y permisos por empresa, perfil y capacidad, con alcances específicos para los recursos mobile."
           },
           {
-            "label": "Infraestructura",
-            "value": "Entorno en contenedores con aplicación, worker, scheduler, MySQL 8 y Redis 7, separando procesamiento web, colas y rutinas programadas."
-          },
-          {
-            "label": "Branding",
-            "value": "Pipeline de assets de marca para procesar logo y favicon, convertir a WebP y generar URLs versionadas para actualizar la identidad white-label de forma consistente."
+            "label": "Procesamiento asíncrono",
+            "value": "Redis y Laravel Horizon soportan las colas de procesamiento. La aplicación, los workers, el scheduler y los servicios de inteligencia tienen responsabilidades separadas."
           }
         ],
         "technologies": [
           {
-            "name": "Laravel 13",
-            "description": "Base del backend para reglas de dominio, autenticación, autorización, rutas web/API y módulos administrativos."
+            "name": "Laravel 13 / PHP 8.5",
+            "description": "Dominio de inspecciones, API, autorización, agenda y gestión de informes."
           },
           {
-            "name": "Livewire 4",
-            "description": "Interfaz administrativa reactiva sin duplicar la lógica de dominio en una SPA separada."
+            "name": "React 19 / Inertia / TypeScript",
+            "description": "Panel administrativo integrado al backend e interfaces tipadas."
+          },
+          {
+            "name": "React Native / Expo",
+            "description": "Aplicación compartida para Android e iOS, con cámara, audio y archivos."
+          },
+          {
+            "name": "SQLite / Drizzle ORM",
+            "description": "Persistencia local y operaciones pendientes para trabajar sin conexión."
+          },
+          {
+            "name": "PostgreSQL",
+            "description": "Datos relacionales de empresas, inmuebles, inspecciones y documentos."
+          },
+          {
+            "name": "Redis / Laravel Horizon",
+            "description": "Colas y seguimiento de tareas ejecutadas en segundo plano."
+          },
+          {
+            "name": "Python / FastAPI",
+            "description": "API interna de los servicios de inteligencia de voz."
+          },
+          {
+            "name": "faster-whisper / Ollama",
+            "description": "Transcripción de audio e interpretación contextual con modelos configurables."
           },
           {
             "name": "Laravel Sanctum",
-            "description": "Autenticación de la API REST para integraciones confiables con los recursos operativos."
+            "description": "Autenticación y control de acceso de la API mobile."
           },
           {
-            "name": "MySQL 8",
-            "description": "Fuente relacional para tenants, sedes, profesionales, servicios, clientes, agendas y citas."
+            "name": "Dompdf",
+            "description": "Generación de informes de inspección en PDF en el servidor."
+          }
+        ],
+        "pricing": []
+      }
+    },
+    {
+      "title": "Accessibility Plugin — SDK de accesibilidad web",
+      "category": "tool",
+      "image": "assets/img/portfolio/accessibility_plugin.webp",
+      "status": "Privado",
+      "description": "SDK integrable que añade lectura, contraste, foco, voz y personalización visual a sitios y sistemas existentes sin reconstruir la aplicación anfitriona.",
+      "stack": [
+        "JavaScript SDK",
+        "Shadow DOM",
+        "Web Speech API",
+        "Web Crypto"
+      ],
+      "details": {
+        "description": "Accessibility Plugin añade una capa de personalización de accesibilidad a productos digitales existentes. El usuario puede partir de perfiles predefinidos o combinar ajustes de texto, contraste, color, cursor, foco de lectura, reducción de movimiento y lectura por voz según sus necesidades. La interfaz funciona en desktop y mobile, conserva preferencias entre sesiones y puede adoptar la identidad visual de diferentes marcas sin interferir con el layout anfitrión.",
+        "features": [
+          "Presets para TDAH, autismo, baja visión, daltonismo y discapacidad visual",
+          "Escala de texto, fuente amigable para dislexia, espaciado y transformación de mayúsculas/minúsculas",
+          "Contraste, saturación, escala de grises y ajustes de color",
+          "Cursores ampliados, lupa y ayudas de seguimiento visual",
+          "Guía y máscara de lectura para reducir distracciones",
+          "Lectura por voz con mouse o touch, resaltado visual y controles de reproducción",
+          "Reducción de movimiento y estímulos con restauración completa del estado original",
+          "Preferencias persistentes, interfaz en portugués/inglés/español y personalización white-label"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Arquitectura modular",
+            "value": "Core independiente de la interfaz, registro de features y actualizaciones por diff reaplican solamente los grupos de preferencias modificados."
           },
           {
-            "name": "Redis 7",
-            "description": "Soporte de infraestructura para colas, caché y ejecución desacoplada de tareas."
+            "label": "Aislamiento de UI",
+            "value": "El widget se ejecuta dentro de Shadow DOM para evitar colisiones de CSS y JavaScript con el producto anfitrión."
           },
           {
-            "name": "Docker Compose",
-            "description": "Orquesta aplicación, base de datos, Redis, worker, scheduler y pasos de inicialización en un stack reproducible."
+            "label": "Ciclo reversible",
+            "value": "Cada feature implementa update, reset y dispose; estilos y atributos originales se conservan para desactivar o destruir el SDK sin residuos."
           },
           {
-            "name": "Carbon",
-            "description": "Tratamiento de fechas, calendarios, zonas horarias y reglas temporales del motor de disponibilidad."
+            "label": "DOM dinámico",
+            "value": "MutationObserver sigue contenido insertado después de la carga, con soporte para Document, ShadowRoots abiertos registrados e iframes del mismo origen."
           },
           {
-            "name": "GD / WebP",
-            "description": "Procesamiento de logo y favicon para normalizar dimensiones y optimizar los assets white-label."
+            "label": "Lectura por voz",
+            "value": "Un SpeechEngine aislado usa APIs nativas del navegador y administra selección, elemento, sección y página con resaltado visual."
           },
           {
-            "name": "PHPUnit 12",
-            "description": "Cobertura automatizada de reglas y flujos críticos del backend."
+            "label": "Estado persistente",
+            "value": "Las preferencias usan un esquema versionado con migraciones para evolucionar el formato sin perder configuraciones guardadas."
+          },
+          {
+            "label": "Licenciamiento",
+            "value": "Una capa de providers soporta licencias locales firmadas, validación remota o implementaciones custom con reglas de host, validez y entitlement."
+          },
+          {
+            "label": "Criptografía",
+            "value": "Web Crypto API verifica firmas ECDSA P-256/SHA-256 para escenarios de distribución licenciada."
+          },
+          {
+            "label": "Calidad",
+            "value": "La suite cubre estado, migraciones, teclado, TTS, reversibilidad, DOM dinámico, Shadow DOM, iframes y reset/destroy."
+          },
+          {
+            "label": "Runtime liviano",
+            "value": "El core de producción no depende de frameworks externos en runtime, reduciendo peso y conflictos de integración."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "JavaScript ES Modules",
+            "description": "Módulos independientes de framework para core, features, adapters e interfaz."
+          },
+          {
+            "name": "Shadow DOM",
+            "description": "Encapsulamiento visual para impedir interferencia entre estilos del host y del widget."
+          },
+          {
+            "name": "Web Speech API",
+            "description": "Síntesis de voz, pausa, reanudación y navegación entre fragmentos de contenido."
+          },
+          {
+            "name": "Web Crypto API",
+            "description": "Verificación criptográfica de licencias firmadas con ECDSA P-256 y SHA-256."
+          },
+          {
+            "name": "MutationObserver",
+            "description": "Aplicación continua de preferencias en interfaces con DOM dinámico."
+          },
+          {
+            "name": "LocalStorage",
+            "description": "Persistencia de preferencias e idioma mediante un esquema versionado."
+          },
+          {
+            "name": "CSS Custom Properties",
+            "description": "Tokens visuales y configuración white-label desacoplada del CSS anfitrión."
+          },
+          {
+            "name": "Node.js 20+",
+            "description": "Toolchain de build, lint y ejecución de pruebas automatizadas."
           }
         ],
         "pricing": []
@@ -469,103 +574,194 @@
       }
     },
     {
-      "title": "Accessibility Plugin — SDK de accesibilidad web",
-      "category": "tool",
-      "image": "assets/img/portfolio/accessibility_plugin.webp",
+      "title": "Aletheia — noticias, contexto y datos públicos",
+      "category": "product",
+      "image": "assets/img/portfolio/aletheia.webp",
       "status": "Privado",
-      "description": "SDK integrable que añade lectura, contraste, foco, voz y personalización visual a sitios y sistemas existentes sin reconstruir la aplicación anfitriona.",
+      "description": "Plataforma editorial que reúne noticias por acontecimiento, compara coberturas y conecta fuentes, perfiles políticos y datos fiscales con origen y límites explícitos.",
       "stack": [
-        "JavaScript SDK",
-        "Shadow DOM",
-        "Web Speech API",
-        "Web Crypto"
+        "Next.js 16",
+        "React + TypeScript",
+        "Python / FastAPI",
+        "PostgreSQL / Neon",
+        "Drizzle ORM"
       ],
       "details": {
-        "description": "Accessibility Plugin añade una capa de personalización de accesibilidad a productos digitales existentes. El usuario puede partir de perfiles predefinidos o combinar ajustes de texto, contraste, color, cursor, foco de lectura, reducción de movimiento y lectura por voz según sus necesidades. La interfaz funciona en desktop y mobile, conserva preferencias entre sesiones y puede adoptar la identidad visual de diferentes marcas sin interferir con el layout anfitrión.",
+        "description": "Aletheia organiza información pública para facilitar la comprensión de los acontecimientos y la comparación de coberturas periodísticas. La aplicación web reúne publicaciones de múltiples fuentes en historias, presenta titulares y cronología y permite consultar evidencias y revisiones de las agrupaciones. Un servicio Python independiente realiza la recopilación, extracción y procesamiento del contenido e integra los resultados en el portal mediante contratos versionados. El producto también organiza historiales de fuentes y autores, registros parlamentarios y electorales e indicadores fiscales. Su propuesta es ofrecer contexto rastreable: la repetición de noticias no constituye confirmación independiente y la similitud textual no mide la veracidad.",
         "features": [
-          "Presets para TDAH, autismo, baja visión, daltonismo y discapacidad visual",
-          "Escala de texto, fuente amigable para dislexia, espaciado y transformación de mayúsculas/minúsculas",
-          "Contraste, saturación, escala de grises y ajustes de color",
-          "Cursores ampliados, lupa y ayudas de seguimiento visual",
-          "Guía y máscara de lectura para reducir distracciones",
-          "Lectura por voz con mouse o touch, resaltado visual y controles de reproducción",
-          "Reducción de movimiento y estímulos con restauración completa del estado original",
-          "Preferencias persistentes, interfaz en portugués/inglés/español y personalización white-label"
+          "Agregación de noticias de medios periodísticos y fuentes institucionales, con enlaces a las publicaciones originales",
+          "Agrupación de publicaciones sobre el mismo acontecimiento e historial de revisiones",
+          "Comparación de titulares por fuente y cronología de las publicaciones disponibles",
+          "Presentación de afirmaciones numéricas con fragmentos de origen y límites del análisis",
+          "Catálogo de fuentes e historiales de autores con indicadores descriptivos de la muestra recopilada",
+          "Consulta de políticos, gastos, actividad parlamentaria y registros electorales en fuentes oficiales",
+          "Simulación educativa del impuesto sobre la renta brasileño y consulta de recaudación y presupuesto con período y nivel de gobierno identificados",
+          "Interfaz editorial adaptable con páginas de metodología y origen de los datos"
         ],
         "technicalSpecs": [
           {
-            "label": "Arquitectura modular",
-            "value": "Core independiente de la interfaz, registro de features y actualizaciones por diff reaplican solamente los grupos de preferencias modificados."
+            "label": "Arquitectura integrada",
+            "value": "Next.js 16, React 19 y TypeScript componen el portal. AletheiaAnalysis utiliza Python 3.12 y FastAPI para ejecutar el procesamiento fuera de la aplicación web."
           },
           {
-            "label": "Aislamiento de UI",
-            "value": "El widget se ejecuta dentro de Shadow DOM para evitar colisiones de CSS y JavaScript con el producto anfitrión."
+            "label": "Recopilación y extracción",
+            "value": "Los feeds RSS/Atom y las páginas públicas alimentan la recopilación incremental. Trafilatura extrae el contenido y conserva metadatos y referencias de origen en cada registro."
           },
           {
-            "label": "Ciclo reversible",
-            "value": "Cada feature implementa update, reset y dispose; estilos y atributos originales se conservan para desactivar o destruir el SDK sin residuos."
+            "label": "Agrupación de historias",
+            "value": "El motor combina similitud textual, señales léxicas y contexto temporal. Los embeddings multilingües se habilitan mediante la dependencia opcional sentence-transformers; no representan una clasificación ideológica."
           },
           {
-            "label": "DOM dinámico",
-            "value": "MutationObserver sigue contenido insertado después de la carga, con soporte para Document, ShadowRoots abiertos registrados e iframes del mismo origen."
+            "label": "Contratos entre servicios",
+            "value": "Pydantic y JSON Schema definen lotes versionados; Zod valida los datos recibidos por el portal. Los identificadores determinísticos y una outbox apoyan el envío y la continuidad del historial."
           },
           {
-            "label": "Lectura por voz",
-            "value": "Un SpeechEngine aislado usa APIs nativas del navegador y administra selección, elemento, sección y página con resaltado visual."
+            "label": "Persistencia y trazabilidad",
+            "value": "PostgreSQL/Neon y Drizzle ORM almacenan publicaciones, versiones, vínculos y revisiones. El origen de los registros se mantiene disponible para consulta."
           },
           {
-            "label": "Estado persistente",
-            "value": "Las preferencias usan un esquema versionado con migraciones para evolucionar el formato sin perder configuraciones guardadas."
+            "label": "Datos públicos",
+            "value": "Las integraciones con la Cámara de Diputados, el Senado, el TSE, la Receita Federal, SICONFI y SIOP de Brasil conservan fuentes, períodos y alcance de los registros presentados."
           },
           {
-            "label": "Licenciamiento",
-            "value": "Una capa de providers soporta licencias locales firmadas, validación remota o implementaciones custom con reglas de host, validez y entitlement."
-          },
-          {
-            "label": "Criptografía",
-            "value": "Web Crypto API verifica firmas ECDSA P-256/SHA-256 para escenarios de distribución licenciada."
-          },
-          {
-            "label": "Calidad",
-            "value": "La suite cubre estado, migraciones, teclado, TTS, reversibilidad, DOM dinámico, Shadow DOM, iframes y reset/destroy."
-          },
-          {
-            "label": "Runtime liviano",
-            "value": "El core de producción no depende de frameworks externos en runtime, reduciendo peso y conflictos de integración."
+            "label": "Límites metodológicos",
+            "value": "Los indicadores del contenido describen la muestra observada. Las clasificaciones externas de audiencia se presentan separadas de los artículos; el producto no emite veredictos automáticos de veracidad."
           }
         ],
         "technologies": [
           {
-            "name": "JavaScript ES Modules",
-            "description": "Módulos independientes de framework para core, features, adapters e interfaz."
+            "name": "Next.js 16 / React 19",
+            "description": "Portal editorial, páginas públicas y presentación de datos integrados."
           },
           {
-            "name": "Shadow DOM",
-            "description": "Encapsulamiento visual para impedir interferencia entre estilos del host y del widget."
+            "name": "TypeScript / Zod",
+            "description": "Tipado y validación de los contratos recibidos por la aplicación web."
           },
           {
-            "name": "Web Speech API",
-            "description": "Síntesis de voz, pausa, reanudación y navegación entre fragmentos de contenido."
+            "name": "Python 3.12 / FastAPI",
+            "description": "Servicio propio de recopilación, extracción y procesamiento de información."
           },
           {
-            "name": "Web Crypto API",
-            "description": "Verificación criptográfica de licencias firmadas con ECDSA P-256 y SHA-256."
+            "name": "Pydantic / JSON Schema",
+            "description": "Contratos versionados y validación de lotes entre servicios."
           },
           {
-            "name": "MutationObserver",
-            "description": "Aplicación continua de preferencias en interfaces con DOM dinámico."
+            "name": "PostgreSQL / Neon",
+            "description": "Persistencia de publicaciones, fuentes, versiones e historiales de revisión."
           },
           {
-            "name": "LocalStorage",
-            "description": "Persistencia de preferencias e idioma mediante un esquema versionado."
+            "name": "Drizzle ORM",
+            "description": "Acceso tipado a los registros persistidos del portal."
           },
           {
-            "name": "CSS Custom Properties",
-            "description": "Tokens visuales y configuración white-label desacoplada del CSS anfitrión."
+            "name": "Trafilatura / HTTPX",
+            "description": "Extracción de artículos y comunicación HTTP con las fuentes."
           },
           {
-            "name": "Node.js 20+",
-            "description": "Toolchain de build, lint y ejecución de pruebas automatizadas."
+            "name": "sentence-transformers (opcional)",
+            "description": "Embeddings multilingües para identificar publicaciones relacionadas."
+          },
+          {
+            "name": "APIs y archivos públicos",
+            "description": "Integración de datos parlamentarios, electorales, fiscales y presupuestarios."
+          }
+        ],
+        "pricing": []
+      }
+    },
+    {
+      "title": "Panel Web de Agenda y Administración",
+      "category": "product",
+      "image": "assets/img/portfolio/whitelabel_booking.webp",
+      "status": "Privado",
+      "description": "Plataforma white-label para reservas online, agenda, servicios, profesionales, clientes y operación diaria en un solo panel.",
+      "stack": [
+        "Laravel 13",
+        "Livewire 4",
+        "MySQL",
+        "Redis"
+      ],
+      "details": {
+        "description": "Plataforma white-label de reservas online que conecta la experiencia del cliente con la operación diaria del equipo en un solo flujo. El cliente puede elegir servicio o profesional, consultar disponibilidad real, seleccionar fecha y horario, iniciar sesión o crear una cuenta, revisar sus datos y confirmar la reserva. En el área administrativa, el equipo gestiona sedes, profesionales, servicios, clientes, horarios, excepciones de disponibilidad, estados de las citas e identidad visual, además de acompañar indicadores y próximos compromisos desde el dashboard.",
+        "features": [
+          "Reserva pública guiada con elección de servicio o profesional, calendario, horarios disponibles y revisión antes de confirmar",
+          "Área del cliente para consultar reservas y cancelar citas futuras",
+          "Dashboard operativo con agenda del día, pendientes, próximas citas y distribución por estado",
+          "Gestión de servicios con duración, precio y relación por sede y profesional",
+          "Agenda por profesional con bloques semanales, intervalos, bloqueos y disponibilidad extraordinaria",
+          "Gestión de sedes, equipo y clientes con permisos administrativos por perfil",
+          "Identidad white-label por empresa con logo, favicon, paleta de colores y textos de la experiencia pública"
+        ],
+        "technicalSpecs": [
+          {
+            "label": "Arquitectura",
+            "value": "Laravel 13 con Livewire 4 en una aplicación server-driven que separa el flujo público de reservas, el portal del cliente y los módulos administrativos compartiendo las mismas reglas de dominio."
+          },
+          {
+            "label": "Alcance y permisos",
+            "value": "Estructura multiempresa con alcance por tenant y perfiles para superadministración, administración de la empresa, gestión, profesionales y clientes."
+          },
+          {
+            "label": "Motor de disponibilidad",
+            "value": "El cálculo de horarios considera zona horaria, duración del servicio, intervalo entre slots, anticipación mínima, ventana máxima de reserva, agendas, excepciones y conflictos con citas existentes."
+          },
+          {
+            "label": "Flujo de reserva",
+            "value": "Proceso por etapas con servicio/profesional, selección complementaria, calendario, autenticación del cliente y revisión. El estado de la reserva puede mantenerse durante el acceso o registro."
+          },
+          {
+            "label": "Modelo operativo",
+            "value": "Los servicios pueden definir duración y precio y relacionarse con profesionales y sedes. Las citas manejan estados como pendiente, confirmada, completada, cancelada y ausencia."
+          },
+          {
+            "label": "API y autenticación",
+            "value": "API REST protegida con Laravel Sanctum para integraciones autenticadas de tenants, sedes, profesionales, servicios, clientes y citas."
+          },
+          {
+            "label": "Infraestructura",
+            "value": "Entorno en contenedores con aplicación, worker, scheduler, MySQL 8 y Redis 7, separando procesamiento web, colas y rutinas programadas."
+          },
+          {
+            "label": "Branding",
+            "value": "Pipeline de assets de marca para procesar logo y favicon, convertir a WebP y generar URLs versionadas para actualizar la identidad white-label de forma consistente."
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Laravel 13",
+            "description": "Base del backend para reglas de dominio, autenticación, autorización, rutas web/API y módulos administrativos."
+          },
+          {
+            "name": "Livewire 4",
+            "description": "Interfaz administrativa reactiva sin duplicar la lógica de dominio en una SPA separada."
+          },
+          {
+            "name": "Laravel Sanctum",
+            "description": "Autenticación de la API REST para integraciones confiables con los recursos operativos."
+          },
+          {
+            "name": "MySQL 8",
+            "description": "Fuente relacional para tenants, sedes, profesionales, servicios, clientes, agendas y citas."
+          },
+          {
+            "name": "Redis 7",
+            "description": "Soporte de infraestructura para colas, caché y ejecución desacoplada de tareas."
+          },
+          {
+            "name": "Docker Compose",
+            "description": "Orquesta aplicación, base de datos, Redis, worker, scheduler y pasos de inicialización en un stack reproducible."
+          },
+          {
+            "name": "Carbon",
+            "description": "Tratamiento de fechas, calendarios, zonas horarias y reglas temporales del motor de disponibilidad."
+          },
+          {
+            "name": "GD / WebP",
+            "description": "Procesamiento de logo y favicon para normalizar dimensiones y optimizar los assets white-label."
+          },
+          {
+            "name": "PHPUnit 12",
+            "description": "Cobertura automatizada de reglas y flujos críticos del backend."
           }
         ],
         "pricing": []
@@ -1114,7 +1310,7 @@
       }
     },
     {
-      "title": "Imobly — plataforma inmobiliaria y gestión de leads",
+      "title": "Mazetto Imobiliária",
       "category": "product",
       "image": "assets/img/portfolio/imobly.webp",
       "status": "Público",
@@ -1127,7 +1323,7 @@
         "Leaflet + Vercel Blob"
       ],
       "details": {
-        "description": "Imobly reúne la experiencia pública de búsqueda de inmuebles y la operación diaria de la inmobiliaria en una sola aplicación. El visitante puede buscar venta o alquiler, combinar filtros, explorar el mapa, abrir la ficha completa del inmueble, simular financiación y contactar al agente responsable. El área administrativa mantiene inmuebles, imágenes, agentes, tipos, características, identidad visual, usuarios y leads, mientras los eventos de navegación ayudan a medir interés y canales de conversión.",
+        "description": "Mazetto Imobiliária reúne la experiencia pública de búsqueda de inmuebles y la operación diaria de la inmobiliaria en una sola aplicación. El visitante puede buscar venta o alquiler, combinar filtros, explorar el mapa, abrir la ficha completa del inmueble, simular financiación y contactar al agente responsable. El área administrativa mantiene inmuebles, imágenes, agentes, tipos, características, identidad visual, usuarios y leads, mientras los eventos de navegación ayudan a medir interés y canales de conversión.",
         "features": [
           "Catálogo de inmuebles con filtros por finalidad, tipo, barrio, rango de precio, habitaciones, plazas de garaje y código",
           "Mapa interactivo con inmuebles georreferenciados y controles de privacidad para ocultar la ubicación exacta",

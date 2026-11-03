@@ -248,6 +248,8 @@ window.portfolioConfig = {
     { id: 'whatsapp', label: 'WhatsApp', icon: 'bi-whatsapp', url: 'https://wa.me/5549988427624' }
   ],
   projectLinks: {
+    setta_synk: { enabled: 0, url: '' },
+    aletheia: { enabled: 0, url: '' },
     whitelabel_booking: { enabled: 0, url: '' },
     xtreme_fut: { enabled: 0, url: '' },
     accessibility_plugin: { enabled: 1, url: 'https://accessibility-widget-xi.vercel.app/' },
@@ -261,6 +263,32 @@ window.portfolioConfig = {
     realtime_messaging: { enabled: 0, url: '' }
   },
   projectGalleries: {
+    'assets/img/portfolio/setta_synk.webp': [
+      'assets/img/portfolio/setta_synk/setta_synk_01.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_02.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_03.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_04.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_05.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_06.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_07.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_08.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_09.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_10.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_11.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_12.webp',
+      'assets/img/portfolio/setta_synk/setta_synk_13.webp'
+    ],
+    'assets/img/portfolio/aletheia.webp': [
+      'assets/img/portfolio/aletheia/aletheia_01.webp',
+      'assets/img/portfolio/aletheia/aletheia_02.webp',
+      'assets/img/portfolio/aletheia/aletheia_03.webp',
+      'assets/img/portfolio/aletheia/aletheia_04.webp',
+      'assets/img/portfolio/aletheia/aletheia_05.webp',
+      'assets/img/portfolio/aletheia/aletheia_06.webp',
+      'assets/img/portfolio/aletheia/aletheia_07.webp',
+      'assets/img/portfolio/aletheia/aletheia_08.webp',
+      'assets/img/portfolio/aletheia/aletheia_09.webp'
+    ],
     'assets/img/portfolio/whitelabel_booking.webp': [
       'assets/img/portfolio/whitelabel_booking/whitelabel_booking_01.webp',
       'assets/img/portfolio/whitelabel_booking/whitelabel_booking_02.webp',
