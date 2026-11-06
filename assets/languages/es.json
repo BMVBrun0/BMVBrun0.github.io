@@ -159,7 +159,7 @@
     {
       "title": "Tech Lead · Astronfy",
       "period": "2023 · 2024",
-      "description": "Liderazgo técnico de un equipo de 5 profesionales, responsable de marketplace, dashboard contable, pagos y aplicaciones white-label. Desarrollo hands-on con PHP/Laravel/Blade/Livewire, Angular, Node.js/Next.js y Python, además de VPS, AWS/Azure y onboarding técnico; el marketplace operó en 10+ países y la implantación de nuevos clientes bajó a cerca de 3 días."
+      "description": "Liderazgo técnico hands-on de un equipo de cinco profesionales en marketplaces, dashboards, pagos y aplicaciones white-label. Desarrollo con PHP/Laravel/Blade/Livewire, React, Angular, Node.js/Next.js y Python, además de VPS y AWS/Azure. Comunicación técnica en inglés con clientes y socios en Brasil, Portugal, México, Alemania, EE. UU., Paraguay y Curazao; onboarding técnico de nuevos clientes web reducido a unos tres días."
     },
     {
       "title": "Desarrollador Full Stack y Mobile · Infogen Sistemas",
@@ -169,7 +169,7 @@
     {
       "title": "Desarrollador Full Stack & Mobile · Freelance y Proyectos Propios",
       "period": "2018 · Actual · por proyecto",
-      "description": "Desarrollo y consultoría de productos web/mobile, APIs, dashboards, sistemas internos, integraciones y experiencias 2D/3D, eligiendo la stack según el producto. Proyectos recientes incluyen una app de inspecciones inmobiliarias en producción, una app internacional de entrenamiento deportivo con IAP y una plataforma propia de contextualización de noticias/datos públicos, con clientes y socios en 4+ países."
+      "description": "Desarrollo y consultoría desde 2018 en productos web/mobile, APIs, dashboards, sistemas internos, integraciones y experiencias 2D/3D. Más de 30 apps mobile white-label de pequeña escala y clientes/socios en 4+ países. Proyectos: SettaSynk, en beta y preparación comercial, XtremeFut con IAP y participación de Ferrão, Aletheia y SDKs de accesibilidad. Presenté personalmente XtremeFut en HIT Games Conference, Berlín, en 2024."
     }
   ],
   "servicesSection": {
@@ -273,7 +273,7 @@
         "Python / FastAPI"
       ],
       "details": {
-        "description": "SettaSynk conecta las inspecciones de campo con la gestión de inmuebles, equipos y documentos. La aplicación organiza ambientes e ítems, registra su estado y evidencias fotográficas y audiovisuales y permite seguir trabajando sin conexión, sincronizando los cambios después. El panel web reúne agenda, seguimiento operativo, plantillas de inspección y gestión de informes para profesionales independientes y empresas. Los relatos de voz pueden transcribirse e interpretarse mediante servicios propios para ayudar a completar la inspección; esta etapa avanzada requiere conexión con la API y mantiene la revisión a cargo del profesional.",
+        "description": "SettaSynk conecta las inspecciones de campo con la gestión de inmuebles, equipos y documentos. La aplicación organiza ambientes e ítems, registra su estado y evidencias fotográficas y audiovisuales y permite seguir trabajando sin conexión, sincronizando los cambios después. El panel web reúne agenda, seguimiento operativo, plantillas de inspección y gestión de informes para profesionales independientes y empresas. Los relatos de voz pueden transcribirse e interpretarse mediante servicios propios para ayudar a completar la inspección; esta etapa avanzada requiere conexión con la API y mantiene la revisión a cargo del profesional. Producto desarrollado, en pruebas beta con empresas de inspección e inmobiliarias de Rio Grande do Sul, Brasil, y en preparación comercial.",
         "features": [
           "Inspecciones organizadas por inmueble, ambiente, ítem, estado y observaciones",
           "Captura y gestión de fotos, videos y audios vinculados a las evidencias de la inspección",
@@ -475,7 +475,7 @@
         "PHP API"
       ],
       "details": {
-        "description": "XtremeFut transforma orientación profesional de entrenamiento en una experiencia mobile organizada. Desarrollada en colaboración con el jugador de futsal Ferrão, la aplicación reúne secuencias y ejercicios escritos por profesionales, demostraciones en video, intervalos, días de descanso planificados y recomendaciones alineadas con el perfil del usuario. La edad, la altura y el peso ayudan a sugerir nivel y objetivo, mientras el atleta puede explorar el catálogo, seguir rutinas por día y revisar ejercicios.",
+        "description": "XtremeFut transforma orientación profesional de entrenamiento en una experiencia mobile organizada. Desarrollada en colaboración con el jugador de futsal Ferrão, la aplicación reúne secuencias y ejercicios escritos por profesionales, demostraciones en video, intervalos, días de descanso planificados y recomendaciones alineadas con el perfil del usuario. La edad, la altura y el peso ayudan a sugerir nivel y objetivo, mientras el atleta puede explorar el catálogo, seguir rutinas por día y revisar ejercicios. La aplicación incluye compras integradas. Presenté personalmente el proyecto en HIT Games Conference, Berlín, en 2024.",
         "features": [
           "Planes y ejercicios estructurados a partir de contenido elaborado por profesionales del deporte",
           "Colaboración con Ferrão como atleta central en la propuesta del producto",
@@ -2025,7 +2025,7 @@
       "result": "Refactorización de productos de agenda y creación de una base white-label reutilizable para distintos clientes y flujos operativos.",
       "bullets": [
         "Nuevo sistema white-label adoptado por decenas de clientes",
-        "Metas comerciales previstas para seis meses alcanzadas en aproximadamente un trimestre",
+        "Según feedback comercial interno recibido en su momento, la solución white-label de agenda y colas alcanzó en aproximadamente un trimestre una referencia de facturación comparable a seis meses de un producto consolidado.",
         "Mejoras de rendimiento, escalabilidad y mantenimiento en productos mobile y web"
       ]
     },
@@ -2035,9 +2035,9 @@
       "title": "Arquitectura, pagos y expansión internacional",
       "result": "Liderazgo técnico e implementación en productos web/mobile, arquitectura white-label, integraciones de pagos y operación con clientes internacionales.",
       "bullets": [
-        "Marketplace atendiendo clientes en más de 10 países",
-        "Sistema de pagos procesando miles de transacciones mensuales",
-        "Pipeline white-label redujo la implantación técnica de nuevos clientes a cerca de 3 días"
+        "Comunicación técnica con clientes y socios en Brasil, Portugal, México, Alemania, EE. UU., Paraguay y Curazao, incluidas reuniones en inglés.",
+        "Desarrollo de marketplace e integraciones de pago, con flujos operativos que abarcan solicitudes HTTP, operaciones de base de datos, eventos de aplicación y automatizaciones.",
+        "La estandarización modular/white-label, configuración y despliegue redujo el onboarding técnico de nuevos clientes web a unos tres días; las apps también dependen de las etapas y normas de las tiendas."
       ]
     },
     {

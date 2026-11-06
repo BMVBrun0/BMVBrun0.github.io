@@ -43,7 +43,7 @@ window.portfolioExtendedData = {
       "download": "Baixar PDF",
       "print": "Imprimir / salvar PDF",
       "summaryTitle": "Perfil profissional",
-      "summary": "Desenvolvedor Full Stack & Mobile com 8+ anos de experiência prática, do primeiro contato com clientes e pequenos freelances até liderança técnica, arquitetura e operação de produtos em escala. Continuo hands-on: frontend, backend, mobile, bancos, integrações, cloud, testes, publicação nas lojas e sustentação em produção fazem parte do mesmo trabalho quando o produto exige.",
+      "summary": "Desenvolvedor Full Stack & Mobile com 8 anos de experiência desde 2018, incluindo projetos independentes e, desde 2022, atuação nas empresas da trajetória. Especialização em React Native/Expo, com profundidade em frontend, backend, dados, integrações, cloud, testes e publicação Android/iOS. Aproximadamente 4 anos em liderança ou referência técnica, incluindo cargos formais de Tech Lead, mantendo participação direta no código, na arquitetura e na sustentação dos produtos.",
       "focusTitle": "Matriz tecnológica",
       "experienceTitle": "Experiência profissional",
       "experienceIntro": "O resumo do PDF cabe em duas páginas. Aqui dá para abrir cada experiência e ver produtos, problemas que resolvi, arquitetura, dados, operação, liderança e resultados.",
@@ -74,20 +74,20 @@ window.portfolioExtendedData = {
           "label": "anos construindo software"
         },
         {
-          "value": "100+",
-          "label": "apps e produtos digitais levados do zero à produção"
+          "value": "30+",
+          "label": "apps mobile white-label de pequena escala em projetos independentes"
         },
         {
-          "value": "3+",
-          "label": "anos em liderança técnica hands-on"
+          "value": "~4",
+          "label": "anos em liderança ou referência técnica hands-on"
         },
         {
           "value": "4+",
           "label": "países com clientes ou parceiros"
         },
         {
-          "value": "4+",
-          "label": "POCs/editais com etapa técnica aprovada"
+          "value": "4",
+          "label": "POCs com aprovação na avaliação técnica"
         },
         {
           "value": "~75%",
@@ -162,7 +162,8 @@ window.portfolioExtendedData = {
               "Construção do painel principal e das aplicações para alunos, professores, gestores e perfis administrativos, com regras configuráveis por tenant, instituição, município, regional e estado.",
               "Biblioteca EPUB com download/offline no aplicativo, leitura, atividades, TTS, recursos de acessibilidade e integração com VLibras.",
               "Integração de jogos 2D em Phaser/JavaScript e suporte técnico ao produto 3D em Unity/C#, incluindo integrações, performance, scripts e otimização de build.",
-              "Dashboards e relatórios para professores, gestores, diretores, regionais e superadmins, além de fluxos de sequências didáticas, videoaulas, atividades e fluência leitora."
+              "Dashboards e relatórios para professores, gestores, diretores, regionais e superadmins, além de fluxos de sequências didáticas, videoaulas, atividades e fluência leitora.",
+              "Desenvolvimento de quatro variantes web e de uma base mobile React Native/Expo compartilhada entre produtos e perfis; responsabilidade por contas de desenvolvedor, builds, submissão, homologação e publicação/atualização das versões disponibilizadas na Google Play e App Store."
             ]
           },
           {
@@ -170,8 +171,8 @@ window.portfolioExtendedData = {
             "items": [
               "Estruturação de Laravel, modelagem/migrations, middlewares, segurança, APIs e integração com aplicações React/React Native.",
               "Migração de infraestrutura de VPS/Hostinger para DigitalOcean, uso de buckets/Spaces para assets, balanceamento e separação de cargas.",
-              "Automação de CI/CD com GitHub Actions e containers Docker; externalização de assets e otimização de uma base de projeto com mais de 40 GB para imagens/builds operacionais abaixo de aproximadamente 4 GB.",
-              "Cache, filas, Redis, Mailgun, observabilidade e testes de carga com Grafana para cenários de alta escala, incluindo validações planejadas para até 2 milhões de usuários."
+              "Externalização de assets para buckets/Spaces e CI/CD com Docker/GitHub Actions: o conjunto operacional anterior superava 40 GB; as imagens/builds de deploy passaram a ter menos de aproximadamente 4 GB.",
+              "Cache, filas, Redis, Mailgun, observabilidade/Grafana e testes de carga com dados simulados para avaliar escalabilidade; capacidade planejada não equivale a usuários reais atendidos."
             ]
           },
           {
@@ -186,7 +187,7 @@ window.portfolioExtendedData = {
           {
             "title": "Liderança e operação",
             "items": [
-              "Liderança e apoio ao time de games e demais desenvolvedores, revisão de código, mentoria e decisões de arquitetura.",
+              "Liderança técnica hands-on de equipe de seis profissionais, com organização de sprints, responsabilidades, mentoria, revisão de código e decisões de arquitetura.",
               "Organização de dailies, sprints e decomposição de tarefas, atuando também próximo de produto/PO quando necessário.",
               "Participação direta em POCs e apresentações públicas, incluindo entrega técnica completa em São Paulo e suporte a negociações com grupos educacionais."
             ]
@@ -195,7 +196,7 @@ window.portfolioExtendedData = {
             "title": "Resultados e impacto",
             "items": [
               "Estruturação da base técnica que hoje permite à empresa vender, demonstrar e evoluir os produtos sobre uma fundação única, modular e documentada, em vez de depender de ambientes montados manualmente.",
-              "Mais de quatro POCs/apresentações realizadas com a plataforma, todas atendendo com folga os requisitos técnicos apresentados.",
+              "Participação em quatro POCs para editais públicos, aprovadas nas avaliações técnicas. Etapas jurídicas e decisões comerciais seguiram processos independentes da engenharia.",
               "Ambientes containerizados e documentados que permitem subir uma nova instância com poucos comandos, reduzindo dependências locais e o custo operacional de uma equipe pequena.",
               "Arquitetura preparada para crescimento horizontal e vertical, separação de cargas, buckets de assets, balanceamento, cache e filas antes de a startup atingir uma escala que normalmente exigiria esse nível de estrutura."
             ]
@@ -262,7 +263,7 @@ window.portfolioExtendedData = {
           {
             "title": "Resultados e impacto",
             "items": [
-              "O produto white-label atingiu recordes internos de venda já no primeiro trimestre de vida.",
+              "Segundo feedback comercial interno recebido na época, a solução white-label de agendamento e filas atingiu em cerca de um trimestre uma referência de faturamento comparável à de seis meses de um produto consolidado.",
               "Refatoração de uma frente web de marketplace/agendamento que vinha acumulando anos de necessidade de modernização.",
               "Padronização do fluxo de entrega mobile, deixando build, validação e publicação mais acessíveis também para desenvolvedores que não eram especialistas em mobile.",
               "Redução do ciclo entre demanda no Jira e publicação em loja de aproximadamente 30 dias para algo próximo de uma semana em cenários recorrentes."
@@ -304,7 +305,7 @@ window.portfolioExtendedData = {
             "items": [
               "Integrações de checkout e meios de pagamento nacionais, internacionais e com criptomoedas.",
               "Uso de RevenueCat e in-app purchases em produtos mobile, Firebase para autenticação/analytics e Google Analytics/Ads em fluxos de aquisição e mensuração.",
-              "SEO, instrumentação e suporte a clientes/parceiros da Europa e Ásia em um marketplace operando em mais de 10 países."
+              "Contato técnico com clientes e parceiros no Brasil, Portugal, México, Alemanha, EUA, Paraguai e Curaçao, incluindo alinhamentos em inglês."
             ]
           },
           {
@@ -325,9 +326,9 @@ window.portfolioExtendedData = {
           {
             "title": "Resultados e impacto",
             "items": [
-              "Marketplace operando em mais de 10 países e processando milhares de transações mensais, com integrações de pagamento tradicionais e criptomoedas.",
-              "Consolidação de uma arquitetura modular e white-label que reduziu trabalho manual de banco, deploy e ativação de módulos.",
-              "Atuação direta com clientes e parceiros internacionais, transformando requisitos comerciais em entregas técnicas e integrações."
+              "Contato técnico com clientes e parceiros no Brasil, Portugal, México, Alemanha, EUA, Paraguai e Curaçao, incluindo alinhamentos em inglês.",
+              "Desenvolvimento de marketplace, integrações de pagamento e fluxos operacionais envolvendo requisições HTTP, operações de banco, eventos de aplicação e automações.",
+              "Padronização da arquitetura modular/white-label, configuração e deploy reduziu a implantação técnica de novos clientes web para aproximadamente 3 dias; aplicativos também dependem das etapas e regras das lojas."
             ]
           }
         ],
@@ -385,14 +386,14 @@ window.portfolioExtendedData = {
             "title": "Crescimento e liderança informal",
             "items": [
               "Progressão de estagiário/trainee para júnior e pleno; na saída havia negociação de evolução para sênior.",
-              "Atuação em ecossistema de mais de 20 aplicativos, refatoração de mais de 8 apps e criação/evolução de mais de 15 módulos white-label.",
+              "Desenvolvimento individual de mais de 20 aplicativos white-label em um ecossistema superior a 40 aplicações, além de mais de 8 apps refatorados e mais de 15 módulos white-label criados/evoluídos.",
               "Onboarding e apoio a desenvolvedores, referência para mobile, módulo Leite, portais, stored procedures/triggers e integrações."
             ]
           },
           {
             "title": "Resultados e impacto",
             "items": [
-              "A nova base React Native/white-label aumentou de forma relevante a velocidade de criação, manutenção e entrega de aplicativos.",
+              "Consolidação de legados Java, Flutter e Xamarin em uma base React Native/Expo white-label, reduzindo ciclos recorrentes de desenvolvimento e publicação de aproximadamente 20 dias para uma semana.",
               "Modernização de aplicativos críticos de campo com sincronização offline, migrations e integridade de dados, eliminando a necessidade recorrente de desinstalar o app para atualizar versões.",
               "Evolução de APIs, segurança, LGPD, pipelines e processos de publicação, além da estruturação prática da frente mobile como área de referência dentro do time.",
               "Crescimento de estagiário para pleno em menos de dois anos, tornando-me referência técnica para mobile, módulo Leite, portais, SQL e integrações."
@@ -462,6 +463,14 @@ window.portfolioExtendedData = {
               "Trabalhar em cenários muito diferentes me obrigou a comparar stacks e arquiteturas na prática, escolhendo tecnologia pelo problema em vez de repetir a mesma solução para tudo.",
               "A atuação independente ajudou a construir uma rede de clientes, parceiros e outros desenvolvedores e aumentou minha maturidade em negociação, documentação, responsabilidade e comunicação profissional."
             ]
+          },
+          {
+            "title": "Projetos autorais e contexto de entrega",
+            "items": [
+              "SettaSynk: app React Native/Expo offline-first, SQLite, sincronização resiliente, evidências multimídia, API Laravel/PostgreSQL, laudos PDF e serviços próprios de IA para voz. Produto em beta com empresas de vistoria e imobiliárias do RS, em preparação comercial.",
+              "XtremeFut: app internacional de treinamento esportivo com Ferrão e profissionais de treinamento, painel administrativo e in-app purchases. Apresentação pessoal na HIT Games Conference, Berlim, em 2024.",
+              "Aletheia: plataforma de contextualização de notícias e dados públicos com origem e limites explícitos; SDKs de acessibilidade com TTS, filtros de cor, fontes e redução de animações, complementando a acessibilidade estrutural."
+            ]
           }
         ],
         "stack": [
@@ -529,7 +538,7 @@ window.portfolioExtendedData = {
       "download": "Download PDF",
       "print": "Print / save PDF",
       "summaryTitle": "Professional profile",
-      "summary": "Full Stack & Mobile Developer with 8+ years of practical experience, from early freelance work and direct client contact to technical leadership, architecture and production operations. I remain hands-on across frontend, backend, mobile, databases, integrations, cloud, testing, app-store publishing and production support whenever the product requires it.",
+      "summary": "Full Stack & Mobile Developer with 8 years of experience since 2018, including independent projects and company roles since 2022. Specialized in React Native/Expo, with depth across frontend, backend, data, integrations, cloud, testing and Android/iOS publishing. Approximately 4 years in technical leadership or technical-reference roles, including formal Tech Lead positions, while remaining directly involved in code, architecture and product maintenance.",
       "focusTitle": "Technology matrix",
       "experienceTitle": "Professional experience",
       "experienceIntro": "The PDF keeps each role short. Here you can open each experience and see the products, problems, architecture, data, operations, leadership and results behind it.",
@@ -560,20 +569,20 @@ window.portfolioExtendedData = {
           "label": "years building software"
         },
         {
-          "value": "100+",
-          "label": "apps and digital products taken from zero to production"
+          "value": "30+",
+          "label": "small-scale white-label mobile apps in independent projects"
         },
         {
-          "value": "3+",
-          "label": "years in hands-on technical leadership"
+          "value": "~4",
+          "label": "years in hands-on technical leadership or technical-reference roles"
         },
         {
           "value": "4+",
           "label": "countries with clients or partners"
         },
         {
-          "value": "4+",
-          "label": "POCs/public bids with technical stage approved"
+          "value": "4",
+          "label": "POCs approved in technical evaluations"
         },
         {
           "value": "~75%",
@@ -648,7 +657,8 @@ window.portfolioExtendedData = {
               "Built the core admin platform and applications for students, teachers, managers and administrative roles with tenant/institution/municipality/regional/state-level configuration.",
               "Implemented an EPUB library with mobile offline download, reading, activities, TTS, accessibility and VLibras integration.",
               "Integrated Phaser/JavaScript 2D games and provided technical support to Unity/C# 3D products, including integrations, performance work, scripts and build optimization.",
-              "Built dashboards and reports for multiple education-management roles, plus lesson sequences, video classes, activities and reading-fluency flows."
+              "Built dashboards and reports for multiple education-management roles, plus lesson sequences, video classes, activities and reading-fluency flows.",
+              "Developed four web variants and a shared React Native/Expo mobile foundation across products and user roles; managed developer accounts, builds, submissions, app review/testing and publishing/updating released versions on Google Play and the App Store."
             ]
           },
           {
@@ -656,8 +666,8 @@ window.portfolioExtendedData = {
             "items": [
               "Structured Laravel services, migrations, middleware, security, APIs and integration with React/React Native applications.",
               "Moved infrastructure from early VPS hosting to DigitalOcean, using buckets/Spaces for assets, load distribution and workload separation.",
-              "Automated CI/CD with GitHub Actions and Docker and externalized large assets to reduce operational image/build size.",
-              "Worked with cache, queues, Redis, Mailgun, observability and Grafana-based load testing for high-scale scenarios, including planned validation up to two million users."
+              "Moved assets to buckets/Spaces and automated CI/CD with Docker/GitHub Actions: the previous operational footprint exceeded 40 GB, while deployable images/builds became smaller than approximately 4 GB.",
+              "Cache, queues, Redis, Mailgun, Grafana observability and load tests with simulated data to evaluate scalability; planned capacity does not represent real users served."
             ]
           },
           {
@@ -672,7 +682,7 @@ window.portfolioExtendedData = {
           {
             "title": "Liderazgo y operación",
             "items": [
-              "Led and supported game and software developers through code review, mentoring and architecture decisions.",
+              "Provided hands-on technical leadership to a six-person team, organizing sprints, responsibilities, mentoring, code reviews and architectural decisions.",
               "Organized dailies, sprints and task breakdown while working close to product/PO responsibilities when needed.",
               "Supported public-sector POCs, technical presentations and education-industry negotiations."
             ]
@@ -681,7 +691,7 @@ window.portfolioExtendedData = {
             "title": "Results & impact",
             "items": [
               "Built the technical foundation the company now uses to sell, demo and evolve its products on a shared, modular and documented platform instead of manually assembled environments.",
-              "More than four POCs/product demonstrations delivered with the platform, all comfortably meeting the technical requirements presented.",
+              "Contributed to four POCs for public procurement processes, approved in technical evaluations. Legal stages and commercial decisions followed processes outside engineering.",
               "Containerized and documented environments that allow a new instance to be brought up with only a few commands, reducing local dependency setup and operational overhead for a small team.",
               "Architecture prepared early for horizontal and vertical growth, workload separation, asset buckets, load balancing, caching and queues."
             ]
@@ -747,7 +757,7 @@ window.portfolioExtendedData = {
           {
             "title": "Results & impact",
             "items": [
-              "The white-label product reached internal sales records during its first quarter.",
+              "According to internal commercial feedback received at the time, the white-label scheduling and queue-management solution reached, in roughly one quarter, a revenue benchmark comparable to six months of an established product.",
               "Modernized a marketplace/scheduling web area that had accumulated years of refactoring needs.",
               "Standardized the mobile delivery flow so build, validation and publishing became easier even for developers who were not mobile specialists.",
               "Reduced the recurring path from Jira task to app-store release from roughly 30 days to about one week."
@@ -788,7 +798,7 @@ window.portfolioExtendedData = {
             "items": [
               "Integrated domestic, international and cryptocurrency payment methods.",
               "Used RevenueCat/in-app purchases, Firebase, Google Analytics/Ads and SEO instrumentation.",
-              "Supported customers and partners in Europe and Asia in a marketplace operating across 10+ countries."
+              "Technical communication with customers and partners in Brazil, Portugal, Mexico, Germany, the USA, Paraguay and Curaçao, including meetings in English."
             ]
           },
           {
@@ -809,9 +819,9 @@ window.portfolioExtendedData = {
           {
             "title": "Results & impact",
             "items": [
-              "Marketplace operating in 10+ countries and processing thousands of monthly transactions with traditional and cryptocurrency payment integrations.",
-              "Consolidated a modular white-label architecture that reduced manual database, deployment and module-activation work.",
-              "Worked directly with international customers and partners, translating commercial requirements into technical delivery and integrations."
+              "Technical communication with customers and partners in Brazil, Portugal, Mexico, Germany, the USA, Paraguay and Curaçao, including meetings in English.",
+              "Developed marketplace and payment integrations, with operational flows spanning HTTP requests, database operations, application events and automation.",
+              "Standardized modular/white-label architecture, configuration and deployments reduced technical onboarding for new web customers to about three days; mobile apps also depend on app-store review and release steps."
             ]
           }
         ],
@@ -867,14 +877,14 @@ window.portfolioExtendedData = {
             "title": "Crecimiento y mentoría",
             "items": [
               "Progressed from intern/trainee to junior and mid-level; senior progression was being discussed when I left.",
-              "Worked in an ecosystem of 20+ apps, refactored 8+ apps and contributed to 15+ white-label modules.",
+              "Individually developed more than 20 white-label apps within an ecosystem of over 40 applications, alongside refactoring 8+ apps and creating/evolving 15+ reusable white-label modules.",
               "Onboarded and supported developers and became a reference for mobile, the dairy module, portals and database/integration work."
             ]
           },
           {
             "title": "Results & impact",
             "items": [
-              "The React Native/white-label foundation substantially increased the speed of creating, maintaining and delivering mobile applications.",
+              "Consolidated legacy Java, Flutter and Xamarin applications into a reusable React Native/Expo white-label foundation, reducing recurring development and publishing cycles from approximately 20 days to one week.",
               "Modernized critical field apps with offline synchronization, migrations and data-integrity safeguards, removing the recurring need to uninstall apps before updates.",
               "Improved APIs, security, LGPD/privacy practices, pipelines and publishing processes while helping structure mobile as a strong technical area inside the team.",
               "Progressed from intern to mid-level developer in under two years and became a technical reference for mobile, the dairy module, portals, SQL and integrations."
@@ -943,6 +953,14 @@ window.portfolioExtendedData = {
               "Working across very different scenarios forced me to compare stacks and architectures in practice, choosing technology for the problem instead of repeating the same solution everywhere.",
               "Independent work helped me build a network of clients, partners and developers while improving negotiation, documentation, ownership and professional communication."
             ]
+          },
+          {
+            "title": "Independent projects and delivery context",
+            "items": [
+              "SettaSynk: offline-first React Native/Expo app, SQLite, resilient synchronization, multimedia evidence, Laravel/PostgreSQL API, PDF reports and in-house voice AI services. In beta with inspection companies and real-estate agencies in southern Brazil, preparing for commercial launch.",
+              "XtremeFut: international sports-training app with Ferrão and training professionals, an administrative dashboard and in-app purchases. Personally presented at HIT Games Conference, Berlin, in 2024.",
+              "Aletheia: news and public-data contextualization with explicit provenance and limitations; accessibility SDKs with TTS, color filters, typography and reduced motion, complementing structural accessibility."
+            ]
           }
         ],
         "stack": [
@@ -1010,7 +1028,7 @@ window.portfolioExtendedData = {
       "download": "Descargar PDF",
       "print": "Imprimir / guardar PDF",
       "summaryTitle": "Perfil profesional",
-      "summary": "Desarrollador Full Stack & Mobile con más de 8 años de experiencia práctica, desde freelances iniciales y contacto directo con clientes hasta liderazgo técnico, arquitectura y operación en producción. Mantengo actuación hands-on en frontend, backend, mobile, datos, integraciones, cloud, pruebas, publicación en tiendas y soporte productivo.",
+      "summary": "Desarrollador Full Stack & Mobile con 8 años de experiencia desde 2018, incluidos proyectos independientes y, desde 2022, puestos en empresas. Especialización en React Native/Expo y experiencia en frontend, backend, datos, integraciones, cloud, pruebas y publicación Android/iOS. Aproximadamente 4 años de liderazgo o referencia técnica, incluidos puestos formales de Tech Lead, manteniendo participación directa en código, arquitectura y mantenimiento.",
       "focusTitle": "Matriz tecnológica",
       "experienceTitle": "Experiencia profesional",
       "experienceIntro": "El PDF resume cada etapa. Aquí se puede abrir cada experiencia y ver productos, problemas resueltos, arquitectura, datos, operación, liderazgo y resultados.",
@@ -1041,20 +1059,20 @@ window.portfolioExtendedData = {
           "label": "años construyendo software"
         },
         {
-          "value": "100+",
-          "label": "apps y productos digitales llevados desde cero hasta producción"
+          "value": "30+",
+          "label": "apps mobile white-label de pequeña escala en proyectos independientes"
         },
         {
-          "value": "3+",
-          "label": "años en liderazgo técnico hands-on"
+          "value": "~4",
+          "label": "años de liderazgo o referencia técnica hands-on"
         },
         {
           "value": "4+",
           "label": "países con clientes o socios"
         },
         {
-          "value": "4+",
-          "label": "POCs/licitaciones con etapa técnica aprobada"
+          "value": "4",
+          "label": "POCs aprobadas en evaluaciones técnicas"
         },
         {
           "value": "~75%",
@@ -1129,7 +1147,8 @@ window.portfolioExtendedData = {
               "Built the core admin platform and applications for students, teachers, managers and administrative roles with tenant/institution/municipality/regional/state-level configuration.",
               "Implemented an EPUB library with mobile offline download, reading, activities, TTS, accessibility and VLibras integration.",
               "Integrated Phaser/JavaScript 2D games and provided technical support to Unity/C# 3D products, including integrations, performance work, scripts and build optimization.",
-              "Built dashboards and reports for multiple education-management roles, plus lesson sequences, video classes, activities and reading-fluency flows."
+              "Built dashboards and reports for multiple education-management roles, plus lesson sequences, video classes, activities and reading-fluency flows.",
+              "Desarrollo de cuatro variantes web y una base mobile React Native/Expo compartida entre productos y perfiles; gestión de cuentas de desarrollador, builds, envíos, homologación y publicación/actualización de versiones en Google Play y App Store."
             ]
           },
           {
@@ -1137,8 +1156,8 @@ window.portfolioExtendedData = {
             "items": [
               "Structured Laravel services, migrations, middleware, security, APIs and integration with React/React Native applications.",
               "Moved infrastructure from early VPS hosting to DigitalOcean, using buckets/Spaces for assets, load distribution and workload separation.",
-              "Automated CI/CD with GitHub Actions and Docker and externalized large assets to reduce operational image/build size.",
-              "Worked with cache, queues, Redis, Mailgun, observability and Grafana-based load testing for high-scale scenarios, including planned validation up to two million users."
+              "Externalización de assets a buckets/Spaces y CI/CD con Docker/GitHub Actions: el conjunto operativo anterior superaba 40 GB; las imágenes/builds de despliegue pasaron a ocupar menos de aproximadamente 4 GB.",
+              "Caché, colas, Redis, Mailgun, observabilidad/Grafana y pruebas de carga con datos simulados para evaluar escalabilidad; la capacidad planificada no equivale a usuarios reales atendidos."
             ]
           },
           {
@@ -1153,7 +1172,7 @@ window.portfolioExtendedData = {
           {
             "title": "Liderazgo y operación",
             "items": [
-              "Led and supported game and software developers through code review, mentoring and architecture decisions.",
+              "Liderazgo técnico hands-on de un equipo de seis profesionales, con organización de sprints, responsabilidades, mentoría, revisión de código y decisiones de arquitectura.",
               "Organized dailies, sprints and task breakdown while working close to product/PO responsibilities when needed.",
               "Supported public-sector POCs, technical presentations and education-industry negotiations."
             ]
@@ -1162,7 +1181,7 @@ window.portfolioExtendedData = {
             "title": "Resultados e impacto",
             "items": [
               "Construcción de la base técnica que hoy permite vender, demostrar y evolucionar los productos sobre una plataforma única, modular y documentada, evitando entornos montados manualmente.",
-              "Más de cuatro POCs/presentaciones realizadas con la plataforma, todas cumpliendo con holgura los requisitos técnicos presentados.",
+              "Participación en cuatro POCs para procesos públicos, aprobadas en las evaluaciones técnicas. Las etapas jurídicas y decisiones comerciales siguieron procesos independientes de ingeniería.",
               "Entornos containerizados y documentados que permiten levantar una nueva instancia con pocos comandos, reduciendo dependencias locales y carga operativa para un equipo pequeño.",
               "Arquitectura preparada desde temprano para crecimiento horizontal y vertical, separación de cargas, buckets de assets, balanceo, caché y colas."
             ]
@@ -1228,7 +1247,7 @@ window.portfolioExtendedData = {
           {
             "title": "Resultados e impacto",
             "items": [
-              "El producto white-label alcanzó récords internos de ventas durante su primer trimestre.",
+              "Según feedback comercial interno recibido en su momento, la solución white-label de agenda y colas alcanzó en aproximadamente un trimestre una referencia de facturación comparable a seis meses de un producto consolidado.",
               "Modernización de una frente web de marketplace/agendamiento que acumulaba años de necesidad de refactorización.",
               "Estandarización del flujo de entrega mobile para facilitar build, validación y publicación incluso a desarrolladores no especialistas en mobile.",
               "Reducción del ciclo recurrente entre tarea en Jira y publicación en tienda de aproximadamente 30 días a cerca de una semana."
@@ -1269,7 +1288,7 @@ window.portfolioExtendedData = {
             "items": [
               "Integrated domestic, international and cryptocurrency payment methods.",
               "Used RevenueCat/in-app purchases, Firebase, Google Analytics/Ads and SEO instrumentation.",
-              "Supported customers and partners in Europe and Asia in a marketplace operating across 10+ countries."
+              "Comunicación técnica con clientes y socios en Brasil, Portugal, México, Alemania, EE. UU., Paraguay y Curazao, incluidas reuniones en inglés."
             ]
           },
           {
@@ -1290,9 +1309,9 @@ window.portfolioExtendedData = {
           {
             "title": "Resultados e impacto",
             "items": [
-              "Marketplace operando en más de 10 países y procesando miles de transacciones mensuales con pagos tradicionales y criptomonedas.",
-              "Consolidación de una arquitectura modular white-label que redujo trabajo manual de base de datos, deploy y activación de módulos.",
-              "Trabajo directo con clientes y socios internacionales, convirtiendo requisitos comerciales en entregas técnicas e integraciones."
+              "Comunicación técnica con clientes y socios en Brasil, Portugal, México, Alemania, EE. UU., Paraguay y Curazao, incluidas reuniones en inglés.",
+              "Desarrollo de marketplace e integraciones de pago, con flujos operativos que abarcan solicitudes HTTP, operaciones de base de datos, eventos de aplicación y automatizaciones.",
+              "La estandarización modular/white-label, configuración y despliegue redujo el onboarding técnico de nuevos clientes web a unos tres días; las apps también dependen de las etapas y normas de las tiendas."
             ]
           }
         ],
@@ -1348,14 +1367,14 @@ window.portfolioExtendedData = {
             "title": "Crecimiento y mentoría",
             "items": [
               "Progressed from intern/trainee to junior and mid-level; senior progression was being discussed when I left.",
-              "Worked in an ecosystem of 20+ apps, refactored 8+ apps and contributed to 15+ white-label modules.",
+              "Desarrollo individual de más de 20 apps white-label dentro de un ecosistema superior a 40 aplicaciones, además de 8+ apps refactorizadas y 15+ módulos white-label creados/evolucionados.",
               "Onboarded and supported developers and became a reference for mobile, the dairy module, portals and database/integration work."
             ]
           },
           {
             "title": "Resultados e impacto",
             "items": [
-              "La nueva base React Native/white-label aumentó de forma relevante la velocidad de creación, mantenimiento y entrega de aplicaciones.",
+              "Consolidación de aplicaciones Java, Flutter y Xamarin en una base React Native/Expo white-label reutilizable, reduciendo ciclos recurrentes de desarrollo y publicación de unos 20 días a una semana.",
               "Modernización de apps críticas de campo con sincronización offline, migrations e integridad de datos, eliminando la necesidad recurrente de desinstalar la app para actualizar.",
               "Evolución de APIs, seguridad, LGPD, pipelines y procesos de publicación, además de ayudar a estructurar mobile como área técnica de referencia.",
               "Evolución de becario a desarrollador pleno en menos de dos años, convirtiéndome en referencia para mobile, módulo Leite, portales, SQL e integraciones."
@@ -1423,6 +1442,14 @@ window.portfolioExtendedData = {
               "La colaboración en el proyecto deportivo con Ferrão amplió mi experiencia con producto internacional, apps móviles, suscripciones/in-app purchases, panel administrativo y personalización de entrenamientos.",
               "Trabajar en escenarios muy distintos me obligó a comparar stacks y arquitecturas en la práctica, eligiendo tecnología según el problema en vez de repetir la misma solución para todo.",
               "El trabajo independiente ayudó a construir una red de clientes, socios y desarrolladores y aumentó mi madurez en negociación, documentación, responsabilidad y comunicación profesional."
+            ]
+          },
+          {
+            "title": "Proyectos propios y contexto de entrega",
+            "items": [
+              "SettaSynk: app React Native/Expo offline-first, SQLite, sincronización resiliente, evidencias multimedia, API Laravel/PostgreSQL, informes PDF e IA propia para voz. En beta con empresas de inspección e inmobiliarias del sur de Brasil y en preparación comercial.",
+              "XtremeFut: app internacional de entrenamiento deportivo con Ferrão y profesionales, panel administrativo y compras integradas. Presentación personal en HIT Games Conference, Berlín, en 2024.",
+              "Aletheia: contextualización de noticias y datos públicos con fuentes y límites explícitos; SDKs de accesibilidad con TTS, filtros de color, fuentes y reducción de animaciones, como complemento a la accesibilidad estructural."
             ]
           }
         ],

@@ -159,7 +159,7 @@
     {
       "title": "Tech Lead · Astronfy",
       "period": "2023 · 2024",
-      "description": "Technical leadership for a 5-person team responsible for marketplace, accounting dashboard, payments and white-label applications. Hands-on work with PHP/Laravel/Blade/Livewire, Angular, Node.js/Next.js and Python, plus VPS, AWS/Azure and customer onboarding; the marketplace operated in 10+ countries and new-customer technical onboarding dropped to about 3 days."
+      "description": "Hands-on technical leadership of a five-person team across marketplaces, dashboards, payments and white-label applications. Development with PHP/Laravel/Blade/Livewire, React, Angular, Node.js/Next.js and Python, plus VPS and AWS/Azure operations. Technical communication in English with customers and partners in Brazil, Portugal, Mexico, Germany, the USA, Paraguay and Curaçao; white-label standardization reduced technical onboarding for new web customers to about three days."
     },
     {
       "title": "Full Stack & Mobile Developer · Infogen Sistemas",
@@ -169,7 +169,7 @@
     {
       "title": "Full Stack & Mobile Developer · Freelance & Independent Projects",
       "period": "2018 · Present · project-based",
-      "description": "Development and consulting across web/mobile products, APIs, dashboards, internal systems, integrations and 2D/3D experiences, selecting the stack for the product context. Recent work includes a production property-inspection app, an international sports-training app with IAP and an independent platform for contextualizing news/public data, with customers and partners in 4+ countries."
+      "description": "Development and consulting since 2018 across web/mobile products, APIs, dashboards, internal systems, integrations and 2D/3D experiences. More than 30 small-scale white-label mobile apps and customers/partners in 4+ countries. Projects include SettaSynk, in beta testing and commercial preparation, XtremeFut with IAP and participation from Ferrão, Aletheia and accessibility SDKs. I personally presented XtremeFut at HIT Games Conference in Berlin in 2024."
     }
   ],
   "servicesSection": {
@@ -273,7 +273,7 @@
         "Python / FastAPI"
       ],
       "details": {
-        "description": "SettaSynk connects field inspections with property, team and document management. The app organizes rooms and items, records conditions and photographic and audiovisual evidence, and keeps work available without a connection, synchronizing changes later. The web dashboard brings together scheduling, operational tracking, inspection templates and report management for independent inspectors and companies. Voice notes can be transcribed and interpreted by in-house services to help populate inspection records; this advanced step requires an API connection and leaves the professional in control of review.",
+        "description": "SettaSynk connects field inspections with property, team and document management. The app organizes rooms and items, records conditions and photographic and audiovisual evidence, and keeps work available without a connection, synchronizing changes later. The web dashboard brings together scheduling, operational tracking, inspection templates and report management for independent inspectors and companies. Voice notes can be transcribed and interpreted by in-house services to help populate inspection records; this advanced step requires an API connection and leaves the professional in control of review. Developed product in beta testing with property-inspection companies and real-estate agencies in Rio Grande do Sul, Brazil, and in commercial preparation.",
         "features": [
           "Inspection workflows organized by property, room, item, condition and notes",
           "Capture and management of photos, video and audio linked to inspection evidence",
@@ -475,7 +475,7 @@
         "PHP API"
       ],
       "details": {
-        "description": "XtremeFut turns professional training guidance into an organized mobile experience. Built in partnership with futsal player Ferrão, the app combines workout sequences and exercises written by professionals, video demonstrations, rest intervals, planned rest days and recommendations aligned with the user's profile. Age range, height and weight help suggest a level and goal, while athletes can explore the catalog, follow day-by-day routines, review exercises and keep relevant content close at hand.",
+        "description": "XtremeFut turns professional training guidance into an organized mobile experience. Built in partnership with futsal player Ferrão, the app combines workout sequences and exercises written by professionals, video demonstrations, rest intervals, planned rest days and recommendations aligned with the user's profile. Age range, height and weight help suggest a level and goal, while athletes can explore the catalog, follow day-by-day routines, review exercises and keep relevant content close at hand. The app includes in-app purchases. I personally presented the project at HIT Games Conference in Berlin in 2024.",
         "features": [
           "Training plans and exercises structured from content authored by sports professionals",
           "Partnership with Ferrão as the athlete at the center of the product proposition",
@@ -2025,7 +2025,7 @@
       "result": "Refactored scheduling products and helped create a reusable white-label foundation for multiple clients and operational flows.",
       "bullets": [
         "New white-label system adopted by dozens of clients",
-        "Commercial targets planned for six months were reached in roughly one quarter",
+        "According to internal commercial feedback received at the time, the white-label scheduling and queue-management solution reached, in roughly one quarter, a revenue benchmark comparable to six months of an established product.",
         "Performance, scalability, and maintainability improvements across mobile and web products"
       ]
     },
@@ -2035,9 +2035,9 @@
       "title": "Architecture, payments, and international expansion",
       "result": "Technical leadership and implementation across web/mobile products, white-label architecture, payment integrations, and international client operations.",
       "bullets": [
-        "Marketplace serving clients in more than 10 countries",
-        "Payment system processing thousands of transactions per month",
-        "White-label pipeline reduced technical onboarding for new clients to around 3 days"
+        "Technical communication with customers and partners in Brazil, Portugal, Mexico, Germany, the USA, Paraguay and Curaçao, including meetings in English.",
+        "Developed marketplace and payment integrations, with operational flows spanning HTTP requests, database operations, application events and automation.",
+        "Standardized modular/white-label architecture, configuration and deployments reduced technical onboarding for new web customers to about three days; mobile apps also depend on app-store review and release steps."
       ]
     },
     {
