@@ -39,6 +39,8 @@ const state = {
   }
 };
 
+let projectDeepLinks = null;
+
 const featureTargets = {
   hero: ['.hero-section'],
   about: ['#about', '#nav-about'],
@@ -2096,7 +2098,7 @@ function initProjectGallery() {
     trigger.addEventListener('click', () => {
       const projectIndex = Number(trigger.dataset.projectIndex);
       const project = state.data.projects[projectIndex];
-      if (project) openProjectGallery(project, trigger);
+      if (project) projectDeepLinks ? projectDeepLinks.open(project, trigger) : openProjectGallery(project, trigger);
     });
   });
 }
@@ -2185,9 +2187,14 @@ function trapModalFocus(event) {
   }
 }
 
+function requestCloseProjectGallery() {
+  if (projectDeepLinks) projectDeepLinks.close();
+  else closeProjectGallery();
+}
+
 function initModalEvents() {
   qsa('[data-close-modal]').forEach((item) => {
-    item.addEventListener('click', closeProjectGallery);
+    item.addEventListener('click', requestCloseProjectGallery);
   });
 
   qs('#image-modal-prev')?.addEventListener('click', () => moveProjectGallery(-1));
@@ -2243,7 +2250,7 @@ function initModalEvents() {
       if (state.gallery.isFullscreen) {
         setGalleryFullscreen(false);
       } else {
-        closeProjectGallery();
+        requestCloseProjectGallery();
       }
       return;
     }
@@ -2345,6 +2352,7 @@ function initLanguageSwitcher() {
 }
 
 async function applyLocale(locale) {
+  projectDeepLinks?.restoreMetadata();
   if (qs('#image-modal')?.classList.contains('is-open')) closeProjectGallery();
   const normalized = config.locales.includes(locale) ? locale : config.defaultLocale;
   state.locale = normalized;
@@ -2371,6 +2379,18 @@ async function applyLocale(locale) {
   initReveal();
   setCurrentYear();
   window.PortfolioExperience?.setLocale?.(normalized, state.data);
+  if (!projectDeepLinks) {
+    projectDeepLinks = window.PortfolioProjectLinks.createController({
+      projects: state.data.projects,
+      locale: normalized,
+      openView: openProjectGallery,
+      closeView: closeProjectGallery,
+      getOpenProject: () => state.gallery.project
+    });
+  } else {
+    projectDeepLinks.setCatalog(state.data.projects, normalized);
+  }
+  projectDeepLinks.sync();
 }
 
 async function init() {

@@ -788,12 +788,16 @@
 
   document.addEventListener('click', (event) => {
     const projectTrigger = event.target.closest('[data-open-project]');
-    if (projectTrigger) { openProject(projectTrigger.dataset.openProject, projectTrigger); return; }
+    if (projectTrigger) {
+      const project = projects[Number(projectTrigger.dataset.openProject)];
+      if (project) projectDeepLinks.open(project, projectTrigger);
+      return;
+    }
     const tab = event.target.closest('[data-library-project-tab]');
     if (tab) { setModalTab(tab.dataset.libraryProjectTab); return; }
     const thumb = event.target.closest('[data-library-project-image]');
     if (thumb) { modalState.imageIndex = Number(thumb.dataset.libraryProjectImage); updateGallery(); return; }
-    if (event.target.closest('[data-close-modal]')) { closeProject(); return; }
+    if (event.target.closest('[data-close-modal]')) { projectDeepLinks.close(); return; }
   });
 
   P.qs('#image-modal-prev')?.addEventListener('click', () => moveGallery(-1));
@@ -840,7 +844,7 @@
     if (!projectModal?.classList.contains('is-open')) return;
     if (event.key === 'Tab') { trapModalFocus(event); return; }
     if (event.key === 'Escape') {
-      if (modalState.fullscreen) setFullscreen(false); else closeProject();
+      if (modalState.fullscreen) setFullscreen(false); else projectDeepLinks.close();
       return;
     }
     if (modalState.activeTab !== 'images') return;
@@ -864,5 +868,14 @@
   };
   window.addEventListener('resize', scheduleGalleryFit, { passive: true });
   window.visualViewport?.addEventListener('resize', scheduleGalleryFit, { passive: true });
+
+  const projectDeepLinks = window.PortfolioProjectLinks.createController({
+    projects,
+    locale,
+    openView: (project, trigger) => openProject(projects.indexOf(project), trigger),
+    closeView: closeProject,
+    getOpenProject: () => modalState.project
+  });
+  projectDeepLinks.sync();
 
 })();
