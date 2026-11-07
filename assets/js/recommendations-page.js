@@ -9,15 +9,8 @@
     P.bindLocaleSelect(locale);
     P.localizeSharedHeader(data, 'recommendations');
     document.documentElement.lang = locale;
-    window.PortfolioRecommendationsUI?.render(locale);
-    const titles = {
-      'pt-BR': 'Recomendações profissionais',
-      en: 'Professional recommendations',
-      es: 'Recomendaciones profesionales'
-    };
-    document.title = `${titles[locale] || titles.en} | Bruno Getten Triches`;
-    const skip = document.querySelector('.skip-link');
-    if (skip) skip.textContent = locale === 'en' ? 'Skip to content' : locale === 'es' ? 'Saltar al contenido' : 'Pular para o conteúdo';
+    window.PortfolioRecommendationsUI?.render(locale, data.recommendations);
+    document.title = `${data.recommendations.documentTitle} | ${P.config.profile.name}`;
   } catch (error) {
     console.error('Unable to initialize professional recommendations:', error);
   }

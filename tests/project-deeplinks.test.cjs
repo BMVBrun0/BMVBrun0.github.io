@@ -1,124 +1,92 @@
-const vm = require('node:vm');
-const fs = require('node:fs');
+const { test } = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
 const path = require('node:path');
-const root = path.resolve(__dirname, '..');
-const source = fs.readFileSync(path.join(root,'assets/js/project-deeplinks.js'),'utf8');
-const langs = ['pt-BR','en','es'];
-const catalogs = Object.fromEntries(langs.map(l => [l,JSON.parse(fs.readFileSync(path.join(root,`assets/languages/${l}.json`),'utf8')).projects]));
-const expects = ['settasynk','accessibility-plugin','xtremefut','aletheia','whitelabel-booking','truco-game','radar-publico','support-circle','media-forge','pocket-links','imobly','garimpei','realtime-messaging'];
+const { execFileSync } = require('node:child_process');
 
-function createDom(urlString, locale = 'pt-BR') {
- let url = new URL(urlString);
- const stack = [{url:url.href,state:null}];
- let cursor=0;
- const listeners={};
- let currentProject=null;
- let promptCall=null;
- let copied=null;
- class Element {
-   constructor(tag='div') { this.tagName=tag.toUpperCase();this.hidden=false;this.attrs={};this.events={};this.children=[];this.style={};this.textContent='';this.title=''; }
-   setAttribute(k,v){this.attrs[k]=String(v);}
-   getAttribute(k){return this.attrs[k]??null;}
-   addEventListener(ev,fn){this.events[ev]=fn;}
-   insertBefore(child){this.children.unshift(child);}
-   prepend(child){this.children.unshift(child);}
-   querySelector(selector){if(selector==='.project-deeplink-copy__label') return this.label ||= new Element('span');return null;}
-   set innerHTML(value){this.html=value;}
- }
- const headAction=new Element();
- const main=new Element();
- const metaSelectors=['meta[name="description"]','meta[property="og:title"]','meta[property="og:description"]','meta[property="og:url"]','meta[name="twitter:title"]','meta[name="twitter:description"]','link[rel="canonical"]'];
- const metas={};
- for(const sel of metaSelectors){metas[sel]=new Element(sel.startsWith('link')?'link':'meta');metas[sel].setAttribute(sel.startsWith('link')?'href':'content','initial '+sel);}
- const document={title:'Original portfolio title',createElement:tag=>new Element(tag),querySelector(selector){if(selector==='#image-modal .image-modal-header-actions')return headAction;if(selector==='main')return main;return metas[selector]||null;}};
- const emit=ev=>(listeners[ev]||[]).forEach(f=>f());
- const history={
-   get state(){return stack[cursor].state;},
-   pushState(state,_unused,url){stack.splice(cursor+1);stack.push({url,state});cursor++;location.href=url;},
-   replaceState(state,_unused,url){stack[cursor]={url,state};location.href=url;},
-   back(){if(cursor>0){cursor--;location.href=stack[cursor].url;emit('popstate');}},
-   forward(){if(cursor<stack.length-1){cursor++;location.href=stack[cursor].url;emit('popstate');}},
- };
- const location={get href(){return url.href;},set href(next){url=new URL(next);}};
- const window={location,addEventListener:(name,fn)=>((listeners[name]||=[]).push(fn)),prompt:(label,value)=>promptCall={label,value}};
- const navigator={clipboard:{writeText:async value=>{copied=value;}}};
- const ctx={window,document,history,location,navigator,URL,console};
- vm.runInNewContext(source,ctx);
- const controller=window.PortfolioProjectLinks.createController({
-   projects:catalogs[locale],locale,
-   openView:(project)=>{currentProject=project;},
-   closeView:()=>{currentProject=null;},
-   getOpenProject:()=>currentProject
- });
- const btn=headAction.children[0];
- return {window,document,history,location,controller,headAction,main,btn,metaSelectors,metas,stack,getOpen:()=>currentProject,getCopied:()=>copied,getPrompt:()=>promptCall};
+const root = path.join(__dirname, '..');
+const source = fs.readFileSync(path.join(root, 'assets/js/project-deeplinks.js'), 'utf8');
+const locales = ['pt-BR', 'en', 'es'];
+const catalogs = locales.map((locale) => require(`../assets/languages/${locale}.json`).projects);
+const configScope = { window: {} };
+vm.runInNewContext(fs.readFileSync(path.join(root, 'assets/js/data.js'), 'utf8'), configScope);
+const config = configScope.window.portfolioConfig;
+
+function load(href, baseURI = href) {
+  const replacements = [];
+  const notices = [];
+  const location = { href, replace: (value) => replacements.push(value) };
+  const document = {
+    baseURI,
+    createElement: () => ({ setAttribute() {} }),
+    querySelector: () => ({ prepend: (notice) => notices.push(notice.textContent) })
+  };
+  const scope = { window: {}, location, document, URL };
+  vm.runInNewContext(source, scope);
+  return { links: scope.window.PortfolioProjectLinks, replacements, notices };
 }
 
-let passed=0;
-function check(name,fn){fn();passed++;console.log('PASS',name);}
+test('Project IDs agree across languages and keep the route when the cover changes', () => {
+  const { links } = load('https://example.test/');
+  const expected = catalogs[0].map(links.slugFor).sort();
+  assert.ok(expected.every(Boolean));
+  assert.equal(new Set(expected).size, expected.length);
+  for (const catalog of catalogs) assert.deepEqual(catalog.map(links.slugFor).sort(), expected);
+  assert.equal(links.slugFor({ id: 'setta_synk', image: 'new-cover.webp' }), 'settasynk');
+  assert.equal(links.slugFor({ id: 'setta_synk' }), 'settasynk');
+  assert.equal(links.slugFor({ image: 'setta_synk.webp' }), 'settasynk');
+});
 
-check('Exactly 13 stable unique slugs in three translations',()=>{
- for(const lang of langs){
-   const env=createDom('http://127.0.0.1:8765/library.html',lang);
-   assert.equal(catalogs[lang].length,13);
-   assert.deepEqual(catalogs[lang].map(env.window.PortfolioProjectLinks.slugFor),expects);
- }
+test('Old Home and Library links redirect to the physical project URL', () => {
+  const { links: routes } = load('https://example.test/');
+  const base = 'https://example.test/portfolio/';
+  for (const page of ['index.html', 'library.html', 'biblioteca/']) {
+    for (const project of catalogs[0].filter((item) => !item.hidden)) {
+      const slug = routes.slugFor(project);
+      const { links, replacements } = load(
+        `${base}${page}?project=${slug}&lang=es#images`,
+        base
+      );
+      assert.equal(links.redirectLegacy(catalogs[0], ''), true);
+      assert.deepEqual(replacements, [`${base}projetos/${slug}/?lang=es#images`]);
+    }
+  }
 });
-for(const lang of langs){
- check(`All 13 direct links open & close in-place (${lang})`,()=>{
-   for(const [index,slug] of expects.entries()){
-     const e=createDom(`http://127.0.0.1:8765/library.html?lang=${lang}&project=${slug}`,lang);
-     e.controller.sync();
-     assert.equal(e.getOpen(),catalogs[lang][index]);
-     assert.equal(e.btn.hidden,false);
-     assert.equal(e.document.title.startsWith(catalogs[lang][index].title),true);
-     assert.equal(e.metas['link[rel="canonical"]'].getAttribute('href'),`https://bmvbrun0.github.io/library.html?project=${slug}`);
-     e.controller.close();
-     assert.equal(e.getOpen(),null);
-     assert.equal(new URL(e.location.href).searchParams.has('project'),false);
-     assert.equal(new URL(e.location.href).searchParams.get('lang'),lang);
-   }
- });
-}
-check('Home card click, history back/forward, close via back',()=>{
- const e=createDom('http://127.0.0.1:8765/#projects');const p=catalogs['pt-BR'][0];e.controller.open(p,{});
- assert.equal(new URL(e.location.href).searchParams.get('project'),'settasynk');
- assert.equal(new URL(e.location.href).hash,'#projects');
- assert.equal(e.getOpen(),p);
- assert.equal(e.stack.length,2);
- e.history.back(); assert.equal(e.getOpen(),null);
- assert.equal(e.document.title,'Original portfolio title');
- e.history.forward(); assert.equal(e.getOpen(),p);
- e.controller.close(); assert.equal(e.getOpen(),null);
- assert.equal(e.location.href,'http://127.0.0.1:8765/#projects');
+
+test('Project access follows the global and per-project settings', () => {
+  const { links } = load('https://example.test/');
+  const project = { id: 'example', image: 'new-cover.webp' };
+  const link = { enabled: 1, url: 'https://example.test/app' };
+  const settings = { features: { projectLinks: 1 }, projectLinks: { example: link } };
+  assert.equal(links.accessUrl(project, settings), link.url);
+  settings.features.projectLinks = 0;
+  assert.equal(links.accessUrl(project, settings), '');
+  settings.features.projectLinks = 1;
+  link.enabled = false;
+  assert.equal(links.accessUrl(project, settings), '');
+  link.enabled = 1;
+  link.url = 'javascript:alert(1)';
+  assert.equal(links.accessUrl(project, settings), '');
 });
-check('Invalid slug is graceful and visible (without changing URL)',()=>{
- const e=createDom('http://127.0.0.1:8765/library.html?project=bogus');
- e.controller.sync();assert.equal(e.getOpen(),null);
- assert.equal(e.main.children.length,1);
- assert.equal(e.main.children[0].hidden,false);
- assert.match(e.main.children[0].textContent,/não encontrado/);
+
+test('An unknown project leaves the visitor on the catalog with feedback', () => {
+  const { links, notices, replacements } = load('https://bmvbrun0.github.io/library.html?project=missing');
+  assert.equal(links.redirectLegacy(catalogs[0], 'Projeto indisponível'), false);
+  assert.deepEqual(notices, ['Projeto indisponível']);
+  assert.deepEqual(replacements, []);
 });
-check('Locale update keeps correct link and translated title',()=>{
- const e=createDom('http://127.0.0.1:8765/?project=xtremefut');
- e.controller.sync();
- e.controller.restoreMetadata();
- e.controller.setCatalog(catalogs.en,'en');e.controller.sync();
- assert.equal(e.getOpen(),catalogs.en[2]);
- assert.match(e.document.title,/XtremeFut/);
+
+test('The generated project pages contain indexable content and correct metadata', () => {
+  execFileSync(process.execPath, [path.join(root, 'scripts/generate-pages.cjs'), '--check']);
+  const { links } = load(config.siteUrl);
+  const base = new URL(config.siteUrl.replace(/\/?$/, '/'));
+  for (const project of catalogs[0].filter((item) => !item.hidden)) {
+    const route = links.projectPath(project);
+    const html = fs.readFileSync(path.join(root, route, 'index.html'), 'utf8');
+    const cover = new URL(project.image || config.branding.socialPreview, base);
+    assert.ok(html.includes('<h1>'));
+    assert.ok(html.includes(`rel="canonical" href="${new URL(route, base)}"`));
+    assert.ok(html.includes(`property="og:image" content="${cover}"`));
+  }
 });
-check('Non-project params survive and direct close does not leave page',()=>{
- const e=createDom('http://127.0.0.1:8765/library.html?lang=en&test=1&project=aletheia#projects','en');
- e.controller.sync();e.controller.close();
- assert.equal(e.location.href,'http://127.0.0.1:8765/library.html?lang=en&test=1#projects');
- assert.equal(e.stack.length,1);
-});
-(async()=>{
- const e=createDom('http://127.0.0.1:8765/library.html?project=settasynk');e.controller.sync();
- await e.btn.events.click();
- assert.equal(e.getCopied(),'https://bmvbrun0.github.io/library.html?project=settasynk');
- assert.match(e.btn.getAttribute('aria-label'),/copiado/);
- passed++;console.log('PASS Clipboard copy and accessible confirmation');
- console.log(`TOTAL ${passed} passed`);
-})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,0 +1,189 @@
+/* The same navigation and icon alignment on every public page. */
+.bi { display: inline-grid; place-items: center; flex: none; line-height: 1; }
+.bi::before { display: block; line-height: 1; vertical-align: baseline; }
+
+body > .site-header,
+html:not(.experience-ambient-disabled) body > .site-header.experience-ambient-surface {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .header-shell { min-height: 64px; gap: 12px; }
+.site-header .brand-logo { display: block; width: clamp(124px, 33vw, 152px); max-width: none; height: 62px; object-fit: cover; }
+.site-header .header-actions { order: 2; gap: 8px; margin-left: auto; }
+.site-header .site-nav { gap: 4px; }
+
+.site-header .site-nav > a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 11px;
+  border-radius: 8px;
+  font-size: .9rem;
+}
+
+.site-header .site-nav > a[aria-current],
+.site-header .site-nav > a:hover {
+  color: var(--text);
+  background: rgba(var(--accent-3-rgb), .08);
+}
+
+.site-header .site-nav > a::after,
+html:not(.experience-ambient-disabled) .site-header.experience-ambient-surface::before { display: none; }
+
+.site-header [data-language],
+.site-header .nav-toggle {
+  min-height: 44px;
+  padding: 0 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: .85rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.site-header [data-language] {
+  border: 0;
+  background: transparent;
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+.site-header [data-language]:focus { outline: none; }
+.site-header [data-language]:focus-visible {
+  outline: 2px solid var(--accent-3);
+  outline-offset: 2px;
+}
+
+.site-header .nav-toggle {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.site-header .nav-toggle .bi { font-size: 1rem; }
+
+@media (max-width: 1120px) {
+  .site-header .nav-toggle { display: inline-flex; align-items: center; gap: 7px; width: auto; }
+  .site-header .site-nav {
+    top: 100%;
+    inset-inline: auto max(10px, env(safe-area-inset-right));
+    width: min(360px, calc(100vw - 20px));
+    max-height: calc(100dvh - 68px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    padding: 6px;
+    background: var(--bg);
+    border-radius: 0 0 12px 12px;
+  }
+
+  .site-header .site-nav > a { flex-shrink: 0; }
+  body:has(.site-nav.is-open) > aw-accessibility-widget,
+  body:has(.site-nav.is-open) .experience-launcher { display: none; }
+}
+
+.hero-section { min-height: 0; background: rgba(var(--bg-rgb), .38); padding-block: clamp(32px, 6vw, 78px); }
+.hero-section .hero-grid { align-items: center; gap: clamp(20px, 5vw, 64px); }
+.hero-section .hero-copy,
+.hero-section .hero-panel { padding: 0; border: 0; background: transparent; box-shadow: none; }
+.hero-section .hero-panel::before { display: none; }
+.hero-section .hero-copy h1 { font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1.02; }
+.hero-section .hero-text { max-width: 58ch; }
+.hero-section .hero-links { display: flex; gap: 4px 12px; }
+.hero-section .hero-links a { padding-inline: 3px; border: 0; background: transparent; }
+.hero-section .hero-stats {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 24px;
+  border-top: 1px solid var(--line);
+}
+.hero-section .hero-role { color: var(--accent-3); }
+.hero-role__rotating { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-role__rotating:has(.is-current) { display: grid; }
+  .hero-role__rotating > span { grid-area: 1 / 1; visibility: hidden; }
+  .hero-role__rotating > .is-current { visibility: visible; }
+  .hero-role:has(.is-current) .hero-role__static {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
+.hero-section .hero-panel-brand { background: transparent; box-shadow: none; border: 0; }
+.hero-secondary[hidden] { display: none; }
+.hero-section .hero-stats article { padding: 12px 0; border: 0; background: transparent; }
+.hero-section .hero-actions { display: flex; }
+.hero-secondary,
+.collection-card__select-label,
+.project-back,
+.project-sections a,
+.project-visit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.hero-secondary:hover,
+.collection-card__select:hover .collection-card__select-label,
+.collection-card__select:focus-visible .collection-card__select-label,
+.project-back:hover,
+.project-sections a:hover,
+.project-visit:hover {
+  border-color: var(--accent-3);
+}
+
+.collection-card__select-label { width: fit-content; }
+.hero-actions .bi, .resume-actions .bi { font-size: 1.15rem; }
+
+.content-carousel-controls { margin-block: 0 10px; }
+.content-carousel-button { flex: 0 0 44px; width: 44px; height: 44px; }
+.content-carousel-status { margin-inline-end: 4px; color: var(--muted); font-size: .85rem; }
+.project-media .project-gallery-affordance {
+  inset: auto 10px 10px auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: .82rem;
+  line-height: 1;
+}
+.collection-card__select { color: inherit; text-decoration: none; }
+.library-page .library-hero { padding-block: clamp(22px, 4vw, 48px) 16px; }
+.library-page .library-hero h1 { font-size: clamp(2.1rem, 5vw, 3.9rem); line-height: 1.06; }
+.route-notice { padding-block: 12px; }
+
+@media (max-width: 680px) {
+  .hero-section .hero-panel { display: none; }
+  .hero-section .hero-stats { grid-template-columns: 1fr; margin-top: 4px; }
+  .library-page .library-filters { flex-wrap: wrap; }
+  .library-page .library-stats { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .library-page .library-stat { display: flex; gap: 5px; align-items: baseline; padding: 0; border: 0; background: transparent; }
+  .library-page .library-stat strong { font-size: .9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+.library-search .bi { color: var(--muted); }

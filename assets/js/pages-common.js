@@ -2,7 +2,6 @@
   'use strict';
 
   const config = window.portfolioConfig || {};
-  const extended = window.portfolioExtendedData || {};
   const qs = (selector, context = document) => context.querySelector(selector);
   const qsa = (selector, context = document) => [...context.querySelectorAll(selector)];
 
@@ -18,7 +17,10 @@
   function detectLocale() {
     const params = new URLSearchParams(location.search);
     const fromQuery = params.get('lang');
-    if (fromQuery && config.locales?.includes(fromQuery)) return fromQuery;
+    if (fromQuery && config.locales?.includes(fromQuery)) {
+      localStorage.setItem('portfolio-locale', fromQuery);
+      return fromQuery;
+    }
     const saved = localStorage.getItem('portfolio-locale');
     if (saved && config.locales?.includes(saved)) return saved;
     const lang = String(navigator.language || '').toLowerCase();
@@ -29,7 +31,7 @@
 
   async function loadLocale(locale) {
     const file = config.localeFiles?.[locale] || config.localeFiles?.[config.defaultLocale];
-    const response = await fetch(file, { cache: 'force-cache' });
+    const response = await fetch(file);
     if (!response.ok) throw new Error(`Failed to load locale: ${file}`);
     return response.json();
   }
@@ -43,28 +45,11 @@
     });
   }
 
-  function imagePath(path) {
-    return path || '';
-  }
-
-  function projectKey(project) {
-    const image = String(project?.image || '').split('/').pop() || '';
-    return project?.id || image.replace(/\.[^.]+$/, '');
-  }
-
-  function projectLink(project) {
-    const item = config.projectLinks?.[projectKey(project)];
-    if (!item || item.enabled === 0 || !item.url) return '';
-    try {
-      const url = new URL(item.url, location.href);
-      return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
-    } catch (_) { return ''; }
-  }
-
   function galleryFor(project) {
     const configured = config.projectGalleries?.[project.image];
-    const candidates = [project.image, ...(Array.isArray(configured) ? configured : [])].filter(Boolean);
-    return [...new Set(candidates)].map(imagePath);
+    const candidates = [project.image, ...(configured || []), ...(project.gallery || [])]
+      .map((item) => typeof item === 'string' ? item : item?.src).filter(Boolean);
+    return [...new Set(candidates)];
   }
 
   function companyName(title) {
@@ -73,171 +58,20 @@
     return (parts[parts.length - 1] || raw).trim();
   }
 
-  function getCompanyDetails(locale, experienceTitle) {
-    const key = companyName(experienceTitle);
-    const local = extended[locale]?.companyDetails || {};
-    const fallback = extended['pt-BR']?.companyDetails || {};
-    if (local[key]) return local[key];
-    return locale === 'pt-BR' ? (fallback[key] || null) : null;
+  function bindLocaleSelect() {
+    window.PortfolioNavigation.bind();
   }
 
-  function languageOptions(locale) {
-    return (config.locales || []).map((code) => {
-      const option = config.languageOptions?.[code] || { label: code, flag: '' };
-      return `<option value="${escapeHtml(code)}" ${code === locale ? 'selected' : ''}>${escapeHtml(option.flag)} ${escapeHtml(option.label)}</option>`;
-    }).join('');
+  function fragment(id) {
+    return location.pathname + location.search + '#' + encodeURIComponent(id);
   }
 
-  function closeLanguageMenus(except = null) {
-    qsa('[data-lang-switcher]').forEach((switcher) => {
-      if (except && switcher === except) return;
-      switcher.classList.remove('is-open');
-      const trigger = qs('[data-lang-trigger]', switcher);
-      if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    });
-  }
-
-  function applyHeaderLocale(locale) {
-    const option = config.languageOptions?.[locale] || config.languageOptions?.[config.defaultLocale] || { flag: '', label: locale };
-    qsa('[data-lang-switcher]').forEach((switcher) => {
-      const flag = qs('[data-lang-current-flag]', switcher);
-      const label = qs('[data-lang-current-text]', switcher);
-      if (flag) flag.textContent = option.flag || '';
-      if (label) label.textContent = option.label || locale;
-      qsa('.lang-option', switcher).forEach((item) => {
-        const active = item.dataset.locale === locale;
-        item.classList.toggle('is-active', active);
-        item.setAttribute('aria-selected', String(active));
-      });
-    });
-  }
-
-  function navigateLocale(next) {
-    if (!config.locales?.includes(next)) return;
-    localStorage.setItem('portfolio-locale', next);
-    const params = new URLSearchParams(location.search);
-    params.set('lang', next);
-    location.search = params.toString();
-  }
-
-  function closeSectionMenu() {
-    const cluster = qs('[data-section-menu]');
-    const trigger = qs('[data-section-menu-trigger]');
-    if (!cluster || !trigger) return;
-    cluster.classList.remove('is-open');
-    trigger.setAttribute('aria-expanded', 'false');
-  }
-
-  function bindSectionMenu() {
-    const cluster = qs('[data-section-menu]');
-    const trigger = qs('[data-section-menu-trigger]');
-    if (!cluster || !trigger || trigger.dataset.bound === 'true') return;
-    trigger.dataset.bound = 'true';
-    trigger.addEventListener('click', (event) => {
-      event.stopPropagation();
-      const open = !cluster.classList.contains('is-open');
-      cluster.classList.toggle('is-open', open);
-      trigger.setAttribute('aria-expanded', String(open));
-    });
-    qsa('[data-home-section]').forEach((link) => link.addEventListener('click', closeSectionMenu));
-  }
-
-  function bindLocaleSelect(locale) {
-    bindSectionMenu();
-    qsa('[data-page-language]').forEach((select) => {
-      select.innerHTML = languageOptions(locale);
-      select.addEventListener('change', () => navigateLocale(select.value));
-    });
-
-    applyHeaderLocale(locale);
-    qsa('[data-lang-trigger]').forEach((trigger) => {
-      trigger.addEventListener('click', (event) => {
-        const switcher = event.currentTarget.closest('[data-lang-switcher]');
-        const open = !switcher.classList.contains('is-open');
-        closeLanguageMenus(open ? switcher : null);
-        switcher.classList.toggle('is-open', open);
-        trigger.setAttribute('aria-expanded', String(open));
-      });
-    });
-    qsa('.lang-option').forEach((option) => option.addEventListener('click', () => navigateLocale(option.dataset.locale)));
-
-    const toggle = qs('.nav-toggle');
-    const nav = qs('.site-nav');
-    if (toggle && nav) {
-      toggle.addEventListener('click', () => {
-        const open = toggle.getAttribute('aria-expanded') !== 'true';
-        toggle.setAttribute('aria-expanded', String(open));
-        nav.classList.toggle('is-open', open);
-      });
-      qsa('a', nav).forEach((link) => link.addEventListener('click', () => {
-        nav.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }));
-    }
-
-    document.addEventListener('click', (event) => {
-      if (!event.target.closest('[data-lang-switcher]')) closeLanguageMenus();
-      if (!event.target.closest('[data-section-menu]')) closeSectionMenu();
-      if (nav && toggle && nav.classList.contains('is-open') && !event.target.closest('.site-header')) {
-        nav.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-    document.addEventListener('keydown', (event) => {
-      if (event.key !== 'Escape') return;
-      closeLanguageMenus();
-      closeSectionMenu();
-      if (nav && toggle) {
-        nav.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-
-  function localizeSharedHeader(data, currentPage = '') {
-    const navCopy = data?.nav || {};
-    qsa('[data-main-nav]').forEach((node) => {
-      const key = node.dataset.mainNav;
-      if (navCopy[key]) node.textContent = navCopy[key];
-    });
-    const parentLabel = qs('#nav-portfolio-label');
-    if (parentLabel) parentLabel.textContent = navCopy.portfolio || 'Portfólio';
-    const labels = {
-      topo: navCopy.overview || 'Visão geral',
-      about: navCopy.about,
-      experience: navCopy.experience,
-      projects: navCopy.projects,
-      certificates: navCopy.certificates,
-      contact: navCopy.contact
-    };
-    qsa('[data-home-section]').forEach((link) => {
-      const label = labels[link.dataset.homeSection];
-      const text = qs('span', link);
-      if (label && text) text.textContent = label;
-      link.classList.remove('is-current');
-      link.removeAttribute('aria-current');
-    });
-    const currentLabel = qs('[data-nav-current-label]');
-    if (currentLabel) currentLabel.textContent = labels.topo || 'Visão geral';
-
-    const languageLabel = data?.language?.label || 'Idioma';
-    const desktop = qs('#language-label-desktop');
-    const mobile = qs('#language-label-mobile');
-    if (desktop) desktop.textContent = languageLabel;
-    if (mobile) mobile.textContent = languageLabel;
-    qsa('.lang-option').forEach((option) => {
-      const helper = qs('small', option);
-      const localizedHelper = data?.language?.options?.[option.dataset.locale];
-      if (helper && localizedHelper) helper.textContent = localizedHelper;
-    });
-    qsa('.site-nav > a').forEach((node) => {
-      node.classList.remove('is-current');
-      node.removeAttribute('aria-current');
-    });
-    const current = currentPage === 'library' ? qs('#nav-library') : currentPage === 'resume' ? qs('#nav-resume') : currentPage === 'recommendations' ? qs('#nav-recommendations') : null;
-    if (current) {
-      current.classList.add('is-current');
-      current.setAttribute('aria-current', 'page');
+  function localizeSharedHeader(data, currentPage) {
+    window.PortfolioNavigation.localize(data, detectLocale(), currentPage);
+    const skip = qs('.skip-link');
+    if (skip) {
+      skip.href = fragment('main-content');
+      skip.textContent = data.accessibility.skipToContent;
     }
     renderSharedFooter(data);
     initPageNetworkBackground();
@@ -250,12 +84,11 @@
     const year = new Date().getFullYear();
     const rights = data?.footer?.rights || 'Todos os direitos reservados.';
     const backToTop = data?.footer?.backToTop || 'Voltar ao topo';
-    const locale = detectLocale();
-    const creditLabel = locale === 'en' ? 'Template by' : locale === 'es' ? 'Plantilla por' : 'Template por';
+    const creditLabel = data.footer.credit;
     footer.innerHTML = `
       <div class="container footer-shell">
         <p id="footer-copy">© <span id="current-year">${year}</span> ${escapeHtml(config.profile?.name || 'Bruno Getten Triches')}. ${escapeHtml(rights)}</p>
-        <a href="#topo" class="back-top" id="footer-back-top">${escapeHtml(backToTop)}</a>
+        <a href="${escapeHtml(fragment('topo'))}" class="back-top" id="footer-back-top">${escapeHtml(backToTop)}</a>
         <div class="bm-template-credit" id="bm-template-credit" aria-label="${escapeHtml(creditLabel)}">
           <img class="bm-template-credit__logo" src="${escapeHtml(config.branding?.logo || 'assets/img/brand/logo-bm-white.webp')}" alt="${escapeHtml(config.branding?.logoAlt || 'Logo BM')}" loading="lazy" decoding="async">
           <span class="bm-template-credit__text">
@@ -395,18 +228,15 @@
 
   window.PortfolioPages = {
     config,
-    extended,
     qs,
     qsa,
     escapeHtml,
     detectLocale,
     loadLocale,
     applyTheme,
-    imagePath,
-    projectKey,
-    projectLink,
     galleryFor,
-    getCompanyDetails,
+    fragment,
+    companyName,
     bindLocaleSelect,
     localizeSharedHeader,
     setBranding,

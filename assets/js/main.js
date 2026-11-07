@@ -15,31 +15,13 @@ const state = {
   locale: config.defaultLocale,
   data: null,
   activeCategory: 'all',
-  activeHomeSection: 'topo',
   profileTab: window.localStorage.getItem('portfolio-profile-tab') || config.profileExplorer?.defaultTab || 'overview',
-  roleIntervalId: null,
   loadedLocales: new Map(),
   carousels: {
     projects: null,
     certificates: null
-  },
-  gallery: {
-    items: [],
-    index: 0,
-    title: '',
-    project: null,
-    tabs: [],
-    activeTab: null,
-    lastTrigger: null,
-    pointerStartX: null,
-    isFullscreen: false,
-    imageRequestId: 0,
-    zoom: 1,
-    rotation: 0
   }
 };
-
-let projectDeepLinks = null;
 
 const featureTargets = {
   hero: ['.hero-section'],
@@ -139,7 +121,7 @@ function renderSocialLinks() {
   root.innerHTML = links.map((item) => `
     <li>
       <a href="${item.url}" target="_blank" rel="noopener" data-social="${item.id || ''}">
-        <i class="bi ${item.icon || 'bi-arrow-up-right'} social-brand-icon" aria-hidden="true"></i>
+        <i class="bi ${item.icon || 'bi-arrow-up-right-circle-fill'} social-brand-icon" aria-hidden="true"></i>
         <span>${item.label || item.id || ''}</span>
       </a>
     </li>
@@ -166,35 +148,6 @@ function replacePlaceholders(template, values = {}) {
   return String(template).replace(/\{(\w+)\}/g, (_, key) => values[key] ?? '');
 }
 
-function getProjectConfigKey(project) {
-  if (project?.id) return String(project.id).trim();
-  const image = String(project?.image || '').split('/').pop() || '';
-  return image.replace(/\.[^.]+$/, '');
-}
-
-function normalizeHttpUrl(value) {
-  const rawUrl = String(value || '').trim();
-  if (!rawUrl) return null;
-
-  try {
-    const url = new URL(rawUrl, window.location.href);
-    return ['http:', 'https:'].includes(url.protocol) ? url.href : null;
-  } catch {
-    return null;
-  }
-}
-
-function getProjectAccessLink(project) {
-  if (!isFeatureEnabled('projectLinks')) return null;
-
-  const key = getProjectConfigKey(project);
-  const linkConfig = key ? config.projectLinks?.[key] : null;
-  if (!linkConfig || linkConfig.enabled === 0 || linkConfig.enabled === false) return null;
-
-  const url = normalizeHttpUrl(linkConfig.url);
-  return url ? { key, url } : null;
-}
-
 function escapeAttribute(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -204,7 +157,7 @@ function escapeAttribute(value) {
 }
 
 function renderProjectAccessLink(project, className = 'project-access-link') {
-  const access = getProjectAccessLink(project);
+  const access = window.PortfolioProjectLinks.accessUrl(project, config);
   if (!access) return '';
 
   const label = state.data.projectsSection.accessCta;
@@ -212,12 +165,13 @@ function renderProjectAccessLink(project, className = 'project-access-link') {
   return `
     <a
       class="${className}"
-      href="${escapeAttribute(access.url)}"
+      href="${escapeAttribute(access)}"
       target="_blank"
       rel="noopener noreferrer"
+      data-track="project_external_click" data-content-id="${window.PortfolioProjectLinks.slugFor(project)}"
       aria-label="${escapeAttribute(ariaLabel)}">
       <span>${label}</span>
-      <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
+      <i class="icon bi bi-arrow-up-right-circle-fill" aria-hidden="true"></i>
     </a>
   `;
 }
@@ -249,38 +203,6 @@ async function loadLocaleData(locale) {
   return json;
 }
 
-function syncLanguageSelects(locale) {
-  const activeLocale = config.locales.includes(locale) ? locale : config.defaultLocale;
-  const currentLanguage = config.languageOptions[activeLocale] || config.languageOptions[config.defaultLocale];
-
-  qsa('[data-lang-switcher]').forEach((switcher) => {
-    const currentFlag = qs('[data-lang-current-flag]', switcher);
-    const currentText = qs('[data-lang-current-text]', switcher);
-
-    if (currentFlag) currentFlag.textContent = currentLanguage.flag;
-    if (currentText) currentText.textContent = currentLanguage.label;
-
-    qsa('.lang-option', switcher).forEach((option) => {
-      const optionLocale = option.dataset.locale;
-      const isActive = optionLocale === activeLocale;
-      option.classList.toggle('is-active', isActive);
-      option.setAttribute('aria-selected', String(isActive));
-      const helper = option.querySelector('small');
-      const localizedHelper = state.data?.language?.options?.[optionLocale];
-      if (helper && localizedHelper) helper.textContent = localizedHelper;
-    });
-  });
-}
-
-function closeLanguageMenus(exceptSwitcher = null) {
-  qsa('[data-lang-switcher]').forEach((switcher) => {
-    if (exceptSwitcher && switcher === exceptSwitcher) return;
-    switcher.classList.remove('is-open');
-    const trigger = qs('[data-lang-trigger]', switcher);
-    if (trigger) trigger.setAttribute('aria-expanded', 'false');
-  });
-}
-
 function updateMeta() {
   const meta = state.data.meta;
   const values = { name: config.profile?.name || '', nickname: config.profile?.nickname || '' };
@@ -305,36 +227,37 @@ function updateMeta() {
   if (twitterDescription) twitterDescription.setAttribute('content', socialDescription);
 }
 
+let heroRoleTimer;
+
+function rotateHeroRoles(hero) {
+  window.clearInterval(heroRoleTimer);
+  const rotating = qs('.hero-role__rotating');
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!hero.roles?.length) return;
+  rotating.replaceChildren(...hero.roles.map((role) => {
+    const item = document.createElement('span');
+    item.textContent = role;
+    return item;
+  }));
+  const roles = [...rotating.children];
+  let active = 0;
+  roles[active].classList.add('is-current');
+
+  heroRoleTimer = window.setInterval(() => {
+    if (document.hidden || motion.matches) return;
+    roles[active].classList.remove('is-current');
+    active = (active + 1) % roles.length;
+    roles[active].classList.add('is-current');
+  }, 3400);
+}
+
 function renderStaticText() {
-  const { nav, hero, about, experienceSection, servicesSection, projectsSection, certificatesSection, contactSection, footer, language } = state.data;
+  const { hero, about, experienceSection, servicesSection, projectsSection, certificatesSection, contactSection, footer } = state.data;
 
   qs('.skip-link').textContent = state.data.accessibility.skipToContent;
-  qs('.brand').setAttribute('aria-label', state.data.accessibility.backToTop);
-  qs('.nav-toggle').setAttribute('aria-label', state.data.accessibility.openMenu);
-  qs('#site-nav').setAttribute('aria-label', state.data.accessibility.mainNavigation);
+  window.PortfolioNavigation.localize(state.data, state.locale, 'portfolio');
   qs('#hero-links').setAttribute('aria-label', state.data.accessibility.socialLinks);
-  qs('.hero-panel').setAttribute('aria-label', state.data.accessibility.professionalSummary);
-  const portfolioLabel = qs('#nav-portfolio-label');
-  if (portfolioLabel) portfolioLabel.textContent = nav.portfolio || 'Portfólio';
-  const homeSectionLabels = {
-    topo: nav.overview || 'Visão geral',
-    about: nav.about,
-    experience: nav.experience,
-    projects: nav.projects,
-    certificates: nav.certificates,
-    contact: nav.contact
-  };
-  qsa('[data-home-section]').forEach((link) => {
-    const label = homeSectionLabels[link.dataset.homeSection];
-    const text = qs('span', link);
-    if (label && text) text.textContent = label;
-  });
-  const libraryNav = qs('#nav-library');
-  const resumeNav = qs('#nav-resume');
-  if (libraryNav) libraryNav.textContent = nav.library || 'Biblioteca';
-  if (resumeNav) resumeNav.textContent = nav.resume || 'Currículo+';
-  const recommendationsNav = qs('#nav-recommendations');
-  if (recommendationsNav) recommendationsNav.textContent = nav.recommendations || 'Recomendações';
+  qs('#hero-stats').setAttribute('aria-label', state.data.accessibility.professionalSummary);
   const homeCtas = state.data.homeCtas || {};
   const ctaMap = {
     '#home-about-link': homeCtas.about,
@@ -345,26 +268,10 @@ function renderStaticText() {
     const node = qs(selector);
     if (node && value) node.textContent = value;
   });
-  setHomeSectionActive(state.activeHomeSection);
-
-  qs('#language-label-desktop').textContent = language.label;
-  qs('#language-label-mobile').textContent = language.label;
-  const transformLabels = [
-    ['#image-modal-zoom-in', state.data.modal.zoomIn],
-    ['#image-modal-zoom-out', state.data.modal.zoomOut],
-    ['#image-modal-rotate-left', state.data.modal.rotateLeft],
-    ['#image-modal-rotate-right', state.data.modal.rotateRight],
-    ['#image-modal-reset', state.data.modal.resetView]
-  ];
-  transformLabels.forEach(([selector, label]) => {
-    const button = qs(selector);
-    if (!button || !label) return;
-    button.setAttribute('aria-label', label);
-    button.setAttribute('title', label);
-  });
-
-  qs('#hero-eyebrow').textContent = hero.eyebrow;
-  qs('#hero-role-prefix').textContent = hero.rolePrefix;
+  qs('.hero-role__static').textContent = hero.eyebrow;
+  rotateHeroRoles(hero);
+  qs('.hero-secondary span').textContent = hero.projectsCta;
+  qs('.hero-secondary').hidden = !isFeatureEnabled('projects');
   qs('#hero-text').textContent = hero.text;
   const heroCvDownload = qs('#hero-cv-download');
   const heroCvDownloadLabel = qs('#hero-cv-download-label');
@@ -408,7 +315,6 @@ function renderStaticText() {
 
   qs('#certificates-eyebrow').textContent = certificatesSection.eyebrow;
   qs('#certificates-title').textContent = certificatesSection.title;
-  qs('#certificates-text').textContent = certificatesSection.text;
   qs('#education-eyebrow').textContent = certificatesSection.educationEyebrow;
   qs('#education-title').textContent = certificatesSection.educationTitle;
   qs('#education-text').textContent = certificatesSection.educationText;
@@ -427,22 +333,6 @@ function renderStaticText() {
   qs('#footer-copy').innerHTML = `© <span id="current-year"></span> ${config.profile?.name || ''}. ${footer.rights}`;
   qs('#footer-back-top').textContent = footer.backToTop;
 
-  const closeButton = qs('.image-modal-close');
-  closeButton.setAttribute('aria-label', state.data.modal.closeLabel);
-  qs('#image-modal-prev').setAttribute('aria-label', state.data.modal.previousLabel);
-  qs('#image-modal-next').setAttribute('aria-label', state.data.modal.nextLabel);
-  const fullscreenButton = qs('#image-modal-fullscreen');
-  if (fullscreenButton) {
-    updateGalleryFullscreenButton();
-  }
-  qs('#image-modal-kicker').textContent = state.data.modal.kicker;
-  qs('#image-modal-title').textContent = state.data.modal.title;
-  qs('#image-modal-caption').textContent = state.data.modal.initialCaption;
-  qs('#project-modal-tabs').setAttribute('aria-label', state.data.modal.tabsLabel);
-  qs('#image-modal-thumbnails').setAttribute('aria-label', state.data.modal.thumbnailsLabel);
-  qs('#image-modal-fallback-title').textContent = state.data.modal.unavailableTitle;
-  qs('#image-modal-fallback-text').textContent = state.data.modal.unavailableText;
-  qs('#image-modal-hint').textContent = state.data.modal.navigationHint;
 }
 
 function renderHeroStats() {
@@ -461,7 +351,7 @@ function renderSkills() {
     <details class="skill-item reveal" ${config.profileExplorer?.compactSkillsOnMobile === 0 ? 'open' : ''}>
       <summary>
         <h3>${item.name}</h3>
-        <i class="bi bi-chevron-down skill-toggle-icon" aria-hidden="true"></i>
+        <i class="bi bi-caret-down-fill skill-toggle-icon" aria-hidden="true"></i>
       </summary>
       <div class="skill-item-body">
         <p>${item.description || ''}</p>
@@ -495,7 +385,7 @@ function renderProfileImpactList(explorer) {
                 <strong>${item.title}</strong>
                 <small>${item.company} · ${item.period}</small>
               </span>
-              <i class="bi bi-chevron-down" aria-hidden="true"></i>
+              <i class="bi bi-caret-down-fill" aria-hidden="true"></i>
             </summary>
             <div class="profile-impact-content">
               <p>${item.result}</p>
@@ -511,8 +401,8 @@ function renderProfileImpactList(explorer) {
 function renderProfileActions(explorer) {
   if (!isFeatureEnabled('recruiter')) return '';
   const actions = [
-    { href: config.cvByLocale['pt-BR'], label: explorer.actions?.cvPt, icon: 'bi-file-earmark-text' },
-    { href: config.cvByLocale.en, label: explorer.actions?.cvEn, icon: 'bi-file-earmark-text' },
+    { href: config.cvByLocale['pt-BR'], label: explorer.actions?.cvPt, icon: 'bi-file-earmark-text-fill' },
+    { href: config.cvByLocale.en, label: explorer.actions?.cvEn, icon: 'bi-file-earmark-text-fill' },
     { href: config.contactLinks?.linkedin, label: explorer.actions?.linkedin, icon: 'bi-linkedin' },
     { href: config.contactLinks?.whatsapp, label: explorer.actions?.whatsapp, icon: 'bi-whatsapp' }
   ].filter((item) => item.href && item.label);
@@ -542,7 +432,7 @@ function renderProfilePanel(tab, explorer) {
       aria-labelledby="profile-tab-${tab.id}"
       hidden>
       <div class="profile-panel-intro">
-        <span class="profile-panel-icon" aria-hidden="true"><i class="bi ${tab.icon || 'bi-check2-circle'}"></i></span>
+        <span class="profile-panel-icon" aria-hidden="true"><i class="bi ${tab.icon || 'bi-check-circle-fill'}"></i></span>
         <div>
           <h4>${tab.title}</h4>
           <p>${tab.text}</p>
@@ -551,7 +441,7 @@ function renderProfilePanel(tab, explorer) {
       <div class="profile-card-grid">
         ${cards.map((card) => `
           <article class="profile-card">
-            <span class="profile-card-icon" aria-hidden="true"><i class="bi ${card.icon || 'bi-check2-circle'}"></i></span>
+            <span class="profile-card-icon" aria-hidden="true"><i class="bi ${card.icon || 'bi-check-circle-fill'}"></i></span>
             <div>
               <h5>${card.title}</h5>
               <p>${card.text}</p>
@@ -686,7 +576,7 @@ function renderWorkProfile() {
   if (!root || !Array.isArray(state.data.workProfileHighlights)) return;
   root.innerHTML = state.data.workProfileHighlights.map((item) => `
     <article class="work-profile-card reveal">
-      <span class="work-profile-icon" aria-hidden="true"><i class="bi ${item.icon || 'bi-check2-circle'}"></i></span>
+      <span class="work-profile-icon" aria-hidden="true"><i class="bi ${item.icon || 'bi-check-circle-fill'}"></i></span>
       <div>
         <h3>${item.title}</h3>
         <p>${item.text}</p>
@@ -778,83 +668,6 @@ function renderFilters() {
   });
 }
 
-function normalizeGalleryItem(item, project, index) {
-  if (typeof item === 'string') {
-    return {
-      src: item,
-      alt: replacePlaceholders(state.data.projectsSection.galleryImageAlt, {
-        title: project.title,
-        index: index + 1
-      }),
-      caption: ''
-    };
-  }
-
-  if (!item || typeof item !== 'object' || !item.src) return null;
-
-  return {
-    src: item.src,
-    alt: item.alt || replacePlaceholders(state.data.projectsSection.galleryImageAlt, {
-      title: project.title,
-      index: index + 1
-    }),
-    caption: item.caption || ''
-  };
-}
-
-function getProjectGallery(project) {
-  const candidates = [];
-
-  if (project.image) candidates.push({ src: project.image, alt: '', caption: '' });
-
-  const sharedGallery = project.image ? config.projectGalleries?.[project.image] : null;
-  if (Array.isArray(sharedGallery)) candidates.push(...sharedGallery);
-
-  if (Array.isArray(project.gallery)) candidates.push(...project.gallery);
-
-  const seen = new Set();
-  const gallery = [];
-
-  candidates.forEach((item) => {
-    const normalized = normalizeGalleryItem(item, project, gallery.length);
-    if (!normalized?.src || seen.has(normalized.src)) return;
-
-    seen.add(normalized.src);
-    gallery.push(normalized);
-  });
-
-  return gallery;
-}
-
-function hasProjectContent(value) {
-  if (Array.isArray(value)) return value.some((item) => hasProjectContent(item));
-  if (typeof value === 'string') return value.trim().length > 0;
-  if (value && typeof value === 'object') return Object.values(value).some((item) => hasProjectContent(item));
-  return value !== null && value !== undefined && value !== false;
-}
-
-function getProjectTabs(project) {
-  const details = project.details || {};
-  const gallery = getProjectGallery(project);
-  const tabs = [];
-
-  if (hasProjectContent(details.description) || hasProjectContent(details.features) || hasProjectContent(details.pricing)) {
-    tabs.push({ id: 'overview', label: state.data.modal.overviewTab });
-  }
-  if (hasProjectContent(details.technicalSpecs) || hasProjectContent(details.technologies) || hasProjectContent(project.stack)) {
-    tabs.push({ id: 'technical', label: state.data.modal.technicalTab });
-  }
-  if (gallery.length) {
-    tabs.push({ id: 'images', label: state.data.modal.imagesTab });
-  }
-
-  if (window.PortfolioExperience?.extendProjectTabs) {
-    return window.PortfolioExperience.extendProjectTabs(tabs, project, state.data);
-  }
-
-  return tabs;
-}
-
 function destroyContentCarousel(kind) {
   const cleanup = state.carousels[kind];
   if (typeof cleanup === 'function') cleanup();
@@ -872,11 +685,10 @@ function initContentCarousel(root, kind) {
   const track = qs('[data-carousel-track]', root);
   const previousButton = qs('[data-carousel-previous]', root);
   const nextButton = qs('[data-carousel-next]', root);
-  const dots = qs('[data-carousel-dots]', root);
   const status = qs('[data-carousel-status]', root);
   const controls = qs('[data-carousel-controls]', root);
   const cards = track ? [...track.children] : [];
-  if (!viewport || !track || !previousButton || !nextButton || !dots || !status || !controls || !cards.length) return null;
+  if (!viewport || !track || !previousButton || !nextButton || !status || !controls || !cards.length) return null;
 
   let page = 0;
   let timerId = null;
@@ -906,31 +718,11 @@ function initContentCarousel(root, kind) {
     return getCardScrollLeft(cards[cardIndex]);
   };
 
-  const renderDots = () => {
-    const count = pageCount();
-    dots.innerHTML = Array.from({ length: count }, (_, index) => `
-      <button
-        type="button"
-        class="content-carousel-dot ${index === page ? 'is-active' : ''}"
-        data-carousel-page="${index}"
-        aria-current="${index === page ? 'true' : 'false'}"
-        aria-label="${replacePlaceholders(state.data.carousel.pageLabel, { current: index + 1, count })}"></button>
-    `).join('');
-
-    qsa('[data-carousel-page]', dots).forEach((button) => {
-      button.addEventListener('click', () => {
-        scrollToPage(Number(button.dataset.carouselPage));
-        restartAutoplay();
-      });
-    });
-  };
-
   const updateUi = () => {
     const count = pageCount();
     page = Math.min(page, count - 1);
     controls.hidden = count <= 1;
     status.textContent = replacePlaceholders(state.data.carousel.status, { current: page + 1, count });
-    renderDots();
   };
 
   const scrollToPage = (targetPage, behavior = prefersReducedMotion ? 'auto' : 'smooth') => {
@@ -1021,18 +813,17 @@ function renderContentCarousel(root, kind, cardsMarkup) {
   root.className = `content-carousel content-carousel-${kind}`;
   root.setAttribute('aria-label', sectionLabel);
   root.innerHTML = `
-    <div class="content-carousel-viewport" data-carousel-viewport tabindex="0">
-      <div class="content-carousel-track" data-carousel-track>${cardsMarkup}</div>
-    </div>
     <div class="content-carousel-controls" data-carousel-controls>
-      <div class="content-carousel-dots" data-carousel-dots></div>
+      <span class="content-carousel-status" data-carousel-status aria-live="polite"></span>
       <button class="content-carousel-button" type="button" data-carousel-previous aria-label="${replacePlaceholders(state.data.carousel.previousLabel, { section: sectionLabel })}">
-        <svg class="icon"><use href="#icon-chevron-left"></use></svg>
+        <i class="bi bi-caret-left-fill" aria-hidden="true"></i>
       </button>
       <button class="content-carousel-button" type="button" data-carousel-next aria-label="${replacePlaceholders(state.data.carousel.nextLabel, { section: sectionLabel })}">
-        <svg class="icon"><use href="#icon-chevron-right"></use></svg>
+        <i class="bi bi-caret-right-fill" aria-hidden="true"></i>
       </button>
-      <span class="sr-only" data-carousel-status aria-live="polite"></span>
+    </div>
+    <div class="content-carousel-viewport" data-carousel-viewport tabindex="0">
+      <div class="content-carousel-track" data-carousel-track>${cardsMarkup}</div>
     </div>
   `;
 
@@ -1040,43 +831,28 @@ function renderContentCarousel(root, kind, cardsMarkup) {
 }
 
 function renderProjectCard(project) {
-  const gallery = getProjectGallery(project);
-  const cover = project.image ? normalizeGalleryItem(project.image, project, 0) : gallery[0];
-  const tabs = getProjectTabs(project);
-  const sectionCount = tabs.length;
-  const sectionCountLabel = sectionCount === 1
-    ? state.data.projectsSection.sectionCountSingle
-    : replacePlaceholders(state.data.projectsSection.sectionCountMultiple, { count: sectionCount });
-
+  const cover = project.image;
+  const path = window.PortfolioProjectLinks.projectPath(project);
   const media = cover
     ? `
-      <button
-        type="button"
-        class="project-media project-gallery-trigger"
-        data-project-index="${state.data.projects.indexOf(project)}"
-        aria-label="${replacePlaceholders(state.data.projectsSection.detailsAriaLabel, {
-          title: project.title,
-          countLabel: sectionCountLabel
-        })}">
+      <a class="project-media project-gallery-trigger" href="${path}" data-track="select_content"
+        data-content-id="${window.PortfolioProjectLinks.slugFor(project)}"
+        aria-label="${escapeHtml(project.title)}">
         ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
-        <img src="${cover.src}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy" decoding="async" fetchpriority="low">
+        <img src="${escapeHtml(cover)}" alt="${replacePlaceholders(state.data.projectsSection.imageAlt, { title: project.title })}" loading="lazy" decoding="async" fetchpriority="low">
         <span class="project-cover-fallback" aria-hidden="true">
-          <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
+          <span class="project-media-empty-icon"><i class="icon bi bi-file-earmark-text-fill" aria-hidden="true"></i></span>
           <strong>${state.data.modal.unavailableTitle}</strong>
         </span>
         <span class="project-media-overlay" aria-hidden="true"></span>
-        <span class="project-gallery-affordance" aria-hidden="true">
-          <span class="project-gallery-affordance-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
-          <span class="project-gallery-affordance-copy"><strong>${state.data.projectsSection.detailsCta}</strong></span>
-          <span class="project-gallery-affordance-arrow"><svg class="icon"><use href="#icon-arrow-up-right"></use></svg></span>
-        </span>
-      </button>
+        <span class="project-gallery-affordance" aria-hidden="true">${state.data.projectsSection.detailsCta} <i class="bi bi-arrow-right-circle-fill"></i></span>
+      </a>
     `
     : `
       <div class="project-media project-media-empty" aria-label="${replacePlaceholders(state.data.projectsSection.noImagesAriaLabel, { title: project.title })}">
         ${project.comingSoon ? `<span class="project-media-badge">${state.data.projectsSection.comingSoonLabel}</span>` : ''}
         <div class="project-media-empty-content">
-          <span class="project-media-empty-icon"><svg class="icon"><use href="#icon-details"></use></svg></span>
+          <span class="project-media-empty-icon"><i class="icon bi bi-file-earmark-text-fill" aria-hidden="true"></i></span>
           <strong>${state.data.projectsSection.noImagesTitle}</strong>
           <span>${state.data.projectsSection.noImagesText}</span>
         </div>
@@ -1121,7 +897,6 @@ function renderProjects() {
   }
 
   initProjectMediaFallbacks();
-  initProjectGallery();
 }
 
 function initProjectMediaFallbacks() {
@@ -1201,7 +976,7 @@ function renderEducation() {
           <span>${escapeHtml(state.data.certificatesSection.languageTrainingText || '')}</span>
           <em>${escapeHtml(state.data.certificatesSection.languageTrainingHours || '450 horas')}</em>
         </div>
-        <a href="library.html#formation-library">${escapeHtml(state.data.certificatesSection.languageTrainingCta || state.data.certificatesSection.credentialCta)} <svg class="icon"><use href="#icon-arrow-up-right"></use></svg></a>`;
+        <a href="biblioteca/#formation-library">${escapeHtml(state.data.certificatesSection.languageTrainingCta || state.data.certificatesSection.credentialCta)} <i class="icon bi bi-arrow-up-right-circle-fill" aria-hidden="true"></i></a>`;
     }
   }
 }
@@ -1266,7 +1041,7 @@ function renderCertificateCard(item, index) {
             <strong>${escapeHtml(badge.title || '')}</strong>
             <em>${escapeHtml(badge.issuer || '')}</em>
           </span>
-          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>`;
+          <i class="icon bi bi-arrow-up-right-circle-fill" aria-hidden="true"></i>`;
         return badge.url
           ? `<a class="certificate-digital-badge" href="${escapeAttribute(badge.url)}" target="_blank" rel="noopener" aria-label="${escapeAttribute(`${section.verifyBadgeCta || 'Verify badge'}: ${badge.title || ''}`)}">${badgeInner}</a>`
           : `<div class="certificate-digital-badge">${badgeInner}</div>`;
@@ -1304,7 +1079,7 @@ function renderCertificateCard(item, index) {
         ${item.url ? `
           <a class="certificate-link-label" href="${escapeAttribute(item.url)}" target="_blank" rel="noopener" aria-label="${escapeAttribute(replacePlaceholders(section.credentialAriaLabel, { title: item.title }))}">
             <span>${escapeHtml(section.credentialCta || '')}</span>
-            <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
+            <i class="icon bi bi-arrow-up-right-circle-fill" aria-hidden="true"></i>
           </a>
         ` : ''}
       </div>
@@ -1386,7 +1161,7 @@ function initCertificateDescriptionToggles() {
 function renderContacts() {
   const root = qs('#contact-grid');
   root.innerHTML = state.data.contacts.map((item) => `
-    <a class="contact-card contact-link reveal" href="${config.contactLinks[item.id]}" ${item.external ? 'target="_blank" rel="noopener"' : ''} aria-label="${item.ariaLabel}" data-contact="${item.id}">
+    <a class="contact-card contact-link reveal" href="${config.contactLinks[item.id]}" ${item.external ? 'target="_blank" rel="noopener"' : ''} aria-label="${item.ariaLabel}" data-contact="${item.id}" data-track="contact_click">
       <div class="contact-icon-wrap">
         <i class="bi ${item.icon} contact-icon" aria-hidden="true"></i>
       </div>
@@ -1395,126 +1170,9 @@ function renderContacts() {
         <strong>${item.value}</strong>
         <p>${item.text}</p>
       </div>
-      <svg class="contact-arrow"><use href="#icon-arrow-up-right"></use></svg>
+      <i class="contact-arrow bi bi-arrow-up-right-circle-fill" aria-hidden="true"></i>
     </a>
   `).join('');
-}
-
-function initRoleRotation() {
-  const target = qs('#typed-role');
-  if (state.roleIntervalId) {
-    window.clearInterval(state.roleIntervalId);
-    state.roleIntervalId = null;
-  }
-  if (!target || !isFeatureEnabled('hero')) return;
-
-  const roles = state.data.hero.roles;
-  let index = 0;
-
-  const paint = () => {
-    target.textContent = roles[index];
-    index = (index + 1) % roles.length;
-  };
-
-  paint();
-  state.roleIntervalId = window.setInterval(paint, 2200);
-}
-
-function closeSectionMenu() {
-  const cluster = qs('[data-section-menu]');
-  const trigger = qs('[data-section-menu-trigger]');
-  if (!cluster || !trigger) return;
-  cluster.classList.remove('is-open');
-  trigger.setAttribute('aria-expanded', 'false');
-}
-
-function setHomeSectionActive(sectionId) {
-  const links = qsa('[data-home-section]');
-  if (!links.length) return;
-  const active = links.find((link) => link.dataset.homeSection === sectionId) || links[0];
-  state.activeHomeSection = active.dataset.homeSection || 'topo';
-  links.forEach((link) => {
-    const current = link === active;
-    link.classList.toggle('is-current', current);
-    if (current) link.setAttribute('aria-current', 'location');
-    else link.removeAttribute('aria-current');
-  });
-  const currentLabel = qs('[data-nav-current-label]');
-  const activeText = qs('span', active)?.textContent?.trim();
-  if (currentLabel && activeText) currentLabel.textContent = activeText;
-  qs('[data-section-menu-trigger]')?.classList.toggle('has-current-section', true);
-}
-
-function initSectionMenu() {
-  const cluster = qs('[data-section-menu]');
-  const trigger = qs('[data-section-menu-trigger]');
-  if (!cluster || !trigger) return;
-
-  trigger.addEventListener('click', (event) => {
-    event.stopPropagation();
-    const open = !cluster.classList.contains('is-open');
-    cluster.classList.toggle('is-open', open);
-    trigger.setAttribute('aria-expanded', String(open));
-  });
-
-  qsa('[data-home-section]').forEach((link) => {
-    link.addEventListener('click', () => closeSectionMenu());
-  });
-
-  document.addEventListener('click', (event) => {
-    if (!event.target.closest('[data-section-menu]')) closeSectionMenu();
-  });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeSectionMenu();
-  });
-
-  const sectionEntries = [
-    ['topo', qs('.hero-section')],
-    ['about', qs('#about')],
-    ['experience', qs('#experience')],
-    ['projects', qs('#projects')],
-    ['certificates', qs('#certificates')],
-    ['contact', qs('#contact')]
-  ].filter(([, element]) => element && !element.classList.contains('is-feature-disabled'));
-  if (!sectionEntries.length) return;
-
-  let frame = null;
-  const update = () => {
-    frame = null;
-    const headerHeight = qs('.site-header')?.offsetHeight || 70;
-    const position = window.scrollY + headerHeight + Math.min(180, window.innerHeight * 0.24);
-    let active = sectionEntries[0][0];
-    sectionEntries.forEach(([id, element]) => {
-      if (position >= element.offsetTop) active = id;
-    });
-    setHomeSectionActive(active);
-  };
-  const schedule = () => {
-    if (frame) return;
-    frame = window.requestAnimationFrame(update);
-  };
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
-  update();
-}
-
-function initMenu() {
-  const toggle = qs('.nav-toggle');
-  const nav = qs('.site-nav');
-  if (!toggle || !nav) return;
-
-  toggle.addEventListener('click', () => {
-    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!isExpanded));
-    nav.classList.toggle('is-open');
-  });
-
-  qsa('.site-nav a').forEach((link) => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
 }
 
 function initReveal() {
@@ -1545,764 +1203,6 @@ function setCurrentYear() {
 
 const galleryImagePreloadCache = new Map();
 
-function clearGalleryImageSizing() {
-  const modalImage = qs('#image-modal-image');
-  if (!modalImage) return;
-
-  modalImage.style.removeProperty('width');
-  modalImage.style.removeProperty('height');
-  modalImage.style.removeProperty('max-width');
-  modalImage.style.removeProperty('max-height');
-}
-
-function getGalleryStageAvailableSize() {
-  const stage = qs('.image-modal-stage');
-  if (!stage) return null;
-
-  const style = window.getComputedStyle(stage);
-  const horizontalPadding = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
-  const verticalPadding = (parseFloat(style.paddingTop) || 0) + (parseFloat(style.paddingBottom) || 0);
-
-  return {
-    width: Math.max(1, stage.clientWidth - horizontalPadding - 4),
-    height: Math.max(1, stage.clientHeight - verticalPadding - 4)
-  };
-}
-
-function applyGalleryImageSizing(naturalWidth, naturalHeight) {
-  const modalImage = qs('#image-modal-image');
-  const available = getGalleryStageAvailableSize();
-  if (!modalImage || !available || !naturalWidth || !naturalHeight) return;
-
-  const containScale = Math.min(
-    available.width / naturalWidth,
-    available.height / naturalHeight,
-    1
-  );
-  const fittedWidth = Math.max(1, Math.floor(naturalWidth * containScale));
-  const fittedHeight = Math.max(1, Math.floor(naturalHeight * containScale));
-
-  modalImage.style.width = `${fittedWidth}px`;
-  modalImage.style.height = `${fittedHeight}px`;
-  modalImage.style.maxWidth = 'none';
-  modalImage.style.maxHeight = 'none';
-}
-
-function fitGalleryImageToStage() {
-  const modal = qs('#image-modal');
-  const modalImage = qs('#image-modal-image');
-
-  if (!modal?.classList.contains('is-open') || !modalImage) return;
-  if (modalImage.hidden || !modalImage.complete || !modalImage.naturalWidth || !modalImage.naturalHeight) return;
-
-  applyGalleryImageSizing(modalImage.naturalWidth, modalImage.naturalHeight);
-}
-
-function preloadGalleryImage(src) {
-  if (!src) return Promise.reject(new Error('Missing gallery image source.'));
-  if (galleryImagePreloadCache.has(src)) return galleryImagePreloadCache.get(src);
-
-  const request = new Promise((resolve, reject) => {
-    const image = new Image();
-    image.decoding = 'async';
-
-    image.addEventListener('load', async () => {
-      try {
-        if (typeof image.decode === 'function') await image.decode();
-      } catch (_) {
-      }
-
-      resolve({
-        src,
-        width: image.naturalWidth,
-        height: image.naturalHeight
-      });
-    }, { once: true });
-
-    image.addEventListener('error', () => {
-      galleryImagePreloadCache.delete(src);
-      reject(new Error(`Unable to load gallery image: ${src}`));
-    }, { once: true });
-
-    image.src = src;
-  });
-
-  galleryImagePreloadCache.set(src, request);
-  return request;
-}
-
-function preloadAdjacentGalleryImages() {
-  const total = state.gallery.items.length;
-  if (total <= 1) return;
-
-  const indexes = [
-    (state.gallery.index - 1 + total) % total,
-    (state.gallery.index + 1) % total
-  ];
-
-  [...new Set(indexes)].forEach((index) => {
-    const src = state.gallery.items[index]?.src;
-    if (src) preloadGalleryImage(src).catch(() => {});
-  });
-}
-
-function updateGalleryImageShapeFromDimensions(naturalWidth, naturalHeight) {
-  const modal = qs('#image-modal');
-  if (!modal || !naturalWidth || !naturalHeight) return;
-
-  const ratio = naturalWidth / naturalHeight;
-  modal.classList.toggle('image-is-portrait', ratio < 0.82);
-  modal.classList.toggle('image-is-square', ratio >= 0.82 && ratio <= 1.18);
-  modal.classList.toggle('image-is-landscape', ratio > 1.18);
-}
-
-function updateGalleryFullscreenButton() {
-  const button = qs('#image-modal-fullscreen');
-  if (!button || !state.data) return;
-
-  const label = state.gallery.isFullscreen
-    ? state.data.modal.fullscreenExitLabel
-    : state.data.modal.fullscreenEnterLabel;
-  button.classList.toggle('is-active', state.gallery.isFullscreen);
-  button.setAttribute('aria-pressed', String(state.gallery.isFullscreen));
-  button.setAttribute('aria-label', label);
-  button.setAttribute('title', label);
-
-  const use = qs('use', button);
-  if (use) use.setAttribute('href', state.gallery.isFullscreen ? '#icon-compress' : '#icon-expand');
-}
-
-function syncGalleryFullscreenState() {
-  const modal = qs('#image-modal');
-  if (!modal) return;
-
-  const nativeFullscreen = document.fullscreenElement === modal;
-  const fallbackFullscreen = modal.classList.contains('is-fullscreen-fallback');
-  state.gallery.isFullscreen = nativeFullscreen || fallbackFullscreen;
-  modal.classList.toggle('is-gallery-fullscreen', state.gallery.isFullscreen);
-  updateGalleryFullscreenButton();
-  window.requestAnimationFrame(fitGalleryImageToStage);
-}
-
-async function setGalleryFullscreen(enabled) {
-  const modal = qs('#image-modal');
-  if (!modal) return;
-  if (enabled && state.gallery.activeTab !== 'images') return;
-
-  if (!enabled) {
-    modal.classList.remove('is-fullscreen-fallback');
-    if (document.fullscreenElement === modal && document.exitFullscreen) {
-      try {
-        await document.exitFullscreen();
-      } catch (error) {
-        console.warn('Unable to exit fullscreen mode.', error);
-      }
-    }
-    syncGalleryFullscreenState();
-    return;
-  }
-
-  if (document.fullscreenElement === modal || modal.classList.contains('is-fullscreen-fallback')) {
-    syncGalleryFullscreenState();
-    return;
-  }
-
-  if (modal.requestFullscreen && document.fullscreenEnabled !== false) {
-    try {
-      await modal.requestFullscreen({ navigationUI: 'hide' });
-    } catch (error) {
-      try {
-        await modal.requestFullscreen();
-      } catch (fallbackError) {
-        modal.classList.add('is-fullscreen-fallback');
-      }
-    }
-  } else {
-    modal.classList.add('is-fullscreen-fallback');
-  }
-
-  syncGalleryFullscreenState();
-}
-
-function exitGalleryFullscreenImmediately() {
-  const modal = qs('#image-modal');
-  if (!modal) return;
-
-  modal.classList.remove('is-fullscreen-fallback', 'is-gallery-fullscreen');
-  if (document.fullscreenElement === modal && document.exitFullscreen) {
-    document.exitFullscreen().catch(() => {});
-  }
-  state.gallery.isFullscreen = false;
-  updateGalleryFullscreenButton();
-}
-
-function updateGalleryImageShape() {
-  const modalImage = qs('#image-modal-image');
-  if (!modalImage || !modalImage.naturalWidth || !modalImage.naturalHeight) return;
-
-  updateGalleryImageShapeFromDimensions(modalImage.naturalWidth, modalImage.naturalHeight);
-}
-
-function renderProjectModalTabs() {
-  const root = qs('#project-modal-tabs');
-  if (!root) return;
-
-  root.innerHTML = state.gallery.tabs.map((tab) => `
-    <button
-      type="button"
-      class="project-modal-tab ${tab.id === state.gallery.activeTab ? 'is-active' : ''}"
-      role="tab"
-      id="project-tab-${tab.id}"
-      data-project-tab="${tab.id}"
-      aria-selected="${String(tab.id === state.gallery.activeTab)}"
-      aria-controls="${tab.id === 'images' ? 'project-modal-gallery' : 'project-modal-content'}">${tab.label}</button>
-  `).join('');
-
-  qsa('[data-project-tab]', root).forEach((button) => {
-    button.addEventListener('click', () => setProjectModalTab(button.dataset.projectTab));
-    button.addEventListener('keydown', (event) => {
-      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-      event.preventDefault();
-      const buttons = qsa('[data-project-tab]', root);
-      const currentIndex = buttons.indexOf(button);
-      let nextIndex = currentIndex;
-      if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
-      if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
-      if (event.key === 'Home') nextIndex = 0;
-      if (event.key === 'End') nextIndex = buttons.length - 1;
-      const next = buttons[nextIndex];
-      if (next) {
-        setProjectModalTab(next.dataset.projectTab);
-        next.focus();
-      }
-    });
-  });
-}
-
-function updateProjectModalTabState() {
-  qsa('[data-project-tab]', qs('#project-modal-tabs')).forEach((button) => {
-    const isActive = button.dataset.projectTab === state.gallery.activeTab;
-    button.classList.toggle('is-active', isActive);
-    button.setAttribute('aria-selected', String(isActive));
-    button.tabIndex = isActive ? 0 : -1;
-  });
-}
-
-function renderProjectOverview(project) {
-  const details = project.details || {};
-  const pricing = Array.isArray(details.pricing) ? details.pricing : [];
-  return `
-    <section class="project-detail-section project-detail-overview">
-      ${hasProjectContent(details.description) ? `
-        <div class="project-detail-lead">
-          <span class="project-detail-label">${state.data.modal.overviewTitle}</span>
-          <p>${details.description}</p>
-        </div>
-      ` : ''}
-      ${hasProjectContent(details.features) ? `
-        <div class="project-detail-block">
-          <h3>${state.data.modal.featuresTitle}</h3>
-          <ul class="project-feature-grid">
-            ${details.features.map((feature) => `
-              <li><span class="project-feature-mark" aria-hidden="true">✓</span><span>${typeof feature === 'string' ? feature : feature.label || feature.value || ''}</span></li>
-            `).join('')}
-          </ul>
-        </div>
-      ` : ''}
-      ${pricing.length ? `
-        <div class="project-detail-block">
-          <h3>${state.data.modal.pricingTitle}</h3>
-          <div class="project-pricing-grid">
-            ${pricing.map((plan) => {
-              if (typeof plan === 'string') return `<article class="project-pricing-card"><strong>${plan}</strong></article>`;
-              const items = Array.isArray(plan.items) ? plan.items : [];
-              return `<article class="project-pricing-card"><div class="project-pricing-heading"><strong>${plan.name || plan.title || ''}</strong>${plan.price ? `<span>${plan.price}</span>` : ''}</div>${plan.description ? `<p>${plan.description}</p>` : ''}${items.length ? `<ul>${items.map((item) => `<li>${item}</li>`).join('')}</ul>` : ''}</article>`;
-            }).join('')}
-          </div>
-        </div>
-      ` : ''}
-      ${renderProjectAccessLink(project, 'project-access-link project-access-link--modal')}
-    </section>
-  `;
-}
-
-function renderProjectTechnical(project) {
-  const details = project.details || {};
-  const specs = Array.isArray(details.technicalSpecs) ? details.technicalSpecs : [];
-  const technologies = Array.isArray(details.technologies) ? details.technologies : [];
-  const stack = Array.isArray(project.stack) ? project.stack.filter(Boolean) : [];
-  const architectureNodes = stack.length ? stack : technologies.map((item) => typeof item === 'string' ? item : item.name || item.label || '').filter(Boolean);
-  const decisionsLabel = state.data.modal.technicalDecisionsTitle || state.data.modal.technicalTitle;
-  const technologiesLabel = state.data.modal.technologiesAndWhyTitle || state.data.modal.technologiesTitle;
-  return `
-    <section class="project-detail-section project-technical-story">
-      <header class="project-technical-hero">
-        <div class="project-technical-hero__copy">
-          <span class="project-detail-label">${state.data.modal.technicalEyebrow || state.data.modal.technicalTitle}</span>
-          <h3>${state.data.modal.technicalTitle}</h3>
-          <p>${state.data.modal.technicalDescription || ''}</p>
-        </div>
-        <div class="project-technical-hero__metrics" aria-hidden="true">
-          ${specs.length ? `<span><strong>${String(specs.length).padStart(2, '0')}</strong><small>${decisionsLabel}</small></span>` : ''}
-          ${technologies.length ? `<span><strong>${String(technologies.length).padStart(2, '0')}</strong><small>${technologiesLabel}</small></span>` : ''}
-          ${architectureNodes.length ? `<span><strong>${String(Math.min(architectureNodes.length, 8)).padStart(2, '0')}</strong><small>${state.data.modal.architectureTitle || 'Stack'}</small></span>` : ''}
-        </div>
-      </header>
-      ${specs.length ? `<div class="project-detail-block project-technical-decisions"><div class="project-technical-section-heading"><span>01</span><h3>${decisionsLabel}</h3></div><ol class="project-decision-timeline">${specs.map((spec,index)=>{const label=typeof spec==='string'?'':spec.label||'';const body=typeof spec==='string'?spec:spec.value||spec.description||'';return `<li class="project-decision-item"><span class="project-decision-index">${String(index+1).padStart(2,'0')}</span><div>${label?`<strong>${label}</strong>`:''}<p>${body}</p></div></li>`;}).join('')}</ol></div>` : ''}
-      ${technologies.length ? `<div class="project-detail-block project-technical-technologies"><div class="project-technical-section-heading"><span>02</span><h3>${technologiesLabel}</h3></div><ul class="project-technology-list project-technology-grid--rationale">${technologies.map((technology,index)=>{const label=typeof technology==='string'?technology:technology.name||technology.label||'';const detail=typeof technology==='object'?technology.description||technology.detail||'':'';return `<li><span class="project-technology-order">${String(index+1).padStart(2,'0')}</span><div><strong>${label}</strong>${detail?`<span>${detail}</span>`:''}</div><i aria-hidden="true"></i></li>`;}).join('')}</ul></div>` : ''}
-      ${architectureNodes.length ? `<div class="project-detail-block project-architecture-block"><div class="project-technical-section-heading"><span>03</span><h3>${state.data.modal.architectureTitle || 'Arquitetura / stack'}</h3></div><div class="project-architecture-canvas"><div class="project-architecture-flow" aria-label="${state.data.modal.architectureAria || ''}">${architectureNodes.slice(0,8).map((node,index)=>`<span class="project-architecture-node"><i>${String(index+1).padStart(2,'0')}</i><strong>${node}</strong></span>${index<Math.min(architectureNodes.length,8)-1?'<b aria-hidden="true">→</b>':''}`).join('')}</div></div></div>` : ''}
-    </section>`;
-}
-
-function renderProjectModalContent(tabId) {
-  const root = qs('#project-modal-content');
-  const project = state.gallery.project;
-  if (!root || !project) return;
-
-  if (tabId === 'overview') root.innerHTML = renderProjectOverview(project);
-  else if (tabId === 'technical') root.innerHTML = renderProjectTechnical(project);
-  else if (window.PortfolioExperience?.renderProjectTab) {
-    const handled = window.PortfolioExperience.renderProjectTab({
-      tabId,
-      project,
-      data: state.data,
-      root
-    });
-    if (!handled) root.innerHTML = '';
-  } else root.innerHTML = '';
-
-  root.scrollTop = 0;
-}
-
-function applyGalleryTransform() {
-  const image = qs('#image-modal-image');
-  if (!image) return;
-  image.style.transform = `scale(${state.gallery.zoom}) rotate(${state.gallery.rotation}deg)`;
-  image.dataset.zoomed = state.gallery.zoom !== 1 || state.gallery.rotation !== 0 ? 'true' : 'false';
-}
-
-function resetGalleryTransform() {
-  state.gallery.zoom = 1;
-  state.gallery.rotation = 0;
-  applyGalleryTransform();
-}
-
-function setProjectModalTab(tabId) {
-  if (!state.gallery.tabs.some((tab) => tab.id === tabId)) return;
-
-  state.gallery.activeTab = tabId;
-  const galleryPane = qs('#project-modal-gallery');
-  const contentPane = qs('#project-modal-content');
-  const counter = qs('#image-modal-counter');
-  const fullscreenButton = qs('#image-modal-fullscreen');
-  const transformControls = qs('#image-modal-transform-controls');
-  const isImages = tabId === 'images';
-
-  if (!isImages) {
-    state.gallery.imageRequestId += 1;
-    qs('.image-modal-frame')?.classList.remove('is-image-loading');
-    qs('.image-modal-frame')?.setAttribute('aria-busy', 'false');
-    if (state.gallery.isFullscreen) setGalleryFullscreen(false);
-  }
-  if (galleryPane) {
-    galleryPane.hidden = !isImages;
-    if (isImages) galleryPane.setAttribute('aria-labelledby', `project-tab-${tabId}`);
-    else galleryPane.removeAttribute('aria-labelledby');
-  }
-  if (contentPane) {
-    contentPane.hidden = isImages;
-    if (!isImages) contentPane.setAttribute('aria-labelledby', `project-tab-${tabId}`);
-    else contentPane.removeAttribute('aria-labelledby');
-  }
-  if (counter) counter.hidden = !isImages;
-  if (transformControls) transformControls.hidden = !isImages;
-  if (fullscreenButton) {
-    fullscreenButton.hidden = !isImages;
-    fullscreenButton.disabled = !isImages;
-    fullscreenButton.setAttribute('aria-hidden', String(!isImages));
-    fullscreenButton.tabIndex = isImages ? 0 : -1;
-  }
-
-  updateProjectModalTabState();
-
-  if (isImages) {
-    updateProjectGallery();
-    window.requestAnimationFrame(fitGalleryImageToStage);
-  } else {
-    renderProjectModalContent(tabId);
-  }
-}
-
-function syncProjectGalleryThumbnails(thumbnails) {
-  if (!thumbnails) return;
-
-  const total = state.gallery.items.length;
-  const hasMultipleImages = total > 1;
-  thumbnails.hidden = !hasMultipleImages;
-
-  if (!hasMultipleImages) {
-    thumbnails.innerHTML = '';
-    return;
-  }
-
-  let buttons = qsa('[data-gallery-index]', thumbnails);
-  const needsRebuild = buttons.length !== total || buttons.some((button, index) => Number(button.dataset.galleryIndex) !== index);
-
-  if (needsRebuild) {
-    thumbnails.innerHTML = state.gallery.items.map((galleryItem, index) => `
-      <button
-        type="button"
-        class="image-modal-thumbnail"
-        data-gallery-index="${index}"
-        aria-label="${replacePlaceholders(state.data.modal.thumbnailLabel, {
-          index: index + 1,
-          title: state.gallery.title
-        })}"
-        aria-current="false">
-        <img src="${galleryItem.src}" alt="" loading="lazy" decoding="async" fetchpriority="low">
-        <span>${String(index + 1).padStart(2, '0')}</span>
-      </button>
-    `).join('');
-
-    buttons = qsa('[data-gallery-index]', thumbnails);
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const nextIndex = Number(button.dataset.galleryIndex);
-        if (!Number.isInteger(nextIndex) || nextIndex === state.gallery.index) return;
-        state.gallery.index = nextIndex;
-        updateProjectGallery();
-      });
-    });
-  }
-
-  buttons.forEach((button, index) => {
-    const isActive = index === state.gallery.index;
-    button.classList.toggle('is-active', isActive);
-    button.setAttribute('aria-current', isActive ? 'true' : 'false');
-  });
-
-  const activeThumbnail = buttons[state.gallery.index];
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  activeThumbnail?.scrollIntoView({
-    behavior: reducedMotion ? 'auto' : 'smooth',
-    block: 'nearest',
-    inline: 'center'
-  });
-}
-
-function updateProjectGallery() {
-  const modal = qs('#image-modal');
-  if (!modal || !state.gallery.items.length) return;
-
-  const item = state.gallery.items[state.gallery.index];
-  const total = state.gallery.items.length;
-  const modalImage = qs('#image-modal-image');
-  const modalFallback = qs('#image-modal-fallback');
-  const modalCaption = qs('#image-modal-caption');
-  const modalCounter = qs('#image-modal-counter');
-  const previousButton = qs('#image-modal-prev');
-  const nextButton = qs('#image-modal-next');
-  const thumbnails = qs('#image-modal-thumbnails');
-  const frame = qs('.image-modal-frame');
-  if (!modalImage || !modalFallback || !modalCaption || !modalCounter || !previousButton || !nextButton) return;
-
-  const requestId = ++state.gallery.imageRequestId;
-  resetGalleryTransform();
-  const hasVisibleImage = Boolean(modalImage.getAttribute('src')) && !modalImage.hidden;
-
-  modal.classList.remove('image-is-portrait', 'image-is-square', 'image-is-landscape');
-  modalFallback.hidden = true;
-  frame?.classList.add('is-image-loading');
-  frame?.setAttribute('aria-busy', 'true');
-  if (!hasVisibleImage) modalImage.hidden = true;
-
-  modalCaption.textContent = item.caption || replacePlaceholders(state.data.modal.caption, {
-    title: state.gallery.title,
-    index: state.gallery.index + 1,
-    count: total
-  });
-
-  modalCounter.textContent = replacePlaceholders(state.data.modal.counter, {
-    current: state.gallery.index + 1,
-    count: total
-  });
-
-  const hasMultipleImages = total > 1;
-  previousButton.hidden = !hasMultipleImages;
-  nextButton.hidden = !hasMultipleImages;
-  previousButton.disabled = !hasMultipleImages;
-  nextButton.disabled = !hasMultipleImages;
-  syncProjectGalleryThumbnails(thumbnails);
-
-  preloadGalleryImage(item.src)
-    .then((loadedImage) => {
-      if (requestId !== state.gallery.imageRequestId) return;
-      if (!modal.classList.contains('is-open') || state.gallery.activeTab !== 'images') return;
-      applyGalleryImageSizing(loadedImage.width, loadedImage.height);
-      updateGalleryImageShapeFromDimensions(loadedImage.width, loadedImage.height);
-
-      modalImage.alt = item.alt || replacePlaceholders(state.data.modal.imageAlt, {
-        title: state.gallery.title,
-        index: state.gallery.index + 1
-      });
-      modalImage.src = loadedImage.src;
-      modalImage.hidden = false;
-      modalFallback.hidden = true;
-      applyGalleryTransform();
-
-      frame?.classList.remove('is-image-loading');
-      frame?.setAttribute('aria-busy', 'false');
-      preloadAdjacentGalleryImages();
-    })
-    .catch(() => {
-      if (requestId !== state.gallery.imageRequestId) return;
-      modalImage.hidden = true;
-      modalFallback.hidden = false;
-      frame?.classList.remove('is-image-loading');
-      frame?.setAttribute('aria-busy', 'false');
-    });
-}
-
-function openProjectGallery(project, trigger) {
-  const modal = qs('#image-modal');
-  const modalTitle = qs('#image-modal-title');
-  const closeButton = qs('.image-modal-close');
-  const tabs = getProjectTabs(project);
-  const gallery = getProjectGallery(project);
-  if (!modal || !modalTitle || !closeButton || !tabs.length) return;
-
-  state.gallery.items = gallery;
-  state.gallery.index = 0;
-  state.gallery.title = project.title;
-  state.gallery.project = project;
-  state.gallery.tabs = tabs;
-  state.gallery.activeTab = tabs[0].id;
-  state.gallery.lastTrigger = trigger;
-  state.gallery.pointerStartX = null;
-  state.gallery.isFullscreen = false;
-  state.gallery.zoom = 1;
-  state.gallery.rotation = 0;
-
-  modalTitle.textContent = project.title;
-  modal.classList.add('is-open');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('modal-open');
-
-  renderProjectModalTabs();
-  setProjectModalTab(state.gallery.activeTab);
-  window.requestAnimationFrame(() => closeButton.focus());
-}
-
-function initProjectGallery() {
-  qsa('.project-gallery-trigger').forEach((trigger) => {
-    trigger.addEventListener('click', () => {
-      const projectIndex = Number(trigger.dataset.projectIndex);
-      const project = state.data.projects[projectIndex];
-      if (project) projectDeepLinks ? projectDeepLinks.open(project, trigger) : openProjectGallery(project, trigger);
-    });
-  });
-}
-
-function moveProjectGallery(direction) {
-  const total = state.gallery.items.length;
-  if (total <= 1) return;
-
-  state.gallery.index = (state.gallery.index + direction + total) % total;
-  updateProjectGallery();
-}
-
-function closeProjectGallery() {
-  const modal = qs('#image-modal');
-  const modalImage = qs('#image-modal-image');
-  const thumbnails = qs('#image-modal-thumbnails');
-  const tabs = qs('#project-modal-tabs');
-  const content = qs('#project-modal-content');
-  if (!modal || !modalImage) return;
-
-  const lastTrigger = state.gallery.lastTrigger;
-  state.gallery.imageRequestId += 1;
-
-  exitGalleryFullscreenImmediately();
-  clearGalleryImageSizing();
-  modal.classList.remove('image-is-portrait', 'image-is-square', 'image-is-landscape');
-  modal.classList.remove('is-open');
-  modal.setAttribute('aria-hidden', 'true');
-  modalImage.src = '';
-  modalImage.alt = '';
-  modalImage.hidden = true;
-  qs('.image-modal-frame')?.classList.remove('is-image-loading');
-  qs('.image-modal-frame')?.setAttribute('aria-busy', 'false');
-  if (thumbnails) thumbnails.innerHTML = '';
-  if (tabs) tabs.innerHTML = '';
-  if (content) content.innerHTML = '';
-  document.body.classList.remove('modal-open');
-
-  state.gallery.items = [];
-  state.gallery.index = 0;
-  state.gallery.title = '';
-  state.gallery.project = null;
-  state.gallery.tabs = [];
-  state.gallery.activeTab = null;
-  state.gallery.lastTrigger = null;
-  state.gallery.pointerStartX = null;
-  state.gallery.isFullscreen = false;
-  state.gallery.zoom = 1;
-  state.gallery.rotation = 0;
-  modalImage.style.transform = '';
-  window.PortfolioExperience?.onProjectModalClose?.();
-
-  if (lastTrigger && document.contains(lastTrigger)) {
-    window.requestAnimationFrame(() => lastTrigger.focus());
-  }
-}
-
-function handleGalleryImageError() {
-  const modalImage = qs('#image-modal-image');
-  const fallback = qs('#image-modal-fallback');
-  if (!modalImage || !fallback) return;
-
-  modalImage.hidden = true;
-  fallback.hidden = false;
-  qs('.image-modal-frame')?.classList.remove('is-image-loading');
-  qs('.image-modal-frame')?.setAttribute('aria-busy', 'false');
-}
-
-function trapModalFocus(event) {
-  const modal = qs('#image-modal');
-  if (!modal?.classList.contains('is-open') || event.key !== 'Tab') return;
-
-  const focusable = qsa('button:not([disabled]):not([hidden]), [href], [tabindex]:not([tabindex="-1"])', modal)
-    .filter((element) => !element.hidden && element.offsetParent !== null);
-  if (!focusable.length) return;
-
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-
-  if (event.shiftKey && document.activeElement === first) {
-    event.preventDefault();
-    last.focus();
-  } else if (!event.shiftKey && document.activeElement === last) {
-    event.preventDefault();
-    first.focus();
-  }
-}
-
-function requestCloseProjectGallery() {
-  if (projectDeepLinks) projectDeepLinks.close();
-  else closeProjectGallery();
-}
-
-function initModalEvents() {
-  qsa('[data-close-modal]').forEach((item) => {
-    item.addEventListener('click', requestCloseProjectGallery);
-  });
-
-  qs('#image-modal-prev')?.addEventListener('click', () => moveProjectGallery(-1));
-  qs('#image-modal-next')?.addEventListener('click', () => moveProjectGallery(1));
-
-  const modalImage = qs('#image-modal-image');
-  modalImage?.addEventListener('error', handleGalleryImageError);
-  modalImage?.addEventListener('load', () => {
-    updateGalleryImageShape();
-    fitGalleryImageToStage();
-  });
-
-  qs('#image-modal-fullscreen')?.addEventListener('click', () => {
-    setGalleryFullscreen(!state.gallery.isFullscreen);
-  });
-
-  qs('#image-modal-zoom-in')?.addEventListener('click', () => { state.gallery.zoom = Math.min(3, state.gallery.zoom + .25); applyGalleryTransform(); });
-  qs('#image-modal-zoom-out')?.addEventListener('click', () => { state.gallery.zoom = Math.max(.5, state.gallery.zoom - .25); applyGalleryTransform(); });
-  qs('#image-modal-rotate-left')?.addEventListener('click', () => { state.gallery.rotation -= 90; applyGalleryTransform(); });
-  qs('#image-modal-rotate-right')?.addEventListener('click', () => { state.gallery.rotation += 90; applyGalleryTransform(); });
-  qs('#image-modal-reset')?.addEventListener('click', resetGalleryTransform);
-
-  const modalFrame = qs('.image-modal-frame');
-  modalFrame?.addEventListener('wheel', (event) => {
-    if (state.gallery.activeTab !== 'images' || !event.ctrlKey) return;
-    event.preventDefault();
-    state.gallery.zoom = Math.max(.5, Math.min(3, state.gallery.zoom + (event.deltaY < 0 ? .15 : -.15)));
-    applyGalleryTransform();
-  }, { passive: false });
-
-  const stage = qs('.image-modal-stage');
-  stage?.addEventListener('pointerdown', (event) => {
-    state.gallery.pointerStartX = event.clientX;
-  });
-  stage?.addEventListener('pointerup', (event) => {
-    if (state.gallery.pointerStartX === null || state.gallery.items.length <= 1) return;
-
-    const distance = event.clientX - state.gallery.pointerStartX;
-    state.gallery.pointerStartX = null;
-
-    if (Math.abs(distance) < 50) return;
-    moveProjectGallery(distance > 0 ? -1 : 1);
-  });
-  stage?.addEventListener('pointercancel', () => {
-    state.gallery.pointerStartX = null;
-  });
-
-  document.addEventListener('keydown', (event) => {
-    const modal = qs('#image-modal');
-    if (!modal?.classList.contains('is-open')) return;
-
-    if (event.key === 'Escape') {
-      if (state.gallery.isFullscreen) {
-        setGalleryFullscreen(false);
-      } else {
-        requestCloseProjectGallery();
-      }
-      return;
-    }
-
-    if (state.gallery.activeTab !== 'images') return;
-
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      moveProjectGallery(-1);
-    } else if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      moveProjectGallery(1);
-    } else if (event.key === 'Home' && state.gallery.items.length > 1) {
-      event.preventDefault();
-      state.gallery.index = 0;
-      updateProjectGallery();
-    } else if (event.key === 'End' && state.gallery.items.length > 1) {
-      event.preventDefault();
-      state.gallery.index = state.gallery.items.length - 1;
-      updateProjectGallery();
-    }
-  });
-
-  document.addEventListener('keydown', trapModalFocus);
-
-  document.addEventListener('fullscreenchange', () => {
-    const modal = qs('#image-modal');
-    if (!modal?.classList.contains('is-open')) return;
-    if (document.fullscreenElement !== modal) modal.classList.remove('is-fullscreen-fallback');
-    syncGalleryFullscreenState();
-  });
-
-  let galleryResizeFrame = null;
-  const scheduleGalleryFit = () => {
-    const modal = qs('#image-modal');
-    if (!modal?.classList.contains('is-open') || state.gallery.activeTab !== 'images') return;
-
-    if (galleryResizeFrame) window.cancelAnimationFrame(galleryResizeFrame);
-    galleryResizeFrame = window.requestAnimationFrame(() => {
-      galleryResizeFrame = null;
-      fitGalleryImageToStage();
-    });
-  };
-
-  window.addEventListener('resize', () => {
-    syncCertificateDescriptionToggles();
-    scheduleGalleryFit();
-  });
-  window.visualViewport?.addEventListener('resize', scheduleGalleryFit);
-}
-
-
 function initBackToTop() {
   qsa('a[href="#topo"]').forEach((link) => {
     link.addEventListener('click', (event) => {
@@ -2313,51 +1213,12 @@ function initBackToTop() {
   });
 }
 
-function initLanguageSwitcher() {
-  qsa('[data-lang-trigger]').forEach((trigger) => {
-    trigger.addEventListener('click', (event) => {
-      const switcher = event.currentTarget.closest('[data-lang-switcher]');
-      const willOpen = !switcher.classList.contains('is-open');
-
-      closeLanguageMenus(willOpen ? switcher : null);
-      switcher.classList.toggle('is-open', willOpen);
-      trigger.setAttribute('aria-expanded', String(willOpen));
-    });
-  });
-
-  qsa('.lang-option').forEach((option) => {
-    option.addEventListener('click', async (event) => {
-      const locale = event.currentTarget.dataset.locale;
-      syncLanguageSelects(locale);
-      closeLanguageMenus();
-      await applyLocale(locale);
-
-      const nav = qs('.site-nav');
-      const toggle = qs('.nav-toggle');
-      if (window.innerWidth <= 1120 && nav && toggle) {
-        nav.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  });
-
-  document.addEventListener('click', (event) => {
-    if (event.target.closest('[data-lang-switcher]')) return;
-    closeLanguageMenus();
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeLanguageMenus();
-  });
-}
-
 async function applyLocale(locale) {
-  projectDeepLinks?.restoreMetadata();
-  if (qs('#image-modal')?.classList.contains('is-open')) closeProjectGallery();
   const normalized = config.locales.includes(locale) ? locale : config.defaultLocale;
   state.locale = normalized;
   window.localStorage.setItem('portfolio-locale', normalized);
   state.data = await loadLocaleData(normalized);
+  if (window.PortfolioProjectLinks.redirectLegacy(state.data.projects, state.data.modal.unavailableTitle)) return;
   state.activeCategory = 'all';
 
   updateMeta();
@@ -2374,37 +1235,21 @@ async function applyLocale(locale) {
   renderEducation();
   renderCertificates();
   renderContacts();
-  window.PortfolioRecommendationsUI?.render(normalized);
-  initRoleRotation();
+  window.PortfolioRecommendationsUI?.render(normalized, state.data.recommendations);
   initReveal();
   setCurrentYear();
   window.PortfolioExperience?.setLocale?.(normalized, state.data);
-  if (!projectDeepLinks) {
-    projectDeepLinks = window.PortfolioProjectLinks.createController({
-      projects: state.data.projects,
-      locale: normalized,
-      openView: openProjectGallery,
-      closeView: closeProjectGallery,
-      getOpenProject: () => state.gallery.project
-    });
-  } else {
-    projectDeepLinks.setCatalog(state.data.projects, normalized);
-  }
-  projectDeepLinks.sync();
+
 }
 
 async function init() {
   applyTheme();
   renderBranding();
   applyFeatureVisibility();
-  initMenu();
-  initSectionMenu();
-  initModalEvents();
-  initLanguageSwitcher();
+  window.PortfolioNavigation.bind();
   initBackToTop();
 
   const locale = detectLocale();
-  syncLanguageSelects(locale);
   await applyLocale(locale);
 }
 

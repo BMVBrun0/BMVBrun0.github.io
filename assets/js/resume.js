@@ -4,27 +4,8 @@
   const P = window.PortfolioPages;
   const locale = P.detectLocale();
   const data = await P.loadLocale(locale);
-  const extra = P.extended[locale]?.resume || P.extended['pt-BR'].resume;
-  const ui = {
-    'pt-BR': {
-      available: 'Aberto a oportunidades remotas e internacionais',
-      jump: [['Resumo', 'resume-summary-section'], ['Origem', 'resume-origin-section'], ['Experiência', 'resume-experience-section'], ['Stack', 'resume-skills-section'], ['Como trabalho', 'resume-principles-section'], ['Projetos', 'resume-projects-section'], ['Formação', 'resume-learning-section'], ['Informações', 'resume-facts-section']],
-      openDetails: 'Abrir história, entregas e contexto',
-      facts: [['Experiência', '8+ anos'], ['Atuação', 'Full Stack · Mobile · Tech Lead'], ['Base', 'Brasil'], ['Perfil', 'Hands-on + arquitetura + liderança']]
-    },
-    en: {
-      available: 'Open to remote and international opportunities',
-      jump: [['Summary', 'resume-summary-section'], ['Origins', 'resume-origin-section'], ['Experience', 'resume-experience-section'], ['Stack', 'resume-skills-section'], ['How I work', 'resume-principles-section'], ['Projects', 'resume-projects-section'], ['Education', 'resume-learning-section'], ['Details', 'resume-facts-section']],
-      openDetails: 'Open story, delivery and context',
-      facts: [['Experience', '8+ years'], ['Focus', 'Full Stack · Mobile · Tech Lead'], ['Based in', 'Brazil'], ['Profile', 'Hands-on + architecture + leadership']]
-    },
-    es: {
-      available: 'Abierto a oportunidades remotas e internacionales',
-      jump: [['Resumen', 'resume-summary-section'], ['Origen', 'resume-origin-section'], ['Experiencia', 'resume-experience-section'], ['Stack', 'resume-skills-section'], ['Cómo trabajo', 'resume-principles-section'], ['Proyectos', 'resume-projects-section'], ['Formación', 'resume-learning-section'], ['Información', 'resume-facts-section']],
-      openDetails: 'Abrir historia, entregas y contexto',
-      facts: [['Experiencia', '8+ años'], ['Enfoque', 'Full Stack · Mobile · Tech Lead'], ['Base', 'Brasil'], ['Perfil', 'Hands-on + arquitectura + liderazgo']]
-    }
-  }[locale] || null;
+  const extra = data.career;
+  const ui = data.careerUi;
 
   P.applyTheme();
   P.setBranding();
@@ -78,7 +59,9 @@
   set('resume-facts-kicker', labels.facts);
   set('resume-links-title', labels.links);
 
-  P.qs('#resume-jumpbar').innerHTML = ui.jump.map(([label, id]) => `<a href="#${P.escapeHtml(id)}">${P.escapeHtml(label)}</a>`).join('');
+  P.qs('#resume-jumpbar').setAttribute('aria-label', ui.jumpLabel);
+  set('resume-email-label', ui.email);
+  P.qs('#resume-jumpbar').innerHTML = ui.jump.map(([label, id]) => `<a href="${P.escapeHtml(P.fragment(id))}">${P.escapeHtml(label)}</a>`).join('');
   P.qs('#resume-facts-list').innerHTML = ui.facts.map(([label, value]) => `<div class="resume-fact"><dt>${P.escapeHtml(label)}</dt><dd>${P.escapeHtml(value)}</dd></div>`).join('');
   P.qs('#resume-hero-metrics').innerHTML = (extra.metrics || []).map((item) => `<article><strong>${P.escapeHtml(item.value)}</strong><span>${P.escapeHtml(item.label)}</span></article>`).join('');
 
@@ -87,7 +70,7 @@
     const cvUrl = P.config.cvByLocale?.[locale] || P.config.cvByLocale?.[P.config.defaultLocale] || '#';
     download.href = cvUrl;
     download.setAttribute('download', locale === 'pt-BR' ? 'Bruno_Getten_Triches_Curriculo.pdf' : 'Bruno_Getten_Triches_Resume.pdf');
-    download.innerHTML = `<svg class="page-button__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg><span>${P.escapeHtml(extra.download)}</span>`;
+    download.innerHTML = `<i class="page-button__icon bi bi-cloud-arrow-down-fill" aria-hidden="true"></i><span>${P.escapeHtml(extra.download)}</span>`;
   }
 
   P.qs('#resume-origin-grid').innerHTML = (extra.origin || []).map((item, index) => `
@@ -148,7 +131,7 @@
   const experience = Array.isArray(data.experience) ? data.experience : [];
   const desktop = matchMedia('(min-width: 980px)').matches;
   P.qs('#resume-timeline').innerHTML = experience.map((job, index) => {
-    const details = P.getCompanyDetails(locale, job.title);
+    const details = data.companyDetails[P.companyName(job.title)];
     const title = splitJobTitle(job.title);
     const stack = details?.stack || [];
     const boxes = details?.sections?.length
@@ -171,10 +154,10 @@
     <article class="resume-principle-card"><span>${String(index + 1).padStart(2, '0')}</span><h3>${P.escapeHtml(item.title || '')}</h3><p>${P.escapeHtml(item.text || '')}</p></article>`).join('');
 
   const projects = Array.isArray(data.projects) ? data.projects.filter((item) => !item.hidden) : [];
-  const selected = projects.filter((project) => P.projectLink(project)).slice(0, 6);
+  const selected = projects.filter((project) => window.PortfolioProjectLinks.accessUrl(project, P.config)).slice(0, 6);
   const fallback = selected.length >= 4 ? selected : projects.slice(0, 6);
   P.qs('#resume-project-grid').innerHTML = fallback.map((project) => {
-    const cover = P.galleryFor(project)[0] || project.image;
+    const cover = P.galleryFor(project)[0] || P.config.branding.socialPreview;
     return `<article class="resume-project-card"><img src="${P.escapeHtml(cover)}" alt="${P.escapeHtml(project.title)}" loading="lazy" decoding="async" fetchpriority="low"><div><h3>${P.escapeHtml(project.title)}</h3><p>${P.escapeHtml(project.description || '')}</p></div></article>`;
   }).join('');
 
@@ -249,13 +232,13 @@
     P.qsa('.resume-job__details').forEach((item, index) => { item.open = Boolean(printState[index]); });
   });
   const jumpLinks = P.qsa('#resume-jumpbar a');
-  const jumpSections = jumpLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  const jumpSections = jumpLinks.map((link) => document.getElementById(link.hash.slice(1))).filter(Boolean);
   if ('IntersectionObserver' in window && jumpSections.length) {
     const sectionObserver = new IntersectionObserver((entries) => {
       const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
       if (!visible) return;
       jumpLinks.forEach((link) => {
-        const active = link.getAttribute('href') === `#${visible.target.id}`;
+        const active = link.hash === `#${visible.target.id}`;
         link.classList.toggle('is-active', active);
         if (active) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
       });

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://bmvbrun0.github.io/</loc>
-    <lastmod>2026-10-12</lastmod>
-  </url>
-  <url>
-    <loc>https://bmvbrun0.github.io/library.html</loc>
-    <lastmod>2026-10-12</lastmod>
-  </url>
-  <url>
-    <loc>https://bmvbrun0.github.io/resume.html</loc>
-    <lastmod>2026-10-12</lastmod>
-  </url>
-  <url>
-    <loc>https://bmvbrun0.github.io/recommendations.html</loc>
-    <lastmod>2026-10-12</lastmod>
-  </url>
+  <url><loc>https://bmvbrun0.github.io/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/biblioteca/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/carreira/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/recomendacoes/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/settasynk/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/accessibility-plugin/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/xtremefut/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/aletheia/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/whitelabel-booking/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/truco-game/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/radar-publico/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/support-circle/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/media-forge/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/pocket-links/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/imobly/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/garimpei/</loc></url>
+  <url><loc>https://bmvbrun0.github.io/projetos/realtime-messaging/</loc></url>
 </urlset>

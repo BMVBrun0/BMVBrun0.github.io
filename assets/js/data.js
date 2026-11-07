@@ -1,4 +1,5 @@
 window.portfolioConfig = {
+  siteUrl: 'https://bmvbrun0.github.io/',
   profile: {
     name: 'Bruno Getten Triches',
     nickname: 'BMVBrun0'
@@ -53,11 +54,10 @@ window.portfolioConfig = {
     microInteractions: 1,
     ambientDepth: 1,
     spaceNetwork: 1,
-    particleField: 1,
-    projectStory: 1
+    particleField: 1
   },
   carousel: {
-    autoplay: 1,
+    autoplay: 0,
     intervalMs: 5000
   },
 
@@ -127,9 +127,6 @@ window.portfolioConfig = {
       drift: 0.16,
       pointerParallax: 0.32,
       maxDevicePixelRatio: 1.35
-    },
-    story: {
-      maxFeatureSteps: 3
     },
     physicsShowcase: {
       moduleUrl: 'https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.min.js',

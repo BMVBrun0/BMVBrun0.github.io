@@ -11,7 +11,9 @@
     "openMenu": "Open menu",
     "mainNavigation": "Main navigation",
     "socialLinks": "Social links",
-    "professionalSummary": "Professional summary"
+    "professionalSummary": "Professional summary",
+    "menu": "Menu",
+    "closeMenu": "Close menu"
   },
   "language": {
     "label": "Language",
@@ -29,7 +31,7 @@
     "contact": "Contact",
     "certificates": "Education",
     "library": "Library",
-    "resume": "Résumé+",
+    "resume": "Career",
     "portfolio": "Portfolio",
     "overview": "Overview",
     "recommendations": "Recommendations"
@@ -46,7 +48,7 @@
     ],
     "text": "For 8+ years I have built, evolved and supported production web products, mobile applications, APIs and business systems. I work hands-on across frontend, backend, mobile, data and infrastructure, taking ownership of architecture, legacy modernization, performance, technical decisions and leadership when the product requires it.",
     "primaryCta": "Download résumé",
-    "secondaryCta": "Detailed résumé",
+    "secondaryCta": "Career",
     "stats": [
       {
         "title": "8+ years building software",
@@ -60,7 +62,8 @@
         "title": "Technical leadership without leaving the code",
         "text": "Code review, mentoring, architecture decisions and product evolution as a natural extension of hands-on experience."
       }
-    ]
+    ],
+    "projectsCta": "View projects"
   },
   "about": {
     "eyebrow": "About me",
@@ -260,6 +263,7 @@
   ],
   "projects": [
     {
+      "id": "setta_synk",
       "title": "SettaSynk — web and mobile property inspections",
       "category": "product",
       "image": "assets/img/portfolio/setta_synk.webp",
@@ -360,6 +364,7 @@
       }
     },
     {
+      "id": "accessibility_plugin",
       "title": "Accessibility Plugin — web accessibility SDK",
       "category": "tool",
       "image": "assets/img/portfolio/accessibility_plugin.webp",
@@ -463,6 +468,7 @@
       }
     },
     {
+      "id": "xtreme_fut",
       "title": "XtremeFut — futsal training with Ferrão",
       "category": "mobile",
       "image": "assets/img/portfolio/xtreme_fut.webp",
@@ -574,6 +580,7 @@
       }
     },
     {
+      "id": "aletheia",
       "title": "Aletheia — news, context and public data",
       "category": "product",
       "image": "assets/img/portfolio/aletheia.webp",
@@ -670,6 +677,7 @@
       }
     },
     {
+      "id": "whitelabel_booking",
       "title": "Scheduling and Administration Web Panel",
       "category": "product",
       "image": "assets/img/portfolio/whitelabel_booking.webp",
@@ -768,6 +776,7 @@
       }
     },
     {
+      "id": "truco_game",
       "title": "Unity 3D Multiplayer Truco",
       "category": "game",
       "image": "assets/img/portfolio/truco_game.webp",
@@ -850,6 +859,7 @@
       }
     },
     {
+      "id": "radar_publico",
       "title": "Radar Público · Public Tender Search & Intelligence",
       "category": "product",
       "image": "assets/img/portfolio/radar_publico.webp",
@@ -964,6 +974,7 @@
       }
     },
     {
+      "id": "support_circle",
       "title": "SupportCircle · Neurodivergence & Support Network",
       "category": "product",
       "image": "assets/img/portfolio/support_circle.webp",
@@ -1086,6 +1097,7 @@
       }
     },
     {
+      "id": "media_forge",
       "title": "MediaForge — media processing and engineering",
       "category": "tool",
       "image": "assets/img/portfolio/media_forge.webp",
@@ -1198,6 +1210,7 @@
       }
     },
     {
+      "id": "pocket_links",
       "title": "Pocket Links — managed links, QR Codes and analytics",
       "category": "mobile",
       "image": "assets/img/portfolio/pocket_links.webp",
@@ -1310,6 +1323,7 @@
       }
     },
     {
+      "id": "imobly",
       "title": "Mazetto Imobiliária",
       "category": "product",
       "image": "assets/img/portfolio/imobly.webp",
@@ -1419,6 +1433,7 @@
       }
     },
     {
+      "id": "garimpei",
       "title": "Garimpei — curated fashion, lists and catalog management",
       "category": "product",
       "image": "assets/img/portfolio/garimpei.webp",
@@ -1528,6 +1543,7 @@
       }
     },
     {
+      "id": "realtime_messaging",
       "title": "Realtime Messaging · Real-Time Messaging Platform",
       "category": "product",
       "image": "assets/img/portfolio/realtime_messaging.webp",
@@ -1687,7 +1703,8 @@
   ],
   "footer": {
     "rights": "All rights reserved.",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "credit": "Template by"
   },
   "carousel": {
     "projectsLabel": "Projects carousel",
@@ -2296,8 +2313,682 @@
   },
   "homeCtas": {
     "about": "View detailed profile and résumé",
-    "experience": "View full career history in Résumé+",
+    "experience": "View full career history",
     "projects": "Explore the full project library",
     "education": "View education and certifications in the library"
+  },
+  "recommendations": {
+    "eyebrow": "PEOPLE I WORKED WITH",
+    "title": "The people behind the projects.",
+    "subtitle": "Beyond job titles and technology stacks, the people I built products with can tell you what working together was actually like.",
+    "read": "Read the full letter",
+    "all": "See all recommendations",
+    "previous": "Previous recommendation",
+    "next": "Next recommendation",
+    "outOf": "of",
+    "carousel": "Professional recommendation carousel",
+    "lettersLabel": "Recommendation letters",
+    "pageKicker": "PROFESSIONAL REFERENCES",
+    "pageTitle": "In the words of people I worked with.",
+    "full": "Full letter",
+    "date": "October 9, 2026",
+    "period": "Worked together",
+    "visit": "LinkedIn profile",
+    "closing": "Sincerely,",
+    "more": "Back to top",
+    "download": "Download English letter",
+    "english": "English version",
+    "portuguese": "Original in Portuguese",
+    "view": "View letter",
+    "meta": "Professional recommendation letters from colleagues who worked with me at Infogen Sistemas and Sensorama Play.",
+    "documentTitle": "Professional recommendations",
+    "entries": {
+      "patrick-walter": {
+        "role": "Technical Coordinator",
+        "period": "04/2022 – 11/2023",
+        "summary": "I was one of Bruno’s technical mentors, but our conversations soon became genuine exchanges of ideas. He never wanted to just ship a screen; he wanted to understand the business, the integrations, and what each decision meant for the system later on.",
+        "letter": {
+          "greeting": "To the Selection Committee,",
+          "paragraphs": [
+            "I am pleased to recommend Bruno Getten Triches for professional or academic opportunities. I worked with Bruno at Infogen Sistemas and, as Technical Coordinator, had the chance to follow his progress as an engineer while discussing technical challenges with him on a regular basis.",
+            "I was an important technical reference for Bruno in full-stack and mobile development, but what impressed me was how quickly those conversations became genuine exchanges of ideas. He did not limit himself to implementing what was requested. He wanted to understand the system, the business need behind a feature, and the implications of a decision for future maintenance.",
+            "At Infogen, Bruno became deeply involved in modernizing mobile applications, particularly the move toward React Native. His contribution extended beyond user interfaces: he dealt with ERP integrations, APIs, offline synchronization, application releases, and the practical challenges of supporting software already in use. He also invested time in documenting solutions and helping other developers become productive.",
+            "In my assessment, Bruno combines technical range with strong ownership. He is comfortable investigating unfamiliar problems, takes quality seriously, and knows how to collaborate without losing sight of delivery. I believe he can make a meaningful contribution to a distributed engineering team and recommend him with confidence."
+          ],
+          "closing": "Sincerely,"
+        }
+      },
+      "renan-rodrigues": {
+        "role": "Mid-Level Analyst",
+        "period": "01/2022 – 11/2023 · later independent projects",
+        "summary": "We started out at almost the same time, as interns, and I watched Bruno become a go-to person for mobile development. When something broke, he wouldn’t settle for a patch. He dug into the cause and shared what he learned with the team.",
+        "letter": {
+          "greeting": "Hello,",
+          "paragraphs": [
+            "I worked with Bruno Getten Triches at Infogen Sistemas, and we basically grew into our careers together. We started at around the same stage, as interns, and I got to see him take on bigger challenges and more responsibility as time went on. That gives me a pretty good perspective on how he works, not just what is written on his résumé.",
+            "One thing about Bruno is that he really likes figuring things out. If an older part of a system was causing problems, or a mobile app needed a better solution, he would dig into the details instead of settling for a quick fix. He became a key person in our mobile work, helping improve and modernize applications with React Native while still understanding how they connected to the rest of the system.",
+            "He was also someone the team could count on. Bruno shared what he learned, helped people who were new to a project, and took responsibility when a problem needed to be solved. We became good friends, but my recommendation is based on the work I saw him do over that time.",
+            "I would absolutely be happy to work with Bruno again. He is the kind of developer who cares about the product, the people around him, and doing a job properly."
+          ],
+          "closing": "Sincerely,"
+        }
+      },
+      "juliano-ortiz-martins": {
+        "role": "Business Intelligence Manager · former colleague",
+        "period": "07/2022 – 11/2023 (approx.)",
+        "summary": "When I joined Infogen, Bruno didn’t just show me how things worked; he explained why decisions had been made. Later, working side by side, I saw how much he cared about maintainable code, clear communication, and helping others.",
+        "letter": {
+          "greeting": "Dear Members of the Review Committee,",
+          "paragraphs": [
+            "It is my pleasure to provide this professional recommendation for Bruno Getten Triches, with whom I worked at Infogen Sistemas.",
+            "My first close interaction with Bruno occurred during my onboarding. He assisted me in becoming familiar with the development environment, the organization of the systems, and the working practices of the team. What made his guidance particularly effective was his willingness to explain the reasons behind technical decisions rather than merely provide a sequence of instructions. This approach accelerated my understanding and made it easier to contribute independently.",
+            "Following that initial period, we worked together as peers. My recommendation is therefore based on direct collaboration, not on a supervisory relationship. I observed in Bruno a consistent concern for maintainability, sound technical reasoning, and the reliability of delivered solutions. He was able to navigate both legacy application constraints and newer mobile development practices, adapting his approach to the needs of the product rather than imposing technology for its own sake.",
+            "I would also emphasize his professional conduct. He communicated technical matters clearly, treated colleagues with respect, and remained available to exchange knowledge even when his own responsibilities were demanding. These qualities contributed to a constructive working environment.",
+            "For these reasons, I consider Bruno a capable, dependable, and well-rounded software professional. I recommend him with confidence and believe he would be an asset to an engineering team that values technical competence, collaboration, and accountability."
+          ],
+          "closing": "Sincerely,"
+        }
+      },
+      "edu-da-fonseca": {
+        "role": "Mid-Level Game Designer",
+        "period": "04/2025 – 08/2026",
+        "summary": "Bruno really listened to what we wanted the player to experience. Instead of design and development pulling against each other, he helped us find a practical way to make the idea work—and stayed hands-on alongside us.",
+        "letter": {
+          "greeting": "Hi there,",
+          "paragraphs": [
+            "I worked with Bruno Getten Triches at Sensorama Play, where my focus was game design and his work covered the technical side of our products, including some technical leadership within the team. We looked at the same challenges from different angles, which is why I got to appreciate how he works.",
+            "What I liked most was that Bruno actually listened to what we wanted the player or user to experience. He would ask questions, point out technical limitations when they mattered, and then help us find a practical way to move forward. It never felt like design and development were fighting each other.",
+            "He was easy to talk to, willing to share knowledge, and very hands-on, even while helping guide the team. That made a big difference when we had to connect creative ideas with real product constraints.",
+            "I would gladly work with Bruno again. He is a great person to have on a team that needs people from different areas to build something together."
+          ],
+          "closing": "Sincerely,"
+        }
+      },
+      "nadini-da-rosa": {
+        "role": "Mid-Level Game Developer",
+        "period": "12/2025 – current at the time of the letter",
+        "summary": "Even when Bruno was leading technically, he wasn’t the type to hand out tasks and disappear. He kept building alongside us and thinking about what came next: performance, maintainability, and how the game, web, and mobile pieces fitted together.",
+        "letter": {
+          "greeting": "To anyone considering Bruno,",
+          "paragraphs": [
+            "I got to work with Bruno Getten Triches at Sensorama Play on the development side of our projects. We both cared about making things work, but he was also looking at the bigger picture: how different parts of the product fit together and what would happen to the code after the first release.",
+            "Bruno had a technical leadership role in part of our work, yet he was never the kind of person who just assigned tasks and disappeared. He stayed involved in implementation, talked through technical decisions, and helped us think about cleaner ways to structure solutions. That made it easier to ask questions and solve problems as a team.",
+            "I especially appreciated his ability to move between game development and the surrounding web or mobile systems. In projects where several technologies had to work together, that broader perspective was useful. He also understood that getting a feature done is only part of the job: performance, maintainability, and the next person working on it matter too.",
+            "Bruno is skilled, approachable, and genuinely committed to the quality of his work. I would recommend him to others and would be happy to have him as a teammate again."
+          ],
+          "closing": "Sincerely,"
+        }
+      }
+    }
+  },
+  "libraryUi": {
+    "rail": "PROJECTS IN COLLECTION",
+    "collectionTitle": "Project collection",
+    "selected": "FEATURED PROJECT",
+    "features": "HIGHLIGHTS",
+    "media": "MEDIA",
+    "item": "item",
+    "items": "items",
+    "select": "Open project",
+    "credentialKicker": "CERTIFICATIONS",
+    "credentials": "Certifications",
+    "credentialsCount": "certifications",
+    "credentialVerified": "Open credential",
+    "educationRecords": "View records",
+    "librarySummary": "Library summary",
+    "projectFilters": "Project filters",
+    "previousEducation": "Previous education"
+  },
+  "careerUi": {
+    "available": "Open to remote and international opportunities",
+    "jump": [
+      [
+        "Summary",
+        "resume-summary-section"
+      ],
+      [
+        "Origins",
+        "resume-origin-section"
+      ],
+      [
+        "Experience",
+        "resume-experience-section"
+      ],
+      [
+        "Stack",
+        "resume-skills-section"
+      ],
+      [
+        "How I work",
+        "resume-principles-section"
+      ],
+      [
+        "Projects",
+        "resume-projects-section"
+      ],
+      [
+        "Education",
+        "resume-learning-section"
+      ],
+      [
+        "Details",
+        "resume-facts-section"
+      ]
+    ],
+    "openDetails": "Open story, delivery and context",
+    "facts": [
+      [
+        "Experience",
+        "8+ years"
+      ],
+      [
+        "Focus",
+        "Full Stack · Mobile · Tech Lead"
+      ],
+      [
+        "Based in",
+        "Brazil"
+      ],
+      [
+        "Profile",
+        "Hands-on + architecture + leadership"
+      ]
+    ],
+    "jumpLabel": "Career sections",
+    "email": "Email"
+  },
+  "projectPage": {
+    "back": "Back to library",
+    "open": "Open image",
+    "zoom": "Actual size",
+    "original": "Original image"
+  },
+  "library": {
+    "eyebrow": "PROFILE ARCHIVE · BUILD 2026",
+    "title": "Project library",
+    "intro": "A deeper view of what I build: products, technical decisions, stacks, screens and certifications. Think of it as a developer profile library — less showcase, more context.",
+    "searchPlaceholder": "Search project, technology or category…",
+    "all": "All",
+    "featured": "Featured",
+    "featuredCopy": "Selected from the collection",
+    "openDossier": "Open dossier",
+    "liveProject": "Open project",
+    "projectsLabel": "Projects in collection",
+    "certificatesLabel": "Achievements unlocked",
+    "technologiesLabel": "Technologies catalogued",
+    "experienceLabel": "Years building software",
+    "collection": "Collection",
+    "achievements": "Achievements & education",
+    "achievementsText": "Certifications, studies and formal education that complement product work.",
+    "currentQuest": "Current education",
+    "noResults": "No items match the current filters.",
+    "detailsOverview": "Overview",
+    "detailsFeatures": "What was built",
+    "detailsTechnical": "Decisions & specs",
+    "detailsStack": "Technologies",
+    "detailsGallery": "Gallery",
+    "close": "Close",
+    "home": "Portfolio",
+    "resume": "Career",
+    "labels": {
+      "educationKicker": "ACHIEVEMENTS & EDUCATION",
+      "credentialKicker": "CERTIFICATIONS"
+    },
+    "seoTitle": "Project Library",
+    "seoDescription": "Software project library covering web, mobile, APIs, data, cloud, architecture, technology stacks, technical decisions and galleries."
+  },
+  "career": {
+    "eyebrow": "RÉSUMÉ · EXPANDED VERSION",
+    "title": "My career, without squeezing it into two pages.",
+    "intro": "This is the part the PDF leaves out: how I started, what I built, the decisions I made, the results I delivered and what I learned along the way.",
+    "home": "Portfolio",
+    "library": "Library",
+    "download": "Download résumé PDF",
+    "print": "Print / save PDF",
+    "summaryTitle": "Professional profile",
+    "summary": "Full Stack & Mobile Developer with 8 years of experience since 2018, including independent projects and company roles since 2022. Specialized in React Native/Expo, with depth across frontend, backend, data, integrations, cloud, testing and Android/iOS publishing. Approximately 4 years in technical leadership or technical-reference roles, including formal Tech Lead positions, while remaining directly involved in code, architecture and product maintenance.",
+    "focusTitle": "Technology matrix",
+    "experienceTitle": "Professional experience",
+    "experienceIntro": "The PDF keeps each role short. Here you can open each experience and see the products, problems, architecture, data, operations, leadership and results behind it.",
+    "projectsBuilt": "Selected products and workstreams",
+    "responsibilities": "Responsibilities and context",
+    "stackTitle": "Stack / tools",
+    "educationTitle": "Education",
+    "languagesTitle": "Languages",
+    "languages": [
+      "Portuguese · native",
+      "English · advanced / professional use · CCAA formal training (450 h, 2015–2019)",
+      "Spanish · reading and basic communication"
+    ],
+    "selectedProjectsTitle": "Selected projects",
+    "selectedProjectsText": "A public sample from the library, showing product work, UX, architecture, integrations and technical decisions.",
+    "learningTitle": "Education & certifications",
+    "learningText": "Current degree, previous academic path and courses that complement a career built largely through practical product work. The CCAA English training records are also available in the library.",
+    "learningLink": "View full education in the library",
+    "originTitle": "Before the formal titles",
+    "originIntro": "The career did not start in 2022. Freelance projects, personal products, automation and early company experience built the technical foundation later applied to larger systems.",
+    "principlesTitle": "How I work",
+    "principlesIntro": "Principles that stayed consistent after years of building, breaking, debugging, refactoring, leading and operating software in production.",
+    "availabilityTitle": "Availability",
+    "availability": "Remote is my current preference. I am open to evaluating hybrid, on-site and relocation opportunities when the project, scope and proposal make sense.",
+    "metrics": [
+      {
+        "value": "8+",
+        "label": "years building software"
+      },
+      {
+        "value": "30+",
+        "label": "small-scale white-label mobile apps in independent projects"
+      },
+      {
+        "value": "~4",
+        "label": "years in hands-on technical leadership or technical-reference roles"
+      },
+      {
+        "value": "4+",
+        "label": "countries with clients or partners"
+      },
+      {
+        "value": "4",
+        "label": "POCs approved in technical evaluations"
+      },
+      {
+        "value": "~75%",
+        "label": "mobile delivery-cycle reduction: ~30 days → ~1 week"
+      }
+    ],
+    "origin": [
+      {
+        "period": "2018 → 2020",
+        "title": "Freelance, web and automation",
+        "text": "I started with landing pages, portfolios and static websites for small businesses and people in my network using GitHub Pages, Vercel and simple email/WhatsApp integrations. The work evolved into C# intranets and chats, Python automation, spreadsheet-to-dashboard workflows and internal tools."
+      },
+      {
+        "period": "2018 → 2022",
+        "title": "Hardware, games and mobile as a lab",
+        "text": "Arduino with C/C++, hardware automation, Minecraft and Half-Life mods, Java, Flutter, React/Node and small scheduling apps for barbers, pet shops and services became a practical laboratory. I also built news/weather scraping and an automated irrigation system for my grandfather’s farm using sensors, weather forecasts and custom irrigation rules."
+      },
+      {
+        "period": "Before Infogen",
+        "title": "Early company experience",
+        "text": "At Cressol Central I worked close to product and customer support, using Firebase, Google Analytics and Python to support spreadsheet and data routines. At Impressoras & Cia I helped build internal rental/equipment tools using Firebase for authentication, database and push notifications."
+      }
+    ],
+    "principles": [
+      {
+        "title": "Product before stack",
+        "text": "Business rules, users, constraints and operations come before framework choice. There is no silver bullet."
+      },
+      {
+        "title": "Hands-on leadership",
+        "text": "Architecture, mentoring and code review work better when leadership remains close to code, incidents, deployments and product."
+      },
+      {
+        "title": "Failure must become learning",
+        "text": "A broken build, migration, store release or production issue should be reproduced, diagnosed, fixed and turned into prevention."
+      },
+      {
+        "title": "Communication is engineering",
+        "text": "Listening, adapting explanations to the audience and creating room for others to contribute improves technical decisions and product outcomes."
+      },
+      {
+        "title": "AI as a multiplier, not autopilot",
+        "text": "I use LLMs for research, implementation and review, while architecture, validation, security, performance and code review still require engineering judgment."
+      },
+      {
+        "title": "Business context is part of engineering",
+        "text": "Before implementing, I try to understand the market, operation, customer and how the product creates value. Better business context leads to better architecture, prioritization and product decisions."
+      }
+    ],
+    "labels": {
+      "profile": "PROFILE",
+      "origin": "ORIGIN STORY",
+      "experience": "CAREER LOG",
+      "skills": "TOOLKIT",
+      "principles": "ENGINEERING MINDSET",
+      "projects": "SELECTED WORK",
+      "learning": "LEARNING LOG",
+      "facts": "QUICK FACTS",
+      "links": "LINKS",
+      "timelinePrefix": "LOG"
+    },
+    "seoTitle": "Résumé · Full Stack & Mobile Developer",
+    "seoDescription": "Detailed résumé with 8+ years across Full Stack and Mobile development, architecture, data, cloud, technical leadership and production products."
+  },
+  "companyDetails": {
+    "Sensorama Play": {
+      "overview": "I joined to build the integration between a Unity 3D product and an API/admin platform. The scope quickly grew into a complete white-label, multitenant education platform spanning web, mobile, games, digital library, accessibility, AI and cloud operations. I became responsible for technical leadership, architecture, delivery planning and hands-on implementation.",
+      "sections": [
+        {
+          "title": "Producto y entregas",
+          "items": [
+            "Built the core admin platform and applications for students, teachers, managers and administrative roles with tenant/institution/municipality/regional/state-level configuration.",
+            "Implemented an EPUB library with mobile offline download, reading, activities, TTS, accessibility and VLibras integration.",
+            "Integrated Phaser/JavaScript 2D games and provided technical support to Unity/C# 3D products, including integrations, performance work, scripts and build optimization.",
+            "Built dashboards and reports for multiple education-management roles, plus lesson sequences, video classes, activities and reading-fluency flows.",
+            "Developed four web variants and a shared React Native/Expo mobile foundation across products and user roles; managed developer accounts, builds, submissions, app review/testing and publishing/updating released versions on Google Play and the App Store."
+          ]
+        },
+        {
+          "title": "Arquitectura e infraestructura",
+          "items": [
+            "Structured Laravel services, migrations, middleware, security, APIs and integration with React/React Native applications.",
+            "Moved infrastructure from early VPS hosting to DigitalOcean, using buckets/Spaces for assets, load distribution and workload separation.",
+            "Moved assets to buckets/Spaces and automated CI/CD with Docker/GitHub Actions: the previous operational footprint exceeded 40 GB, while deployable images/builds became smaller than approximately 4 GB.",
+            "Cache, queues, Redis, Mailgun, Grafana observability and load tests with simulated data to evaluate scalability; planned capacity does not represent real users served."
+          ]
+        },
+        {
+          "title": "IA, calidad y accesibilidad",
+          "items": [
+            "Built flows with local LLMs and OpenAI for lesson content, interpretation, questions, reading-fluency support and English assessment.",
+            "Created fast and deeper reading-fluency evaluation modes, including early-literacy cases involving syllables, incomplete words, pauses and hesitations.",
+            "Integrated Playwright for web and Jest for mobile-oriented validation in CI to reduce regression risk.",
+            "Built a custom accessibility layer for web/mobile covering low vision, reading difficulties, contrast, fonts, TTS and VLibras."
+          ]
+        },
+        {
+          "title": "Liderazgo y operación",
+          "items": [
+            "Provided hands-on technical leadership to a six-person team, organizing sprints, responsibilities, mentoring, code reviews and architectural decisions.",
+            "Organized dailies, sprints and task breakdown while working close to product/PO responsibilities when needed.",
+            "Supported public-sector POCs, technical presentations and education-industry negotiations."
+          ]
+        },
+        {
+          "title": "Results & impact",
+          "items": [
+            "Built the technical foundation the company now uses to sell, demo and evolve its products on a shared, modular and documented platform instead of manually assembled environments.",
+            "Contributed to four POCs for public procurement processes, approved in technical evaluations. Legal stages and commercial decisions followed processes outside engineering.",
+            "Containerized and documented environments that allow a new instance to be brought up with only a few commands, reducing local dependency setup and operational overhead for a small team.",
+            "Architecture prepared early for horizontal and vertical growth, workload separation, asset buckets, load balancing, caching and queues."
+          ]
+        }
+      ],
+      "stack": [
+        "React",
+        "React Native",
+        "TypeScript",
+        "JavaScript",
+        "PHP / Laravel",
+        "Blade / Livewire",
+        "C# / Unity",
+        "Phaser",
+        "SQL",
+        "Redis",
+        "Docker",
+        "GitHub Actions",
+        "DigitalOcean",
+        "Jest",
+        "Playwright",
+        "Grafana",
+        "Mailgun",
+        "OpenAI / LLMs",
+        "VLibras / TTS"
+      ]
+    },
+    "Amplimed": {
+      "overview": "I joined with a Full Stack/Laravel focus and was quickly moved into the mobile ecosystem because of my background. I soon became a key owner of marketplace/scheduling and telemedicine work across web, mobile, APIs, data and app-store operations.",
+      "sections": [
+        {
+          "title": "Marketplace, agenda y telemedicina",
+          "items": [
+            "Refactored the online scheduling/marketplace web product and evolved mobile modules for consultations, scheduling and telemedicine.",
+            "Improved Twilio performance and UX and implemented mobile checkout/payment integration.",
+            "Implemented digital-care queue flows end to end: ordering, priority, triage, professional routing and care continuity.",
+            "Built Pharma flows connecting patient, pharmacist and physician for medication, vaccination and related care scenarios."
+          ]
+        },
+        {
+          "title": "Mobile y tiendas",
+          "items": [
+            "Worked across the React Native lifecycle with Java/Swift where native integration was required, including builds, tests, distribution and Android/iOS publishing.",
+            "Resolved Google Play compliance/privacy issues and improved the release process for the company and white-label apps.",
+            "Optimized build size, performance, error fallback and data integrity."
+          ]
+        },
+        {
+          "title": "Backend y datos",
+          "items": [
+            "Refactored integration APIs/microservices inside an ecosystem with dozens of repositories.",
+            "Worked heavily with Docker/Dev Containers and supported Kubernetes-based environments.",
+            "Improved MongoDB organization/aggregations and prepared data for performance/value dashboards for clinics and hospitals."
+          ]
+        },
+        {
+          "title": "Documentación y referencia técnica",
+          "items": [
+            "Produced roughly 10–15 technical/operational documents covering setup, upgrades, stores, deployments and support processes.",
+            "Worked directly with technical leadership/CTO on critical problems and product decisions."
+          ]
+        },
+        {
+          "title": "Results & impact",
+          "items": [
+            "According to internal commercial feedback received at the time, the white-label scheduling and queue-management solution reached, in roughly one quarter, a revenue benchmark comparable to six months of an established product.",
+            "Modernized a marketplace/scheduling web area that had accumulated years of refactoring needs.",
+            "Standardized the mobile delivery flow so build, validation and publishing became easier even for developers who were not mobile specialists.",
+            "Reduced the recurring path from Jira task to app-store release from roughly 30 days to about one week."
+          ]
+        }
+      ],
+      "stack": [
+        "React",
+        "React Native",
+        "TypeScript",
+        "JavaScript",
+        "PHP / Laravel / Blade",
+        "Node.js",
+        "MongoDB",
+        "Twilio",
+        "Docker / Dev Containers",
+        "Kubernetes",
+        "Jest",
+        "Java",
+        "Swift",
+        "REST APIs",
+        "App Store / Google Play"
+      ]
+    },
+    "Astronfy": {
+      "overview": "The relationship started as freelance work on multi-tenant web platforms and later became a full-time Tech Lead role with responsibility for product, servers, integrations and international customers.",
+      "sections": [
+        {
+          "title": "Producto y arquitectura",
+          "items": [
+            "Built marketplaces and dashboards with Laravel, Blade/Livewire and MariaDB in modular white-label/multitenant architectures.",
+            "Used schema-first/module-oriented migrations to reduce manual database updates.",
+            "Worked with React/Vue/Angular micro frontends, Node.js services and Python automation."
+          ]
+        },
+        {
+          "title": "Pagos y growth",
+          "items": [
+            "Integrated domestic, international and cryptocurrency payment methods.",
+            "Used RevenueCat/in-app purchases, Firebase, Google Analytics/Ads and SEO instrumentation.",
+            "Technical communication with customers and partners in Brazil, Portugal, Mexico, Germany, the USA, Paraguay and Curaçao, including meetings in English."
+          ]
+        },
+        {
+          "title": "Infraestructura y automatización",
+          "items": [
+            "Managed multiple VPS environments, backups, security, availability and GitHub-triggered deployments.",
+            "Worked with AWS/Azure services including Lambda, SQS/SNS and batch-style jobs.",
+            "Built Python automation, scraping and cron jobs for operational/data workflows."
+          ]
+        },
+        {
+          "title": "Liderazgo",
+          "items": [
+            "Hands-on technical leadership, architecture decisions, reviews and delivery follow-up.",
+            "Translated international customer/business needs into technical solutions and product priorities."
+          ]
+        },
+        {
+          "title": "Results & impact",
+          "items": [
+            "Technical communication with customers and partners in Brazil, Portugal, Mexico, Germany, the USA, Paraguay and Curaçao, including meetings in English.",
+            "Developed marketplace and payment integrations, with operational flows spanning HTTP requests, database operations, application events and automation.",
+            "Standardized modular/white-label architecture, configuration and deployments reduced technical onboarding for new web customers to about three days; mobile apps also depend on app-store review and release steps."
+          ]
+        }
+      ],
+      "stack": [
+        "PHP / Laravel",
+        "Blade / Livewire",
+        "MariaDB",
+        "React",
+        "Vue.js",
+        "Angular",
+        "Node.js / Next.js",
+        "Python / FastAPI",
+        "Docker",
+        "AWS",
+        "Azure",
+        "VPS",
+        "RevenueCat",
+        "Firebase",
+        "Google Analytics",
+        "Payments / Crypto",
+        "Cron jobs"
+      ]
+    },
+    "Infogen Sistemas": {
+      "overview": "This was the transition into large professional software products. I joined as an intern, quickly moved through GeneXus and the dairy module, then into mobile, and grew to mid-level/reference ownership across apps, portals, integrations and data.",
+      "sections": [
+        {
+          "title": "ERP y backend",
+          "items": [
+            "Started with internal APK/beta distribution pages, completed the GeneXus 9/10 onboarding quickly and took ownership of the dairy module.",
+            "Expanded into C#/.NET portals/services, APIs, reports and high-volume SQL Server work with stored procedures and triggers.",
+            "Worked with IIS/Jenkins and Python automation for file/process monitoring, notifications and external-price scraping."
+          ]
+        },
+        {
+          "title": "Tres generaciones mobile",
+          "items": [
+            "Maintained a legacy Java/Android CRM, Flutter products and a Xamarin stock/POS-style app.",
+            "Helped consolidate Java/Flutter/Xamarin products into React Native; implemented the first app on the new shared base and evolved the white-label structure.",
+            "Used Redux, Styled Components, TypeORM/SQLite and migrations to improve architecture, offline sync and release safety.",
+            "Managed app-store pages/releases, build optimization, store requirements and privacy/LGPD-related practices."
+          ]
+        },
+        {
+          "title": "Coleta de leche y pedidos de venta",
+          "items": [
+            "Recovered and rebuilt the Milk Collection app with stronger integrity, security, file transfer and background geolocation sync.",
+            "Refactored Sales Orders for real offline field usage with recovery, duplicate prevention and synchronization safeguards.",
+            "Redesigned tables/timestamps to track synchronization state and resolve data conflicts."
+          ]
+        },
+        {
+          "title": "Crecimiento y mentoría",
+          "items": [
+            "Progressed from intern/trainee to junior and mid-level; senior progression was being discussed when I left.",
+            "Individually developed more than 20 white-label apps within an ecosystem of over 40 applications, alongside refactoring 8+ apps and creating/evolving 15+ reusable white-label modules.",
+            "Onboarded and supported developers and became a reference for mobile, the dairy module, portals and database/integration work."
+          ]
+        },
+        {
+          "title": "Results & impact",
+          "items": [
+            "Consolidated legacy Java, Flutter and Xamarin applications into a reusable React Native/Expo white-label foundation, reducing recurring development and publishing cycles from approximately 20 days to one week.",
+            "Modernized critical field apps with offline synchronization, migrations and data-integrity safeguards, removing the recurring need to uninstall apps before updates.",
+            "Improved APIs, security, LGPD/privacy practices, pipelines and publishing processes while helping structure mobile as a strong technical area inside the team.",
+            "Progressed from intern to mid-level developer in under two years and became a technical reference for mobile, the dairy module, portals, SQL and integrations."
+          ]
+        }
+      ],
+      "stack": [
+        "GeneXus 9/10",
+        "C# / .NET Framework / .NET Core",
+        "ASP.NET",
+        "Vue.js",
+        "Java / Android",
+        "Flutter",
+        "Xamarin",
+        "React Native / Expo",
+        "Redux",
+        "Styled Components",
+        "TypeORM / SQLite",
+        "SQL Server",
+        "MySQL / Oracle",
+        "Firebase",
+        "Python",
+        "IIS",
+        "Jenkins"
+      ]
+    },
+    "Freelance": {
+      "overview": "Independent work has always been both a product lab and real client delivery: websites, apps, dashboards, internal systems, automation, games, hardware, integrations, AI and infrastructure for different budgets and stages.",
+      "sections": [
+        {
+          "title": "Base inicial",
+          "items": [
+            "Landing pages and portfolios for small businesses using GitHub Pages/Vercel and direct-contact integrations.",
+            "C# intranets/chats, Python automation, spreadsheet dashboards and internal tools.",
+            "Arduino/C/C++, automated irrigation, game mods, Java, Flutter and small scheduling apps."
+          ]
+        },
+        {
+          "title": "Productos y consultoría",
+          "items": [
+            "Full web/mobile products, APIs, dashboards, management systems, marketplaces, white-label products and legacy modernization.",
+            "International sports products with React Native/in-app purchases and admin panels; 2D/3D work with Phaser, Three.js and Unity.",
+            "Recent work includes property inspection, realtime messaging, media tooling, accessibility, link management and public-data/news-context products."
+          ]
+        },
+        {
+          "title": "Backend, IA y datos",
+          "items": [
+            "Node.js/NestJS, Laravel, C#/.NET, Spring Boot and Python/FastAPI depending on product needs.",
+            "Machine learning/data-analysis experiments, automation and LLM/OpenAI integrations when appropriate.",
+            "SQL/NoSQL, Redis, messaging, payments, email, notifications and WebSockets."
+          ]
+        },
+        {
+          "title": "Infraestructura y entrega",
+          "items": [
+            "Frequent use of Vercel/Neon for low-operations products plus Firebase, Docker and VPS on Hostinger, DigitalOcean and Vultr.",
+            "Git/GitHub/Git LFS, CI/CD, app-store publishing, cron jobs, observability, backups and post-release evolution."
+          ]
+        },
+        {
+          "title": "Results and professional growth",
+          "items": [
+            "Freelance work gave me end-to-end product perspective: talking to clients, understanding the problem, researching the market, choosing a viable solution, building, shipping, charging, supporting and evolving it.",
+            "The sports project partnership with Ferrão expanded my experience with international product work, mobile apps, subscriptions/in-app purchases, admin panels and training personalization.",
+            "Working across very different scenarios forced me to compare stacks and architectures in practice, choosing technology for the problem instead of repeating the same solution everywhere.",
+            "Independent work helped me build a network of clients, partners and developers while improving negotiation, documentation, ownership and professional communication."
+          ]
+        },
+        {
+          "title": "Independent projects and delivery context",
+          "items": [
+            "SettaSynk: offline-first React Native/Expo app, SQLite, resilient synchronization, multimedia evidence, Laravel/PostgreSQL API, PDF reports and in-house voice AI services. In beta with inspection companies and real-estate agencies in southern Brazil, preparing for commercial launch.",
+            "XtremeFut: international sports-training app with Ferrão and training professionals, an administrative dashboard and in-app purchases. Personally presented at HIT Games Conference, Berlin, in 2024.",
+            "Aletheia: news and public-data contextualization with explicit provenance and limitations; accessibility SDKs with TTS, color filters, typography and reduced motion, complementing structural accessibility."
+          ]
+        }
+      ],
+      "stack": [
+        "React / Next.js",
+        "React Native",
+        "Node.js / NestJS",
+        "C# / .NET",
+        "PHP / Laravel",
+        "Java / Spring Boot",
+        "Python / FastAPI",
+        "Vue / Angular",
+        "Flutter",
+        "Swift / Objective-C",
+        "PostgreSQL / SQL / NoSQL",
+        "Firebase",
+        "Vercel / Neon",
+        "Docker",
+        "VPS / Cloud",
+        "Three.js / Phaser / Unity"
+      ]
+    }
   }
 }
